@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da3ae000e98a71d489bf062b749ae76f, type: 3}
+  m_Name: RedSlime
+  m_EditorClassIdentifier: 
+  material: {fileID: 2100000, guid: 311eff41e7ec3bf40a0aa04ee19d4ede, type: 2}
+  name: Red Slime
+  id: 2
+  minDamage: 3
+  maxDamage: 5
+  attackTypes:
+  - {fileID: 11400000, guid: b1c664d91f6c61d499f755bbeab0ee60, type: 2}
+  - {fileID: 11400000, guid: a6288402b34b63244ad0a0871a5ba504, type: 2}
+  health: 15
+  maxHealth: 15
+  stamina: 15
+  maxStamina: 15
+  stamRegen: 2
+  mana: 0
+  maxMana: 0
+  manaRegen: 0
+  speed: 75
+  goldReward: 4
+  expReward: 6
+  itemRewards: {fileID: 11400000, guid: e260beb7a9342524c8a983f58357d75e, type: 2}

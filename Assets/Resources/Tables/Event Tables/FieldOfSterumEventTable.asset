@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eff4c547f527e6645acdbf7c3954c90a, type: 3}
+  m_Name: FieldOfSterumEventTable
+  m_EditorClassIdentifier: 
+  events:
+  - {fileID: 11400000, guid: e4a3ee5892c3ada45a1e6ea6c033e058, type: 2}
+  - {fileID: 11400000, guid: 7b1ad306ed33c6f429fd1fc447c7852b, type: 2}
+  itemProbability:
+  - 90
+  - 100
