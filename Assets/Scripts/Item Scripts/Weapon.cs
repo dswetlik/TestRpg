@@ -13,6 +13,7 @@ public class Weapon : Item
     }
 
     [SerializeField] WeaponType weaponType;
+    [SerializeField] List<ActiveSkill> weaponSkills;
     [SerializeField] int maxDamage;
     [SerializeField] int minDamage;
 
@@ -22,6 +23,8 @@ public class Weapon : Item
     }
 
     public WeaponType GetWeaponType() { return weaponType; }
+    public List<ActiveSkill> GetWeaponSkills() { return weaponSkills; }
+    public ActiveSkill GetRandomSkill() { return (weaponSkills.Count > 1) ? weaponSkills[Random.Range(0, weaponSkills.Count)] : weaponSkills[0]; }
     public int GetMaxDamage() { return maxDamage; }
     public int GetMinDamage() { return minDamage; }
     public void SetMaxDamage(int damage) { this.maxDamage = damage; }

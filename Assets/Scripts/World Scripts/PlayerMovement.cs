@@ -137,9 +137,16 @@ public class PlayerMovement : MonoBehaviour
     {
         if (other.tag == "LocationPortal")
         {
-            Location location = other.GetComponent<LocationContainer>().GetLocation();
-            transform.position = location.GetSpawnLocation();
-            GameObject.Find("GameManager").GetComponent<Engine>().EnterLocation(location);
+            if (other.name == "ArenaPortal")
+            {
+                GameObject.Find("GameManager").GetComponent<Engine>().ActivateArenaScreen(true);
+            }
+            else
+            {
+                Location location = other.GetComponent<LocationContainer>().GetLocation();
+                transform.position = location.GetSpawnLocation();
+                GameObject.Find("GameManager").GetComponent<Engine>().EnterLocation(location);
+            }
         }
         else if (other.transform.parent.tag == "Chest")
         {

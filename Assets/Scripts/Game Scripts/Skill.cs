@@ -30,5 +30,15 @@ public class Skill : ScriptableObject
         return true;
     }
 
+    public string GetName()
+    {
+        return name;
+    }
+
+    public string GetDescription()
+    {
+        return description;
+    }
+
 
 }

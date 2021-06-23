@@ -22,6 +22,6 @@ MonoBehaviour:
   isEnterable: 0
   enteredLocation: {fileID: 11400000, guid: 7a0fe3c266500ae489ebaa73fdb1ce04, type: 2}
   sceneName: Overworld
-  spawnLocation: {x: 0, y: 1.5, z: 10}
-  spawnRotation: {x: 0, y: 0, z: 0, w: 0}
+  spawnLocation: {x: 0, y: 2.2, z: 70}
+  spawnRotation: {x: 0, y: 180, z: 0, w: 0}
   chests: []

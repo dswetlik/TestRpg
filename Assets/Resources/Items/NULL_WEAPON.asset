@@ -14,8 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemType: 1
   id: 998
-  name: ' '
-  description: ' '
+  name: Fists
+  description: Show off your pugilist moves.
   weight: 0
   value: 0
-  damage: 0
+  weaponType: 1
+  weaponSkills:
+  - {fileID: 11400000, guid: 46c516f16126b4a459c945fd4cfa98e0, type: 2}
+  maxDamage: 3
+  minDamage: 0

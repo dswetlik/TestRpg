@@ -20,6 +20,7 @@ public class Engine : MonoBehaviour
     GameObject UIQuestScreen;
     GameObject UIBattleScreen;
     GameObject UIPickupScreen;
+    GameObject UIArenaScreen;
 
     // Directional UI Variables
     Button northBtn;
@@ -132,10 +133,9 @@ public class Engine : MonoBehaviour
     Slider playerSpeedSlider;
     Slider enemySpeedSlider;
 
-    Button playerAttackBtn;
-    Button playerSkillBtn;
-    Button playerSpellBtn;
     Button playerBattleInventoryBtn;
+
+    GameObject playerCardLocationA;
 
     // UI Pickup Variables
     Text otherPickUpNameTxt;
@@ -154,6 +154,22 @@ public class Engine : MonoBehaviour
     GameObject pickUpConsumableObj;
 
     Button pickupExitBtn;
+
+    // UI Arena Variables
+    Enemy selectedEnemy;
+
+    GameObject enemyA;
+    GameObject enemyB;
+    GameObject enemyC;
+
+    Text enemyAName;
+    Text enemyBName;
+    Text enemyCName;
+
+    Text enemyName;
+    Text enemyDescription;
+    Text enemyHealth;
+    Text enemyDamage;
 
     // Game Variables
     public static SortedDictionary<uint, Item> ItemDictionary;
@@ -200,6 +216,8 @@ public class Engine : MonoBehaviour
     Quest testBaseQuest;
     Quest leaveTheCave;
 
+    ActiveSkill slash;
+
     // Local Use Variables
     bool playerHasMoved, isInPickup = false, isInBattle = false, isInChest = false;
     int playerDamageOutput, enemyDamageOutput;
@@ -207,6 +225,7 @@ public class Engine : MonoBehaviour
     DoorInteraction activeDoor;
     public GameObject playerObject, enemyObject;
     public GameObject gameManager;
+    public GameObject card;
 
     public bool isLoadingGame;
 
@@ -226,7 +245,7 @@ public class Engine : MonoBehaviour
 
     void StartNewGame()
     {
-        AddToQuestList(leaveTheCave);
+        //AddToQuestList(leaveTheCave);
 
         player.GetInventory().AddToInventory(ironSword);
         player.GetInventory().AddToInventory(leatherBoots);
@@ -234,7 +253,7 @@ public class Engine : MonoBehaviour
         player.GetInventory().OnBeforeSerialize();
         player.GetInventory().OnAfterDeserialize();
 
-        StartCoroutine(LoadScene(floor1));
+        StartCoroutine(LoadScene(overworld));
     }
 
     void LoadGame()
@@ -297,6 +316,8 @@ public class Engine : MonoBehaviour
         smallHealthPotion = Resources.Load<Consumable>("Items/Consumables/Small Health Potion");
         smallStaminaPotion = Resources.Load<Consumable>("Items/Consumables/Small Stamina Potion");
 
+        slash = Resources.Load<ActiveSkill>("Player Moves/Slash");
+
         ItemDictionary.Add(key.GetID(), key);
 
         ItemDictionary.Add(ratFur.GetID(), ratFur);
@@ -350,6 +371,7 @@ public class Engine : MonoBehaviour
         UIQuestScreen = GameObject.Find("UI Quest");
         UIBattleScreen = GameObject.Find("UI Battle");
         UIPickupScreen = GameObject.Find("UI Pickup");
+        UIArenaScreen = GameObject.Find("UI Arena");
 
         northBtn = GameObject.Find("NorthBtn").GetComponent<Button>();
         eastBtn = GameObject.Find("EastBtn").GetComponent<Button>();
@@ -471,13 +493,7 @@ public class Engine : MonoBehaviour
         enemySpeedSlider = GameObject.Find("EnemySpeedSlider").GetComponent<Slider>();
         playerSpeedSlider = GameObject.Find("PlayerSpeedSlider").GetComponent<Slider>();
 
-        playerAttackBtn = GameObject.Find("PlayerAttackBtn").GetComponent<Button>();
-        playerSkillBtn = GameObject.Find("PlayerSkillBtn").GetComponent<Button>();
-        playerSpellBtn = GameObject.Find("PlayerSpellBtn").GetComponent<Button>();
         playerBattleInventoryBtn = GameObject.Find("PlayerBattleInventoryBtn").GetComponent<Button>();
-        playerAttackBtn.interactable = false;
-        playerSkillBtn.interactable = false;
-        playerSpellBtn.interactable = false;
         playerBattleInventoryBtn.interactable = false;
 
         otherPickUpNameTxt = GameObject.Find("OtherPickupNameTxt").GetComponent<Text>();
@@ -501,25 +517,40 @@ public class Engine : MonoBehaviour
         pickUpArmorObj.SetActive(false);
         pickUpConsumableObj.SetActive(false);
 
+        enemyA = GameObject.Find("EnemyA");
+        enemyB = GameObject.Find("EnemyB");
+        enemyC = GameObject.Find("EnemyC");
+
+        enemyAName = GameObject.Find("EnemyAName").GetComponent<Text>();
+        enemyBName = GameObject.Find("EnemyBName").GetComponent<Text>();
+        enemyCName = GameObject.Find("EnemyCName").GetComponent<Text>();
+
+        enemyName = GameObject.Find("ArenaNameTxt").GetComponent<Text>();
+        enemyDescription = GameObject.Find("ArenaDescriptionTxt").GetComponent<Text>();
+        enemyDamage = GameObject.Find("ArenaDamageTxt").GetComponent<Text>();
+        enemyHealth = GameObject.Find("ArenaHealthTxt").GetComponent<Text>();
+
         invScroll.verticalNormalizedPosition = 1;
 
         UIInventoryScreen.SetActive(false);
         UIQuestScreen.SetActive(false);
         UIBattleScreen.SetActive(false);
         UIPickupScreen.SetActive(false);
+        UIArenaScreen.SetActive(false);
 
         UpdateInventoryAttributes();
-    }
-
-    void Gameplay()
-    {
-
     }
 
     public void StartBattle(GameObject enemy)
     {
         if(!isInBattle)
             StartCoroutine(Battle(enemy));
+    }
+
+    public void Battle()
+    {
+        StartCoroutine(Battle(selectedEnemy));
+        ActivateArenaScreen(false);
     }
 
     IEnumerator Battle(GameObject eGO)
@@ -634,6 +665,117 @@ public class Engine : MonoBehaviour
         isInBattle = false;
     }
 
+    IEnumerator Battle(Enemy eGO)
+    {
+        isInBattle = true;
+
+        playerDamageOutput = 0;
+        enemyDamageOutput = 0;
+
+        Enemy enemy = Instantiate(eGO);
+        enemyNameTxt.text = enemy.GetName();
+
+        UIBattleScreen.SetActive(true);
+
+        UpdateBattleAttributes(enemy);
+
+        int playerSpeed = player.GetSpeed(), enemySpeed = enemy.GetSpeed();
+        playerSpeedSlider.value = playerSpeed;
+        enemySpeedSlider.value = enemySpeed;
+
+        while (player.GetHealth() > 0 && enemy.GetHealth() > 0)
+        {
+
+            while (playerSpeed < 100 && enemySpeed < 100)
+            {
+                playerSpeed += player.GetSpeed();
+                enemySpeed += enemy.GetSpeed();
+
+                playerSpeedSlider.value = playerSpeed;
+                enemySpeedSlider.value = enemySpeed;
+
+                player.RegenAttributes();
+                enemy.RegenAttributes();
+
+                UpdateBattleAttributes(enemy);
+                yield return new WaitForSeconds(1.0f);
+            }
+
+            if (playerSpeed >= 100 && playerSpeed >= enemySpeed && player.GetHealth() > 0)
+            {
+                yield return StartCoroutine("PlayerMove");
+                playerSpeed -= 100;
+
+                enemy.ChangeHealth(-playerDamageOutput);
+                UpdateBattleAttributes(enemy);
+
+                playerSpeedSlider.value = playerSpeed;
+
+                if (enemySpeed >= 100 && enemy.GetHealth() > 0)
+                {
+                    EnemyAttack(enemy);
+                    enemySpeed -= 100;
+
+                    player.ChangeHealth(-enemyDamageOutput);
+                    UpdateBattleAttributes(enemy);
+
+                    enemySpeedSlider.value = enemySpeed;
+                }
+
+                playerDamageOutput = 0;
+                enemyDamageOutput = 0;
+
+            }
+            if (enemySpeed >= 100 && enemySpeed >= playerSpeed && enemy.GetHealth() > 0)
+            {
+                EnemyAttack(enemy);
+                enemySpeed -= 100;
+
+                player.ChangeHealth(-enemyDamageOutput);
+                UpdateBattleAttributes(enemy);
+
+                enemySpeedSlider.value = enemySpeed;
+
+                if (playerSpeed >= 100 && player.GetHealth() > 0)
+                {
+                    yield return StartCoroutine("PlayerMove");
+                    playerSpeed -= 100;
+
+                    enemy.ChangeHealth(-playerDamageOutput);
+                    UpdateBattleAttributes(enemy);
+
+                    playerSpeedSlider.value = playerSpeed;
+                }
+
+                playerDamageOutput = 0;
+                enemyDamageOutput = 0;
+
+            }
+
+            UpdateBattleAttributes(enemy);
+            yield return null;
+        }
+
+        if (enemy.GetHealth() <= 0)
+        {
+            ActivatePickupScreen(true, enemy.GetName());
+            GenerateItemPickup(enemy.GetItemRewards());
+            OutputToText(String.Format("You have killed {0}, gaining {1} exp and {2} gold.", enemy.GetName(), enemy.GetExpReward(), enemy.GetGoldReward()));
+            player.AddExp(enemy.GetExpReward());
+            player.ChangeGold(enemy.GetGoldReward());
+            UIBattleScreen.SetActive(false);
+        }
+        else
+        {
+            UIBattleScreen.SetActive(false);
+            OutputToText("You have Died.");
+        }
+
+        UpdateInventoryAttributes();
+        battleOutputTxt.text = "";
+        isInBattle = false;
+    }
+
     void UpdateBattleAttributes(Enemy enemy)
     {
         enemyHealthSlider.maxValue = enemy.GetMaxHealth();
@@ -663,38 +805,86 @@ public class Engine : MonoBehaviour
     IEnumerator PlayerMove()
     {
         playerHasMoved = false;
-        playerAttackBtn.interactable = true;
-        playerSkillBtn.interactable = true;
-        playerSpellBtn.interactable = true;
         playerBattleInventoryBtn.interactable = true;
 
-        while(!playerHasMoved)
+        Instantiate(card, GameObject.Find("PlayerCardALocation").transform).transform.position = GameObject.Find("PlayerCardALocation").transform.position;
+        Instantiate(card, GameObject.Find("PlayerCardBLocation").transform).transform.position = GameObject.Find("PlayerCardBLocation").transform.position;
+        Instantiate(card, GameObject.Find("PlayerCardCLocation").transform).transform.position = GameObject.Find("PlayerCardCLocation").transform.position;
+
+        ActiveSkill cardASkill = player.GetWeapon().GetRandomSkill();
+        ActiveSkill cardBSkill = player.GetWeapon().GetRandomSkill();
+        ActiveSkill cardCSkill = player.GetWeapon().GetRandomSkill();
+
+        GameObject.Find("PlayerCardALocation").transform.GetChild(0).GetComponent<Button>().onClick.AddListener(delegate { PlayerAttack(cardASkill); });
+        GameObject.Find("PlayerCardBLocation").transform.GetChild(0).GetComponent<Button>().onClick.AddListener(delegate { PlayerAttack(cardBSkill); });
+        GameObject.Find("PlayerCardCLocation").transform.GetChild(0).GetComponent<Button>().onClick.AddListener(delegate { PlayerAttack(cardCSkill); });
+
+        SetCard(GameObject.Find("PlayerCardALocation").transform.GetChild(0).gameObject, cardASkill);
+        SetCard(GameObject.Find("PlayerCardBLocation").transform.GetChild(0).gameObject, cardBSkill);
+        SetCard(GameObject.Find("PlayerCardCLocation").transform.GetChild(0).gameObject, cardCSkill);
+
+        while (!playerHasMoved)
         {
             yield return null;
         }
 
-        playerAttackBtn.interactable = false;
-        playerSkillBtn.interactable = false;
-        playerSpellBtn.interactable = false;
         playerBattleInventoryBtn.interactable = false;
 
         UpdateInventoryAttributes();
 
+        Destroy(GameObject.Find("PlayerCardALocation").transform.GetChild(0).gameObject);
+        Destroy(GameObject.Find("PlayerCardBLocation").transform.GetChild(0).gameObject);
+        Destroy(GameObject.Find("PlayerCardCLocation").transform.GetChild(0).gameObject);
+
     }
 
-    public void PlayerAttack()
+    void SetCard(GameObject card, ActiveSkill skill)
+    {
+
+        card.GetComponent<AttackContainer>().SetPlayerSkill(skill);
+
+        card.transform.GetChild(0).GetComponent<Text>().text = skill.GetName();
+        card.transform.GetChild(1).GetComponent<Text>().text = skill.GetDescription();
+        card.transform.GetChild(2).GetComponent<Text>().text = skill.GetMinDamageModifier() + " - " + skill.GetMaxDamageModifier();
+        card.transform.GetChild(4).GetComponent<Text>().text = skill.GetAttributeChange().ToString();
+
+        switch(skill.GetAttributeType())
+        {
+            case ActiveSkill.AttributeType.weapon:
+                card.transform.GetChild(6).GetComponent<Text>().text = "Weapon";
+                card.transform.GetChild(2).GetComponent<Text>().text = player.GetWeapon().GetMinDamage() + " - " + player.GetWeapon().GetMaxDamage();
+                break;
+            case ActiveSkill.AttributeType.health:
+                card.transform.GetChild(6).GetComponent<Text>().text = "Health";
+                break;
+            case ActiveSkill.AttributeType.stamina:
+                card.transform.GetChild(6).GetComponent<Text>().text = "Stamina";
+                break;
+            case ActiveSkill.AttributeType.mana:
+                card.transform.GetChild(6).GetComponent<Text>().text = "Mana";
+                break;
+        }
+        
+    }
+
+    public void PlayerAttack(ActiveSkill skill)
     {
         playerHasMoved = true;
-        if (player.GetWeapon() == NULL_WEAPON)
+
+        switch (skill.GetAttributeType())
         {
-            playerDamageOutput = 1;
-            OutputToBattle(String.Format("Player threw a mean punch, dealing {0} damage.", playerDamageOutput));
+            case ActiveSkill.AttributeType.weapon:
+                playerDamageOutput = player.GetWeapon().Attack();
+                OutputToBattle(String.Format("Player swung {0}, dealing {1} damage.", player.GetWeapon().GetName(), playerDamageOutput));
+                break;
+            case ActiveSkill.AttributeType.health:
+                break;
+            case ActiveSkill.AttributeType.stamina:
+                break;
+            case ActiveSkill.AttributeType.mana:
+                break;
         }
-        else
-        {
-            playerDamageOutput = (int)player.GetWeapon().Attack();
-            OutputToBattle(String.Format("Player swung {0}, dealing {1} damage.", player.GetWeapon().GetName(), playerDamageOutput));
-        }
+        
     }
 
     public void EnemyMove()
@@ -1367,6 +1557,15 @@ public class Engine : MonoBehaviour
         selQuestDescription.text = selectedQuest.GetDescription();
     }
 
+    public void DisplayEnemy(EnemyContainer enemyContainer)
+    {
+        selectedEnemy = enemyContainer.GetEnemy();
+        enemyName.text = enemyContainer.GetEnemy().GetName();
+        enemyDescription.text = enemyContainer.GetEnemy().GetDescription();
+        enemyHealth.text = enemyContainer.GetEnemy().GetMaxHealth().ToString();
+        enemyDamage.text = enemyContainer.GetEnemy().GetMaxDamage().ToString();
+    }
+
     public void MakeQuestActive()
     {
         activeQuest = selectedQuest;
@@ -1453,6 +1652,18 @@ public class Engine : MonoBehaviour
             if (isInChest)
                 OpenChest(activeChest);
         }
+    }
+
+    public void ActivateArenaScreen(bool x)
+    {
+        UIArenaScreen.SetActive(x);
+
+        enemyAName.text = enemyA.GetComponent<EnemyContainer>().GetEnemy().GetName();
+        enemyBName.text = enemyB.GetComponent<EnemyContainer>().GetEnemy().GetName();
+        enemyCName.text = enemyC.GetComponent<EnemyContainer>().GetEnemy().GetName();
+
+        GameObject.Find("Player").transform.position = new Vector3(0, 2.2f, 10);
+        GameObject.Find("Player").transform.transform.rotation = new Quaternion(0, 0, 0, 0);
     }
 
     public void UseItem()

@@ -8,6 +8,7 @@ public class Enemy : ScriptableObject
     [SerializeField] Material material;
 
     [SerializeField] new string name;
+    [SerializeField] string description;
     [SerializeField] uint id;
     [SerializeField] int minDamage, maxDamage;
     [SerializeField] List<EnemyAttackType> attackTypes;
@@ -17,6 +18,7 @@ public class Enemy : ScriptableObject
 
     public Material GetMaterial() { return material; }
     public string GetName() { return name; }
+    public string GetDescription() { return description; }
     public uint GetID() { return id; }
     public int GetMaxDamage() { return maxDamage; }
     public int GetMinDamage() { return minDamage; }
