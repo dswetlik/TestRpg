@@ -14,9 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Punch
   description: Show off your pugilist skills.
+  actionMessage: Player threw a {0}, dealing {1} damage!
   skillType: 0
   isUnlocked: 0
-  prerequisteSkills: []
+  isUnlockable: 0
+  nextSkills: []
   attributeType: 0
   attributeChange: 0
   minDamageModifier: 0

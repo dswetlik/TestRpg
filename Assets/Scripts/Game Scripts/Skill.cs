@@ -14,20 +14,25 @@ public class Skill : ScriptableObject
     [SerializeField] new string name;
     [TextArea(3,5)]
     [SerializeField] string description;
+    [TextArea(3,5)]
+    [SerializeField] string actionMessage;
     [SerializeField] SkillType skillType;
     [SerializeField] bool isUnlocked;
-    [SerializeField] List<Skill> prerequisteSkills = new List<Skill>();
+    [SerializeField] bool isUnlockable;
+    [SerializeField] List<Skill> nextSkills = new List<Skill>();
 
     public SkillType GetSkillType() { return skillType; }
     public bool IsUnlocked() { return isUnlocked; }
-    public List<Skill> GetPrerequisites() { return prerequisteSkills; }
+    public bool IsUnlockable() { return isUnlockable; }
+    public List<Skill> GetNextSkills () { return nextSkills; }
 
-    public bool CheckUnlockable()
+    public void SetUnlocked() { isUnlocked = true; }
+
+    public void UnlockNextSkills()
     {
-        foreach (Skill skill in prerequisteSkills)
-            if (!skill.IsUnlocked())
-                return false;
-        return true;
+        foreach (Skill skill in nextSkills)
+            if (!skill.IsUnlockable())
+                isUnlockable = true;
     }
 
     public string GetName()
@@ -40,5 +45,9 @@ public class Skill : ScriptableObject
         return description;
     }
 
+    public string GetActionMessage()
+    {
+        return actionMessage;
+    }
 
 }

@@ -21,6 +21,7 @@ public class Engine : MonoBehaviour
     GameObject UIBattleScreen;
     GameObject UIPickupScreen;
     GameObject UIArenaScreen;
+    GameObject UISkillScreen;
 
     // Directional UI Variables
     Button northBtn;
@@ -171,6 +172,16 @@ public class Engine : MonoBehaviour
     Text enemyHealth;
     Text enemyDamage;
 
+    // UI Skill Variables
+    Skill selectedSkill;
+
+    Text skillNameTxt;
+    Text skillDescriptionTxt;
+    Text skillCostTxt;
+    Text skillDamageTxt;
+
+    Button unlockSkillBtn;
+
     // Game Variables
     public static SortedDictionary<uint, Item> ItemDictionary;
     public static SortedDictionary<uint, Location> LocationDictionary;
@@ -316,7 +327,7 @@ public class Engine : MonoBehaviour
         smallHealthPotion = Resources.Load<Consumable>("Items/Consumables/Small Health Potion");
         smallStaminaPotion = Resources.Load<Consumable>("Items/Consumables/Small Stamina Potion");
 
-        slash = Resources.Load<ActiveSkill>("Player Moves/Slash");
+        slash = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Weapon Skills/Slash"));
 
         ItemDictionary.Add(key.GetID(), key);
 
@@ -372,6 +383,7 @@ public class Engine : MonoBehaviour
         UIBattleScreen = GameObject.Find("UI Battle");
         UIPickupScreen = GameObject.Find("UI Pickup");
         UIArenaScreen = GameObject.Find("UI Arena");
+        UISkillScreen = GameObject.Find("UI Skill");
 
         northBtn = GameObject.Find("NorthBtn").GetComponent<Button>();
         eastBtn = GameObject.Find("EastBtn").GetComponent<Button>();
@@ -530,6 +542,13 @@ public class Engine : MonoBehaviour
         enemyDamage = GameObject.Find("ArenaDamageTxt").GetComponent<Text>();
         enemyHealth = GameObject.Find("ArenaHealthTxt").GetComponent<Text>();
 
+        skillNameTxt = GameObject.Find("SkillNameTxt").GetComponent<Text>();
+        skillDescriptionTxt = GameObject.Find("SkillDescriptionTxt").GetComponent<Text>();
+        skillCostTxt = GameObject.Find("SkillCostTxt").GetComponent<Text>();
+        skillDamageTxt = GameObject.Find("SkillDamageTxt").GetComponent<Text>();
+
+        unlockSkillBtn = GameObject.Find("UnlockSkillBtn").GetComponent<Button>();
+
         invScroll.verticalNormalizedPosition = 1;
 
         UIInventoryScreen.SetActive(false);
@@ -537,6 +556,7 @@ public class Engine : MonoBehaviour
         UIBattleScreen.SetActive(false);
         UIPickupScreen.SetActive(false);
         UIArenaScreen.SetActive(false);
+        UISkillScreen.SetActive(false);
 
         UpdateInventoryAttributes();
     }
@@ -807,21 +827,26 @@ public class Engine : MonoBehaviour
         playerHasMoved = false;
         playerBattleInventoryBtn.interactable = true;
 
-        Instantiate(card, GameObject.Find("PlayerCardALocation").transform).transform.position = GameObject.Find("PlayerCardALocation").transform.position;
-        Instantiate(card, GameObject.Find("PlayerCardBLocation").transform).transform.position = GameObject.Find("PlayerCardBLocation").transform.position;
-        Instantiate(card, GameObject.Find("PlayerCardCLocation").transform).transform.position = GameObject.Find("PlayerCardCLocation").transform.position;
-
         ActiveSkill cardASkill = player.GetWeapon().GetRandomSkill();
-        ActiveSkill cardBSkill = player.GetWeapon().GetRandomSkill();
+        ActiveSkill cardBSkill = player.GetRandomStaminaSkill();
         ActiveSkill cardCSkill = player.GetWeapon().GetRandomSkill();
 
+        Instantiate(card, GameObject.Find("PlayerCardALocation").transform).transform.position = GameObject.Find("PlayerCardALocation").transform.position;
+        if(cardBSkill != null)
+            Instantiate(card, GameObject.Find("PlayerCardBLocation").transform).transform.position = GameObject.Find("PlayerCardBLocation").transform.position;
+        //Instantiate(card, GameObject.Find("PlayerCardCLocation").transform).transform.position = GameObject.Find("PlayerCardCLocation").transform.position;
+
+
+
         GameObject.Find("PlayerCardALocation").transform.GetChild(0).GetComponent<Button>().onClick.AddListener(delegate { PlayerAttack(cardASkill); });
-        GameObject.Find("PlayerCardBLocation").transform.GetChild(0).GetComponent<Button>().onClick.AddListener(delegate { PlayerAttack(cardBSkill); });
-        GameObject.Find("PlayerCardCLocation").transform.GetChild(0).GetComponent<Button>().onClick.AddListener(delegate { PlayerAttack(cardCSkill); });
+        if(cardBSkill != null)
+            GameObject.Find("PlayerCardBLocation").transform.GetChild(0).GetComponent<Button>().onClick.AddListener(delegate { PlayerAttack(cardBSkill); });
+        //GameObject.Find("PlayerCardCLocation").transform.GetChild(0).GetComponent<Button>().onClick.AddListener(delegate { PlayerAttack(cardCSkill); });
 
         SetCard(GameObject.Find("PlayerCardALocation").transform.GetChild(0).gameObject, cardASkill);
-        SetCard(GameObject.Find("PlayerCardBLocation").transform.GetChild(0).gameObject, cardBSkill);
-        SetCard(GameObject.Find("PlayerCardCLocation").transform.GetChild(0).gameObject, cardCSkill);
+        if(cardBSkill != null)
+            SetCard(GameObject.Find("PlayerCardBLocation").transform.GetChild(0).gameObject, cardBSkill);
+       // SetCard(GameObject.Find("PlayerCardCLocation").transform.GetChild(0).gameObject, cardCSkill);
 
         while (!playerHasMoved)
         {
@@ -833,8 +858,9 @@ public class Engine : MonoBehaviour
         UpdateInventoryAttributes();
 
         Destroy(GameObject.Find("PlayerCardALocation").transform.GetChild(0).gameObject);
-        Destroy(GameObject.Find("PlayerCardBLocation").transform.GetChild(0).gameObject);
-        Destroy(GameObject.Find("PlayerCardCLocation").transform.GetChild(0).gameObject);
+        if(cardBSkill != null)
+            Destroy(GameObject.Find("PlayerCardBLocation").transform.GetChild(0).gameObject);
+        //Destroy(GameObject.Find("PlayerCardCLocation").transform.GetChild(0).gameObject);
 
     }
 
@@ -875,11 +901,14 @@ public class Engine : MonoBehaviour
         {
             case ActiveSkill.AttributeType.weapon:
                 playerDamageOutput = player.GetWeapon().Attack();
-                OutputToBattle(String.Format("Player swung {0}, dealing {1} damage.", player.GetWeapon().GetName(), playerDamageOutput));
+                OutputToBattle(String.Format(skill.GetActionMessage(), player.GetWeapon().GetName(), playerDamageOutput));
                 break;
             case ActiveSkill.AttributeType.health:
                 break;
             case ActiveSkill.AttributeType.stamina:
+                playerDamageOutput = player.GetWeapon().Attack() + skill.GetDamageModifier();
+                OutputToBattle(String.Format(skill.GetActionMessage(), player.GetWeapon().GetName(), playerDamageOutput));
+                player.ChangeStamina(-skill.GetAttributeChange());
                 break;
             case ActiveSkill.AttributeType.mana:
                 break;
@@ -1566,6 +1595,29 @@ public class Engine : MonoBehaviour
         enemyDamage.text = enemyContainer.GetEnemy().GetMaxDamage().ToString();
     }
 
+    public void DisplaySkill(SkillContainer skillContainer)
+    {
+        selectedSkill = skillContainer.GetSkill();
+
+        skillNameTxt.text = selectedSkill.GetName();
+        skillDescriptionTxt.text = selectedSkill.GetDescription();
+        skillCostTxt.text = ((ActiveSkill)selectedSkill).GetAttributeChange().ToString();
+        skillDamageTxt.text = ((ActiveSkill)selectedSkill).GetMinDamageModifier().ToString() + " - " + ((ActiveSkill)selectedSkill).GetMaxDamageModifier().ToString();
+  
+        if (player.GetSkillPoints() > 0 && !selectedSkill.IsUnlocked() && selectedSkill.IsUnlockable())
+            unlockSkillBtn.interactable = true;
+    }
+
+    public void UnlockSkill()
+    {
+        player.SetSkillPoints(player.GetSkillPoints() - 1);
+        player.AddActiveStaminaSkill((ActiveSkill)selectedSkill);
+        selectedSkill.SetUnlocked();
+        selectedSkill.UnlockNextSkills();
+
+        DeactivateSkillSelection();
+    }
+
     public void MakeQuestActive()
     {
         activeQuest = selectedQuest;
@@ -1664,6 +1716,15 @@ public class Engine : MonoBehaviour
 
         GameObject.Find("Player").transform.position = new Vector3(0, 2.2f, 10);
         GameObject.Find("Player").transform.transform.rotation = new Quaternion(0, 0, 0, 0);
+    }
+
+    public void ActivateSkillScreen(bool x)
+    {
+        DeactivateInvSelection();
+        DeactivateSkillSelection();
+
+        UIInventoryScreen.SetActive(!x);
+        UISkillScreen.SetActive(x);
     }
 
     public void UseItem()
@@ -1889,6 +1950,18 @@ public class Engine : MonoBehaviour
         questDescription.text = "";
 
         turnInQuestBtn.interactable = false;
+    }
+
+    void DeactivateSkillSelection()
+    {
+        selectedSkill = null;
+
+        skillNameTxt.text = "";
+        skillDescriptionTxt.text = "";
+        skillCostTxt.text = "";
+        skillDamageTxt.text = "";
+
+        unlockSkillBtn.interactable = false;
     }
 
     public void SetActiveDoor(DoorInteraction door, bool x = true)

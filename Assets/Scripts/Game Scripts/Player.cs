@@ -21,6 +21,8 @@ public class Player
     int energy, hunger, thirst, health, maxEnergy, maxHunger, maxThirst, stamina, mana, maxHealth, maxStamina, maxMana, staminaRegen, manaRegen, speed, gold;
     List<Quest> questList = new List<Quest>();
 
+    List<ActiveSkill> activeStaminaSkills = new List<ActiveSkill>();
+
     public Player(string name, Location currentLocation, Inventory inventory, uint level = 1, int health = 100, int stamina = 100, int mana = 100,
             uint currentWeight = 0, uint maxWeight = 50)
     {
@@ -241,10 +243,24 @@ public class Player
             exp -= expToLevel;
             level++;
             expToLevel += (level * 10);
+            skillPoints++;
 
             GameObject.Find("GameManager").GetComponent<Engine>().OutputToText(String.Format("Level Up! New Level: {0}. Exp to Level: {1}.", level, expToLevel));
         }
     }
+
+    public void AddActiveStaminaSkill(ActiveSkill skill) { activeStaminaSkills.Add(skill); }
+
+    public List<ActiveSkill> GetActiveStaminaSkills() { return activeStaminaSkills; }
+
+    public ActiveSkill GetRandomStaminaSkill()
+    {
+        if (activeStaminaSkills.Count == 0)
+            return null;
+        else
+            return (activeStaminaSkills.Count > 1) ? activeStaminaSkills[UnityEngine.Random.Range(0, activeStaminaSkills.Count)] : activeStaminaSkills[0];
+    }
+
 
     public bool CheckForQuest(uint id)
     {

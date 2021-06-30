@@ -14,9 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Slash
   description: Swing your bladed weapon to cut with the edge.
+  actionMessage: Player slashed with their {0}, dealing {1} damage!
   skillType: 0
   isUnlocked: 0
-  prerequisteSkills: []
+  isUnlockable: 0
+  nextSkills: []
   attributeType: 0
   attributeChange: 0
   minDamageModifier: 0

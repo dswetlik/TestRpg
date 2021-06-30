@@ -10,14 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fbb210134401d9945b470a0a8b2b9ce7, type: 3}
-  m_Name: Stab
+  m_Name: Heavy Swing
   m_EditorClassIdentifier: 
-  name: Stab
-  description: Thrust the tip of your weapon at the enemy
+  name: Heavy Swing
+  description: Really put your weight behind your swing to do additional damage.
+  actionMessage: Player really put their weight behind swinging {0}, dealing {1}
+    damage!
   skillType: 0
   isUnlocked: 0
-  prerequisteSkills: []
-  attributeType: 0
-  attributeChange: 0
-  minDamageModifier: 0
-  maxDamageModifier: 0
+  isUnlockable: 1
+  nextSkills: []
+  attributeType: 2
+  attributeChange: 10
+  minDamageModifier: 1
+  maxDamageModifier: 5
