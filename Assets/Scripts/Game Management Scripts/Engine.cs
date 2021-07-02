@@ -185,6 +185,7 @@ public class Engine : MonoBehaviour
     // Game Variables
     public static SortedDictionary<uint, Item> ItemDictionary;
     public static SortedDictionary<uint, Location> LocationDictionary;
+    public static SortedDictionary<string, Skill> SkillDictionary;
 
     Player player;
 
@@ -228,6 +229,8 @@ public class Engine : MonoBehaviour
     Quest leaveTheCave;
 
     ActiveSkill slash;
+    ActiveSkill stab;
+    ActiveSkill heavySwing;
 
     // Local Use Variables
     bool playerHasMoved, isInPickup = false, isInBattle = false, isInChest = false;
@@ -295,6 +298,7 @@ public class Engine : MonoBehaviour
     {
         ItemDictionary = new SortedDictionary<uint, Item>();
         LocationDictionary = new SortedDictionary<uint, Location>();
+        SkillDictionary = new SortedDictionary<string, Skill>();
 
         NULL_ITEM = Resources.Load<Item>("Items/NULL_ITEM");
         NULL_WEAPON = Resources.Load<Weapon>("Items/NULL_WEAPON");
@@ -326,8 +330,6 @@ public class Engine : MonoBehaviour
         ratMeat = Resources.Load<Consumable>("Items/Consumables/Rat Meat");
         smallHealthPotion = Resources.Load<Consumable>("Items/Consumables/Small Health Potion");
         smallStaminaPotion = Resources.Load<Consumable>("Items/Consumables/Small Stamina Potion");
-
-        slash = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Weapon Skills/Slash"));
 
         ItemDictionary.Add(key.GetID(), key);
 
@@ -365,6 +367,14 @@ public class Engine : MonoBehaviour
         LocationDictionary.Add(overworld.GetID(), overworld);
         LocationDictionary.Add(floor1.GetID(), floor1);
         LocationDictionary.Add(floor2.GetID(), floor2);
+
+        slash = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Weapon Skills/Slash"));
+        stab = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Weapon Skills/Stab"));
+        heavySwing = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Stamina Skills/Heavy Swing"));
+
+        SkillDictionary.Add(slash.GetName(), slash);
+        SkillDictionary.Add(stab.GetName(), stab);
+        SkillDictionary.Add(heavySwing.GetName(), heavySwing);
 
         player = new Player("Name", floor1, new Inventory());
     }
@@ -1597,7 +1607,7 @@ public class Engine : MonoBehaviour
 
     public void DisplaySkill(SkillContainer skillContainer)
     {
-        selectedSkill = skillContainer.GetSkill();
+        selectedSkill = SkillDictionary[skillContainer.GetSkill().GetName()];
 
         skillNameTxt.text = selectedSkill.GetName();
         skillDescriptionTxt.text = selectedSkill.GetDescription();
@@ -1615,6 +1625,7 @@ public class Engine : MonoBehaviour
         selectedSkill.SetUnlocked();
         selectedSkill.UnlockNextSkills();
 
+        UpdateExpSliders();
         DeactivateSkillSelection();
     }
 
