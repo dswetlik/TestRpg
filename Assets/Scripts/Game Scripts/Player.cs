@@ -18,7 +18,7 @@ public class Player
     Weapon weapon;
     Armor head, chest, legs, feet, hands;
     uint level, exp, totalExp, expToLevel, skillPoints, currentWeight, maxWeight;
-    int energy, hunger, thirst, health, maxEnergy, maxHunger, maxThirst, stamina, mana, maxHealth, maxStamina, maxMana, staminaRegen, manaRegen, speed, gold;
+    int health, stamina, mana, maxHealth, maxStamina, maxMana, staminaRegen, manaRegen, speed, gold;
     List<Quest> questList = new List<Quest>();
 
     List<ActiveSkill> activeStaminaSkills = new List<ActiveSkill>();
@@ -34,12 +34,7 @@ public class Player
         this.mana = mana;
         this.maxWeight = maxWeight;
         this.inventory = inventory;
-        energy = 100;
-        maxEnergy = 100;
-        hunger = 100;
-        maxHunger = 100;
-        thirst = 100;
-        maxThirst = 100;
+
         maxHealth = 100;
         maxStamina = 100;
         maxMana = 100;
@@ -72,12 +67,6 @@ public class Player
     public uint GetToLevelExp() { return expToLevel; }
     public uint GetSkillPoints() { return skillPoints; }
 
-    public int GetEnergy() { return energy; }
-    public int GetHunger() { return hunger; }
-    public int GetThirst() { return thirst; }
-    public int GetMaxEnergy() { return maxEnergy; }
-    public int GetMaxHunger() { return maxHunger; }
-    public int GetMaxThirst() { return maxThirst; }
     public int GetHealth() { return health; }
     public int GetStamina() { return stamina; }
     public int GetMana() { return mana; }
@@ -206,12 +195,6 @@ public class Player
     public void SetExpToLevel(uint expToLevel) { this.expToLevel = expToLevel; }
     public void SetSkillPoints(uint skillPoints) { this.skillPoints = skillPoints; }
 
-    public void SetEnergy(int energy) { this.energy = energy; }
-    public void SetHunger(int hunger) { this.hunger = hunger; }
-    public void SetThirst(int thirst) { this.thirst = thirst; }
-    public void SetMaxEnergy(int maxEnergy) { this.maxEnergy = maxEnergy; }
-    public void SetMaxHunger(int maxHunger) { this.maxHunger = maxHunger; }
-    public void SetMaxThirst(int maxThirst) { this.maxThirst = maxThirst; }
     public void SetHealth(int health) { this.health = health; }
     public void SetStamina(int stamina) { this.stamina = stamina; }
     public void SetMana(int mana) { this.mana = mana; }
@@ -314,45 +297,4 @@ public class Player
             mana = 100;
     }
 
-    public void ChangeEnergy(int energyChange)
-    {
-        energy = (energy + energyChange);
-
-        if (energy > maxEnergy)
-            energy = 100;
-        if (energy < 0)
-            energy = 0;
-    }
-
-    public void ChangeHunger(int hungerChange)
-    {
-        float changeRateNegative = 2f - (((float)energy) / 100);
-        float changeRatePositive = ((float)energy / 100);
-
-        if (hungerChange < 0)
-            hunger = (int)(hunger + (hungerChange * changeRateNegative));
-        else
-            hunger = (int)(hunger + (hungerChange * changeRatePositive));
-
-        if (hunger > maxHunger)
-            hunger = maxHunger;
-        else if (hunger < 0)
-            hunger = 0;
-    }
-
-    public void ChangeThirst(int thirstChange)
-    {
-        float changeRateNegative = 2f - (((float)energy) / 100);
-        float changeRatePositive = ((float)energy / 100);
-
-        if (thirstChange < 0)
-            thirst = (int)(thirst + (thirstChange * changeRateNegative));
-        else
-            thirst = (int)(thirst + (thirstChange * changeRatePositive));
-
-        if (thirst > maxThirst)
-            thirst = maxThirst;
-        else if (thirst < 0)
-            thirst = 0;
-    }
 }

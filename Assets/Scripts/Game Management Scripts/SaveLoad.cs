@@ -18,7 +18,7 @@ public class SaveLoad
     public uint weapon;
     public uint head, chest, legs, feet, hands;
     public uint level, exp, totalExp, expToLevel, skillPoints, currentWeight, maxWeight;
-    public int energy, hunger, thirst, maxEnergy, maxHunger, maxThirst, health, stamina, mana, maxHealth, maxStamina, maxMana, staminaRegen, manaRegen, gold;
+    public int health, stamina, mana, maxHealth, maxStamina, maxMana, staminaRegen, manaRegen, gold;
 
     public Player LoadPlayer()
     {
@@ -50,12 +50,6 @@ public class SaveLoad
         player.SetSkillPoints(skillPoints);
         player.SetMaxWeight(maxWeight);
 
-        player.SetEnergy(energy);
-        player.SetHunger(hunger);
-        player.SetThirst(thirst);
-        player.SetMaxEnergy(maxEnergy);
-        player.SetMaxHunger(maxHunger);
-        player.SetMaxThirst(maxThirst);
         player.SetHealth(health);
         player.SetStamina(stamina);
         player.SetMana(mana);
@@ -96,12 +90,6 @@ public class SaveLoad
         skillPoints = player.GetSkillPoints();
         maxWeight = player.GetMaxWeight();
 
-        energy = player.GetEnergy();
-        hunger = player.GetHunger();
-        thirst = player.GetThirst();
-        maxEnergy = player.GetMaxEnergy();
-        maxHunger = player.GetMaxHunger();
-        thirst = player.GetMaxThirst();
         health = player.GetHealth();
         stamina = player.GetStamina();
         mana = player.GetMana();

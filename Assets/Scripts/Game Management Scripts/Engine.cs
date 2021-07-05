@@ -31,14 +31,6 @@ public class Engine : MonoBehaviour
     Button searchBtn;
     Button openBtn;
 
-    Text dirEnergyTxt;
-    Text dirHungerTxt;
-    Text dirThirstTxt;
-
-    Slider dirEnergySlider;
-    Slider dirHungerSlider;
-    Slider dirThirstSlider;
-
     Text locationNameTxt;
     static Text outputTxt;
     public ScrollRect mainGameScroll;
@@ -83,16 +75,10 @@ public class Engine : MonoBehaviour
     Text invHealthTxt;
     Text invStaminaTxt;
     Text invManaTxt;
-    Text invEnergyTxt;
-    Text invHungerTxt;
-    Text invThirstTxt;
 
     Slider invHealthSlider;
     Slider invStaminaSlider;
     Slider invManaSlider;
-    Slider invEnergySlider;
-    Slider invHungerSlider;
-    Slider invThirstSlider;
     Slider invExpSlider;
 
     // Quest UI Variables
@@ -456,12 +442,6 @@ public class Engine : MonoBehaviour
         invTotalExpTxt = GameObject.Find("InventoryTotalExpTxt").GetComponent<Text>();
         invSkillPointsTxt = GameObject.Find("InventorySkillPointsTxt").GetComponent<Text>();
 
-        dirEnergyTxt = GameObject.Find("DirectionalEnergyTxt").GetComponent<Text>();
-        dirHungerTxt = GameObject.Find("DirectionalHungerTxt").GetComponent<Text>();
-        dirThirstTxt = GameObject.Find("DirectionalThirstTxt").GetComponent<Text>();
-        invEnergyTxt = GameObject.Find("InventoryEnergyTxt").GetComponent<Text>();
-        invHungerTxt = GameObject.Find("InventoryHungerTxt").GetComponent<Text>();
-        invThirstTxt = GameObject.Find("InventoryThirstTxt").GetComponent<Text>();
         invHealthTxt = GameObject.Find("InventoryHealthTxt").GetComponent<Text>();
         invStaminaTxt = GameObject.Find("InventoryStaminaTxt").GetComponent<Text>();
         invManaTxt = GameObject.Find("InventoryManaTxt").GetComponent<Text>();
@@ -484,12 +464,6 @@ public class Engine : MonoBehaviour
         outputTxt = GameObject.Find("GameTxt").GetComponent<Text>();
         outputTxt.text = "";
         
-        dirEnergySlider = GameObject.Find("DirectionalEnergySlider").GetComponent<Slider>();
-        dirHungerSlider = GameObject.Find("DirectionalHungerSlider").GetComponent<Slider>();
-        dirThirstSlider = GameObject.Find("DirectionalThirstSlider").GetComponent<Slider>();
-        invEnergySlider = GameObject.Find("InventoryEnergySlider").GetComponent<Slider>();
-        invHungerSlider = GameObject.Find("InventoryHungerSlider").GetComponent<Slider>();
-        invThirstSlider = GameObject.Find("InventoryThirstSlider").GetComponent<Slider>();
         invHealthSlider = GameObject.Find("InventoryHealthSlider").GetComponent<Slider>();
         invStaminaSlider = GameObject.Find("InventoryStaminaSlider").GetComponent<Slider>();
         invManaSlider = GameObject.Find("InventoryManaSlider").GetComponent<Slider>();
@@ -819,6 +793,7 @@ public class Engine : MonoBehaviour
         enemyHealthSlider.value = enemy.GetHealth();
         enemyStaminaSlider.value = enemy.GetStamina();
         enemyManaSlider.value = enemy.GetMana();
+
         playerBattleHealthSlider.value = player.GetHealth();
         playerBattleStaminaSlider.value = player.GetStamina();
         playerBattleManaSlider.value = player.GetMana();
@@ -1086,105 +1061,8 @@ public class Engine : MonoBehaviour
         StartCoroutine(LoadScene(location));
     }
 
-    IEnumerator LoadStartScene()
-    {
-        Scene currentScene = SceneManager.GetActiveScene();
-        //GameObject player = GameObject.Find("Player");
-        AsyncOperation newScene = SceneManager.LoadSceneAsync("Floor1", LoadSceneMode.Additive);
-        newScene.allowSceneActivation = false;
-
-        while (newScene.progress < 0.9f)
-        {
-            //Debug.Log("Loading scene: " + newScene.progress);
-            yield return null;
-        }
-
-        newScene.allowSceneActivation = true;
-
-        while (!newScene.isDone)
-        {
-            yield return null;
-        }
-
-        Scene thisScene = SceneManager.GetSceneByName("Floor1");
-
-        if (thisScene.IsValid())
-        {
-            SceneManager.MoveGameObjectToScene(playerObject, thisScene);
-            SceneManager.MoveGameObjectToScene(UIRoot, thisScene);
-            SceneManager.MoveGameObjectToScene(gameManager, thisScene);
-            SceneManager.SetActiveScene(thisScene);
-            playerObject.transform.position = floor1.GetSpawnLocation();
-            playerObject.transform.rotation = floor1.GetSpawnRotation();
-
-            locationNameTxt.text = "Floor 1";
-            player.SetLocation(floor1);
-
-        }
-        AsyncOperation closeScene = SceneManager.UnloadSceneAsync(SceneManager.GetSceneByName("LoadScene"));
-
-        while(!closeScene.isDone)
-        {
-            yield return null;
-        }
-
-        PopulateLocationChests();
-        SpawnEnemies();
-
-    }
-
     void SetPlayerLocation(Location location)
     {
-
-    }
-
-    IEnumerator LoadScene(Location location)
-    {
-        Scene currentScene = SceneManager.GetActiveScene();
-        //GameObject player = GameObject.Find("Player");
-        AsyncOperation newScene = SceneManager.LoadSceneAsync(location.GetSceneName(), LoadSceneMode.Additive);
-        newScene.allowSceneActivation = false;
-        
-        while(newScene.progress < 0.9f)
-        {
-            //Debug.Log("Loading scene: " + newScene.progress);
-            yield return null;
-        }
-
-        newScene.allowSceneActivation = true;
-
-        while(!newScene.isDone)
-        {
-            yield return null;
-        }
-
-        Scene thisScene = SceneManager.GetSceneByName(location.GetSceneName());
-
-        if (thisScene.IsValid())
-        {
-
-            SceneManager.MoveGameObjectToScene(playerObject, thisScene);
-            SceneManager.MoveGameObjectToScene(UIRoot, thisScene);
-            SceneManager.MoveGameObjectToScene(gameManager, thisScene);
-            SceneManager.SetActiveScene(thisScene);
-
-            player.SetLocation(location);
-            locationNameTxt.text = location.GetName();
-        }
-
-        AsyncOperation closeScene = SceneManager.UnloadSceneAsync(currentScene);
-
-        while (!closeScene.isDone)
-        {
-            yield return null;
-        }
-
-        PopulateLocationChests();
-        SpawnEnemies();
-        CheckLocationQuestCompletion();
-
-        playerObject.transform.position = location.GetSpawnLocation();
-        playerObject.transform.rotation = location.GetSpawnRotation();
 
     }
 
@@ -1216,41 +1094,6 @@ public class Engine : MonoBehaviour
             player.AddQuest(quest);
         }
            
-    }
-    
-    public void SearchLocation()
-    {
-        if (player.GetEnergy() > 10)
-        {
-            ChangeEnergy(-10);
-
-            Event events = player.GetLocation().GetEventTable().RandomEvent();
-            Debug.Log(String.Format("Event Name: {0}", events.GetName()));
-            if(events.GetEventType() == Event.EventType.enemy)
-            {
-                EnemyEvent eEvent = (EnemyEvent)events;
-                StartCoroutine("Battle", eEvent);
-            }
-            else if(events.GetEventType() == Event.EventType.loot)
-            {
-                LootEvent lEvent = (LootEvent)events;
-
-                List<Item> items = new List<Item>();
-                List<int> counts = new List<int>();
-
-                lEvent.GetItemLootTable().ItemDrop(ref items, ref counts);
-
-                for(int i = 0; i < items.Count; i++)
-                {
-                    OutputToText(String.Format("You have found {0} {1} in a {2}", counts[i], items[i].GetName(), lEvent.GetName()));
-                    while(counts[i] > 0)
-                    {
-                        AddToInventory(items[i]);
-                        counts[i]--;
-                    }
-                }
-            }
-        }
     }
 
     /// <summary>
@@ -1741,7 +1584,6 @@ public class Engine : MonoBehaviour
     public void UseItem()
     {
         Consumable c = (Consumable)activeItem;
-        Debug.Log(c.GetStatChange());
         c.UseItem(player);
         RemoveFromInventory(c);
 
@@ -1757,10 +1599,10 @@ public class Engine : MonoBehaviour
                 UpdateManaSliders();
                 break;
             case Consumable.ConsumableType.food:
-                UpdateHungerSliders();
+                UpdateHealthSliders();
                 break;
             case Consumable.ConsumableType.drink:
-                UpdateThirstSliders();
+                
                 break;
         }
 
@@ -2008,24 +1850,6 @@ public class Engine : MonoBehaviour
             SetActiveDoor(activeDoor, false);
         }
     }
-
-    void ChangeEnergy(int energy)
-    {
-        player.ChangeEnergy(energy);
-        UpdateEnergySliders();
-    }
-
-    void ChangeHunger(int hunger)
-    {
-        player.ChangeHunger(hunger);
-        UpdateHungerSliders();
-    }
-
-    void ChangeThirst(int thirst)
-    {
-        player.ChangeThirst(thirst);
-        UpdateThirstSliders();
-    }
     
     void ChangeHealth(int health)
     {
@@ -2062,9 +1886,7 @@ public class Engine : MonoBehaviour
         UpdateHealthSliders();
         UpdateStaminaSliders();
         UpdateManaSliders();
-        UpdateEnergySliders();
-        UpdateHungerSliders();
-        UpdateThirstSliders();
+
         UpdateExpSliders();
 
         SetCurrentWeight();
@@ -2100,36 +1922,6 @@ public class Engine : MonoBehaviour
         invManaSlider.maxValue = player.GetMaxMana();
         invManaSlider.value = player.GetMana();
         invManaTxt.text = player.GetMana() + "/" + player.GetMaxMana();
-    }
-
-    void UpdateEnergySliders()
-    {
-        int energy = player.GetEnergy();
-
-        dirEnergySlider.value = energy;
-        invEnergySlider.value = energy;
-        dirEnergyTxt.text = energy + "/100";
-        invEnergyTxt.text = energy + "/100";
-    }
-
-    void UpdateHungerSliders()
-    {
-        int hunger = player.GetHunger();
-
-        dirHungerSlider.value = hunger;
-        invHungerSlider.value = hunger;
-        dirHungerTxt.text = hunger + "/100";
-        invHungerTxt.text = hunger + "/100";
-    }
-
-    void UpdateThirstSliders()
-    {
-        int thirst = player.GetThirst();
-
-        dirThirstSlider.value = thirst;
-        invThirstSlider.value = thirst;
-        dirThirstTxt.text = thirst + "/100";
-        invThirstTxt.text = thirst + "/100";
     }
 
     void SetCurrentWeight()
@@ -2207,6 +1999,103 @@ public class Engine : MonoBehaviour
         {
             yield return null;
         }
+
+    }
+
+    IEnumerator LoadStartScene()
+    {
+        Scene currentScene = SceneManager.GetActiveScene();
+        //GameObject player = GameObject.Find("Player");
+        AsyncOperation newScene = SceneManager.LoadSceneAsync("Floor1", LoadSceneMode.Additive);
+        newScene.allowSceneActivation = false;
+
+        while (newScene.progress < 0.9f)
+        {
+            //Debug.Log("Loading scene: " + newScene.progress);
+            yield return null;
+        }
+
+        newScene.allowSceneActivation = true;
+
+        while (!newScene.isDone)
+        {
+            yield return null;
+        }
+
+        Scene thisScene = SceneManager.GetSceneByName("Floor1");
+
+        if (thisScene.IsValid())
+        {
+            SceneManager.MoveGameObjectToScene(playerObject, thisScene);
+            SceneManager.MoveGameObjectToScene(UIRoot, thisScene);
+            SceneManager.MoveGameObjectToScene(gameManager, thisScene);
+            SceneManager.SetActiveScene(thisScene);
+            playerObject.transform.position = floor1.GetSpawnLocation();
+            playerObject.transform.rotation = floor1.GetSpawnRotation();
+
+            locationNameTxt.text = "Floor 1";
+            player.SetLocation(floor1);
+
+        }
+        AsyncOperation closeScene = SceneManager.UnloadSceneAsync(SceneManager.GetSceneByName("LoadScene"));
+
+        while (!closeScene.isDone)
+        {
+            yield return null;
+        }
+
+        PopulateLocationChests();
+        SpawnEnemies();
+
+    }
+
+    IEnumerator LoadScene(Location location)
+    {
+        Scene currentScene = SceneManager.GetActiveScene();
+        //GameObject player = GameObject.Find("Player");
+        AsyncOperation newScene = SceneManager.LoadSceneAsync(location.GetSceneName(), LoadSceneMode.Additive);
+        newScene.allowSceneActivation = false;
+
+        while (newScene.progress < 0.9f)
+        {
+            //Debug.Log("Loading scene: " + newScene.progress);
+            yield return null;
+        }
+
+        newScene.allowSceneActivation = true;
+
+        while (!newScene.isDone)
+        {
+            yield return null;
+        }
+
+        Scene thisScene = SceneManager.GetSceneByName(location.GetSceneName());
+
+        if (thisScene.IsValid())
+        {
+
+            SceneManager.MoveGameObjectToScene(playerObject, thisScene);
+            SceneManager.MoveGameObjectToScene(UIRoot, thisScene);
+            SceneManager.MoveGameObjectToScene(gameManager, thisScene);
+            SceneManager.SetActiveScene(thisScene);
+
+            player.SetLocation(location);
+            locationNameTxt.text = location.GetName();
+        }
+
+        AsyncOperation closeScene = SceneManager.UnloadSceneAsync(currentScene);
+
+        while (!closeScene.isDone)
+        {
+            yield return null;
+        }
+
+        PopulateLocationChests();
+        SpawnEnemies();
+        CheckLocationQuestCompletion();
+
+        playerObject.transform.position = location.GetSpawnLocation();
+        playerObject.transform.rotation = location.GetSpawnRotation();
 
     }
 }

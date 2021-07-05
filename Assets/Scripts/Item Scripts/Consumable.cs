@@ -51,10 +51,10 @@ public class Consumable : Item
                 player.ChangeMana(statChange);
                 break;
             case ConsumableType.food:
-                player.ChangeHunger(statChange);
+                player.ChangeHealth(statChange);
                 break;
             case ConsumableType.drink:
-                player.ChangeThirst(statChange);
+                
                 break;
         }
     }
