@@ -22,6 +22,7 @@ public class Engine : MonoBehaviour
     GameObject UIPickupScreen;
     GameObject UIArenaScreen;
     GameObject UISkillScreen;
+    GameObject UILoadScreen;
 
     // Directional UI Variables
     Button northBtn;
@@ -167,6 +168,11 @@ public class Engine : MonoBehaviour
     Text skillDamageTxt;
 
     Button unlockSkillBtn;
+
+    // UI Load Variables
+    Slider loadingSlider;
+
+    Text loadingPercentTxt;
 
     // Game Variables
     public static SortedDictionary<uint, Item> ItemDictionary;
@@ -380,6 +386,7 @@ public class Engine : MonoBehaviour
         UIPickupScreen = GameObject.Find("UI Pickup");
         UIArenaScreen = GameObject.Find("UI Arena");
         UISkillScreen = GameObject.Find("UI Skill");
+        UILoadScreen = GameObject.Find("UI Load");
 
         northBtn = GameObject.Find("NorthBtn").GetComponent<Button>();
         eastBtn = GameObject.Find("EastBtn").GetComponent<Button>();
@@ -533,6 +540,9 @@ public class Engine : MonoBehaviour
 
         unlockSkillBtn = GameObject.Find("UnlockSkillBtn").GetComponent<Button>();
 
+        loadingSlider = GameObject.Find("LoadingSlider").GetComponent<Slider>();
+        loadingPercentTxt = GameObject.Find("LoadingPercentTxt").GetComponent<Text>();
+
         invScroll.verticalNormalizedPosition = 1;
 
         UIInventoryScreen.SetActive(false);
@@ -541,6 +551,7 @@ public class Engine : MonoBehaviour
         UIPickupScreen.SetActive(false);
         UIArenaScreen.SetActive(false);
         UISkillScreen.SetActive(false);
+        UILoadScreen.SetActive(false);
 
         UpdateInventoryAttributes();
     }
@@ -2055,10 +2066,12 @@ public class Engine : MonoBehaviour
         //GameObject player = GameObject.Find("Player");
         AsyncOperation newScene = SceneManager.LoadSceneAsync(location.GetSceneName(), LoadSceneMode.Additive);
         newScene.allowSceneActivation = false;
+        UILoadScreen.SetActive(true);
 
         while (newScene.progress < 0.9f)
         {
-            //Debug.Log("Loading scene: " + newScene.progress);
+            loadingSlider.value = newScene.progress;
+            loadingPercentTxt.text = ((int)(newScene.progress * 100)) + "%";
             yield return null;
         }
 
@@ -2066,6 +2079,8 @@ public class Engine : MonoBehaviour
 
         while (!newScene.isDone)
         {
+            loadingSlider.value = newScene.progress;
+            loadingPercentTxt.text = ((int)(newScene.progress * 100)) + "%";
             yield return null;
         }
 
@@ -2096,6 +2111,8 @@ public class Engine : MonoBehaviour
 
         playerObject.transform.position = location.GetSpawnLocation();
         playerObject.transform.rotation = location.GetSpawnRotation();
+
+        UILoadScreen.SetActive(false);
 
     }
 }

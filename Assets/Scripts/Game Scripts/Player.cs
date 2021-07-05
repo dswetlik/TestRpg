@@ -38,6 +38,9 @@ public class Player
         maxHealth = 100;
         maxStamina = 100;
         maxMana = 100;
+        staminaRegen = 5;
+        manaRegen = 5;
+
         speed = 50;
         weapon = Engine.NULL_WEAPON;
         head = Engine.NULL_ARMOR;
