@@ -6,7 +6,7 @@ All of the scripting is located in Assets/Scripts/. It has some organization to 
 
 Some of the more interesting (in my opinion) scripts to look at are Game Management Scripts/Engine.cs, Item Scripts/Inventory.cs, and Game Scripts/Player.cs. This isn't to say that the other scripts aren't nice, a lot of them are just derived from ScriptableObject and as such are only used to create new instances of that object to act as a database for game values. They're pretty boring.
 
-Don't be too surprised if the code (again, especially Engine.cs) is very messy. This idea has gone under several refactorings as my end-goal has changed over the past year or so. I have yet to go through and do some serious clean-up on code that is no longer used. (See in Engine.cs and /Game Scripts/Player.cs, I used to have an idea to have Energy, Hunger, and Thirst as stats, though the idea died out and the remains are still there.)
+Don't be too surprised if the code (again, especially Engine.cs) is very messy. This idea has gone under several refactorings as my end-goal has changed over the past year or so. I have yet to go through and do some serious clean-up on code that is no longer used.
 
 Right now the current idea is to make this into a "card-game Arena battle" idea, refactoring away from the previous idea of being a dungeon-crawler, which was a refactor of an open-world idea, which was a refactor of a more unique(?) idea. (Think kind of like Knights of Pen and Paper.) As you can probably tell, this is really a stomping ground for implementation and idea testing that might turn into something if I stop changing the idea.
 
