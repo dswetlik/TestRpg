@@ -22,6 +22,7 @@ public class Player
     List<Quest> questList = new List<Quest>();
 
     List<ActiveSkill> activeStaminaSkills = new List<ActiveSkill>();
+    List<ActiveSkill> activeManaSkills = new List<ActiveSkill>();
 
     public Player(string name, Location currentLocation, Inventory inventory, uint level = 1, int health = 100, int stamina = 100, int mana = 100,
             uint currentWeight = 0, uint maxWeight = 50)
@@ -237,7 +238,11 @@ public class Player
 
     public void AddActiveStaminaSkill(ActiveSkill skill) { activeStaminaSkills.Add(skill); }
 
+    public void AddActiveManaSkill(ActiveSkill skill) { activeManaSkills.Add(skill); }
+
     public List<ActiveSkill> GetActiveStaminaSkills() { return activeStaminaSkills; }
+
+    public List<ActiveSkill> GetActiveManaSkills() { return activeManaSkills; }
 
     public ActiveSkill GetRandomStaminaSkill()
     {
@@ -247,6 +252,13 @@ public class Player
             return (activeStaminaSkills.Count > 1) ? activeStaminaSkills[UnityEngine.Random.Range(0, activeStaminaSkills.Count)] : activeStaminaSkills[0];
     }
 
+    public ActiveSkill GetRandomManaSkill()
+    {
+        if (activeManaSkills.Count == 0)
+            return null;
+        else
+            return (activeManaSkills.Count > 1) ? activeManaSkills[UnityEngine.Random.Range(0, activeManaSkills.Count)] : activeManaSkills[0];
+    }
 
     public bool CheckForQuest(uint id)
     {

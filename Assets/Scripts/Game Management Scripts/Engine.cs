@@ -160,6 +160,9 @@ public class Engine : MonoBehaviour
     Text enemyDamage;
 
     // UI Skill Variables
+    GameObject skillScrollView;
+    GameObject magicScrollView;
+
     Skill selectedSkill;
 
     Text skillNameTxt;
@@ -223,6 +226,9 @@ public class Engine : MonoBehaviour
     ActiveSkill slash;
     ActiveSkill stab;
     ActiveSkill heavySwing;
+
+    ActiveSkill flames;
+    ActiveSkill lightHeal;
 
     // Local Use Variables
     bool playerHasMoved, isInPickup = false, isInBattle = false, isInChest = false;
@@ -364,11 +370,18 @@ public class Engine : MonoBehaviour
         stab = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Weapon Skills/Stab"));
         heavySwing = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Stamina Skills/Heavy Swing"));
 
+        flames = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Mana Skills/Flames"));
+        lightHeal = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Mana Skills/Light Heal"));
+
         SkillDictionary.Add(slash.GetName(), slash);
         SkillDictionary.Add(stab.GetName(), stab);
         SkillDictionary.Add(heavySwing.GetName(), heavySwing);
 
-        player = new Player("Name", floor1, new Inventory());
+        SkillDictionary.Add(flames.GetName(), flames);
+        SkillDictionary.Add(lightHeal.GetName(), lightHeal);
+
+        player = new Player("Name", overworld, new Inventory());
+        player.SetSkillPoints(3);
     }
 
     void InitializeQuests()
@@ -532,6 +545,10 @@ public class Engine : MonoBehaviour
         enemyDescription = GameObject.Find("ArenaDescriptionTxt").GetComponent<Text>();
         enemyDamage = GameObject.Find("ArenaDamageTxt").GetComponent<Text>();
         enemyHealth = GameObject.Find("ArenaHealthTxt").GetComponent<Text>();
+
+        skillScrollView = GameObject.Find("SkillScrollView");
+        magicScrollView = GameObject.Find("MagicScrollView");
+        magicScrollView.SetActive(false);
 
         skillNameTxt = GameObject.Find("SkillNameTxt").GetComponent<Text>();
         skillDescriptionTxt = GameObject.Find("SkillDescriptionTxt").GetComponent<Text>();
@@ -825,24 +842,32 @@ public class Engine : MonoBehaviour
 
         ActiveSkill cardASkill = player.GetWeapon().GetRandomSkill();
         ActiveSkill cardBSkill = player.GetRandomStaminaSkill();
-        ActiveSkill cardCSkill = player.GetWeapon().GetRandomSkill();
+        ActiveSkill cardCSkill = player.GetRandomManaSkill();
 
         Instantiate(card, GameObject.Find("PlayerCardALocation").transform).transform.position = GameObject.Find("PlayerCardALocation").transform.position;
         if(cardBSkill != null)
             Instantiate(card, GameObject.Find("PlayerCardBLocation").transform).transform.position = GameObject.Find("PlayerCardBLocation").transform.position;
-        //Instantiate(card, GameObject.Find("PlayerCardCLocation").transform).transform.position = GameObject.Find("PlayerCardCLocation").transform.position;
+        if(cardCSkill != null)
+            Instantiate(card, GameObject.Find("PlayerCardCLocation").transform).transform.position = GameObject.Find("PlayerCardCLocation").transform.position;
 
 
 
         GameObject.Find("PlayerCardALocation").transform.GetChild(0).GetComponent<Button>().onClick.AddListener(delegate { PlayerAttack(cardASkill); });
         if(cardBSkill != null)
             GameObject.Find("PlayerCardBLocation").transform.GetChild(0).GetComponent<Button>().onClick.AddListener(delegate { PlayerAttack(cardBSkill); });
-        //GameObject.Find("PlayerCardCLocation").transform.GetChild(0).GetComponent<Button>().onClick.AddListener(delegate { PlayerAttack(cardCSkill); });
+        if(cardCSkill != null)
+            GameObject.Find("PlayerCardCLocation").transform.GetChild(0).GetComponent<Button>().onClick.AddListener(delegate { PlayerAttack(cardCSkill); });
 
         SetCard(GameObject.Find("PlayerCardALocation").transform.GetChild(0).gameObject, cardASkill);
         if(cardBSkill != null)
             SetCard(GameObject.Find("PlayerCardBLocation").transform.GetChild(0).gameObject, cardBSkill);
-       // SetCard(GameObject.Find("PlayerCardCLocation").transform.GetChild(0).gameObject, cardCSkill);
+        if(cardCSkill != null)
+            SetCard(GameObject.Find("PlayerCardCLocation").transform.GetChild(0).gameObject, cardCSkill);
+
+        if (cardBSkill.GetAttributeChange() > player.GetStamina())
+            GameObject.Find("PlayerCardBLocation").transform.GetChild(0).GetComponent<Button>().interactable = false;
+        if (cardCSkill.GetAttributeChange() > player.GetMana())
+            GameObject.Find("PlayerCardCLocation").transform.GetChild(0).GetComponent<Button>().interactable = false;
 
         while (!playerHasMoved)
         {
@@ -856,7 +881,8 @@ public class Engine : MonoBehaviour
         Destroy(GameObject.Find("PlayerCardALocation").transform.GetChild(0).gameObject);
         if(cardBSkill != null)
             Destroy(GameObject.Find("PlayerCardBLocation").transform.GetChild(0).gameObject);
-        //Destroy(GameObject.Find("PlayerCardCLocation").transform.GetChild(0).gameObject);
+        if(cardCSkill != null)
+            Destroy(GameObject.Find("PlayerCardCLocation").transform.GetChild(0).gameObject);
 
     }
 
@@ -907,6 +933,19 @@ public class Engine : MonoBehaviour
                 player.ChangeStamina(-skill.GetAttributeChange());
                 break;
             case ActiveSkill.AttributeType.mana:
+                if(skill.GetMagicType() == ActiveSkill.MagicType.heal)
+                {
+                    playerDamageOutput = 0;
+                    int temp = skill.GetDamageModifier();
+                    player.ChangeHealth(temp);
+                    OutputToBattle(String.Format(skill.GetActionMessage(), skill.GetName(), temp));
+                }
+                if(skill.GetMagicType() == ActiveSkill.MagicType.damage)
+                {
+                    playerDamageOutput = skill.GetDamageModifier();
+                    OutputToBattle(String.Format(skill.GetActionMessage(), skill.GetName(), playerDamageOutput));
+                }
+                player.ChangeMana(-skill.GetAttributeChange());
                 break;
         }
         
@@ -1475,7 +1514,11 @@ public class Engine : MonoBehaviour
     public void UnlockSkill()
     {
         player.SetSkillPoints(player.GetSkillPoints() - 1);
-        player.AddActiveStaminaSkill((ActiveSkill)selectedSkill);
+        if (((ActiveSkill)selectedSkill).GetAttributeType() == ActiveSkill.AttributeType.stamina)
+            player.AddActiveStaminaSkill((ActiveSkill)selectedSkill);
+        else if (((ActiveSkill)selectedSkill).GetAttributeType() == ActiveSkill.AttributeType.mana)
+            player.AddActiveManaSkill((ActiveSkill)selectedSkill);
+
         selectedSkill.SetUnlocked();
         selectedSkill.UnlockNextSkills();
 
@@ -1588,8 +1631,25 @@ public class Engine : MonoBehaviour
         DeactivateInvSelection();
         DeactivateSkillSelection();
 
+        skillScrollView.SetActive(true);
+        magicScrollView.SetActive(false);
+
         UIInventoryScreen.SetActive(!x);
         UISkillScreen.SetActive(x);
+    }
+
+    public void ActivateSkillScrollView(bool x)
+    {
+        if(x)
+        {
+            skillScrollView.SetActive(true);
+            magicScrollView.SetActive(false);
+        }
+        else
+        {
+            skillScrollView.SetActive(false);
+            magicScrollView.SetActive(true);
+        }
     }
 
     public void UseItem()

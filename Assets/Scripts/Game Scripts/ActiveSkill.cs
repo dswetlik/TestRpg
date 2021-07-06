@@ -14,7 +14,15 @@ public class ActiveSkill : Skill
         mana
     }
 
+    public enum MagicType
+    {
+        none,
+        damage,
+        heal
+    }
+
     [SerializeField] AttributeType attributeType;
+    [SerializeField] MagicType magicType;
     [SerializeField] int attributeChange;
     
     [SerializeField] int minDamageModifier;
@@ -23,6 +31,7 @@ public class ActiveSkill : Skill
     public int GetDamageModifier() { return Random.Range(minDamageModifier, maxDamageModifier + 1); }
 
     public AttributeType GetAttributeType() { return attributeType; }
+    public MagicType GetMagicType() { return magicType; }
     public int GetAttributeChange() { return attributeChange; }
     public int GetMinDamageModifier() { return minDamageModifier; }
     public int GetMaxDamageModifier() { return maxDamageModifier; }
