@@ -128,6 +128,7 @@ public class Engine : MonoBehaviour
     // UI Pickup Variables
     Text otherPickUpNameTxt;
     Text playerPickUpNameTxt;
+    Text pickupGoldTxt;
 
     Text pickUpDescriptionTxt;
     Text pickUpNameTxt;
@@ -141,6 +142,8 @@ public class Engine : MonoBehaviour
     GameObject pickUpArmorObj;
     GameObject pickUpConsumableObj;
 
+    Button pickupDropItemBtn;
+    Button pickupItemBtn;
     Button pickupExitBtn;
 
     // UI Arena Variables
@@ -231,13 +234,14 @@ public class Engine : MonoBehaviour
     ActiveSkill lightHeal;
 
     // Local Use Variables
-    bool playerHasMoved, isInPickup = false, isInBattle = false, isInChest = false;
+    bool playerHasMoved, isInPickup = false, isInBattle = false, isInChest = false, isInShop = false;
     int playerDamageOutput, enemyDamageOutput;
     ChestInventory activeChest;
     DoorInteraction activeDoor;
     public GameObject playerObject, enemyObject;
     public GameObject gameManager;
     public GameObject card;
+    Store currentShop;
 
     public bool isLoadingGame;
 
@@ -514,6 +518,7 @@ public class Engine : MonoBehaviour
 
         otherPickUpNameTxt = GameObject.Find("OtherPickupNameTxt").GetComponent<Text>();
         playerPickUpNameTxt = GameObject.Find("PlayerPickUpNameTxt").GetComponent<Text>();
+        pickupGoldTxt = GameObject.Find("PickupGoldTxt").GetComponent<Text>();
 
         pickUpDescriptionTxt = GameObject.Find("PickupDescriptionTxt").GetComponent<Text>();
         pickUpNameTxt = GameObject.Find("PickupNameTxt").GetComponent<Text>();
@@ -523,6 +528,8 @@ public class Engine : MonoBehaviour
         pickUpArmorTxt = GameObject.Find("PickupArmorTxt").GetComponent<Text>();
         pickUpConsumableTxt = GameObject.Find("PickupConsumableTxt").GetComponent<Text>();
 
+        pickupDropItemBtn = GameObject.Find("PickupDropItemBtn").GetComponent<Button>();
+        pickupItemBtn = GameObject.Find("PickupItemBtn").GetComponent<Button>();
         pickupExitBtn = GameObject.Find("PickupExitBtn").GetComponent<Button>();
         pickupExitBtn.GetComponent<Button>().onClick.AddListener(() => ActivatePickupScreen(false));
         
@@ -864,9 +871,9 @@ public class Engine : MonoBehaviour
         if(cardCSkill != null)
             SetCard(GameObject.Find("PlayerCardCLocation").transform.GetChild(0).gameObject, cardCSkill);
 
-        if (cardBSkill.GetAttributeChange() > player.GetStamina())
+        if (cardBSkill != null && cardBSkill.GetAttributeChange() > player.GetStamina())
             GameObject.Find("PlayerCardBLocation").transform.GetChild(0).GetComponent<Button>().interactable = false;
-        if (cardCSkill.GetAttributeChange() > player.GetMana())
+        if (cardCSkill != null && cardCSkill.GetAttributeChange() > player.GetMana())
             GameObject.Find("PlayerCardCLocation").transform.GetChild(0).GetComponent<Button>().interactable = false;
 
         while (!playerHasMoved)
@@ -1295,8 +1302,14 @@ public class Engine : MonoBehaviour
             AddToPickup(activeItem);
             if (isInChest)
                 activeChest.AddItem(activeItem);
+            if(isInShop)
+            {
+                currentShop.AddItem(activeItem);
+                player.ChangeGold((int)activeItem.GetValue());
+            }
             RemoveFromInventory(activeItem);
         }
+        UpdateInventoryAttributes();
     }
 
     public void PickupItem()
@@ -1321,7 +1334,7 @@ public class Engine : MonoBehaviour
         }
 
         SetCurrentWeight();
-
+        
         invScroll.verticalNormalizedPosition = 1;
     }
 
@@ -1344,8 +1357,13 @@ public class Engine : MonoBehaviour
             AddToInventory(item);
             if (isInChest)
                 activeChest.RemoveItem(item);
+            if (isInShop)
+            {
+                currentShop.RemoveItem(item);
+                player.ChangeGold(-(int)item.GetValue());
+            }                
         }
-
+        UpdateInventoryAttributes();
         pickupScroll.verticalNormalizedPosition = 1;
     }
 
@@ -1436,8 +1454,30 @@ public class Engine : MonoBehaviour
             Debug.Log("Is In Pickup");
             if (itemContainer.GetItem() != NULL_ITEM && itemContainer.GetItem() != NULL_WEAPON && itemContainer.GetItem() != NULL_ARMOR)
             {
+
+                if(isInShop)
+                {
+                    pickupDropItemBtn.gameObject.transform.GetChild(0).GetComponent<Text>().text = "Sell Item";
+                    pickupItemBtn.gameObject.transform.GetChild(0).GetComponent<Text>().text = "Buy Item";
+                }
+                else
+                {
+                    pickupDropItemBtn.gameObject.transform.GetChild(0).GetComponent<Text>().text = "Drop Item";
+                    pickupItemBtn.gameObject.transform.GetChild(0).GetComponent<Text>().text = "Grab Item";
+                }
+
                 activeItem = itemContainer.GetItem();
-                dropItemBtn.interactable = true;
+
+                if (player.GetInventory().CheckForItem(activeItem.GetID()))
+                    pickupDropItemBtn.interactable = true;
+                else
+                    pickupDropItemBtn.interactable = false;
+
+                if (activeItem.GetValue() > player.GetGold() && isInShop)
+                    pickupItemBtn.interactable = false;
+                else
+                    pickupItemBtn.interactable = true;
+                    
 
                 pickUpNameTxt.text = activeItem.GetName();
                 pickUpDescriptionTxt.text = activeItem.GetDescription();
@@ -1571,6 +1611,17 @@ public class Engine : MonoBehaviour
         DeactivateQuestSelection();
     }
 
+    public void SetIsInShop(bool x, GameObject shop)
+    {
+        isInShop = x;
+        if (x)
+            currentShop = shop.GetComponent<Store>();
+        else
+            currentShop = null;
+
+        ActivatePickupScreen(x);
+    }
+
     public void ActivatePickupScreen(bool x, string sourceName = "")
     {
         if (isInChest)
@@ -1578,8 +1629,19 @@ public class Engine : MonoBehaviour
             sourceName = "Chest";
             activeChest.SetHasBeenSearched(true);
         }
+
         if(x)
         {
+            if (isInShop)
+            {
+                sourceName = currentShop.GetName();
+
+                foreach(Item item in currentShop.GetItemList())
+                {
+                    AddToPickup(item);
+                }
+            }
+
             invScroll.transform.SetParent(UIPickupScreen.transform);
             otherPickUpNameTxt.text = sourceName;
             isInPickup = true;
@@ -1961,7 +2023,8 @@ public class Engine : MonoBehaviour
         UpdateExpSliders();
 
         SetCurrentWeight();
-        goldTxt.text = player.GetGold().ToString();        
+        goldTxt.text = player.GetGold().ToString();
+        pickupGoldTxt.text = player.GetGold().ToString();
     }
 
     void UpdateExpSliders()
@@ -2128,6 +2191,9 @@ public class Engine : MonoBehaviour
         newScene.allowSceneActivation = false;
         UILoadScreen.SetActive(true);
 
+        loadingSlider.value = newScene.progress;
+        loadingPercentTxt.text = ((int)(newScene.progress * 100)) + "%";
+
         while (newScene.progress < 0.9f)
         {
             loadingSlider.value = newScene.progress;
@@ -2135,6 +2201,8 @@ public class Engine : MonoBehaviour
             yield return null;
         }
 
+        loadingSlider.value = newScene.progress;
+        loadingPercentTxt.text = ((int)(newScene.progress * 100)) + "%";
         newScene.allowSceneActivation = true;
 
         while (!newScene.isDone)
