@@ -153,14 +153,17 @@ public class Engine : MonoBehaviour
     GameObject enemyB;
     GameObject enemyC;
 
-    Text enemyAName;
-    Text enemyBName;
-    Text enemyCName;
+    Text enemyANameTxt;
+    Text enemyBNameTxt;
+    Text enemyCNameTxt;
 
-    Text enemyName;
-    Text enemyDescription;
-    Text enemyHealth;
-    Text enemyDamage;
+    Text arenaEnemyNameTxt;
+    Text arenaEnemyDescriptionTxt;
+    Text arenaEnemyHealthTxt;
+    Text arenaEnemyStaminaTxt;
+    Text arenaEnemyManaTxt;
+    Text arenaEnemyDamageTxt;
+    Text arenaEnemySpeedTxt;
 
     // UI Skill Variables
     GameObject skillScrollView;
@@ -544,14 +547,17 @@ public class Engine : MonoBehaviour
         enemyB = GameObject.Find("EnemyB");
         enemyC = GameObject.Find("EnemyC");
 
-        enemyAName = GameObject.Find("EnemyAName").GetComponent<Text>();
-        enemyBName = GameObject.Find("EnemyBName").GetComponent<Text>();
-        enemyCName = GameObject.Find("EnemyCName").GetComponent<Text>();
+        enemyANameTxt = GameObject.Find("EnemyAName").GetComponent<Text>();
+        enemyBNameTxt = GameObject.Find("EnemyBName").GetComponent<Text>();
+        enemyCNameTxt = GameObject.Find("EnemyCName").GetComponent<Text>();
 
-        enemyName = GameObject.Find("ArenaNameTxt").GetComponent<Text>();
-        enemyDescription = GameObject.Find("ArenaDescriptionTxt").GetComponent<Text>();
-        enemyDamage = GameObject.Find("ArenaDamageTxt").GetComponent<Text>();
-        enemyHealth = GameObject.Find("ArenaHealthTxt").GetComponent<Text>();
+        arenaEnemyNameTxt = GameObject.Find("ArenaNameTxt").GetComponent<Text>();
+        arenaEnemyDescriptionTxt = GameObject.Find("ArenaDescriptionTxt").GetComponent<Text>();
+        arenaEnemyDamageTxt = GameObject.Find("ArenaDamageTxt").GetComponent<Text>();
+        arenaEnemySpeedTxt = GameObject.Find("ArenaSpeedTxt").GetComponent<Text>();
+        arenaEnemyHealthTxt = GameObject.Find("ArenaHealthTxt").GetComponent<Text>();
+        arenaEnemyStaminaTxt = GameObject.Find("ArenaStaminaTxt").GetComponent<Text>();
+        arenaEnemyManaTxt = GameObject.Find("ArenaManaTxt").GetComponent<Text>();
 
         skillScrollView = GameObject.Find("SkillScrollView");
         magicScrollView = GameObject.Find("MagicScrollView");
@@ -1532,10 +1538,13 @@ public class Engine : MonoBehaviour
     public void DisplayEnemy(EnemyContainer enemyContainer)
     {
         selectedEnemy = enemyContainer.GetEnemy();
-        enemyName.text = enemyContainer.GetEnemy().GetName();
-        enemyDescription.text = enemyContainer.GetEnemy().GetDescription();
-        enemyHealth.text = enemyContainer.GetEnemy().GetMaxHealth().ToString();
-        enemyDamage.text = enemyContainer.GetEnemy().GetMaxDamage().ToString();
+        arenaEnemyNameTxt.text = enemyContainer.GetEnemy().GetName();
+        arenaEnemyDescriptionTxt.text = enemyContainer.GetEnemy().GetDescription();
+        arenaEnemyHealthTxt.text = enemyContainer.GetEnemy().GetMaxHealth().ToString();
+        arenaEnemyStaminaTxt.text = enemyContainer.GetEnemy().GetMaxStamina().ToString();
+        arenaEnemyManaTxt.text = enemyContainer.GetEnemy().GetMaxMana().ToString();
+        arenaEnemyDamageTxt.text = enemyContainer.GetEnemy().GetMaxDamage().ToString();
+        arenaEnemySpeedTxt.text = enemyContainer.GetEnemy().GetSpeed().ToString();
     }
 
     public void DisplaySkill(SkillContainer skillContainer)
@@ -1680,9 +1689,9 @@ public class Engine : MonoBehaviour
     {
         UIArenaScreen.SetActive(x);
 
-        enemyAName.text = enemyA.GetComponent<EnemyContainer>().GetEnemy().GetName();
-        enemyBName.text = enemyB.GetComponent<EnemyContainer>().GetEnemy().GetName();
-        enemyCName.text = enemyC.GetComponent<EnemyContainer>().GetEnemy().GetName();
+        enemyANameTxt.text = enemyA.GetComponent<EnemyContainer>().GetEnemy().GetName();
+        enemyBNameTxt.text = enemyB.GetComponent<EnemyContainer>().GetEnemy().GetName();
+        enemyCNameTxt.text = enemyC.GetComponent<EnemyContainer>().GetEnemy().GetName();
 
         GameObject.Find("Player").transform.position = new Vector3(0, 2.2f, 10);
         GameObject.Find("Player").transform.transform.rotation = new Quaternion(0, 0, 0, 0);
@@ -1915,6 +1924,8 @@ public class Engine : MonoBehaviour
         pickUpDamageObj.SetActive(false);
         pickUpArmorObj.SetActive(false);
         pickUpConsumableObj.SetActive(false);
+        pickupDropItemBtn.interactable = false;
+        pickupItemBtn.interactable = false;
 
         activeItem = null;
         dropItemBtn.interactable = false;
