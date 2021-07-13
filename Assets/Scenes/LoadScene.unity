@@ -10463,7 +10463,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1116962253}
   m_HandleRect: {fileID: 1116962252}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -17738,6 +17738,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TargetTexture
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5811790113026238048, guid: befb0f0972a47354aaddba3fc9292a81,
+        type: 3}
+      propertyPath: m_BackGroundColor.b
+      value: 0.49411765
+      objectReference: {fileID: 0}
+    - target: {fileID: 5811790113026238048, guid: befb0f0972a47354aaddba3fc9292a81,
+        type: 3}
+      propertyPath: m_BackGroundColor.g
+      value: 0.34901962
+      objectReference: {fileID: 0}
+    - target: {fileID: 5811790113026238048, guid: befb0f0972a47354aaddba3fc9292a81,
+        type: 3}
+      propertyPath: m_BackGroundColor.r
+      value: 0.12156863
       objectReference: {fileID: 0}
     - target: {fileID: 5811790113026238048, guid: befb0f0972a47354aaddba3fc9292a81,
         type: 3}

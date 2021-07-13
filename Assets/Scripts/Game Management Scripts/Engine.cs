@@ -207,6 +207,8 @@ public class Engine : MonoBehaviour
     Item redSlimeGoo;
     Item unknownBone;
 
+    Weapon rustyIronDagger;
+    Weapon ironDagger;
     Weapon ironSword;
     Weapon steelSword;
     Weapon steelDagger;
@@ -220,6 +222,7 @@ public class Engine : MonoBehaviour
     Consumable ratMeat;
     Consumable smallHealthPotion;
     Consumable smallStaminaPotion;
+    Consumable smallManaPotion;
 
     Location border;
     Location overworld;
@@ -322,6 +325,8 @@ public class Engine : MonoBehaviour
         redSlimeGoo = Resources.Load<Item>("Items/Miscellaneous/SlimeItems/RedSlimeGoo");
         unknownBone = Resources.Load<Item>("Items/Miscellaneous/SlimeItems/UnknownBone");
 
+        rustyIronDagger = Resources.Load<Weapon>("Items/Weapons/Rusty Iron Dagger");
+        ironDagger = Resources.Load<Weapon>("Items/Weapons/Iron Dagger");
         ironSword = Resources.Load<Weapon>("Items/Weapons/Iron Sword");
         steelSword = Resources.Load<Weapon>("Items/Weapons/Steel Sword");
         steelDagger = Resources.Load<Weapon>("Items/Weapons/Steel Dagger");
@@ -335,6 +340,7 @@ public class Engine : MonoBehaviour
         ratMeat = Resources.Load<Consumable>("Items/Consumables/Rat Meat");
         smallHealthPotion = Resources.Load<Consumable>("Items/Consumables/Small Health Potion");
         smallStaminaPotion = Resources.Load<Consumable>("Items/Consumables/Small Stamina Potion");
+        smallManaPotion = Resources.Load<Consumable>("Items/Consumables/Small Mana Potion");
 
         ItemDictionary.Add(key.GetID(), key);
 
@@ -1461,17 +1467,6 @@ public class Engine : MonoBehaviour
             if (itemContainer.GetItem() != NULL_ITEM && itemContainer.GetItem() != NULL_WEAPON && itemContainer.GetItem() != NULL_ARMOR)
             {
 
-                if(isInShop)
-                {
-                    pickupDropItemBtn.gameObject.transform.GetChild(0).GetComponent<Text>().text = "Sell Item";
-                    pickupItemBtn.gameObject.transform.GetChild(0).GetComponent<Text>().text = "Buy Item";
-                }
-                else
-                {
-                    pickupDropItemBtn.gameObject.transform.GetChild(0).GetComponent<Text>().text = "Drop Item";
-                    pickupItemBtn.gameObject.transform.GetChild(0).GetComponent<Text>().text = "Grab Item";
-                }
-
                 activeItem = itemContainer.GetItem();
 
                 if (player.GetInventory().CheckForItem(activeItem.GetID()))
@@ -1633,6 +1628,10 @@ public class Engine : MonoBehaviour
 
     public void ActivatePickupScreen(bool x, string sourceName = "")
     {
+
+        pickupItemBtn.interactable = false;
+        pickupDropItemBtn.interactable = false;
+
         if (isInChest)
         {
             sourceName = "Chest";
@@ -1645,7 +1644,10 @@ public class Engine : MonoBehaviour
             {
                 sourceName = currentShop.GetName();
 
-                foreach(Item item in currentShop.GetItemList())
+                pickupDropItemBtn.gameObject.transform.GetChild(0).GetComponent<Text>().text = "Sell Item";
+                pickupItemBtn.gameObject.transform.GetChild(0).GetComponent<Text>().text = "Buy Item";
+
+                foreach (Item item in currentShop.GetItemList())
                 {
                     AddToPickup(item);
                 }
@@ -1658,6 +1660,9 @@ public class Engine : MonoBehaviour
         }
         else
         {
+            pickupDropItemBtn.gameObject.transform.GetChild(0).GetComponent<Text>().text = "Drop Item";
+            pickupItemBtn.gameObject.transform.GetChild(0).GetComponent<Text>().text = "Grab Item";
+
             invScroll.transform.SetParent(UIInventoryScreen.transform);
             isInPickup = false;
 

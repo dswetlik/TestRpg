@@ -13,14 +13,14 @@ MonoBehaviour:
   m_Name: Iron Sword
   m_EditorClassIdentifier: 
   itemType: 1
-  id: 100
+  id: 102
   name: Iron Sword
   description: A trusty iron sword.
   weight: 5
-  value: 5
+  value: 10
   weaponType: 0
   weaponSkills:
   - {fileID: 11400000, guid: 7d57fe5ee52be9c41acea2a16275c96e, type: 2}
   - {fileID: 11400000, guid: 599f83945ae651648a626484a7b39715, type: 2}
-  maxDamage: 5
   minDamage: 1
+  maxDamage: 5

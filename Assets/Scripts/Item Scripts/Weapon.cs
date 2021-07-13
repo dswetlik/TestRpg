@@ -14,8 +14,8 @@ public class Weapon : Item
 
     [SerializeField] WeaponType weaponType;
     [SerializeField] List<ActiveSkill> weaponSkills;
-    [SerializeField] int maxDamage;
     [SerializeField] int minDamage;
+    [SerializeField] int maxDamage;
 
     public Weapon(uint id = 0, string name = "New Weapon", uint weight = 0, uint value = 0, uint maxDamage = 0, uint minDamage = 0) : base(id)
     {
