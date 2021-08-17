@@ -12,10 +12,11 @@ public class Enemy : ScriptableObject
     [SerializeField] uint id;
     [SerializeField] int minDamage, maxDamage;
     [SerializeField] List<EnemyAttackType> attackTypes;
-    [SerializeField] int health, maxHealth, stamina, maxStamina, stamRegen, mana, maxMana, manaRegen, speed, goldReward;
+    [SerializeField] int health, maxHealth, stamina, maxStamina, stamRegen, mana, maxMana, manaRegen, goldReward;
+    [SerializeField] float speed;
     [SerializeField] uint expReward;
     [SerializeField] ItemLootTable itemRewards;
-
+ 
     public Material GetMaterial() { return material; }
     public string GetName() { return name; }
     public string GetDescription() { return description; }
@@ -33,7 +34,7 @@ public class Enemy : ScriptableObject
     public int GetMana() { return mana; }
     public int GetMaxMana() { return maxMana; }
     public int GetManaRegen() { return manaRegen; }
-    public int GetSpeed() { return speed; }
+    public float GetSpeed() { return speed; }
     public List<EnemyAttackType> GetEnemyAttackTypes() { return attackTypes; }
     public ItemLootTable GetItemRewards() { return itemRewards; }
 

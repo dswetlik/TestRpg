@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: RatSkull
   m_EditorClassIdentifier: 
   itemType: 0
+  sprite: {fileID: 21300000, guid: 392c21bd97cbe844486879d03db5485f, type: 3}
   id: 3
   name: Rat Skull
   description: A cracked skull from a rat.

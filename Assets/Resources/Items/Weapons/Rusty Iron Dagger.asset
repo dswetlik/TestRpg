@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Rusty Iron Dagger
   m_EditorClassIdentifier: 
   itemType: 1
+  sprite: {fileID: 21300000, guid: 8d74ed79c71e61243b0511348f3fa7ba, type: 3}
   id: 100
   name: Rusty Iron Dagger
   description: A rusty iron dagger.

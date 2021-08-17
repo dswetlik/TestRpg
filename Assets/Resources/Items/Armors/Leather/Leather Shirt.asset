@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: Leather Shirt
   m_EditorClassIdentifier: 
   itemType: 2
-  id: 301
+  sprite: {fileID: 21300000, guid: 379f08a205f454d47a3da248085abab5, type: 3}
+  id: 306
   name: Leather Shirt
   description: A basic leather shirt.
   weight: 3
   value: 7
-  rating: 3
   armorType: 1
+  armorClass: 0
+  rating: 3

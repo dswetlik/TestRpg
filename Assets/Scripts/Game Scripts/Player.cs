@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 public class Player
 {
 
-    const int DEFAULT_SPEED = 50;
+    const float DEFAULT_SPEED = 1.0f;
 
     string name;
     Location currentLocation;
@@ -18,11 +18,13 @@ public class Player
     Weapon weapon;
     Armor head, chest, legs, feet, hands;
     uint level, exp, totalExp, expToLevel, skillPoints, currentWeight, maxWeight;
-    int health, stamina, mana, maxHealth, maxStamina, maxMana, staminaRegen, manaRegen, speed, gold;
+    int health, stamina, mana, maxHealth, maxStamina, maxMana, staminaRegen, manaRegen, gold;
+    float speed;
     List<Quest> questList = new List<Quest>();
-
+    List<StatusEffect> statusEffects = new List<StatusEffect>();
     List<ActiveSkill> activeStaminaSkills = new List<ActiveSkill>();
     List<ActiveSkill> activeManaSkills = new List<ActiveSkill>();
+
 
     public Player(string name, Location currentLocation, Inventory inventory, uint level = 1, int health = 100, int stamina = 100, int mana = 100,
             uint currentWeight = 0, uint maxWeight = 50)
@@ -42,7 +44,7 @@ public class Player
         staminaRegen = 5;
         manaRegen = 5;
 
-        speed = 50;
+        speed = DEFAULT_SPEED;
         weapon = Engine.NULL_WEAPON;
         head = Engine.NULL_ARMOR;
         chest = Engine.NULL_ARMOR;
@@ -79,7 +81,7 @@ public class Player
     public int GetMaxMana() { return maxMana; }
     public int GetStaminaRegen() { return staminaRegen; }
     public int GetManaRegen() { return manaRegen; }
-    public int GetSpeed() { return speed; }
+    public float GetSpeed() { return speed; }
 
     public Weapon GetWeapon() { return weapon; }
 
@@ -135,7 +137,7 @@ public class Player
         }
     }
 
-    public void SetSpeed(int speed) { this.speed = speed; }
+    public void SetSpeed(float speed) { this.speed = speed; }
 
     public void CheckSpeed()
     {
@@ -235,6 +237,12 @@ public class Player
             GameObject.Find("GameManager").GetComponent<Engine>().OutputToText(String.Format("Level Up! New Level: {0}. Exp to Level: {1}.", level, expToLevel));
         }
     }
+
+    public List<StatusEffect> GetStatusEffects() { return statusEffects; }
+
+    public void AddStatusEffect(StatusEffect statusEffect) { statusEffects.Add(statusEffect); }
+
+    public void DecrementStatusEffectTurn() { }
 
     public void AddActiveStaminaSkill(ActiveSkill skill) { activeStaminaSkills.Add(skill); }
 

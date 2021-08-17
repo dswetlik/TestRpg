@@ -129,7 +129,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (other.transform.parent.tag == "Chest")
         {
-            GameObject.Find("GameManager").GetComponent<Engine>().OpenChest(other.GetComponentInParent<ChestInventory>());
+           // GameObject.Find("GameManager").GetComponent<Engine>().OpenChest(other.GetComponentInParent<ChestInventory>());
         }
     }
 
@@ -150,7 +150,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (other.transform.parent.tag == "Chest")
         {
-            GameObject.Find("GameManager").GetComponent<Engine>().OpenChest(other.GetComponentInParent<ChestInventory>(), false);
+          //  GameObject.Find("GameManager").GetComponent<Engine>().OpenChest(other.GetComponentInParent<ChestInventory>(), false);
         }
     }
 }

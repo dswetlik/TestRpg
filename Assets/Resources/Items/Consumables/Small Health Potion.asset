@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Small Health Potion
   m_EditorClassIdentifier: 
   itemType: 3
+  sprite: {fileID: 21300000, guid: 444fb3c8e06364c46a345234b59594ff, type: 3}
   id: 500
   name: Small Health Potion
   description: A small vial of a murky red liquid.

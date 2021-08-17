@@ -19,6 +19,7 @@ public class Item : ScriptableObject
     };
 
     [SerializeField] ItemType itemType;
+    [SerializeField] Sprite sprite;
     [SerializeField] uint id;
     [SerializeField] new string name;
     [TextArea(3, 5)]
@@ -29,6 +30,7 @@ public class Item : ScriptableObject
     public Item() { }
     public Item(uint setID) { id = setID; }
 
+    public Sprite GetSprite() { return sprite; }
     public string GetName() { return name; }
     public string GetDescription() { return description; }
     public uint GetWeight() { return weight; }

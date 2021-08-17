@@ -2,13 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
+
+    GameObject UILoadScreen;
+    Text mainLoadingPercentTxt;
+    Slider mainLoadingSlider;
+
     // Start is called before the first frame update
     void Start()
     {
+        UILoadScreen = GameObject.Find("UI Main Load");
+        mainLoadingPercentTxt = GameObject.Find("MainLoadingPercentTxt").GetComponent<Text>();
+        mainLoadingSlider = GameObject.Find("MainLoadingSlider").GetComponent<Slider>();
 
+        UILoadScreen.SetActive(false);
     }
 
     // Update is called once per frame
@@ -20,11 +30,13 @@ public class MainMenu : MonoBehaviour
     public void NewGame()
     {
         StartCoroutine(LoadStartScene("LoadScene", false));
+        UILoadScreen.SetActive(true);
     }
 
     public void LoadGame()
     {
         StartCoroutine(LoadStartScene("LoadScene", true));
+        UILoadScreen.SetActive(true);
     }
 
     IEnumerator LoadStartScene(string sceneName, bool loadGame)
@@ -35,24 +47,30 @@ public class MainMenu : MonoBehaviour
 
         newScene.allowSceneActivation = false;
 
+        mainLoadingSlider.value = newScene.progress;
+        mainLoadingPercentTxt.text = ((int)(newScene.progress * 100)) + "%";
+
         while (newScene.progress < 0.9f)
         {
-            Debug.Log("Loading scene: " + newScene.progress);
-            yield return null;
+            mainLoadingSlider.value = newScene.progress;
+            mainLoadingPercentTxt.text = ((int)(newScene.progress * 100)) + "%";
+            yield return new WaitForFixedUpdate();
         }
 
         newScene.allowSceneActivation = true;
 
         while (!newScene.isDone)
         {
-            yield return null;
+            mainLoadingSlider.value = newScene.progress;
+            mainLoadingPercentTxt.text = ((int)(newScene.progress * 100)) + "%";
+            yield return new WaitForFixedUpdate();
         }
 
         Scene thisScene = SceneManager.GetSceneByName(sceneName);
 
         if (thisScene.IsValid())
         {
-            Debug.Log("Scene is Valid");
+            //Debug.Log("Scene is Valid");
 
             SceneManager.SetActiveScene(thisScene);
         }

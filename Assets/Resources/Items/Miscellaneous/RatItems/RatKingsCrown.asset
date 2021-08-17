@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: RatKingsCrown
   m_EditorClassIdentifier: 
   itemType: 0
+  sprite: {fileID: 21300000, guid: 5f675553c18fff14198844c137594597, type: 3}
   id: 4
   name: Rat King's Crown
   description: A crown obtained from a dead rat king.

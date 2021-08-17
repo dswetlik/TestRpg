@@ -14,9 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 6fb0ba0e24b54574984035ce3ed02b68, type: 2}
   name: Green Slime
+  description: A speedy-looking ball of green slime
   id: 3
-  minDamage: 3
-  maxDamage: 5
+  minDamage: 1
+  maxDamage: 4
   attackTypes:
   - {fileID: 11400000, guid: b1c664d91f6c61d499f755bbeab0ee60, type: 2}
   - {fileID: 11400000, guid: a6288402b34b63244ad0a0871a5ba504, type: 2}
@@ -28,7 +29,7 @@ MonoBehaviour:
   mana: 0
   maxMana: 0
   manaRegen: 0
-  speed: 75
   goldReward: 4
+  speed: 1.75
   expReward: 6
   itemRewards: {fileID: 11400000, guid: 5831117a999096b4f9dfaab812d0b6d7, type: 2}

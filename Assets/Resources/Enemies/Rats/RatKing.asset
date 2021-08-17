@@ -30,7 +30,7 @@ MonoBehaviour:
   mana: 10
   maxMana: 10
   manaRegen: 1
-  speed: 60
   goldReward: 5
+  speed: 0.75
   expReward: 10
   itemRewards: {fileID: 11400000, guid: 3c6a8e6f94c7a754b86382385dafca5a, type: 2}

@@ -66,8 +66,11 @@ public class ItemContainer : MonoBehaviour
     {
         gameObject.transform.GetChild(0).GetComponent<Text>().text = item.GetName();
 
-        if(!IsArmorContainer && !IsWeaponContainer)
+        if (!IsArmorContainer && !IsWeaponContainer)
+        {
             gameObject.transform.GetChild(1).GetComponent<Text>().text = itemCount.ToString();
+            gameObject.transform.GetChild(2).GetComponent<Image>().sprite = item.GetSprite();
+        }
     }
 
     public bool IsEmpty()

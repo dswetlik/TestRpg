@@ -16,7 +16,7 @@ public class DoorInteraction : MonoBehaviour
     {
         if(other.tag == "Player")
         {
-            GameObject.Find("GameManager").GetComponent<Engine>().SetActiveDoor(this);
+          //  GameObject.Find("GameManager").GetComponent<Engine>().SetActiveDoor(this);
         }
     }
 
@@ -24,7 +24,7 @@ public class DoorInteraction : MonoBehaviour
     {
         if(other.tag == "Player")
         {
-            GameObject.Find("GameManager").GetComponent<Engine>().SetActiveDoor(this, false);
+          //  GameObject.Find("GameManager").GetComponent<Engine>().SetActiveDoor(this, false);
         }
     }
 

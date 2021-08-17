@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Leather Boots
   m_EditorClassIdentifier: 
   itemType: 2
-  id: 303
+  sprite: {fileID: 21300000, guid: 583f484d6af116743a970ea5ebd4120f, type: 3}
+  id: 308
   name: Leather Boots
   description: A basic pair of leather boots.
   weight: 1

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: RatTooth
   m_EditorClassIdentifier: 
   itemType: 0
+  sprite: {fileID: 21300000, guid: 65155f1be5218be43822dfe9eeedfbbb, type: 3}
   id: 2
   name: Rat Tooth
   description: A sharp, yellowed tooth from a rat.

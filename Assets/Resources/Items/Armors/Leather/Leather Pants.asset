@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: Leather Pants
   m_EditorClassIdentifier: 
   itemType: 2
-  id: 302
+  sprite: {fileID: 21300000, guid: d86715ea591ec454f8a189e3e560faa7, type: 3}
+  id: 307
   name: Leather Pants
   description: A basic pair of leather pants.
   weight: 2
   value: 6
-  rating: 2
   armorType: 2
+  armorClass: 0
+  rating: 2

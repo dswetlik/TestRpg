@@ -20,11 +20,13 @@ public class Skill : ScriptableObject
     [SerializeField] bool isUnlocked;
     [SerializeField] bool isUnlockable;
     [SerializeField] List<Skill> nextSkills = new List<Skill>();
+    [SerializeField] List<StatusEffect> statusEffects = new List<StatusEffect>();
 
     public SkillType GetSkillType() { return skillType; }
     public bool IsUnlocked() { return isUnlocked; }
     public bool IsUnlockable() { return isUnlockable; }
-    public List<Skill> GetNextSkills () { return nextSkills; }
+    public List<Skill> GetNextSkills() { return nextSkills; }
+    public List<StatusEffect> GetStatusEffects() { return statusEffects; }
 
     public void SetUnlocked() { isUnlocked = true; }
 
