@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 737ebae1e8923d9498e5ab27a3d4e42e, type: 3}
-  m_Name: Weak Heal Over Time
+  m_Name: Weak Bleed
   m_EditorClassIdentifier: 
-  statusEffectType: 0
-  name: Weak Heal Over Time
-  description: A weak heal over time.
-  hitChance: 0.5
+  statusEffectType: 1
+  name: Weak Bleed
+  description: Your wounds are lightly bleeding.
+  hitChance: 0
   turnAmount: 3
-  isNegative: 0
+  isNegative: 1
   isPercentage: 0
   statChange: 10
-  sprite: {fileID: 21300000, guid: 630eddf708086054da34bcf4d5dcdb16, type: 3}
+  sprite: {fileID: 21300000, guid: 7ccd62562998f8f429be4d2c575301a8, type: 3}

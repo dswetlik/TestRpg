@@ -35,4 +35,5 @@ public class ActiveSkill : Skill
     public int GetAttributeChange() { return attributeChange; }
     public int GetMinDamageModifier() { return minDamageModifier; }
     public int GetMaxDamageModifier() { return maxDamageModifier; }
+
 }

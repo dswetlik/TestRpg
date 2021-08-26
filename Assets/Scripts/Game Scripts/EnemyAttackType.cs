@@ -32,6 +32,8 @@ public class EnemyAttackType : ScriptableObject
     [SerializeField] int maxDamageModifier;
     [SerializeField] int staminaCost;
     [SerializeField] int manaCost;
+    [SerializeField] bool hasStatusEffects;
+    [SerializeField] List<StatusEffect> statusEffects = new List<StatusEffect>();
 
     public string GetName() { return name; }
     public AttackType GetAttackType() { return attackType; }
@@ -42,4 +44,7 @@ public class EnemyAttackType : ScriptableObject
 
     public int GetStaminaCost() { return staminaCost; }
     public int GetManaCost() { return manaCost; }
+
+    public bool HasStatusEffects() { return hasStatusEffects; }
+    public List<StatusEffect> GetStatusEffects() { return statusEffects; }
 }

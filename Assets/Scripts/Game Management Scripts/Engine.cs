@@ -101,6 +101,13 @@ public class Engine : MonoBehaviour
     public GameObject questPanel;
 
     // UI Battle Variables
+    public GameObject statusEffectSlot;
+    GameObject playerStatusEffectGO;
+    List<GameObject> playerStatusEffectSlots = new List<GameObject>();
+    GameObject enemyStatusEffectGO;
+    List<GameObject> enemyStatusEffectSlots = new List<GameObject>();
+    Enemy activeEnemy;
+
     Text enemyNameTxt;
     Text enemyHealthTxt;
     Text enemyStaminaTxt;
@@ -528,6 +535,9 @@ public class Engine : MonoBehaviour
         invManaSlider = GameObject.Find("InventoryManaSlider").GetComponent<Slider>();
         invExpSlider = GameObject.Find("InventoryExpSlider").GetComponent<Slider>();
 
+        playerStatusEffectGO = GameObject.Find("PlayerStatusEffects");
+        enemyStatusEffectGO = GameObject.Find("EnemyStatusEffects");
+
         enemyNameTxt = GameObject.Find("EnemyNameTxt").GetComponent<Text>();
         enemyHealthTxt = GameObject.Find("EnemyHealthTxt").GetComponent<Text>();
         enemyStaminaTxt = GameObject.Find("EnemyStaminaTxt").GetComponent<Text>();
@@ -762,6 +772,7 @@ public class Engine : MonoBehaviour
     IEnumerator Battle(Enemy eGO)
     {
         isInBattle = true;
+        activeEnemy = eGO;
 
         playerDamageOutput = 0;
         enemyDamageOutput = 0;
@@ -782,8 +793,24 @@ public class Engine : MonoBehaviour
 
             while (playerSpeed < 100 && enemySpeed < 100)
             {
-                playerSpeed += player.GetSpeed();
-                enemySpeed += enemy.GetSpeed();
+                int extraPlayerSpeedFlat = 0, extraEnemySpeedFlat = 0;
+                float extraPlayerSpeedPer = 1.0f, extraEnemySpeedPer = 1.0f;
+                foreach (StatusEffect statusEffect in player.GetStatusEffects())
+                    if (statusEffect.GetStatusEffectType() == StatusEffect.StatusEffectType.speed)
+                        if (statusEffect.IsPercentage())
+                            extraPlayerSpeedPer += statusEffect.GetStatChange();
+                        else
+                            extraPlayerSpeedFlat += (int)statusEffect.GetStatChange();
+                foreach (StatusEffect statusEffect in enemy.GetStatusEffects())
+                    if (statusEffect.GetStatusEffectType() == StatusEffect.StatusEffectType.speed)
+                        if (statusEffect.GetStatusEffectType() == StatusEffect.StatusEffectType.speed)
+                            if (statusEffect.IsPercentage())
+                                extraEnemySpeedPer += statusEffect.GetStatChange();
+                            else
+                                extraEnemySpeedFlat += (int)statusEffect.GetStatChange();
+
+                playerSpeed += (int)extraPlayerSpeedPer * (player.GetSpeed() + extraPlayerSpeedFlat);
+                enemySpeed += (int)extraEnemySpeedPer * (enemy.GetSpeed() + extraEnemySpeedFlat);
 
                 playerSpeedSlider.value = playerSpeed;
                 enemySpeedSlider.value = enemySpeed;
@@ -797,7 +824,8 @@ public class Engine : MonoBehaviour
 
             if (playerSpeed >= 100 && playerSpeed >= enemySpeed && player.GetHealth() > 0)
             {
-                yield return StartCoroutine("PlayerMove");
+                if(!CheckIfStunned(true))
+                    yield return StartCoroutine("PlayerMove");
                 playerSpeed -= 100;
 
                 enemy.ChangeHealth(-playerDamageOutput);
@@ -805,15 +833,26 @@ public class Engine : MonoBehaviour
 
                 playerSpeedSlider.value = playerSpeed;
 
+                player.DecrementStatusEffectTurn();
+
+                EndOfTurnStatusEffect(true);
+
+                UpdateBattleAttributes(enemy);
+
                 if (enemySpeed >= 100 && enemy.GetHealth() > 0)
                 {
-                    EnemyAttack(enemy);
+                    if (!CheckIfStunned(false))
+                        EnemyAttack(enemy);
                     enemySpeed -= 100;
 
                     player.ChangeHealth(-enemyDamageOutput);
                     UpdateBattleAttributes(enemy);
 
                     enemySpeedSlider.value = enemySpeed;
+
+                    enemy.DecrementStatusEffectTurn();
+
+                    EndOfTurnStatusEffect(false);
                 }
 
                 playerDamageOutput = 0;
@@ -822,7 +861,8 @@ public class Engine : MonoBehaviour
             }
             if (enemySpeed >= 100 && enemySpeed >= playerSpeed && enemy.GetHealth() > 0)
             {
-                EnemyAttack(enemy);
+                if (!CheckIfStunned(false))
+                    EnemyAttack(enemy);
                 enemySpeed -= 100;
 
                 player.ChangeHealth(-enemyDamageOutput);
@@ -830,21 +870,37 @@ public class Engine : MonoBehaviour
 
                 enemySpeedSlider.value = enemySpeed;
 
+                enemy.DecrementStatusEffectTurn();
+
+                EndOfTurnStatusEffect(false);
+
                 if (playerSpeed >= 100 && player.GetHealth() > 0)
                 {
-                    yield return StartCoroutine("PlayerMove");
+                    if (!CheckIfStunned(true))
+                        yield return StartCoroutine("PlayerMove");
                     playerSpeed -= 100;
+
+                    foreach(StatusEffect statusEffect in enemy.GetStatusEffects())
 
                     enemy.ChangeHealth(-playerDamageOutput);
                     UpdateBattleAttributes(enemy);
 
                     playerSpeedSlider.value = playerSpeed;
+
+                    player.DecrementStatusEffectTurn();
+
+                    EndOfTurnStatusEffect(true);
+
+                    UpdateBattleAttributes(enemy);
                 }
 
                 playerDamageOutput = 0;
                 enemyDamageOutput = 0;
 
             }
+
+            player.RegenAttributes();
+            enemy.RegenAttributes();
 
             UpdateBattleAttributes(enemy);
             yield return null;
@@ -869,6 +925,74 @@ public class Engine : MonoBehaviour
         battleOutputTxt.text = "";
         isInBattle = false;
     }
+
+    bool CheckIfStunned(bool isPlayer)
+    {
+        if (isPlayer)
+        {
+            foreach (StatusEffect statusEffect in player.GetStatusEffects())
+                if (statusEffect.GetStatusEffectType() == StatusEffect.StatusEffectType.stun)
+                    return true;
+            return false;
+        }
+        else
+        {
+            foreach (StatusEffect statusEffect in activeEnemy.GetStatusEffects())
+                if (statusEffect.GetStatusEffectType() == StatusEffect.StatusEffectType.stun)
+                    return true;
+            return false;
+        }
+    }
+
+    void EndOfTurnStatusEffect(bool isPlayer)
+    {
+        if (isPlayer)
+        {
+            foreach (GameObject sGO in playerStatusEffectSlots.ToList<GameObject>())
+            {
+                if (sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatusEffectType() == StatusEffect.StatusEffectType.heal)
+                    player.ChangeHealth((int)sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatChange());
+                else if (sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatusEffectType() == StatusEffect.StatusEffectType.bleed)
+                    player.ChangeHealth(-(int)sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatChange());
+                else if (sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatusEffectType() == StatusEffect.StatusEffectType.burn)
+                    player.ChangeHealth(-(int)sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatChange());
+                else if (sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatusEffectType() == StatusEffect.StatusEffectType.freeze)
+                    player.ChangeHealth(-(int)sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatChange());
+                else if (sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatusEffectType() == StatusEffect.StatusEffectType.poison)
+                    player.ChangeHealth(-(int)sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatChange());
+                sGO.GetComponent<StatusContainer>().DecrementStatusEffect();
+                if (sGO.GetComponent<StatusContainer>().GetTurnAmount() < 1)
+                {
+                    GameObject.Destroy(sGO);
+                    playerStatusEffectSlots.Remove(sGO);
+                }
+            }
+        }
+        else
+        {
+            foreach (GameObject sGO in enemyStatusEffectSlots.ToList<GameObject>())
+            {
+                if (sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatusEffectType() == StatusEffect.StatusEffectType.heal)
+                    activeEnemy.ChangeHealth((int)sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatChange());
+                else if (sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatusEffectType() == StatusEffect.StatusEffectType.bleed)
+                    activeEnemy.ChangeHealth(-(int)sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatChange());
+                else if (sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatusEffectType() == StatusEffect.StatusEffectType.burn)
+                    activeEnemy.ChangeHealth(-(int)sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatChange());
+                else if (sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatusEffectType() == StatusEffect.StatusEffectType.freeze)
+                    activeEnemy.ChangeHealth(-(int)sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatChange());
+                else if (sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatusEffectType() == StatusEffect.StatusEffectType.poison)
+                    activeEnemy.ChangeHealth(-(int)sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatChange());
+
+                sGO.GetComponent<StatusContainer>().DecrementStatusEffect();
+                if (sGO.GetComponent<StatusContainer>().GetTurnAmount() < 1)
+                {
+                    GameObject.Destroy(sGO);
+                    enemyStatusEffectSlots.Remove(sGO);
+                }
+            }
+        }
+    }
+
 
     void UpdateBattleAttributes(Enemy enemy)
     {
@@ -996,16 +1120,35 @@ public class Engine : MonoBehaviour
     {
         playerHasMoved = true;
 
+        int enemyDefValue = activeEnemy.GetDefense();
+
+        foreach(StatusEffect statusEffect in activeEnemy.GetStatusEffects())
+        {
+            if(statusEffect.GetStatusEffectType() == StatusEffect.StatusEffectType.defence)
+            {
+                if (statusEffect.IsPercentage())
+                    enemyDefValue = (int)(enemyDefValue * statusEffect.GetStatChange());
+                else
+                    enemyDefValue = (int)(enemyDefValue + statusEffect.GetStatChange());
+            }
+        }
+
+        enemyDefValue /= 2;
+
         switch (skill.GetAttributeType())
         {
             case ActiveSkill.AttributeType.weapon:
-                playerDamageOutput = player.GetWeapon().Attack();
+                playerDamageOutput = player.GetWeapon().Attack() - enemyDefValue;
+                if (playerDamageOutput < 0)
+                    playerDamageOutput = 0;
                 OutputToBattle(String.Format(skill.GetActionMessage(), player.GetWeapon().GetName(), playerDamageOutput));
                 break;
             case ActiveSkill.AttributeType.health:
                 break;
             case ActiveSkill.AttributeType.stamina:
-                playerDamageOutput = player.GetWeapon().Attack() + skill.GetDamageModifier();
+                playerDamageOutput = (player.GetWeapon().Attack() + skill.GetDamageModifier()) - enemyDefValue;
+                if (playerDamageOutput < 0)
+                    playerDamageOutput = 0;
                 OutputToBattle(String.Format(skill.GetActionMessage(), player.GetWeapon().GetName(), playerDamageOutput));
                 player.ChangeStamina(-skill.GetAttributeChange());
                 break;
@@ -1019,13 +1162,53 @@ public class Engine : MonoBehaviour
                 }
                 if(skill.GetMagicType() == ActiveSkill.MagicType.damage)
                 {
-                    playerDamageOutput = skill.GetDamageModifier();
+                    playerDamageOutput = skill.GetDamageModifier() - enemyDefValue;
+                    if (playerDamageOutput < 0)
+                        playerDamageOutput = 0;
                     OutputToBattle(String.Format(skill.GetActionMessage(), skill.GetName(), playerDamageOutput));
                 }
                 player.ChangeMana(-skill.GetAttributeChange());
                 break;
         }
         
+        if(skill.HasStatusEffects())
+        {
+            List<StatusEffect> statusEffects = skill.GetStatusEffects();
+            foreach (StatusEffect statusEffect in statusEffects)
+            {
+                float hitChance = UnityEngine.Random.Range(0, 1.0f);
+                Debug.Log("Going through status effect foreach; Hit Chance: " + hitChance);
+                if (hitChance > statusEffect.GetHitChance())
+                {
+                    if (statusEffect.IsNegative())
+                        AddStatusEffect(Instantiate(statusEffect), false, activeEnemy);
+                    else
+                        AddStatusEffect(Instantiate(statusEffect), true, null);
+                }
+            }
+        }
+    }
+
+    void AddStatusEffect(StatusEffect statusEffect, bool isPlayer, Enemy enemy)
+    {
+        if (isPlayer)
+        {
+            Debug.Log("Adding Status Effect " + statusEffect.GetName());
+            player.AddStatusEffect(statusEffect);
+
+            GameObject GO = Instantiate(statusEffectSlot, playerStatusEffectGO.transform);
+            GO.GetComponent<StatusContainer>().SetStatusEffect(statusEffect);
+            playerStatusEffectSlots.Add(GO);
+        }
+        else
+        {
+            Debug.Log("Adding Status Effect to Enemy " + statusEffect.GetName());
+            enemy.AddStatusEffect(statusEffect);
+
+            GameObject GO = Instantiate(statusEffectSlot, enemyStatusEffectGO.transform);
+            GO.GetComponent<StatusContainer>().SetStatusEffect(statusEffect);
+            enemyStatusEffectSlots.Add(GO);
+        }
     }
 
     public void EnemyMove()
@@ -1042,9 +1225,26 @@ public class Engine : MonoBehaviour
     {
         EnemyAttackType attack = enemy.GetAttack();
 
+        int playerDefValue = player.GetDefense();
+
+        foreach (StatusEffect statusEffect in player.GetStatusEffects())
+        {
+            if (statusEffect.GetStatusEffectType() == StatusEffect.StatusEffectType.defence)
+            {
+                if (statusEffect.IsPercentage())
+                    playerDefValue = (int)(playerDefValue * statusEffect.GetStatChange());
+                else
+                    playerDefValue = (int)(playerDefValue + statusEffect.GetStatChange());
+            }
+        }
+
+        playerDefValue /= 2;
+
         if (attack == null)
         {
-            enemyDamageOutput = (int)enemy.GetBaseDamage();
+            enemyDamageOutput = (int)enemy.GetBaseDamage() - playerDefValue;
+            if (enemyDamageOutput < 0)
+                enemyDamageOutput = 0;
             OutputToBattle(String.Format("{0} has attacked, dealing {1} damage.", enemy.GetName(), enemyDamageOutput));
         }
         else
@@ -1062,19 +1262,38 @@ public class Engine : MonoBehaviour
             }
             else if (attack.GetAttackAttribute() == EnemyAttackType.AttackAttribute.mana)
             {
-                enemyDamageOutput = attack.GetDamageModifier() + (int)enemy.GetBaseDamage();
-
+                enemyDamageOutput = (attack.GetDamageModifier() + (int)enemy.GetBaseDamage()) - playerDefValue;
+                if (enemyDamageOutput < 0)
+                    enemyDamageOutput = 0;
                 enemy.ChangeMana(-attack.GetManaCost());
 
-                OutputToBattle(String.Format("{0} has cast {1}, dealing {2} damage.", enemy.GetName(), attack.GetName(), enemyDamageOutput));
+                OutputToBattle(String.Format("{0} has cast {1}, dealing {2} damage.", enemy.GetName(), enemyDamageOutput));
             }
             else if (attack.GetAttackAttribute() == EnemyAttackType.AttackAttribute.stamina)
             {
-                enemyDamageOutput = attack.GetDamageModifier() + (int)enemy.GetBaseDamage();
-
+                enemyDamageOutput = (attack.GetDamageModifier() + (int)enemy.GetBaseDamage()) - playerDefValue;
+                if (enemyDamageOutput < 0)
+                    enemyDamageOutput = 0;
                 enemy.ChangeStamina(-attack.GetStaminaCost());
 
-                OutputToBattle(String.Format("{0} performed a {1}, dealing {2} damage.", enemy.GetName(), attack.GetName(), enemyDamageOutput));
+                OutputToBattle(String.Format("{0} performed a {1}, dealing {2} damage.", enemy.GetName(), enemyDamageOutput));
+            }
+        }
+
+        if(attack.HasStatusEffects())
+        {
+            List<StatusEffect> statusEffects = attack.GetStatusEffects();
+            foreach (StatusEffect statusEffect in statusEffects)
+            {
+                float hitChance = UnityEngine.Random.Range(0, 1.0f);
+                Debug.Log("Going through status effect foreach; Hit Chance: " + hitChance);
+                if (hitChance > statusEffect.GetHitChance())
+                {
+                    if (statusEffect.IsNegative())
+                        AddStatusEffect(Instantiate(statusEffect), true, null);
+                    else
+                        AddStatusEffect(Instantiate(statusEffect), false, enemy);                  
+                }
             }
         }
     }

@@ -14,12 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Light Heal
   description: The smallest healing spell, capable of instantly healing small bumps
-    and scrapes.
+    and scrapes as well as over time.
   actionMessage: Player cast {0}, healing {1} damage!
   skillType: 0
   isUnlocked: 0
   isUnlockable: 1
   nextSkills: []
+  hasStatusEffects: 1
+  statusEffects:
+  - {fileID: 11400000, guid: 44d77c23e493d3e4db561638263721df, type: 2}
   attributeType: 3
   magicType: 2
   attributeChange: 20

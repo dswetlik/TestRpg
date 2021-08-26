@@ -18,7 +18,7 @@ public class Player
     Weapon weapon;
     Armor head, chest, legs, feet, hands;
     uint level, exp, totalExp, expToLevel, skillPoints, currentWeight, maxWeight;
-    int health, stamina, mana, maxHealth, maxStamina, maxMana, staminaRegen, manaRegen, gold;
+    int health, stamina, mana, maxHealth, maxStamina, maxMana, staminaRegen, manaRegen, defense, gold;
     float speed;
     List<Quest> questList = new List<Quest>();
     List<StatusEffect> statusEffects = new List<StatusEffect>();
@@ -81,6 +81,8 @@ public class Player
     public int GetMaxMana() { return maxMana; }
     public int GetStaminaRegen() { return staminaRegen; }
     public int GetManaRegen() { return manaRegen; }
+    public int GetDefense() { return (int)(GetHead().GetRating() + GetChest().GetRating() + GetLegs().GetRating()
+                + GetFeet().GetRating() + GetHands().GetRating()); }
     public float GetSpeed() { return speed; }
 
     public Weapon GetWeapon() { return weapon; }
@@ -242,7 +244,20 @@ public class Player
 
     public void AddStatusEffect(StatusEffect statusEffect) { statusEffects.Add(statusEffect); }
 
-    public void DecrementStatusEffectTurn() { }
+    public void DecrementStatusEffectTurn()
+    {
+        if (statusEffects.Count > 0)
+            foreach (StatusEffect statusEffect in statusEffects.ToList<StatusEffect>())
+            {
+                statusEffect.DecrementTurnCount();
+                if (statusEffect.GetTurnAmount() < 1)
+                    RemoveStatusEffect(statusEffect);
+            }              
+    }
+
+    public void RemoveStatusEffect(StatusEffect statusEffect) { statusEffects.Remove(statusEffect); }
+
+    public void ClearStatusEffects() { statusEffects.Clear(); }
 
     public void AddActiveStaminaSkill(ActiveSkill skill) { activeStaminaSkills.Add(skill); }
 

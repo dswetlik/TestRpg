@@ -8,13 +8,12 @@ public class StatusEffect : ScriptableObject
     public enum StatusEffectType
     {
         heal,
+        bleed,
         burn,
         freeze,
         poison,
         stun,
         defence,
-        dodge,
-        hit,
         speed
     }
 
@@ -37,5 +36,7 @@ public class StatusEffect : ScriptableObject
     public bool IsPercentage() { return isPercentage; }
     public float GetStatChange() { return statChange; }
     public Sprite GetSprite() { return sprite; }
+
+    public void DecrementTurnCount() { Debug.Log("Decrementing"); turnAmount -= 1; }
 
 }

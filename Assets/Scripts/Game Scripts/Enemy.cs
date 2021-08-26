@@ -1,6 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 [CreateAssetMenu(fileName = "New Enemy", menuName = "Enemies", order = 0)]
 public class Enemy : ScriptableObject
@@ -11,19 +15,22 @@ public class Enemy : ScriptableObject
     [SerializeField] string description;
     [SerializeField] uint id;
     [SerializeField] int minDamage, maxDamage;
+    [SerializeField] int defense;
     [SerializeField] List<EnemyAttackType> attackTypes;
     [SerializeField] int health, maxHealth, stamina, maxStamina, stamRegen, mana, maxMana, manaRegen, goldReward;
     [SerializeField] float speed;
     [SerializeField] uint expReward;
     [SerializeField] ItemLootTable itemRewards;
- 
+    [SerializeField] List<StatusEffect> statusEffects = new List<StatusEffect>();
+
     public Material GetMaterial() { return material; }
     public string GetName() { return name; }
     public string GetDescription() { return description; }
     public uint GetID() { return id; }
     public int GetMaxDamage() { return maxDamage; }
     public int GetMinDamage() { return minDamage; }
-    public int GetBaseDamage() { return Random.Range(minDamage, maxDamage + 1); }
+    public int GetDefense() { return defense; }
+    public int GetBaseDamage() { return UnityEngine.Random.Range(minDamage, maxDamage + 1); }
     public uint GetExpReward() { return expReward; }
     public int GetGoldReward() { return goldReward; }
     public int GetHealth() { return health; }
@@ -110,5 +117,22 @@ public class Enemy : ScriptableObject
         }
         return maxAttack;
     }
+
+    public List<StatusEffect> GetStatusEffects() { return statusEffects; }
+
+    public void AddStatusEffect(StatusEffect statusEffect) { statusEffects.Add(statusEffect); }
+
+    public void DecrementStatusEffectTurn()
+    {
+        if (statusEffects.Count > 0)
+            foreach (StatusEffect statusEffect in statusEffects.ToList<StatusEffect>())
+            {
+                statusEffect.DecrementTurnCount();
+                if (statusEffect.GetTurnAmount() < 1)
+                    RemoveStatusEffect(statusEffect);
+            }
+    }
+
+    public void RemoveStatusEffect(StatusEffect statusEffect) { statusEffects.Remove(statusEffect); }
 
 }
