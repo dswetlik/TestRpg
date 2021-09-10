@@ -52,17 +52,20 @@ public class MainMenu : MonoBehaviour
 
         while (newScene.progress < 0.9f)
         {
-            mainLoadingSlider.value = newScene.progress;
-            mainLoadingPercentTxt.text = ((int)(newScene.progress * 100)) + "%";
+            //mainLoadingSlider.value = newScene.progress;
+            mainLoadingSlider.value = Mathf.MoveTowards(newScene.progress * 100, 90.0f, 0.25f * Time.deltaTime);
+            mainLoadingPercentTxt.text = ((int)Mathf.MoveTowards(newScene.progress * 100, 90.0f, 0.25f * Time.deltaTime)) + "%";
             yield return new WaitForFixedUpdate();
         }
 
+        mainLoadingSlider.value = Mathf.MoveTowards(newScene.progress * 100, 90.0f, 0.25f * Time.deltaTime);
+        mainLoadingPercentTxt.text = ((int)Mathf.MoveTowards(newScene.progress * 100, 90.0f, 0.25f * Time.deltaTime)) + "%";
         newScene.allowSceneActivation = true;
 
         while (!newScene.isDone)
         {
-            mainLoadingSlider.value = newScene.progress;
-            mainLoadingPercentTxt.text = ((int)(newScene.progress * 100)) + "%";
+            mainLoadingSlider.value = Mathf.MoveTowards(newScene.progress * 100, 90.0f, 0.25f * Time.deltaTime);
+            mainLoadingPercentTxt.text = ((int)Mathf.MoveTowards(newScene.progress * 100, 90.0f, 0.25f * Time.deltaTime)) + "%";
             yield return new WaitForFixedUpdate();
         }
 

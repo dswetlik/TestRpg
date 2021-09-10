@@ -20,4 +20,4 @@ MonoBehaviour:
   weight: 1
   value: 5
   consumableType: 0
-  statChange: 20
+  statChange: 10

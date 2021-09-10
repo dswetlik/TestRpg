@@ -19,8 +19,10 @@ MonoBehaviour:
   isUnlocked: 0
   isUnlockable: 1
   nextSkills: []
+  hasStatusEffects: 0
+  statusEffects: []
   attributeType: 3
   magicType: 1
-  attributeChange: 20
+  attributeChange: 5
   minDamageModifier: 1
   maxDamageModifier: 7

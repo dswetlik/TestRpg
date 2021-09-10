@@ -35,8 +35,10 @@ public class Skill : ScriptableObject
     public void UnlockNextSkills()
     {
         foreach (Skill skill in nextSkills)
-            if (!skill.IsUnlockable())
-                isUnlockable = true;
+        {
+            if(!Engine.SkillDictionary[skill.GetName()].IsUnlockable())
+               Engine.SkillDictionary[skill.GetName()].isUnlockable = true;
+        }
     }
 
     public string GetName()

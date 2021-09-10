@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbb210134401d9945b470a0a8b2b9ce7, type: 3}
+  m_Name: Frostbite
+  m_EditorClassIdentifier: 
+  name: Frostbite
+  description: A small burst of chilly wind radiating from your hand
+  actionMessage: Player cast {0}, dealing {1} damage!
+  skillType: 0
+  isUnlocked: 0
+  isUnlockable: 1
+  nextSkills: []
+  hasStatusEffects: 0
+  statusEffects: []
+  attributeType: 3
+  magicType: 1
+  attributeChange: 5
+  minDamageModifier: 4
+  maxDamageModifier: 5

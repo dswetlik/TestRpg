@@ -19,12 +19,13 @@ MonoBehaviour:
   skillType: 0
   isUnlocked: 0
   isUnlockable: 1
-  nextSkills: []
+  nextSkills:
+  - {fileID: 11400000, guid: 11b0b3cf171237a4e8c6458934983ad1, type: 2}
   hasStatusEffects: 1
   statusEffects:
   - {fileID: 11400000, guid: 44d77c23e493d3e4db561638263721df, type: 2}
   attributeType: 3
   magicType: 2
-  attributeChange: 20
+  attributeChange: 5
   minDamageModifier: 2
-  maxDamageModifier: 10
+  maxDamageModifier: 5

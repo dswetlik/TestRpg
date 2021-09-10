@@ -64,7 +64,21 @@ public class ItemContainer : MonoBehaviour
 
     void UpdateTextComponents()
     {
-        gameObject.transform.GetChild(0).GetComponent<Text>().text = item.GetName();
+
+        if (IsArmorContainer || IsWeaponContainer)
+            if (item.GetSprite() != null)
+            {
+                Image imgGO = gameObject.transform.GetChild(0).GetComponent<Image>();
+                imgGO.color = new Color(imgGO.color.r, imgGO.color.g, imgGO.color.b, 1);
+                gameObject.transform.GetChild(0).GetComponent<Image>().sprite = item.GetSprite();
+            }
+            else
+            {
+                Image imgGO = gameObject.transform.GetChild(0).GetComponent<Image>();
+                imgGO.color = new Color(imgGO.color.r, imgGO.color.g, imgGO.color.b, 0);
+            }
+        else
+            gameObject.transform.GetChild(0).GetComponent<Text>().text = item.GetName();
 
         if (!IsArmorContainer && !IsWeaponContainer)
         {

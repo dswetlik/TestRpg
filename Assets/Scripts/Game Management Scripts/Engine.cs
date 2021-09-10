@@ -22,6 +22,7 @@ public class Engine : MonoBehaviour
     GameObject UIPickupScreen;
     GameObject UIArenaScreen;
     GameObject UISkillScreen;
+    GameObject UIStatsScreen;
     GameObject UILoadScreen;
 
     // Directional UI Variables
@@ -30,7 +31,6 @@ public class Engine : MonoBehaviour
     Button southBtn;
     Button westBtn;
 
-    Text locationNameTxt;
     static Text outputTxt;
     public ScrollRect mainGameScroll;
 
@@ -68,19 +68,8 @@ public class Engine : MonoBehaviour
     Text weightTxt;
     Text totalInvWeightTxt;
     Text goldTxt;
-    Text expTxt;
-    Text invLevelTxt;
-    Text invTotalExpTxt;
-    Text invSkillPointsTxt;
-
-    Text invHealthTxt;
-    Text invStaminaTxt;
-    Text invManaTxt;
-
-    Slider invHealthSlider;
-    Slider invStaminaSlider;
-    Slider invManaSlider;
-    Slider invExpSlider;
+    Text armorValueTxt;
+    Text damageValueTxt;
 
     // Quest UI Variables
     public GameObject uiQuestSlot;
@@ -96,6 +85,9 @@ public class Engine : MonoBehaviour
 
     Button makeActiveBtn;
     Button turnInQuestBtn;
+
+    GameObject noActiveQuestTxt;
+    GameObject noSelectedQuestTxt;
 
     public ScrollRect questScroll;
     public GameObject questPanel;
@@ -190,8 +182,28 @@ public class Engine : MonoBehaviour
     Text skillDescriptionTxt;
     Text skillCostTxt;
     Text skillDamageTxt;
+    Text unlockedTxt;
 
     Button unlockSkillBtn;
+
+    // UI Stats Variales
+    Text statsPlayerName;
+    Text statsHealthTxt;
+    Text statsStaminaTxt;
+    Text statsManaTxt;
+    Text statsExpTxt;
+    Text statsLvlTxt;
+    Text statsTotalExpTxt;
+    Text statsSkillPointsTxt;
+    Text statsWeightTxt;
+    Text statsGoldTxt;
+    Text statsDmgTxt;
+    Text statsDefTxt;
+
+    Slider statsHealthSlider;
+    Slider statsStaminaSlider;
+    Slider statsManaSlider;
+    Slider statsExpSlider;
 
     // UI Load Variables
     Slider loadingSlider;
@@ -256,13 +268,16 @@ public class Engine : MonoBehaviour
 
     ActiveSkill flames;
     ActiveSkill lightHeal;
+    ActiveSkill frostBite;
+    ActiveSkill sparks;
+    ActiveSkill weakSpecShield;
 
     Sprite healthDrop;
     Sprite staminaDrop;
     Sprite manaDrop;
 
     // Local Use Variables
-    bool playerHasMoved, isInPickup = false, isInBattle = false, isInChest = false, isInShop = false;
+    bool playerHasMoved, isInPickup = false, isInBattle = false, isInChest = false, isInShop = false, isInStats = false;
     int playerDamageOutput, enemyDamageOutput;
     ChestInventory activeChest;
     DoorInteraction activeDoor;
@@ -415,6 +430,9 @@ public class Engine : MonoBehaviour
 
         flames = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Mana Skills/Flames"));
         lightHeal = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Mana Skills/Light Heal"));
+        frostBite = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Mana Skills/Frostbite"));
+        sparks = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Mana Skills/Sparks"));
+        weakSpecShield = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Mana Skills/Weak Spectral Shield"));
 
         SkillDictionary.Add(slash.GetName(), slash);
         SkillDictionary.Add(stab.GetName(), stab);
@@ -422,6 +440,9 @@ public class Engine : MonoBehaviour
 
         SkillDictionary.Add(flames.GetName(), flames);
         SkillDictionary.Add(lightHeal.GetName(), lightHeal);
+        SkillDictionary.Add(frostBite.GetName(), frostBite);
+        SkillDictionary.Add(sparks.GetName(), sparks);
+        SkillDictionary.Add(weakSpecShield.GetName(), weakSpecShield);
 
         healthDrop = Resources.Load<Sprite>("Textures/Inventory Icons/skill_049");
         staminaDrop = Resources.Load<Sprite>("Textures/Inventory Icons/skill_028");
@@ -446,6 +467,7 @@ public class Engine : MonoBehaviour
         UIPickupScreen = GameObject.Find("UI Pickup");
         UIArenaScreen = GameObject.Find("UI Arena");
         UISkillScreen = GameObject.Find("UI Skill");
+        UIStatsScreen = GameObject.Find("UI Stats");
         UILoadScreen = GameObject.Find("UI Load");
 
         northBtn = GameObject.Find("NorthBtn").GetComponent<Button>();
@@ -455,12 +477,8 @@ public class Engine : MonoBehaviour
 
         dropItemBtn = GameObject.Find("DropItemBtn").GetComponent<Button>();
         useItemBtn = GameObject.Find("UseItemBtn").GetComponent<Button>();
-        locationNameTxt = GameObject.Find("LocationNameTxt").GetComponent<Text>();
-
         equipItemBtn = GameObject.Find("EquipItemBtn").GetComponent<Button>();
         unequipItemBtn = GameObject.Find("UnequipItemBtn").GetComponent<Button>();
-        makeActiveBtn = GameObject.Find("MakeActiveBtn").GetComponent<Button>();
-        turnInQuestBtn = GameObject.Find("TurnInQuestBtn").GetComponent<Button>();
 
         headBtn = GameObject.Find("HeadBtn").GetComponent<Button>();
         chestBtn = GameObject.Find("ChestBtn").GetComponent<Button>();
@@ -476,12 +494,16 @@ public class Engine : MonoBehaviour
         handsBtn.gameObject.GetComponent<ItemContainer>().SetItem(NULL_ARMOR);
         weaponBtn.gameObject.GetComponent<ItemContainer>().SetItem(NULL_WEAPON);
 
-        makeActiveBtn.interactable = false;
-        turnInQuestBtn.interactable = false;
-        dropItemBtn.gameObject.SetActive(false);
-        useItemBtn.gameObject.SetActive(false);
         equipItemBtn.gameObject.SetActive(false);
         unequipItemBtn.gameObject.SetActive(false);
+        dropItemBtn.gameObject.SetActive(false);
+        useItemBtn.gameObject.SetActive(false);
+
+        makeActiveBtn = GameObject.Find("MakeActiveBtn").GetComponent<Button>();
+        turnInQuestBtn = GameObject.Find("TurnInQuestBtn").GetComponent<Button>();
+
+        makeActiveBtn.gameObject.SetActive(false);
+        turnInQuestBtn.gameObject.SetActive(false);
 
         itemWeightObj = GameObject.Find("ItemWeight");
         itemValueObj = GameObject.Find("ItemValue");
@@ -494,13 +516,10 @@ public class Engine : MonoBehaviour
         valueTxt = GameObject.Find("ValueTxt").GetComponent<Text>();
         weightTxt = GameObject.Find("WeightTxt").GetComponent<Text>();
         totalInvWeightTxt = GameObject.Find("TotalInvWeightTxt").GetComponent<Text>();
-        selQuestName = GameObject.Find("SelectQuestNameTxt").GetComponent<Text>();
-        selQuestDescription = GameObject.Find("SelectQuestDescriptionTxt").GetComponent<Text>();
         goldTxt = GameObject.Find("InventoryGoldTxt").GetComponent<Text>();
-        expTxt = GameObject.Find("InventoryExpTxt").GetComponent<Text>();
-        invLevelTxt = GameObject.Find("InventoryLvlTxt").GetComponent<Text>();
-        invTotalExpTxt = GameObject.Find("InventoryTotalExpTxt").GetComponent<Text>();
-        invSkillPointsTxt = GameObject.Find("InventorySkillPointsTxt").GetComponent<Text>();
+
+        armorValueTxt = GameObject.Find("ArmorValueTxt").GetComponent<Text>();
+        damageValueTxt = GameObject.Find("DamageValueTxt").GetComponent<Text>();
 
         itemWeightObj.SetActive(false);
         itemValueObj.SetActive(false);
@@ -508,32 +527,29 @@ public class Engine : MonoBehaviour
         itemArmorObj.SetActive(false);
         itemConsumableObj.SetActive(false);
 
-        invHealthTxt = GameObject.Find("InventoryHealthTxt").GetComponent<Text>();
-        invStaminaTxt = GameObject.Find("InventoryStaminaTxt").GetComponent<Text>();
-        invManaTxt = GameObject.Find("InventoryManaTxt").GetComponent<Text>();
-
         nameTxt.text = "";
         descriptionTxt.text = "";
         valueTxt.text = "";
         weightTxt.text = "";
         totalInvWeightTxt.text = "";
-        selQuestName.text = "";
-        selQuestDescription.text = "";
+        goldTxt.text = 0.ToString();
+        armorValueTxt.text = "0";
+        damageValueTxt.text = "0";
+
         questName = GameObject.Find("ActiveQuestNameTxt").GetComponent<Text>();
         questDescription = GameObject.Find("ActiveQuestDescriptionTxt").GetComponent<Text>();
-        goldTxt.text = 0.ToString();
-        expTxt.text = player.GetExp() + "/" + player.GetToLevelExp();
+        selQuestName = GameObject.Find("SelectQuestNameTxt").GetComponent<Text>();
+        selQuestDescription = GameObject.Find("SelectQuestDescriptionTxt").GetComponent<Text>();
+        noActiveQuestTxt = GameObject.Find("NoActiveQuestTxt");
+        noSelectedQuestTxt = GameObject.Find("NoSelectedQuestTxt");
 
         questName.text = "";
         questDescription.text = "";
+        selQuestName.text = "";
+        selQuestDescription.text = "";
 
         outputTxt = GameObject.Find("GameTxt").GetComponent<Text>();
         outputTxt.text = "";
-        
-        invHealthSlider = GameObject.Find("InventoryHealthSlider").GetComponent<Slider>();
-        invStaminaSlider = GameObject.Find("InventoryStaminaSlider").GetComponent<Slider>();
-        invManaSlider = GameObject.Find("InventoryManaSlider").GetComponent<Slider>();
-        invExpSlider = GameObject.Find("InventoryExpSlider").GetComponent<Slider>();
 
         playerStatusEffectGO = GameObject.Find("PlayerStatusEffects");
         enemyStatusEffectGO = GameObject.Find("EnemyStatusEffects");
@@ -626,6 +642,24 @@ public class Engine : MonoBehaviour
         skillDescriptionTxt = GameObject.Find("SkillDescriptionTxt").GetComponent<Text>();
         skillCostTxt = GameObject.Find("SkillCostTxt").GetComponent<Text>();
         skillDamageTxt = GameObject.Find("SkillDamageTxt").GetComponent<Text>();
+        unlockedTxt = GameObject.Find("UnlockedTxt").GetComponent<Text>();
+
+        statsHealthTxt = GameObject.Find("StatsHealthTxt").GetComponent<Text>();
+        statsStaminaTxt = GameObject.Find("StatsStaminaTxt").GetComponent<Text>();
+        statsManaTxt = GameObject.Find("StatsManaTxt").GetComponent<Text>();
+        statsExpTxt = GameObject.Find("StatsExpTxt").GetComponent<Text>();
+        statsLvlTxt = GameObject.Find("StatsLvlTxt").GetComponent<Text>();
+        statsTotalExpTxt = GameObject.Find("StatsTotalExpTxt").GetComponent<Text>();
+        statsSkillPointsTxt = GameObject.Find("StatsSkillPointsTxt").GetComponent<Text>();
+        statsWeightTxt = GameObject.Find("StatsWeightTxt").GetComponent<Text>();
+        statsGoldTxt = GameObject.Find("StatsGoldTxt").GetComponent<Text>();
+        statsDmgTxt = GameObject.Find("StatsDmgTxt").GetComponent<Text>();
+        statsDefTxt = GameObject.Find("StatsDefTxt").GetComponent<Text>();
+
+        statsHealthSlider = GameObject.Find("StatsHealthSlider").GetComponent<Slider>();
+        statsStaminaSlider = GameObject.Find("StatsStaminaSlider").GetComponent<Slider>();
+        statsManaSlider = GameObject.Find("StatsManaSlider").GetComponent<Slider>();
+        statsExpSlider = GameObject.Find("StatsExpSlider").GetComponent<Slider>();
 
         unlockSkillBtn = GameObject.Find("UnlockSkillBtn").GetComponent<Button>();
 
@@ -640,6 +674,7 @@ public class Engine : MonoBehaviour
         UIPickupScreen.SetActive(false);
         UIArenaScreen.SetActive(false);
         UISkillScreen.SetActive(false);
+        UIStatsScreen.SetActive(false);
         UILoadScreen.SetActive(false);
 
         UpdateInventoryAttributes();
@@ -953,7 +988,7 @@ public class Engine : MonoBehaviour
                 if (sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatusEffectType() == StatusEffect.StatusEffectType.heal)
                     player.ChangeHealth((int)sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatChange());
                 else if (sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatusEffectType() == StatusEffect.StatusEffectType.bleed)
-                    player.ChangeHealth(-(int)sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatChange());
+                    player.ChangeHealth(-(player.GetHealth() * (int)sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatChange()));
                 else if (sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatusEffectType() == StatusEffect.StatusEffectType.burn)
                     player.ChangeHealth(-(int)sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatChange());
                 else if (sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatusEffectType() == StatusEffect.StatusEffectType.freeze)
@@ -975,7 +1010,7 @@ public class Engine : MonoBehaviour
                 if (sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatusEffectType() == StatusEffect.StatusEffectType.heal)
                     activeEnemy.ChangeHealth((int)sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatChange());
                 else if (sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatusEffectType() == StatusEffect.StatusEffectType.bleed)
-                    activeEnemy.ChangeHealth(-(int)sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatChange());
+                    activeEnemy.ChangeHealth(-(int)(activeEnemy.GetHealth() * sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatChange()));
                 else if (sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatusEffectType() == StatusEffect.StatusEffectType.burn)
                     activeEnemy.ChangeHealth(-(int)sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatChange());
                 else if (sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatusEffectType() == StatusEffect.StatusEffectType.freeze)
@@ -1267,7 +1302,7 @@ public class Engine : MonoBehaviour
                     enemyDamageOutput = 0;
                 enemy.ChangeMana(-attack.GetManaCost());
 
-                OutputToBattle(String.Format("{0} has cast {1}, dealing {2} damage.", enemy.GetName(), enemyDamageOutput));
+                OutputToBattle(String.Format("{0} has cast {1}, dealing {2} damage.", enemy.GetName(), attack.GetName(), enemyDamageOutput));
             }
             else if (attack.GetAttackAttribute() == EnemyAttackType.AttackAttribute.stamina)
             {
@@ -1276,7 +1311,7 @@ public class Engine : MonoBehaviour
                     enemyDamageOutput = 0;
                 enemy.ChangeStamina(-attack.GetStaminaCost());
 
-                OutputToBattle(String.Format("{0} performed a {1}, dealing {2} damage.", enemy.GetName(), enemyDamageOutput));
+                OutputToBattle(String.Format("{0} performed a {1}, dealing {2} damage.", enemy.GetName(), attack.GetName(), enemyDamageOutput));
             }
         }
 
@@ -1805,14 +1840,6 @@ public class Engine : MonoBehaviour
         }
     }
 
-    public void DisplayQuest(QuestContainer questContainer)
-    {
-        selectedQuest = questContainer.GetQuest();
-        makeActiveBtn.interactable = true;
-        selQuestName.text = selectedQuest.GetName();
-        selQuestDescription.text = selectedQuest.GetDescription();
-    }
-
     public void DisplayEnemy(EnemyContainer enemyContainer)
     {
         selectedEnemy = enemyContainer.GetEnemy();
@@ -1839,9 +1866,30 @@ public class Engine : MonoBehaviour
         skillDescriptionTxt.text = selectedSkill.GetDescription();
         skillCostTxt.text = ((ActiveSkill)selectedSkill).GetAttributeChange().ToString();
         skillDamageTxt.text = ((ActiveSkill)selectedSkill).GetMinDamageModifier().ToString() + " - " + ((ActiveSkill)selectedSkill).GetMaxDamageModifier().ToString();
-  
+
         if (player.GetSkillPoints() > 0 && !selectedSkill.IsUnlocked() && selectedSkill.IsUnlockable())
-            unlockSkillBtn.interactable = true;
+        {
+            unlockSkillBtn.gameObject.SetActive(true);
+            unlockedTxt.gameObject.SetActive(false);
+        }
+        else if (selectedSkill.IsUnlocked())
+        {
+            unlockSkillBtn.gameObject.SetActive(false);
+            unlockedTxt.gameObject.SetActive(true);
+            unlockedTxt.text = "Skill Unlocked";
+        }
+        else if (!selectedSkill.IsUnlockable())
+        {
+            unlockSkillBtn.gameObject.SetActive(false);
+            unlockedTxt.gameObject.SetActive(true);
+            unlockedTxt.text = "Skill Not Yet Unlockable";
+        }
+        else if (player.GetSkillPoints() < 1)
+        {
+            unlockSkillBtn.gameObject.SetActive(false);
+            unlockedTxt.gameObject.SetActive(true);
+            unlockedTxt.text = "Not Enough Skill Points";
+        }
     }
 
     public void UnlockSkill()
@@ -1859,14 +1907,24 @@ public class Engine : MonoBehaviour
         DeactivateSkillSelection();
     }
 
+    public void DisplayQuest(QuestContainer questContainer)
+    {
+        selectedQuest = questContainer.GetQuest();
+        makeActiveBtn.gameObject.SetActive(false);
+        selQuestName.text = selectedQuest.GetName();
+        selQuestDescription.text = selectedQuest.GetDescription();
+        noSelectedQuestTxt.SetActive(false);
+    }
+
     public void MakeQuestActive()
     {
         activeQuest = selectedQuest;
         questName.text = activeQuest.GetName();
         questDescription.text = activeQuest.GetDescription();
         if (uiQuestSlots[activeQuest.GetID()].GetComponent<QuestContainer>().GetCompleted())
-            turnInQuestBtn.interactable = true;
+            turnInQuestBtn.gameObject.SetActive(true);
 
+        noActiveQuestTxt.SetActive(false);
         DeactivateQuestSelection();
     }
 
@@ -1893,6 +1951,7 @@ public class Engine : MonoBehaviour
     public void ActivateInventoryScreen(bool x)
     {
         UIInventoryScreen.SetActive(x);
+        UIStatsScreen.SetActive(false);
 
         DeactivateInvSelection();
     }
@@ -2011,6 +2070,7 @@ public class Engine : MonoBehaviour
         magicScrollView.SetActive(false);
 
         UIInventoryScreen.SetActive(!x);
+        UIStatsScreen.SetActive(false);
         UISkillScreen.SetActive(x);
     }
 
@@ -2026,6 +2086,15 @@ public class Engine : MonoBehaviour
             skillScrollView.SetActive(false);
             magicScrollView.SetActive(true);
         }
+    }
+
+    public void ActivateStatsScreen(bool x)
+    {
+        DeactivateInvSelection();
+
+        UpdateInventoryAttributes();
+
+        UIStatsScreen.SetActive(x);
     }
 
     public void UseItem()
@@ -2081,6 +2150,7 @@ public class Engine : MonoBehaviour
                 weaponBtn.gameObject.GetComponent<ItemContainer>().SetItem(w);
                 RemoveFromInventory(w);
             }
+            damageValueTxt.text = w.GetMaxDamage().ToString();
         }
         else if(activeItem.IsArmor())
         {
@@ -2169,6 +2239,7 @@ public class Engine : MonoBehaviour
                     break;
             }
         }
+        armorValueTxt.text = player.GetDefense().ToString();
         DeactivateInvSelection();
     }
 
@@ -2249,6 +2320,8 @@ public class Engine : MonoBehaviour
         selQuestDescription.text = "";
         selQuestName.text = "";
 
+        noSelectedQuestTxt.SetActive(true);
+
         makeActiveBtn.interactable = false;
     }
 
@@ -2257,6 +2330,8 @@ public class Engine : MonoBehaviour
         activeQuest = null;
         questName.text = "";
         questDescription.text = "";
+
+        noActiveQuestTxt.SetActive(true);
 
         turnInQuestBtn.interactable = false;
     }
@@ -2270,7 +2345,8 @@ public class Engine : MonoBehaviour
         skillCostTxt.text = "";
         skillDamageTxt.text = "";
 
-        unlockSkillBtn.interactable = false;
+        unlockSkillBtn.gameObject.SetActive(false);
+        unlockedTxt.gameObject.SetActive(false);
     }
 
    /* public void OpenDoor()
@@ -2333,37 +2409,40 @@ public class Engine : MonoBehaviour
         SetCurrentWeight();
         goldTxt.text = player.GetGold().ToString();
         pickupGoldTxt.text = player.GetGold().ToString();
+        statsGoldTxt.text = player.GetGold().ToString();
+        statsDmgTxt.text = player.GetWeapon().GetMaxDamage().ToString();
+        statsDefTxt.text = player.GetDefense().ToString();
     }
 
     void UpdateExpSliders()
     {
-        invExpSlider.maxValue = player.GetToLevelExp();
-        invExpSlider.value = player.GetExp();
-        invTotalExpTxt.text = player.GetTotalExp().ToString();
-        invSkillPointsTxt.text = player.GetSkillPoints().ToString();
-        invLevelTxt.text = player.GetLevel().ToString();
-        expTxt.text = player.GetExp() + "/" + player.GetToLevelExp();
+        statsExpSlider.maxValue = player.GetToLevelExp();
+        statsExpSlider.value = player.GetExp();
+        statsTotalExpTxt.text = player.GetTotalExp().ToString();
+        statsSkillPointsTxt.text = player.GetSkillPoints().ToString();
+        statsLvlTxt.text = player.GetLevel().ToString();
+        statsExpTxt.text = player.GetExp() + "/" + player.GetToLevelExp();
     }
 
     void UpdateHealthSliders()
     {
-        invHealthSlider.maxValue = player.GetMaxHealth();
-        invHealthSlider.value = player.GetHealth();
-        invHealthTxt.text = player.GetHealth() + "/" + player.GetMaxHealth();
+        statsHealthSlider.maxValue = player.GetMaxHealth();
+        statsHealthSlider.value = player.GetHealth();
+        statsHealthTxt.text = player.GetHealth() + "/" + player.GetMaxHealth();
     }
     
     void UpdateStaminaSliders()
     {
-        invStaminaSlider.maxValue = player.GetMaxStamina();
-        invStaminaSlider.value = player.GetStamina();
-        invStaminaTxt.text = player.GetStamina() + "/" + player.GetMaxStamina();
+        statsStaminaSlider.maxValue = player.GetMaxStamina();
+        statsStaminaSlider.value = player.GetStamina();
+        statsStaminaTxt.text = player.GetStamina() + "/" + player.GetMaxStamina();
     }
 
     void UpdateManaSliders()
     {
-        invManaSlider.maxValue = player.GetMaxMana();
-        invManaSlider.value = player.GetMana();
-        invManaTxt.text = player.GetMana() + "/" + player.GetMaxMana();
+        statsManaSlider.maxValue = player.GetMaxMana();
+        statsManaSlider.value = player.GetMana();
+        statsManaTxt.text = player.GetMana() + "/" + player.GetMaxMana();
     }
 
     void SetCurrentWeight()
@@ -2386,6 +2465,7 @@ public class Engine : MonoBehaviour
         player.SetCurrentWeight(weight);
 
         totalInvWeightTxt.text = String.Format("{0}/{1}", player.GetCurrentWeight(), player.GetMaxWeight());
+        statsWeightTxt.text = player.GetCurrentWeight().ToString();
     }
 
     SaveLoad NewSaveLoadObject()
@@ -2458,20 +2538,23 @@ public class Engine : MonoBehaviour
         while (newScene.progress < 0.9f)
         {
             //Debug.Log("Loading scene: " + newScene.progress);
-            loadingSlider.value = newScene.progress;
-            loadingPercentTxt.text = ((int)(newScene.progress * 100)) + "%";
+            //loadingSlider.value = newScene.progress;
+
+            loadingSlider.value = Mathf.MoveTowards(newScene.progress * 100, 90.0f, 0.25f * Time.deltaTime);
+
+            loadingPercentTxt.text = ((int)Mathf.MoveTowards(newScene.progress * 100, 90.0f, 0.25f * Time.deltaTime)) + "%";
             yield return new WaitForEndOfFrame();
         }
 
-        loadingSlider.value = newScene.progress;
-        loadingPercentTxt.text = ((int)(newScene.progress * 100)) + "%";
+        loadingSlider.value = Mathf.MoveTowards(newScene.progress * 100, 90.0f, 0.25f * Time.deltaTime);
+        loadingPercentTxt.text = ((int)Mathf.MoveTowards(newScene.progress * 100, 90.0f, 0.25f * Time.deltaTime)) + "%";
         newScene.allowSceneActivation = true;
 
         while (!newScene.isDone)
         {
             //Debug.Log("Loading scene: " + newScene.progress);
-            loadingSlider.value = newScene.progress;
-            loadingPercentTxt.text = ((int)(newScene.progress * 100)) + "%";
+            loadingSlider.value = Mathf.MoveTowards(newScene.progress * 100, 90.0f, 0.25f * Time.deltaTime);
+            loadingPercentTxt.text = ((int)Mathf.MoveTowards(newScene.progress * 100, 90.0f, 0.25f * Time.deltaTime)) + "%";
             yield return new WaitForFixedUpdate();
         }
 
@@ -2486,7 +2569,6 @@ public class Engine : MonoBehaviour
             SceneManager.SetActiveScene(thisScene);
 
             player.SetLocation(location);
-            locationNameTxt.text = location.GetName();
         }
 
         AsyncOperation closeScene = SceneManager.UnloadSceneAsync(currentScene);
@@ -2495,7 +2577,7 @@ public class Engine : MonoBehaviour
         {
             yield return null;
         }
-
+        
         PopulateLocationChests();
         SpawnEnemies();
         CheckLocationQuestCompletion();
@@ -2506,5 +2588,9 @@ public class Engine : MonoBehaviour
         UILoadScreen.SetActive(false);
 
     }
-}
 
+    IEnumerator DirectionalOutput()
+    {
+        yield return null;
+    }
+}

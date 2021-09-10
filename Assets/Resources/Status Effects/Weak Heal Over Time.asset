@@ -19,5 +19,5 @@ MonoBehaviour:
   turnAmount: 3
   isNegative: 0
   isPercentage: 0
-  statChange: 10
+  statChange: 5
   sprite: {fileID: 21300000, guid: 630eddf708086054da34bcf4d5dcdb16, type: 3}

@@ -23,10 +23,9 @@ public class Player
     List<Quest> questList = new List<Quest>();
     List<StatusEffect> statusEffects = new List<StatusEffect>();
     List<ActiveSkill> activeStaminaSkills = new List<ActiveSkill>();
-    List<ActiveSkill> activeManaSkills = new List<ActiveSkill>();
+    List<ActiveSkill> activeManaSkills = new List<ActiveSkill>();                                                                                                                                                                                
 
-
-    public Player(string name, Location currentLocation, Inventory inventory, uint level = 1, int health = 100, int stamina = 100, int mana = 100,
+    public Player(string name, Location currentLocation, Inventory inventory, uint level = 1, int health = 20, int stamina = 10, int mana = 10,
             uint currentWeight = 0, uint maxWeight = 50)
     {
         this.name = name;
@@ -38,11 +37,11 @@ public class Player
         this.maxWeight = maxWeight;
         this.inventory = inventory;
 
-        maxHealth = 100;
-        maxStamina = 100;
-        maxMana = 100;
-        staminaRegen = 5;
-        manaRegen = 5;
+        maxHealth = 20;
+        maxStamina = 10;
+        maxMana = 10;
+        staminaRegen = 2;
+        manaRegen = 2;
 
         speed = DEFAULT_SPEED;
         weapon = Engine.NULL_WEAPON;
@@ -81,8 +80,21 @@ public class Player
     public int GetMaxMana() { return maxMana; }
     public int GetStaminaRegen() { return staminaRegen; }
     public int GetManaRegen() { return manaRegen; }
-    public int GetDefense() { return (int)(GetHead().GetRating() + GetChest().GetRating() + GetLegs().GetRating()
-                + GetFeet().GetRating() + GetHands().GetRating()); }
+    public int GetDefense() {
+        int defenseRating = 0;
+        if (GetHead() != Engine.NULL_ARMOR)
+            defenseRating += (int)GetHead().GetRating();
+        if (GetChest() != Engine.NULL_ARMOR)
+            defenseRating += (int)GetChest().GetRating();
+        if (GetLegs() != Engine.NULL_ARMOR)
+            defenseRating += (int)GetLegs().GetRating();
+        if (GetFeet() != Engine.NULL_ARMOR)
+            defenseRating += (int)GetFeet().GetRating();
+        if (GetHands() != Engine.NULL_ARMOR)
+            defenseRating += (int)GetHands().GetRating();
+
+        return defenseRating;
+    }
     public float GetSpeed() { return speed; }
 
     public Weapon GetWeapon() { return weapon; }
@@ -236,6 +248,10 @@ public class Player
             expToLevel += (level * 10);
             skillPoints++;
 
+            SetMaxHealth((int)(level * 5) + 20);
+            SetMaxStamina((int)(level * 5) + 10);
+            SetMaxMana((int)(level * 5) + 10);
+
             GameObject.Find("GameManager").GetComponent<Engine>().OutputToText(String.Format("Level Up! New Level: {0}. Exp to Level: {1}.", level, expToLevel));
         }
     }
@@ -314,7 +330,7 @@ public class Player
         if (health < 0)
             health = 0;
         if (health > maxHealth)
-            health = 100;
+            health = maxHealth;
     }
 
     public void ChangeStamina(int staminaChange)
@@ -323,7 +339,7 @@ public class Player
         if (stamina < 0)
             stamina = 0;
         if (stamina > maxStamina)
-            stamina = 100;
+            stamina = maxStamina;
     }
 
     public void ChangeMana(int manaChange)
@@ -332,7 +348,7 @@ public class Player
         if (mana < 0)
             mana = 0;
         if (mana > maxMana)
-            mana = 100;
+            mana = maxMana;
     }
 
 }

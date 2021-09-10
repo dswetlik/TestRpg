@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbb210134401d9945b470a0a8b2b9ce7, type: 3}
+  m_Name: Weak Spectral Shield
+  m_EditorClassIdentifier: 
+  name: Weak Spectral Shield
+  description: Summons a weak spectral shield that blocks a portion of damage directed
+    at you.
+  actionMessage: Player summoned a {0}. ({1} damage)
+  skillType: 0
+  isUnlocked: 0
+  isUnlockable: 0
+  nextSkills: []
+  hasStatusEffects: 1
+  statusEffects:
+  - {fileID: 11400000, guid: e65ace155aa72ff4396dd98030bb4504, type: 2}
+  attributeType: 3
+  magicType: 3
+  attributeChange: 5
+  minDamageModifier: 0
+  maxDamageModifier: 0
