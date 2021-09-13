@@ -23,7 +23,8 @@ public class Player
     List<Quest> questList = new List<Quest>();
     List<StatusEffect> statusEffects = new List<StatusEffect>();
     List<ActiveSkill> activeStaminaSkills = new List<ActiveSkill>();
-    List<ActiveSkill> activeManaSkills = new List<ActiveSkill>();                                                                                                                                                                                
+    List<ActiveSkill> activeManaSkills = new List<ActiveSkill>();
+    List<PassiveSkill> passiveSkills = new List<PassiveSkill>();
 
     public Player(string name, Location currentLocation, Inventory inventory, uint level = 1, int health = 20, int stamina = 10, int mana = 10,
             uint currentWeight = 0, uint maxWeight = 50)
@@ -63,7 +64,7 @@ public class Player
     public Location GetLocation() { return currentLocation; }
     public Inventory GetInventory() { return inventory; }
     public uint GetCurrentWeight() { return currentWeight; }
-    public uint GetMaxWeight() { return maxWeight; }
+    public uint GetMaxWeight() { return (uint)((maxWeight + GetPassiveFlat(PassiveSkill.AttributeType.carryWeight)) * GetPassivePercent(PassiveSkill.AttributeType.carryWeight)); }
     public int GetGold() { return gold; }
 
     public uint GetLevel() { return level; }
@@ -75,15 +76,15 @@ public class Player
     public int GetHealth() { return health; }
     public int GetStamina() { return stamina; }
     public int GetMana() { return mana; }
-    public int GetMaxHealth() { return maxHealth; }
-    public int GetMaxStamina() { return maxStamina; }
-    public int GetMaxMana() { return maxMana; }
-    public int GetStaminaRegen() { return staminaRegen; }
-    public int GetManaRegen() { return manaRegen; }
+    public int GetMaxHealth() { return (int)((maxHealth + GetPassiveFlat(PassiveSkill.AttributeType.maxHealth)) * GetPassivePercent(PassiveSkill.AttributeType.maxHealth)); }
+    public int GetMaxStamina() { return (int)((maxStamina + GetPassiveFlat(PassiveSkill.AttributeType.maxStamina)) * GetPassivePercent(PassiveSkill.AttributeType.maxStamina)); }
+    public int GetMaxMana() { return (int)((maxMana + GetPassiveFlat(PassiveSkill.AttributeType.maxMana)) * GetPassivePercent(PassiveSkill.AttributeType.maxMana)); }
+    public int GetStaminaRegen() { return (int)((staminaRegen + GetPassiveFlat(PassiveSkill.AttributeType.staminaRegen)) * GetPassivePercent(PassiveSkill.AttributeType.staminaRegen)); }
+    public int GetManaRegen() { return (int)((manaRegen + GetPassiveFlat(PassiveSkill.AttributeType.manaRegen)) * GetPassivePercent(PassiveSkill.AttributeType.manaRegen)); }
     public int GetDefense() {
         int defenseRating = 0;
         if (GetHead() != Engine.NULL_ARMOR)
-            defenseRating += (int)GetHead().GetRating();
+            defenseRating += (int)GetHead().GetRating(); 
         if (GetChest() != Engine.NULL_ARMOR)
             defenseRating += (int)GetChest().GetRating();
         if (GetLegs() != Engine.NULL_ARMOR)
@@ -93,9 +94,9 @@ public class Player
         if (GetHands() != Engine.NULL_ARMOR)
             defenseRating += (int)GetHands().GetRating();
 
-        return defenseRating;
+        return (int)((defenseRating + GetPassiveFlat(PassiveSkill.AttributeType.defense)) * GetPassivePercent(PassiveSkill.AttributeType.defense));
     }
-    public float GetSpeed() { return speed; }
+    public float GetSpeed() { return ((speed + GetPassiveFlat(PassiveSkill.AttributeType.speed)) * GetPassivePercent(PassiveSkill.AttributeType.speed)); }
 
     public Weapon GetWeapon() { return weapon; }
 
@@ -297,6 +298,32 @@ public class Player
             return null;
         else
             return (activeManaSkills.Count > 1) ? activeManaSkills[UnityEngine.Random.Range(0, activeManaSkills.Count)] : activeManaSkills[0];
+    }
+
+    public void AddPassiveSkill(PassiveSkill passiveSkill) { passiveSkills.Add(passiveSkill); }
+
+    public List<PassiveSkill> GetPassiveSkills() { return passiveSkills; }
+
+    public float GetPassivePercent(PassiveSkill.AttributeType attributeType)
+    {
+        float percentage = 1.0f;
+        foreach(PassiveSkill skill in passiveSkills)
+        {
+            if (skill.GetAttributeType() == attributeType && skill.IsPercentage())
+                percentage += skill.GetAttributeChange();
+        }
+        return percentage;
+    }
+
+    public int GetPassiveFlat(PassiveSkill.AttributeType attributeType)
+    {
+        int flat = 0;
+        foreach(PassiveSkill skill in passiveSkills)
+        {
+            if (skill.GetAttributeType() == attributeType && !skill.IsPercentage())
+                flat += (int)skill.GetAttributeChange();
+        }
+        return flat;
     }
 
     public bool CheckForQuest(uint id)

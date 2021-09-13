@@ -15,9 +15,12 @@ MonoBehaviour:
   material: {fileID: 2100000, guid: 311eff41e7ec3bf40a0aa04ee19d4ede, type: 2}
   name: Red Slime
   description: A ball of angry-looking red slime.
-  id: 2
+  id: 3
+  minLevel: 3
+  maxLevel: 5
   minDamage: 4
   maxDamage: 6
+  defense: 0
   attackTypes:
   - {fileID: 11400000, guid: b1c664d91f6c61d499f755bbeab0ee60, type: 2}
   - {fileID: 11400000, guid: a6288402b34b63244ad0a0871a5ba504, type: 2}
@@ -33,3 +36,4 @@ MonoBehaviour:
   speed: 0.6
   expReward: 6
   itemRewards: {fileID: 11400000, guid: e260beb7a9342524c8a983f58357d75e, type: 2}
+  statusEffects: []

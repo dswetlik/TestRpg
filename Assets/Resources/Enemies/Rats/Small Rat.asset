@@ -10,30 +10,29 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: da3ae000e98a71d489bf062b749ae76f, type: 3}
-  m_Name: Rat
+  m_Name: Small Rat
   m_EditorClassIdentifier: 
-  material: {fileID: 2100000, guid: 88b6ccca07b0f19479181430530ac5e1, type: 2}
-  name: Rat
-  description: A furry rat, a classic fight.
-  id: 101
+  material: {fileID: 0}
+  name: Small Rat
+  description: A small rat, an insult to fight as a gladiator.
+  id: 100
   minLevel: 1
-  maxLevel: 5
-  minDamage: 1
+  maxLevel: 3
+  minDamage: 0
   maxDamage: 2
   defense: 0
   attackTypes:
   - {fileID: 11400000, guid: c4c112e9746a14b43a84465341717600, type: 2}
-  - {fileID: 11400000, guid: ec4a780c87016a1459c601ffbe4381ea, type: 2}
-  health: 10
-  maxHealth: 10
-  stamina: 10
-  maxStamina: 10
-  stamRegen: 1
+  health: 5
+  maxHealth: 5
+  stamina: 0
+  maxStamina: 0
+  stamRegen: 0
   mana: 0
   maxMana: 0
   manaRegen: 0
   goldReward: 2
   speed: 1.5
-  expReward: 5
+  expReward: 3
   itemRewards: {fileID: 11400000, guid: 6fd21c7884f09494082df16c550bff14, type: 2}
   statusEffects: []

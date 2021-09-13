@@ -3824,11 +3824,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: The Heavy Anvil
-  itemList:
+  defItemList:
+  - {fileID: 11400000, guid: 610aeb62773842e4c8803f083696559d, type: 2}
   - {fileID: 11400000, guid: 76538cc43dfb1ba44afe04b693ee2f7d, type: 2}
   - {fileID: 11400000, guid: 558c8d31aded24d40a679071c99792dd, type: 2}
   - {fileID: 11400000, guid: dd6af988591040343987801e8ec0590d, type: 2}
-  - {fileID: 11400000, guid: 21407eb84d5e5ec4d970bd89b962728b, type: 2}
 --- !u!65 &522950823
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5621,7 +5621,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: The Alchemist's Brew
-  itemList:
+  defItemList:
   - {fileID: 11400000, guid: 0bdbe513d1d77bf4297a682e35e80ea1, type: 2}
   - {fileID: 11400000, guid: 0bdbe513d1d77bf4297a682e35e80ea1, type: 2}
   - {fileID: 11400000, guid: 0bdbe513d1d77bf4297a682e35e80ea1, type: 2}

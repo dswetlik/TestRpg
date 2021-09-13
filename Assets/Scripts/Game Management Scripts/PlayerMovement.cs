@@ -125,7 +125,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (other.transform.tag == "Enemy")
         {
-            GameObject.Find("GameManager").GetComponent<Engine>().StartBattle(other.gameObject);
+            //GameObject.Find("GameManager").GetComponent<Engine>().StartBattle(other.gameObject);
         }
         else if (other.transform.parent.tag == "Chest")
         {

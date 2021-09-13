@@ -11,6 +11,7 @@ public class StatusEffect : ScriptableObject
         bleed,
         burn,
         freeze,
+        shock,
         poison,
         stun,
         defence,

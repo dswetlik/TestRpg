@@ -15,9 +15,12 @@ MonoBehaviour:
   material: {fileID: 2100000, guid: e5c8847984573ed4e88a9e7fcef09bb6, type: 2}
   name: Blue Slime
   description: A 'regular'-looking ball of blue slime.
-  id: 4
+  id: 5
+  minLevel: 3
+  maxLevel: 5
   minDamage: 3
   maxDamage: 5
+  defense: 0
   attackTypes:
   - {fileID: 11400000, guid: b1c664d91f6c61d499f755bbeab0ee60, type: 2}
   - {fileID: 11400000, guid: a6288402b34b63244ad0a0871a5ba504, type: 2}
@@ -33,3 +36,4 @@ MonoBehaviour:
   speed: 1
   expReward: 6
   itemRewards: {fileID: 11400000, guid: f474172537c56744180e4fdc0278ce4c, type: 2}
+  statusEffects: []

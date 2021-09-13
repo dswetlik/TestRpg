@@ -21,6 +21,7 @@ public class Engine : MonoBehaviour
     GameObject UIBattleScreen;
     GameObject UIPickupScreen;
     GameObject UIArenaScreen;
+    GameObject UIBossScreen;
     GameObject UISkillScreen;
     GameObject UIStatsScreen;
     GameObject UILoadScreen;
@@ -172,6 +173,14 @@ public class Engine : MonoBehaviour
     GameObject arenaEnemyDamageObj;
     GameObject arenaEnemySpeedObj;
 
+    // UI Boss Variables
+    Slider levelSlider;
+
+    Button bossABtn;
+    Button bossBBtn;
+    Button bossCBtn;
+    Button bossDBtn;
+
     // UI Skill Variables
     GameObject skillScrollView;
     GameObject magicScrollView;
@@ -214,6 +223,7 @@ public class Engine : MonoBehaviour
     public static SortedDictionary<uint, Item> ItemDictionary;
     public static SortedDictionary<uint, Location> LocationDictionary;
     public static SortedDictionary<string, Skill> SkillDictionary;
+    public static SortedDictionary<uint, Enemy> EnemyDictionary;
 
     Player player;
 
@@ -272,12 +282,22 @@ public class Engine : MonoBehaviour
     ActiveSkill sparks;
     ActiveSkill weakSpecShield;
 
+    Enemy smallRat;
+    Enemy ratPack;
+    Enemy rat;
+    Enemy ratKing;
+
+    Enemy redSlime;
+    Enemy greenSlime;
+    Enemy blueSlime;
+
     Sprite healthDrop;
     Sprite staminaDrop;
     Sprite manaDrop;
 
     // Local Use Variables
     bool playerHasMoved, isInPickup = false, isInBattle = false, isInChest = false, isInShop = false, isInStats = false;
+    List<Enemy> leveledEnemies = new List<Enemy>();
     int playerDamageOutput, enemyDamageOutput;
     ChestInventory activeChest;
     DoorInteraction activeDoor;
@@ -346,6 +366,7 @@ public class Engine : MonoBehaviour
         ItemDictionary = new SortedDictionary<uint, Item>();
         LocationDictionary = new SortedDictionary<uint, Location>();
         SkillDictionary = new SortedDictionary<string, Skill>();
+        EnemyDictionary = new SortedDictionary<uint, Enemy>();
 
         NULL_ITEM = Resources.Load<Item>("Items/NULL_ITEM");
         NULL_WEAPON = Resources.Load<Weapon>("Items/NULL_WEAPON");
@@ -444,6 +465,24 @@ public class Engine : MonoBehaviour
         SkillDictionary.Add(sparks.GetName(), sparks);
         SkillDictionary.Add(weakSpecShield.GetName(), weakSpecShield);
 
+        rat = Instantiate(Resources.Load<Enemy>("Enemies/Rats/Rat"));
+        ratKing = Instantiate(Resources.Load<Enemy>("Enemies/Rats/RatKing"));
+        smallRat = Instantiate(Resources.Load<Enemy>("Enemies/Rats/Small Rat"));
+        ratPack = Instantiate(Resources.Load<Enemy>("Enemies/Rats/RatPack"));
+
+        redSlime = Instantiate(Resources.Load<Enemy>("Enemies/Slimes/RedSlime"));
+        greenSlime = Instantiate(Resources.Load<Enemy>("Enemies/Slimes/GreenSlime"));
+        blueSlime = Instantiate(Resources.Load<Enemy>("Enemies/Slimes/BlueSlime"));
+
+        EnemyDictionary.Add(rat.GetID(), rat);
+        //EnemyDictionary.Add(ratKing.GetID(), ratKing);
+        EnemyDictionary.Add(smallRat.GetID(), smallRat);
+        EnemyDictionary.Add(ratPack.GetID(), ratPack);
+
+        EnemyDictionary.Add(redSlime.GetID(), redSlime);
+        EnemyDictionary.Add(greenSlime.GetID(), greenSlime);
+        EnemyDictionary.Add(blueSlime.GetID(), blueSlime);
+
         healthDrop = Resources.Load<Sprite>("Textures/Inventory Icons/skill_049");
         staminaDrop = Resources.Load<Sprite>("Textures/Inventory Icons/skill_028");
         manaDrop = Resources.Load<Sprite>("Textures/Inventory Icons/skill_alt_028");
@@ -466,6 +505,7 @@ public class Engine : MonoBehaviour
         UIBattleScreen = GameObject.Find("UI Battle");
         UIPickupScreen = GameObject.Find("UI Pickup");
         UIArenaScreen = GameObject.Find("UI Arena");
+        UIBossScreen = GameObject.Find("UI Boss");
         UISkillScreen = GameObject.Find("UI Skill");
         UIStatsScreen = GameObject.Find("UI Stats");
         UILoadScreen = GameObject.Find("UI Load");
@@ -634,6 +674,18 @@ public class Engine : MonoBehaviour
         arenaEnemySpeedObj.SetActive(false);
         arenaEnemyDamageObj.SetActive(false);
 
+        levelSlider = GameObject.Find("LevelSlider").GetComponent<Slider>();
+
+        bossABtn = GameObject.Find("BossAButton").GetComponent<Button>();
+        bossBBtn = GameObject.Find("BossBButton").GetComponent<Button>();
+        bossCBtn = GameObject.Find("BossCButton").GetComponent<Button>();
+        bossDBtn = GameObject.Find("BossDButton").GetComponent<Button>();
+
+        bossABtn.interactable = false;
+        bossBBtn.interactable = false;
+        bossCBtn.interactable = false;
+        bossDBtn.interactable = false;
+
         skillScrollView = GameObject.Find("SkillScrollView");
         magicScrollView = GameObject.Find("MagicScrollView");
         magicScrollView.SetActive(false);
@@ -673,6 +725,7 @@ public class Engine : MonoBehaviour
         UIBattleScreen.SetActive(false);
         UIPickupScreen.SetActive(false);
         UIArenaScreen.SetActive(false);
+        UIBossScreen.SetActive(false);
         UISkillScreen.SetActive(false);
         UIStatsScreen.SetActive(false);
         UILoadScreen.SetActive(false);
@@ -680,128 +733,10 @@ public class Engine : MonoBehaviour
         UpdateInventoryAttributes();
     }
 
-    public void StartBattle(GameObject enemy)
-    {
-        if(!isInBattle)
-            StartCoroutine(Battle(enemy));
-    }
-
     public void Battle()
     {
         StartCoroutine(Battle(selectedEnemy));
         ActivateArenaScreen(false);
-    }
-
-    IEnumerator Battle(GameObject eGO)
-    {
-        isInBattle = true;
-
-        playerDamageOutput = 0;
-        enemyDamageOutput = 0;
-
-        Enemy enemy = Instantiate(eGO.GetComponent<EnemyMovement>().GetEnemy());
-        enemyNameTxt.text = enemy.GetName();
-
-        UIBattleScreen.SetActive(true);
-
-        UpdateBattleAttributes(enemy);
-
-        float playerSpeed = player.GetSpeed(), enemySpeed = enemy.GetSpeed();
-        playerSpeedSlider.value = playerSpeed;
-        enemySpeedSlider.value = enemySpeed;
-
-        while (player.GetHealth() > 0 && enemy.GetHealth() > 0)
-        {
-
-            while (playerSpeed < 100 && enemySpeed < 100)
-            {
-                playerSpeed += player.GetSpeed();
-                enemySpeed += enemy.GetSpeed();
-
-                playerSpeedSlider.value = playerSpeed;
-                enemySpeedSlider.value = enemySpeed;
-
-                //player.RegenAttributes();
-                //enemy.RegenAttributes();
-
-                UpdateBattleAttributes(enemy);
-                yield return new WaitForSeconds(0.5f);
-            }
-
-            if (playerSpeed >= 100 && playerSpeed >= enemySpeed && player.GetHealth() > 0)
-            {
-                yield return StartCoroutine("PlayerMove");
-                playerSpeed -= 100;
-
-                enemy.ChangeHealth(-playerDamageOutput);
-                UpdateBattleAttributes(enemy);
-
-                playerSpeedSlider.value = playerSpeed;
-
-                if (enemySpeed >= 100 && enemy.GetHealth() > 0)
-                {
-                    EnemyAttack(enemy);
-                    enemySpeed -= 100;
-
-                    player.ChangeHealth(-enemyDamageOutput);
-                    UpdateBattleAttributes(enemy);
-
-                    enemySpeedSlider.value = enemySpeed;
-                }
-
-                playerDamageOutput = 0;
-                enemyDamageOutput = 0;
-
-            }
-            if (enemySpeed >= 100 && enemySpeed >= playerSpeed && enemy.GetHealth() > 0)
-            {
-                EnemyAttack(enemy);
-                enemySpeed -= 100;
-
-                player.ChangeHealth(-enemyDamageOutput);
-                UpdateBattleAttributes(enemy);
-
-                enemySpeedSlider.value = enemySpeed;
-
-                if (playerSpeed >= 100 && player.GetHealth() > 0)
-                {
-                    yield return StartCoroutine("PlayerMove");
-                    playerSpeed -= 100;
-
-                    enemy.ChangeHealth(-playerDamageOutput);
-                    UpdateBattleAttributes(enemy);
-
-                    playerSpeedSlider.value = playerSpeed;
-                }
-
-                playerDamageOutput = 0;
-                enemyDamageOutput = 0;
-
-            }
-
-            UpdateBattleAttributes(enemy);
-            yield return null;
-        }
-
-        if(enemy.GetHealth() <= 0)
-        {
-            ActivatePickupScreen(true, enemy.GetName());
-            GenerateItemPickup(enemy.GetItemRewards());
-            OutputToText(String.Format("You have killed {0}, gaining {1} exp and {2} gold.", enemy.GetName(), enemy.GetExpReward(), enemy.GetGoldReward()));
-            player.AddExp(enemy.GetExpReward());
-            player.ChangeGold(enemy.GetGoldReward());
-            UIBattleScreen.SetActive(false);
-            Destroy(eGO);
-        }
-        else
-        {
-            UIBattleScreen.SetActive(false);
-            OutputToText("You have Died.");
-        }
-
-        UpdateInventoryAttributes();
-        battleOutputTxt.text = "";
-        isInBattle = false;
     }
 
     IEnumerator Battle(Enemy eGO)
@@ -979,6 +914,24 @@ public class Engine : MonoBehaviour
         }
     }
 
+    bool CheckIfPoisoned(bool isPlayer)
+    {
+        if (isPlayer)
+        {
+            foreach (StatusEffect statusEffect in player.GetStatusEffects())
+                if (statusEffect.GetStatusEffectType() == StatusEffect.StatusEffectType.poison)
+                    return true;
+            return false;
+        }
+        else
+        {
+            foreach (StatusEffect statusEffect in activeEnemy.GetStatusEffects())
+                if (statusEffect.GetStatusEffectType() == StatusEffect.StatusEffectType.poison)
+                    return true;
+            return false;
+        }
+    }
+
     void EndOfTurnStatusEffect(bool isPlayer)
     {
         if (isPlayer)
@@ -986,15 +939,27 @@ public class Engine : MonoBehaviour
             foreach (GameObject sGO in playerStatusEffectSlots.ToList<GameObject>())
             {
                 if (sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatusEffectType() == StatusEffect.StatusEffectType.heal)
-                    player.ChangeHealth((int)sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatChange());
+                {
+                    if (!CheckIfPoisoned(true))
+                        player.ChangeHealth((int)(sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatChange() + player.GetPassiveFlat(PassiveSkill.AttributeType.healthRegen) * player.GetPassivePercent(PassiveSkill.AttributeType.healthRegen)));
+                }
                 else if (sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatusEffectType() == StatusEffect.StatusEffectType.bleed)
-                    player.ChangeHealth(-(player.GetHealth() * (int)sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatChange()));
+                    player.ChangeHealth(-(int)(player.GetHealth() * sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatChange()));
                 else if (sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatusEffectType() == StatusEffect.StatusEffectType.burn)
                     player.ChangeHealth(-(int)sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatChange());
                 else if (sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatusEffectType() == StatusEffect.StatusEffectType.freeze)
-                    player.ChangeHealth(-(int)sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatChange());
+                {
+                    player.ChangeHealth(-(int)sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatChange() / 2);
+                    player.ChangeStamina(-(int)sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatChange());
+                }                  
+                else if(sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatusEffectType() == StatusEffect.StatusEffectType.shock)
+                {
+                    player.ChangeHealth(-(int)sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatChange() / 2);
+                    player.ChangeMana(-(int)sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatChange());
+                }
                 else if (sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatusEffectType() == StatusEffect.StatusEffectType.poison)
                     player.ChangeHealth(-(int)sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatChange());
+
                 sGO.GetComponent<StatusContainer>().DecrementStatusEffect();
                 if (sGO.GetComponent<StatusContainer>().GetTurnAmount() < 1)
                 {
@@ -1008,7 +973,10 @@ public class Engine : MonoBehaviour
             foreach (GameObject sGO in enemyStatusEffectSlots.ToList<GameObject>())
             {
                 if (sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatusEffectType() == StatusEffect.StatusEffectType.heal)
-                    activeEnemy.ChangeHealth((int)sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatChange());
+                {
+                    if(!CheckIfPoisoned(false))
+                        activeEnemy.ChangeHealth((int)sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatChange());
+                }
                 else if (sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatusEffectType() == StatusEffect.StatusEffectType.bleed)
                     activeEnemy.ChangeHealth(-(int)(activeEnemy.GetHealth() * sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatChange()));
                 else if (sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatusEffectType() == StatusEffect.StatusEffectType.burn)
@@ -1029,7 +997,7 @@ public class Engine : MonoBehaviour
     }
 
 
-    void UpdateBattleAttributes(Enemy enemy)
+    void UpdateBattleAttributes(Enemy enemy)                                            
     {
         enemyHealthSlider.maxValue = enemy.GetMaxHealth();
         enemyStaminaSlider.maxValue = enemy.GetMaxStamina();
@@ -1173,7 +1141,7 @@ public class Engine : MonoBehaviour
         switch (skill.GetAttributeType())
         {
             case ActiveSkill.AttributeType.weapon:
-                playerDamageOutput = player.GetWeapon().Attack() - enemyDefValue;
+                playerDamageOutput = ((int)(player.GetWeapon().Attack() + player.GetPassiveFlat(PassiveSkill.AttributeType.weaponDamage) * player.GetPassivePercent(PassiveSkill.AttributeType.weaponDamage)) - enemyDefValue);
                 if (playerDamageOutput < 0)
                     playerDamageOutput = 0;
                 OutputToBattle(String.Format(skill.GetActionMessage(), player.GetWeapon().GetName(), playerDamageOutput));
@@ -1181,7 +1149,7 @@ public class Engine : MonoBehaviour
             case ActiveSkill.AttributeType.health:
                 break;
             case ActiveSkill.AttributeType.stamina:
-                playerDamageOutput = (player.GetWeapon().Attack() + skill.GetDamageModifier()) - enemyDefValue;
+                playerDamageOutput = ((int)((player.GetWeapon().Attack() + skill.GetDamageModifier() + player.GetPassiveFlat(PassiveSkill.AttributeType.skillDamage)) * player.GetPassivePercent(PassiveSkill.AttributeType.skillDamage)) - enemyDefValue);
                 if (playerDamageOutput < 0)
                     playerDamageOutput = 0;
                 OutputToBattle(String.Format(skill.GetActionMessage(), player.GetWeapon().GetName(), playerDamageOutput));
@@ -1191,13 +1159,18 @@ public class Engine : MonoBehaviour
                 if(skill.GetMagicType() == ActiveSkill.MagicType.heal)
                 {
                     playerDamageOutput = 0;
-                    int temp = skill.GetDamageModifier();
-                    player.ChangeHealth(temp);
-                    OutputToBattle(String.Format(skill.GetActionMessage(), skill.GetName(), temp));
+                    if (!CheckIfPoisoned(true))
+                    {
+                        int temp = (int)((skill.GetDamageModifier() + player.GetPassiveFlat(PassiveSkill.AttributeType.healthRegen)) * player.GetPassivePercent(PassiveSkill.AttributeType.healthRegen));
+                        player.ChangeHealth(temp);
+                        OutputToBattle(String.Format(skill.GetActionMessage(), skill.GetName(), temp));
+                    }
+                    else
+                        OutputToBattle(String.Format("{0} attempted to heal, but they are poisoned!", player.GetName()));
                 }
                 if(skill.GetMagicType() == ActiveSkill.MagicType.damage)
                 {
-                    playerDamageOutput = skill.GetDamageModifier() - enemyDefValue;
+                    playerDamageOutput = (int)((skill.GetDamageModifier() + player.GetPassiveFlat(PassiveSkill.AttributeType.manaDamage) * player.GetPassivePercent(PassiveSkill.AttributeType.manaDamage)) - enemyDefValue);
                     if (playerDamageOutput < 0)
                         playerDamageOutput = 0;
                     OutputToBattle(String.Format(skill.GetActionMessage(), skill.GetName(), playerDamageOutput));
@@ -1288,12 +1261,15 @@ public class Engine : MonoBehaviour
             {
                 enemyDamageOutput = 0;
 
-                int enemyHealRate = attack.GetDamageModifier();
-
-                enemy.ChangeHealth(enemyHealRate);
+                if (!CheckIfPoisoned(false))
+                {
+                    int enemyHealRate = attack.GetDamageModifier();
+                    enemy.ChangeHealth(enemyHealRate);
+                    OutputToBattle(String.Format("{0} has healed {1} damage.", enemy.GetName(), enemyHealRate));
+                }
+                else
+                    OutputToBattle(String.Format("{0} attempted to heal, but is poisoned!", enemy.GetName()));
                 enemy.ChangeMana(-attack.GetManaCost());
-
-                OutputToBattle(String.Format("{0} has healed {1} damage.", enemy.GetName(), enemyHealRate));
             }
             else if (attack.GetAttackAttribute() == EnemyAttackType.AttackAttribute.mana)
             {
@@ -1367,45 +1343,6 @@ public class Engine : MonoBehaviour
 
         chests = null;
     }
-
-   /*public void OpenChest(ChestInventory chest, bool x = true)
-    {
-        if (x)
-        {
-            List<Item> items = chest.GetItems();
-            foreach (Item item in items)
-            {
-                AddToPickup(item);
-            }
-            activeChest = chest;
-            searchBtn.gameObject.SetActive(true);
-            isInChest = true;
-        }
-        else
-        {
-            searchBtn.gameObject.SetActive(false);
-            isInChest = false;
-
-            List<Item> items = new List<Item>();
-
-            foreach (KeyValuePair<uint, GameObject> kvp in uiPickupSlots)
-            {
-                int y = kvp.Value.GetComponent<ItemContainer>().GetCount();
-
-                while (y > 0)
-                {
-                    items.Add(kvp.Value.GetComponent<ItemContainer>().GetItem());
-                    y--;
-                }
-            }
-            foreach (Item item in items)
-            {
-                RemoveFromPickup(item);
-            }
-
-            
-        }
-    } */
 
     void SpawnEnemies()
     {
@@ -1684,7 +1621,7 @@ public class Engine : MonoBehaviour
             if (isInShop)
             {
                 currentShop.RemoveItem(item);
-                player.ChangeGold(-(int)item.GetValue());
+                player.ChangeGold(-(int)(item.GetValue() * 0.75f));
             }                
         }
         UpdateInventoryAttributes();
@@ -1810,7 +1747,7 @@ public class Engine : MonoBehaviour
                     pickUpConsumableObj.SetActive(false);
 
                     Weapon w = (Weapon)itemContainer.GetItem();
-                    //pickUpDamageObj.GetComponentInChildren<Text>().text = w.GetDamage().ToString();
+                    pickUpDamageObj.GetComponentInChildren<Text>().text = w.GetMaxDamage().ToString();
                 }
                 else if (itemContainer.GetItem().IsArmor())
                 {
@@ -1856,6 +1793,25 @@ public class Engine : MonoBehaviour
         arenaEnemyManaObj.SetActive(true);
         arenaEnemySpeedObj.SetActive(true);
         arenaEnemyDamageObj.SetActive(true);
+
+        if (UIBossScreen.activeSelf)
+            UIBossScreen.SetActive(false);
+    }
+
+    public void ActivateBossScreen(bool x)
+    {
+        UIBossScreen.SetActive(x);
+
+        levelSlider.value = player.GetLevel();
+
+        if (player.GetLevel() >= 5)
+            bossABtn.interactable = true;
+        if (player.GetLevel() >= 10)
+            bossBBtn.interactable = true;
+        if (player.GetLevel() >= 15)
+            bossCBtn.interactable = true;
+        if (player.GetLevel() >= 20)
+            bossDBtn.interactable = true;
     }
 
     public void DisplaySkill(SkillContainer skillContainer)
@@ -2043,6 +1999,26 @@ public class Engine : MonoBehaviour
     public void ActivateArenaScreen(bool x)
     {
         UIArenaScreen.SetActive(x);
+
+        foreach (KeyValuePair<uint, Enemy> kvp in EnemyDictionary)
+        {
+            Enemy e = kvp.Value;
+            if (leveledEnemies.Contains(e))
+            {
+                if (player.GetLevel() > e.GetMaxLevel() || player.GetLevel() < e.GetMinLevel())
+                    leveledEnemies.Remove(e);
+            }
+            else
+            {
+                if (player.GetLevel() <= e.GetMaxLevel() && player.GetLevel() >= e.GetMinLevel())
+                    leveledEnemies.Add(e);
+            }
+        }
+
+        enemyA.GetComponent<EnemyContainer>().SetEnemy(leveledEnemies[UnityEngine.Random.Range(0, leveledEnemies.Count)]);
+        enemyB.GetComponent<EnemyContainer>().SetEnemy(leveledEnemies[UnityEngine.Random.Range(0, leveledEnemies.Count)]);
+        enemyC.GetComponent<EnemyContainer>().SetEnemy(leveledEnemies[UnityEngine.Random.Range(0, leveledEnemies.Count)]);
+
 
         enemyANameTxt.text = enemyA.GetComponent<EnemyContainer>().GetEnemy().GetName();
         enemyBNameTxt.text = enemyB.GetComponent<EnemyContainer>().GetEnemy().GetName();

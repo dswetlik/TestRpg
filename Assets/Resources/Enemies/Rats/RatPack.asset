@@ -10,31 +10,29 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: da3ae000e98a71d489bf062b749ae76f, type: 3}
-  m_Name: RatKing
+  m_Name: RatPack
   m_EditorClassIdentifier: 
-  material: {fileID: 2100000, guid: 88b6ccca07b0f19479181430530ac5e1, type: 2}
-  name: Rat King
-  description: A large bundle of angry rats tied at the tail.
-  id: 103
-  minLevel: 5
-  maxLevel: 20
+  material: {fileID: 0}
+  name: Pack of Rats
+  description: A pack of rats just let loose from a burlap bag. They are not happy.
+  id: 102
+  minLevel: 3
+  maxLevel: 5
   minDamage: 2
   maxDamage: 4
   defense: 0
   attackTypes:
   - {fileID: 11400000, guid: c4c112e9746a14b43a84465341717600, type: 2}
-  - {fileID: 11400000, guid: ec4a780c87016a1459c601ffbe4381ea, type: 2}
-  - {fileID: 11400000, guid: 8ea4b0e6bc68f994cbf0ad5531fd153d, type: 2}
-  health: 20
-  maxHealth: 20
+  health: 15
+  maxHealth: 15
   stamina: 10
   maxStamina: 10
-  stamRegen: 1
-  mana: 10
-  maxMana: 10
-  manaRegen: 1
+  stamRegen: 2
+  mana: 0
+  maxMana: 0
+  manaRegen: 0
   goldReward: 5
   speed: 0.75
-  expReward: 10
-  itemRewards: {fileID: 11400000, guid: 3c6a8e6f94c7a754b86382385dafca5a, type: 2}
+  expReward: 5
+  itemRewards: {fileID: 11400000, guid: 6fd21c7884f09494082df16c550bff14, type: 2}
   statusEffects: []
