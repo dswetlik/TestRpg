@@ -38,6 +38,6 @@ public class StatusEffect : ScriptableObject
     public float GetStatChange() { return statChange; }
     public Sprite GetSprite() { return sprite; }
 
-    public void DecrementTurnCount() { Debug.Log("Decrementing"); turnAmount -= 1; }
+    public void DecrementTurnCount() { Debug.Log("Decrementing " + name); turnAmount -= 1; }
 
 }

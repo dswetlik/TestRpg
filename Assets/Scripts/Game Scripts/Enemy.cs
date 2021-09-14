@@ -127,9 +127,11 @@ public class Enemy : ScriptableObject
 
     public void DecrementStatusEffectTurn()
     {
+        Debug.Log("Enemy Status Effect Count: " + statusEffects.Count);
         if (statusEffects.Count > 0)
             foreach (StatusEffect statusEffect in statusEffects.ToList<StatusEffect>())
             {
+                Debug.Log("Decrement in Enemy: " + statusEffect.GetName());
                 statusEffect.DecrementTurnCount();
                 if (statusEffect.GetTurnAmount() < 1)
                     RemoveStatusEffect(statusEffect);

@@ -12,10 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbb210134401d9945b470a0a8b2b9ce7, type: 3}
   m_Name: Flames
   m_EditorClassIdentifier: 
+  ID: 500
   name: Flames
   description: A small bout of flames, essentially a heat blast.
   actionMessage: Player cast {0}, dealing {1} damage!
   skillType: 0
+  levelRequirement: 0
   isUnlocked: 0
   isUnlockable: 1
   nextSkills: []

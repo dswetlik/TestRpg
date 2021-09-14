@@ -11,19 +11,23 @@ public class Skill : ScriptableObject
         passive
     }
 
+    [SerializeField] uint ID;
     [SerializeField] new string name;
     [TextArea(3,5)]
     [SerializeField] string description;
     [TextArea(3,5)]
     [SerializeField] string actionMessage;
     [SerializeField] SkillType skillType;
+    [SerializeField] int levelRequirement;
     [SerializeField] bool isUnlocked;
     [SerializeField] bool isUnlockable;
     [SerializeField] List<Skill> nextSkills = new List<Skill>();
     [SerializeField] bool hasStatusEffects;
     [SerializeField] List<StatusEffect> statusEffects = new List<StatusEffect>();
 
+    public uint GetID() { return ID; }
     public SkillType GetSkillType() { return skillType; }
+    public int GetLevelRequirement() { return levelRequirement; }
     public bool IsUnlocked() { return isUnlocked; }
     public bool IsUnlockable() { return isUnlockable; }
     public List<Skill> GetNextSkills() { return nextSkills; }
@@ -36,8 +40,8 @@ public class Skill : ScriptableObject
     {
         foreach (Skill skill in nextSkills)
         {
-            if(!Engine.SkillDictionary[skill.GetName()].IsUnlockable())
-               Engine.SkillDictionary[skill.GetName()].isUnlockable = true;
+            if(!Engine.SkillDictionary[skill.GetID()].IsUnlockable())
+               Engine.SkillDictionary[skill.GetID()].isUnlockable = true;
         }
     }
 

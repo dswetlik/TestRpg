@@ -12,11 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbb210134401d9945b470a0a8b2b9ce7, type: 3}
   m_Name: Light Heal
   m_EditorClassIdentifier: 
+  ID: 502
   name: Light Heal
   description: The smallest healing spell, capable of instantly healing small bumps
     and scrapes as well as over time.
   actionMessage: Player cast {0}, healing {1} damage!
   skillType: 0
+  levelRequirement: 0
   isUnlocked: 0
   isUnlockable: 1
   nextSkills:

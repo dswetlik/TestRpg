@@ -12,11 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbb210134401d9945b470a0a8b2b9ce7, type: 3}
   m_Name: Sparks
   m_EditorClassIdentifier: 
+  ID: 503
   name: Sparks
   description: A small pulse of electricty that may fry some hairs. May be from shuffling
     your feet.
   actionMessage: Player cast {0}, dealing {1} damage!
   skillType: 0
+  levelRequirement: 0
   isUnlocked: 0
   isUnlockable: 1
   nextSkills: []

@@ -222,7 +222,7 @@ public class Engine : MonoBehaviour
     // Game Variables
     public static SortedDictionary<uint, Item> ItemDictionary;
     public static SortedDictionary<uint, Location> LocationDictionary;
-    public static SortedDictionary<string, Skill> SkillDictionary;
+    public static SortedDictionary<uint, Skill> SkillDictionary;
     public static SortedDictionary<uint, Enemy> EnemyDictionary;
 
     Player player;
@@ -274,7 +274,25 @@ public class Engine : MonoBehaviour
 
     ActiveSkill slash;
     ActiveSkill stab;
+
     ActiveSkill heavySwing;
+    ActiveSkill lightSpectralArrow;
+    ActiveSkill shortMeditation;
+    ActiveSkill slightAmpUp;
+    ActiveSkill slightIntimidation;
+    ActiveSkill stunningStrike;
+    ActiveSkill weakBleedingEdge;
+    ActiveSkill weakDefensiveStance;
+    ActiveSkill weakVenomStrike;
+    ActiveSkill ampUp;
+    ActiveSkill defensiveStance;
+    ActiveSkill intimidate;
+    ActiveSkill jarringStrike;
+    ActiveSkill meditation;
+    ActiveSkill smite;
+    ActiveSkill spectralArrow;
+    ActiveSkill toxicStrike;
+    ActiveSkill weepingEdge;
 
     ActiveSkill flames;
     ActiveSkill lightHeal;
@@ -365,7 +383,7 @@ public class Engine : MonoBehaviour
     {
         ItemDictionary = new SortedDictionary<uint, Item>();
         LocationDictionary = new SortedDictionary<uint, Location>();
-        SkillDictionary = new SortedDictionary<string, Skill>();
+        SkillDictionary = new SortedDictionary<uint, Skill>();
         EnemyDictionary = new SortedDictionary<uint, Enemy>();
 
         NULL_ITEM = Resources.Load<Item>("Items/NULL_ITEM");
@@ -447,7 +465,25 @@ public class Engine : MonoBehaviour
 
         slash = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Weapon Skills/Slash"));
         stab = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Weapon Skills/Stab"));
-        heavySwing = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Stamina Skills/Heavy Swing"));
+
+        heavySwing = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Stamina Skills/Tier 1/Heavy Swing"));
+        lightSpectralArrow = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Stamina Skills/Tier 1/Light Spectral Arrow"));
+        shortMeditation = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Stamina Skills/Tier 1/Short Meditation"));
+        slightAmpUp = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Stamina Skills/Tier 1/Slight Amp Up"));
+        slightIntimidation = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Stamina Skills/Tier 1/Slight Intimidation"));
+        stunningStrike = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Stamina Skills/Tier 1/Stunning Strike"));
+        weakBleedingEdge = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Stamina Skills/Tier 1/Weak Bleeding Edge"));
+        weakDefensiveStance = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Stamina Skills/Tier 1/Weak Defensive Stance"));
+        weakVenomStrike = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Stamina Skills/Tier 1/Weak Venom Strike"));
+        ampUp = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Stamina Skills/Tier 2/Amp Up"));
+        defensiveStance = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Stamina Skills/Tier 2/Defensive Stance"));
+        intimidate = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Stamina Skills/Tier 2/Intimidate"));
+        jarringStrike = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Stamina Skills/Tier 2/Jarring Strike"));
+        meditation = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Stamina Skills/Tier 2/Meditation"));
+        smite = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Stamina Skills/Tier 2/Smite"));
+        spectralArrow = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Stamina Skills/Tier 2/Spectral Arrow"));
+        toxicStrike = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Stamina Skills/Tier 2/Toxic Strike"));
+        weepingEdge = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Stamina Skills/Tier 2/Weeping Edge"));
 
         flames = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Mana Skills/Flames"));
         lightHeal = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Mana Skills/Light Heal"));
@@ -455,15 +491,33 @@ public class Engine : MonoBehaviour
         sparks = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Mana Skills/Sparks"));
         weakSpecShield = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Mana Skills/Weak Spectral Shield"));
 
-        SkillDictionary.Add(slash.GetName(), slash);
-        SkillDictionary.Add(stab.GetName(), stab);
-        SkillDictionary.Add(heavySwing.GetName(), heavySwing);
+        SkillDictionary.Add(slash.GetID(), slash);
+        SkillDictionary.Add(stab.GetID(), stab);
 
-        SkillDictionary.Add(flames.GetName(), flames);
-        SkillDictionary.Add(lightHeal.GetName(), lightHeal);
-        SkillDictionary.Add(frostBite.GetName(), frostBite);
-        SkillDictionary.Add(sparks.GetName(), sparks);
-        SkillDictionary.Add(weakSpecShield.GetName(), weakSpecShield);
+        SkillDictionary.Add(heavySwing.GetID(), heavySwing);
+        SkillDictionary.Add(lightSpectralArrow.GetID(), lightSpectralArrow);
+        SkillDictionary.Add(shortMeditation.GetID(), shortMeditation);
+        SkillDictionary.Add(slightAmpUp.GetID(), slightAmpUp);
+        SkillDictionary.Add(slightIntimidation.GetID(), slightIntimidation);
+        SkillDictionary.Add(stunningStrike.GetID(), stunningStrike);
+        SkillDictionary.Add(weakBleedingEdge.GetID(), weakBleedingEdge);
+        SkillDictionary.Add(weakDefensiveStance.GetID(), weakDefensiveStance);
+        SkillDictionary.Add(weakVenomStrike.GetID(), weakVenomStrike);
+        SkillDictionary.Add(ampUp.GetID(), ampUp);
+        SkillDictionary.Add(defensiveStance.GetID(), defensiveStance);
+        SkillDictionary.Add(intimidate.GetID(), intimidate);
+        SkillDictionary.Add(jarringStrike.GetID(), jarringStrike);
+        SkillDictionary.Add(meditation.GetID(), meditation);
+        SkillDictionary.Add(smite.GetID(), smite);
+        SkillDictionary.Add(spectralArrow.GetID(), spectralArrow);
+        SkillDictionary.Add(toxicStrike.GetID(), toxicStrike);
+        SkillDictionary.Add(weepingEdge.GetID(), weepingEdge);
+
+        SkillDictionary.Add(flames.GetID(), flames);
+        SkillDictionary.Add(lightHeal.GetID(), lightHeal);
+        SkillDictionary.Add(frostBite.GetID(), frostBite);
+        SkillDictionary.Add(sparks.GetID(), sparks);
+        SkillDictionary.Add(weakSpecShield.GetID(), weakSpecShield);
 
         rat = Instantiate(Resources.Load<Enemy>("Enemies/Rats/Rat"));
         ratKing = Instantiate(Resources.Load<Enemy>("Enemies/Rats/RatKing"));
@@ -742,12 +796,12 @@ public class Engine : MonoBehaviour
     IEnumerator Battle(Enemy eGO)
     {
         isInBattle = true;
-        activeEnemy = eGO;
 
         playerDamageOutput = 0;
         enemyDamageOutput = 0;
 
         Enemy enemy = Instantiate(eGO);
+        activeEnemy = enemy;
         enemyNameTxt.text = enemy.GetName();
 
         UIBattleScreen.SetActive(true);
@@ -823,6 +877,8 @@ public class Engine : MonoBehaviour
                     enemy.DecrementStatusEffectTurn();
 
                     EndOfTurnStatusEffect(false);
+
+                    UpdateBattleAttributes(enemy);
                 }
 
                 playerDamageOutput = 0;
@@ -844,13 +900,13 @@ public class Engine : MonoBehaviour
 
                 EndOfTurnStatusEffect(false);
 
+                UpdateBattleAttributes(enemy);
+
                 if (playerSpeed >= 100 && player.GetHealth() > 0)
                 {
                     if (!CheckIfStunned(true))
                         yield return StartCoroutine("PlayerMove");
                     playerSpeed -= 100;
-
-                    foreach(StatusEffect statusEffect in enemy.GetStatusEffects())
 
                     enemy.ChangeHealth(-playerDamageOutput);
                     UpdateBattleAttributes(enemy);
@@ -883,6 +939,13 @@ public class Engine : MonoBehaviour
             OutputToText(String.Format("You have killed {0}, gaining {1} exp and {2} gold.", enemy.GetName(), enemy.GetExpReward(), enemy.GetGoldReward()));
             player.AddExp(enemy.GetExpReward());
             player.ChangeGold(enemy.GetGoldReward());
+
+            foreach (GameObject sGO in enemyStatusEffectSlots.ToList<GameObject>())
+            {
+                GameObject.Destroy(sGO);
+                enemyStatusEffectSlots.Remove(sGO);
+            }
+
             UIBattleScreen.SetActive(false);
         }
         else
@@ -1149,10 +1212,10 @@ public class Engine : MonoBehaviour
             case ActiveSkill.AttributeType.health:
                 break;
             case ActiveSkill.AttributeType.stamina:
-                playerDamageOutput = ((int)((player.GetWeapon().Attack() + skill.GetDamageModifier() + player.GetPassiveFlat(PassiveSkill.AttributeType.skillDamage)) * player.GetPassivePercent(PassiveSkill.AttributeType.skillDamage)) - enemyDefValue);
+                playerDamageOutput = ((int)((skill.GetDamageModifier() + player.GetPassiveFlat(PassiveSkill.AttributeType.skillDamage)) * player.GetPassivePercent(PassiveSkill.AttributeType.skillDamage)) - enemyDefValue);
                 if (playerDamageOutput < 0)
                     playerDamageOutput = 0;
-                OutputToBattle(String.Format(skill.GetActionMessage(), player.GetWeapon().GetName(), playerDamageOutput));
+                OutputToBattle(String.Format(skill.GetActionMessage(), playerDamageOutput));
                 player.ChangeStamina(-skill.GetAttributeChange());
                 break;
             case ActiveSkill.AttributeType.mana:
@@ -1173,7 +1236,7 @@ public class Engine : MonoBehaviour
                     playerDamageOutput = (int)((skill.GetDamageModifier() + player.GetPassiveFlat(PassiveSkill.AttributeType.manaDamage) * player.GetPassivePercent(PassiveSkill.AttributeType.manaDamage)) - enemyDefValue);
                     if (playerDamageOutput < 0)
                         playerDamageOutput = 0;
-                    OutputToBattle(String.Format(skill.GetActionMessage(), skill.GetName(), playerDamageOutput));
+                    OutputToBattle(String.Format(skill.GetActionMessage(), playerDamageOutput));
                 }
                 player.ChangeMana(-skill.GetAttributeChange());
                 break;
@@ -1816,14 +1879,14 @@ public class Engine : MonoBehaviour
 
     public void DisplaySkill(SkillContainer skillContainer)
     {
-        selectedSkill = SkillDictionary[skillContainer.GetSkill().GetName()];
+        selectedSkill = SkillDictionary[skillContainer.GetSkill().GetID()];
 
         skillNameTxt.text = selectedSkill.GetName();
         skillDescriptionTxt.text = selectedSkill.GetDescription();
         skillCostTxt.text = ((ActiveSkill)selectedSkill).GetAttributeChange().ToString();
         skillDamageTxt.text = ((ActiveSkill)selectedSkill).GetMinDamageModifier().ToString() + " - " + ((ActiveSkill)selectedSkill).GetMaxDamageModifier().ToString();
 
-        if (player.GetSkillPoints() > 0 && !selectedSkill.IsUnlocked() && selectedSkill.IsUnlockable())
+        if (player.GetSkillPoints() > 0 && !selectedSkill.IsUnlocked() && selectedSkill.IsUnlockable() && (player.GetLevel() >= selectedSkill.GetLevelRequirement()))
         {
             unlockSkillBtn.gameObject.SetActive(true);
             unlockedTxt.gameObject.SetActive(false);
@@ -1839,6 +1902,12 @@ public class Engine : MonoBehaviour
             unlockSkillBtn.gameObject.SetActive(false);
             unlockedTxt.gameObject.SetActive(true);
             unlockedTxt.text = "Skill Not Yet Unlockable";
+        }
+        else if(player.GetLevel() < selectedSkill.GetLevelRequirement())
+        {
+            unlockSkillBtn.gameObject.SetActive(false);
+            unlockedTxt.gameObject.SetActive(true);
+            unlockedTxt.text = "Level Requirement Not Reached";
         }
         else if (player.GetSkillPoints() < 1)
         {

@@ -12,11 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbb210134401d9945b470a0a8b2b9ce7, type: 3}
   m_Name: Weak Spectral Shield
   m_EditorClassIdentifier: 
+  ID: 504
   name: Weak Spectral Shield
   description: Summons a weak spectral shield that blocks a portion of damage directed
     at you.
   actionMessage: Player summoned a {0}. ({1} damage)
   skillType: 0
+  levelRequirement: 0
   isUnlocked: 0
   isUnlockable: 0
   nextSkills: []

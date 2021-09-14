@@ -10,15 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 737ebae1e8923d9498e5ab27a3d4e42e, type: 3}
-  m_Name: Weak Spectral Shield Effect
+  m_Name: Weak Defense Buff
   m_EditorClassIdentifier: 
-  statusEffectType: 6
-  name: Weak Spectral Shield
-  description: A weak spectral shield that blocks a portion of damage directed at
-    you.
+  statusEffectType: 7
+  name: Weak Defense Buff
+  description: Increases your defense by a small amount
   hitChance: 0
-  turnAmount: 3
+  turnAmount: 2
   isNegative: 0
-  isPercentage: 1
-  statChange: 1.25
-  sprite: {fileID: 21300000, guid: 7739f73443abc5248a6ef512bf24461e, type: 3}
+  isPercentage: 0
+  statChange: 1.125
+  sprite: {fileID: 21300000, guid: 166c7b80b2f8b6245925abf1ce8352c8, type: 3}
