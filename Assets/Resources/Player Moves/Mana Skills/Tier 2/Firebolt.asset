@@ -10,23 +10,25 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fbb210134401d9945b470a0a8b2b9ce7, type: 3}
-  m_Name: Weak Spectral Shield
+  m_Name: Firebolt
   m_EditorClassIdentifier: 
-  ID: 504
-  name: Weak Spectral Shield
-  description: Summons a weak spectral shield that blocks a portion of damage directed
-    at you.
-  actionMessage: Player summoned a {0}. ({1} damage)
+  ID: 601
+  name: Firebolt
+  description: Channel your rage into a bolt of fire.
+  actionMessage: 'You throw a firebolt at the enemy, dealing {0} damage!
+
+'
   skillType: 0
-  levelRequirement: 0
+  levelRequirement: 6
   isUnlocked: 0
   isUnlockable: 0
-  nextSkills: []
+  nextSkills:
+  - {fileID: 11400000, guid: 62bb1eab6cc32004888f50a028d9f201, type: 2}
   hasStatusEffects: 1
   statusEffects:
-  - {fileID: 11400000, guid: e65ace155aa72ff4396dd98030bb4504, type: 2}
+  - {fileID: 11400000, guid: f1411c9c1b5362a4691454abae5c16fc, type: 2}
   attributeType: 3
-  magicType: 3
-  attributeChange: 5
-  minDamageModifier: 0
-  maxDamageModifier: 0
+  magicType: 1
+  attributeChange: 25
+  minDamageModifier: 9
+  maxDamageModifier: 13

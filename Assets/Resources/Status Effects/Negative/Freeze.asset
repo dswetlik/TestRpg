@@ -16,7 +16,7 @@ MonoBehaviour:
   name: Freeze
   description: You're still feeling the weak aftereffects of getting struck by a
     frost attack.
-  hitChance: 0.6
+  hitChance: 0.5
   turnAmount: 3
   isNegative: 1
   isPercentage: 0

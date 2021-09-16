@@ -21,4 +21,4 @@ MonoBehaviour:
   isNegative: 1
   isPercentage: 0
   statChange: 2
-  sprite: {fileID: 21300000, guid: cb27cf1f8f47c5e4d8f6f8611fda3a49, type: 3}
+  sprite: {fileID: 21300000, guid: 195e09b3a8802f24f8d8289362e13e59, type: 3}

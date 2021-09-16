@@ -10,22 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fbb210134401d9945b470a0a8b2b9ce7, type: 3}
-  m_Name: Sparks
+  m_Name: Ice Spike
   m_EditorClassIdentifier: 
-  ID: 503
-  name: Sparks
-  description: A small pulse of electricty that may fry some hairs. May be from shuffling
-    your feet.
-  actionMessage: Player cast {0}, dealing {1} damage!
+  ID: 603
+  name: Ice Spike
+  description: Channel your sorrow into an ice spike.
+  actionMessage: You throw an ice spike at the enemy, dealing {0} damage!
   skillType: 0
-  levelRequirement: 0
+  levelRequirement: 6
   isUnlocked: 0
-  isUnlockable: 1
+  isUnlockable: 0
   nextSkills: []
-  hasStatusEffects: 0
-  statusEffects: []
+  hasStatusEffects: 1
+  statusEffects:
+  - {fileID: 11400000, guid: 210c241864b2f274686a4ad1cfd6a6b9, type: 2}
   attributeType: 3
   magicType: 1
-  attributeChange: 5
-  minDamageModifier: 2
-  maxDamageModifier: 6
+  attributeChange: 25
+  minDamageModifier: 9
+  maxDamageModifier: 13

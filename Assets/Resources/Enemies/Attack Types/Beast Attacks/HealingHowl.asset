@@ -19,3 +19,6 @@ MonoBehaviour:
   maxDamageModifier: 10
   staminaCost: 0
   manaCost: 10
+  hasStatusEffects: 0
+  statusEffects:
+  - {fileID: 11400000, guid: 44d77c23e493d3e4db561638263721df, type: 2}

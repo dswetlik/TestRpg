@@ -16,7 +16,7 @@ MonoBehaviour:
   name: Weak Shock
   description: Recently hit by an electric attack, you're still lightly shocked.
   hitChance: 0.75
-  turnAmount: 3
+  turnAmount: 2
   isNegative: 1
   isPercentage: 0
   statChange: 2

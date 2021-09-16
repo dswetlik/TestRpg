@@ -32,6 +32,8 @@ public class Engine : MonoBehaviour
     Button southBtn;
     Button westBtn;
 
+    Button enterShopBtn;
+
     static Text outputTxt;
     public ScrollRect mainGameScroll;
 
@@ -299,6 +301,13 @@ public class Engine : MonoBehaviour
     ActiveSkill frostBite;
     ActiveSkill sparks;
     ActiveSkill weakSpecShield;
+    ActiveSkill lightDispel;
+    ActiveSkill dispel;
+    ActiveSkill fireBolt;
+    ActiveSkill heal;
+    ActiveSkill iceSpike;
+    ActiveSkill lightning;
+    ActiveSkill spectralShield;
 
     Enemy smallRat;
     Enemy ratPack;
@@ -485,11 +494,18 @@ public class Engine : MonoBehaviour
         toxicStrike = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Stamina Skills/Tier 2/Toxic Strike"));
         weepingEdge = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Stamina Skills/Tier 2/Weeping Edge"));
 
-        flames = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Mana Skills/Flames"));
-        lightHeal = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Mana Skills/Light Heal"));
-        frostBite = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Mana Skills/Frostbite"));
-        sparks = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Mana Skills/Sparks"));
-        weakSpecShield = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Mana Skills/Weak Spectral Shield"));
+        flames = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Mana Skills/Tier 1/Flames"));
+        lightHeal = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Mana Skills/Tier 1/Light Heal"));
+        frostBite = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Mana Skills/Tier 1/Frostbite"));
+        sparks = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Mana Skills/Tier 1/Sparks"));
+        weakSpecShield = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Mana Skills/Tier 1/Weak Spectral Shield"));
+        lightDispel = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Mana Skills/Tier 1/Light Dispel"));
+        dispel = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Mana Skills/Tier 2/Dispel"));
+        fireBolt = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Mana Skills/Tier 2/Firebolt"));
+        heal = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Mana Skills/Tier 2/Heal"));
+        iceSpike = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Mana Skills/Tier 2/Ice Spike"));
+        lightning = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Mana Skills/Tier 2/Lightning"));
+        spectralShield = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Mana Skills/Tier 2/Spectral Shield"));
 
         SkillDictionary.Add(slash.GetID(), slash);
         SkillDictionary.Add(stab.GetID(), stab);
@@ -518,6 +534,13 @@ public class Engine : MonoBehaviour
         SkillDictionary.Add(frostBite.GetID(), frostBite);
         SkillDictionary.Add(sparks.GetID(), sparks);
         SkillDictionary.Add(weakSpecShield.GetID(), weakSpecShield);
+        SkillDictionary.Add(lightDispel.GetID(), lightDispel);
+        SkillDictionary.Add(dispel.GetID(), dispel);
+        SkillDictionary.Add(fireBolt.GetID(), fireBolt);
+        SkillDictionary.Add(heal.GetID(), heal);
+        SkillDictionary.Add(iceSpike.GetID(), iceSpike);
+        SkillDictionary.Add(lightning.GetID(), lightning);
+        SkillDictionary.Add(spectralShield.GetID(), spectralShield);
 
         rat = Instantiate(Resources.Load<Enemy>("Enemies/Rats/Rat"));
         ratKing = Instantiate(Resources.Load<Enemy>("Enemies/Rats/RatKing"));
@@ -568,6 +591,9 @@ public class Engine : MonoBehaviour
         eastBtn = GameObject.Find("EastBtn").GetComponent<Button>();
         southBtn = GameObject.Find("SouthBtn").GetComponent<Button>();
         westBtn = GameObject.Find("WestBtn").GetComponent<Button>();
+        enterShopBtn = GameObject.Find("EnterShopBtn").GetComponent<Button>();
+
+        enterShopBtn.gameObject.SetActive(false);
 
         dropItemBtn = GameObject.Find("DropItemBtn").GetComponent<Button>();
         useItemBtn = GameObject.Find("UseItemBtn").GetComponent<Button>();
@@ -934,7 +960,7 @@ public class Engine : MonoBehaviour
 
         if (enemy.GetHealth() <= 0)
         {
-            ActivatePickupScreen(true, enemy.GetName());
+            ActivatePickupScreen(true);
             GenerateItemPickup(enemy.GetItemRewards());
             OutputToText(String.Format("You have killed {0}, gaining {1} exp and {2} gold.", enemy.GetName(), enemy.GetExpReward(), enemy.GetGoldReward()));
             player.AddExp(enemy.GetExpReward());
@@ -1226,10 +1252,28 @@ public class Engine : MonoBehaviour
                     {
                         int temp = (int)((skill.GetDamageModifier() + player.GetPassiveFlat(PassiveSkill.AttributeType.healthRegen)) * player.GetPassivePercent(PassiveSkill.AttributeType.healthRegen));
                         player.ChangeHealth(temp);
-                        OutputToBattle(String.Format(skill.GetActionMessage(), skill.GetName(), temp));
+                        OutputToBattle(String.Format(skill.GetActionMessage(), temp));
                     }
                     else
                         OutputToBattle(String.Format("{0} attempted to heal, but they are poisoned!", player.GetName()));
+                }
+                if(skill.GetMagicType() == ActiveSkill.MagicType.dispel)
+                {
+                    playerDamageOutput = 0;
+                    int x = skill.GetDamageModifier();
+                    for(int i = 0; i < x; i++)
+                    {
+                        player.DecrementStatusEffectTurn();
+                        foreach(GameObject sGO in playerStatusEffectSlots.ToList<GameObject>())
+                        {
+                            sGO.GetComponent<StatusContainer>().DecrementStatusEffect();
+                            if (sGO.GetComponent<StatusContainer>().GetTurnAmount() < 1)
+                            {
+                                GameObject.Destroy(sGO);
+                                playerStatusEffectSlots.Remove(sGO);
+                            }
+                        }
+                    }
                 }
                 if(skill.GetMagicType() == ActiveSkill.MagicType.damage)
                 {
@@ -1996,12 +2040,12 @@ public class Engine : MonoBehaviour
         else
             currentShop = null;
 
-        ActivatePickupScreen(x);
+        enterShopBtn.gameObject.SetActive(x);
     }
 
-    public void ActivatePickupScreen(bool x, string sourceName = "")
+    public void ActivatePickupScreen(bool x)
     {
-
+        string sourceName = "";
         pickupItemBtn.interactable = false;
         pickupDropItemBtn.interactable = false;
 
@@ -2016,7 +2060,6 @@ public class Engine : MonoBehaviour
             if (isInShop)
             {
                 sourceName = currentShop.GetName();
-
                 pickupDropItemBtn.gameObject.transform.GetChild(0).GetComponent<Text>().text = "Sell Item";
                 pickupItemBtn.gameObject.transform.GetChild(0).GetComponent<Text>().text = "Buy Item";
 
@@ -2024,6 +2067,10 @@ public class Engine : MonoBehaviour
                 {
                     AddToPickup(item);
                 }
+            }
+            else if (isInBattle)
+            {
+                sourceName = activeEnemy.GetName();
             }
 
             invScroll.transform.SetParent(UIPickupScreen.transform);

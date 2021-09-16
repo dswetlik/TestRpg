@@ -10,21 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fbb210134401d9945b470a0a8b2b9ce7, type: 3}
-  m_Name: Frostbite
+  m_Name: Lightning
   m_EditorClassIdentifier: 
-  ID: 501
-  name: Frostbite
-  description: A small burst of chilly wind radiating from your hand
-  actionMessage: Player cast {0}, dealing {1} damage!
+  ID: 604
+  name: Lightning
+  description: Channel your energy into a bolt of lightning.
+  actionMessage: You throw a lightning bolt at the enemy, dealing {0} damage!
   skillType: 0
-  levelRequirement: 0
+  levelRequirement: 6
   isUnlocked: 0
-  isUnlockable: 1
+  isUnlockable: 0
   nextSkills: []
-  hasStatusEffects: 0
-  statusEffects: []
+  hasStatusEffects: 1
+  statusEffects:
+  - {fileID: 11400000, guid: 183db1feac9919e4880a4ddb6e8423d5, type: 2}
   attributeType: 3
   magicType: 1
-  attributeChange: 5
-  minDamageModifier: 4
-  maxDamageModifier: 5
+  attributeChange: 25
+  minDamageModifier: 9
+  maxDamageModifier: 13

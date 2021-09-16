@@ -19,7 +19,8 @@ public class ActiveSkill : Skill
         none,
         damage,
         heal,
-        effect
+        effect,
+        dispel
     }
 
     [SerializeField] AttributeType attributeType;
