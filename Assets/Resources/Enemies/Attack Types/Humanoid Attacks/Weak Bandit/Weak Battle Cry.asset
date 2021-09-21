@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 299be0d63f38ef945b5952b2c16587d7, type: 3}
-  m_Name: HealingHowl
+  m_Name: Weak Battle Cry
   m_EditorClassIdentifier: 
-  name: Healing Howl
-  attackType: 8
-  attackAttribute: 2
-  minDamageModifier: 1
-  maxDamageModifier: 10
+  name: Weak Battle Cry
+  description: 
+  attackType: 0
+  attackAttribute: 0
+  minDamageModifier: 0
+  maxDamageModifier: 0
   staminaCost: 0
-  manaCost: 10
+  manaCost: 0
   hasStatusEffects: 0
-  statusEffects:
-  - {fileID: 11400000, guid: 44d77c23e493d3e4db561638263721df, type: 2}
+  statusEffects: []

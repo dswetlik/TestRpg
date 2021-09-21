@@ -23,6 +23,8 @@ MonoBehaviour:
   defense: 0
   attackTypes:
   - {fileID: 11400000, guid: c4c112e9746a14b43a84465341717600, type: 2}
+  - {fileID: 11400000, guid: 8ea4b0e6bc68f994cbf0ad5531fd153d, type: 2}
+  - {fileID: 11400000, guid: ec4a780c87016a1459c601ffbe4381ea, type: 2}
   health: 15
   maxHealth: 15
   stamina: 10
@@ -33,6 +35,6 @@ MonoBehaviour:
   manaRegen: 0
   goldReward: 5
   speed: 0.75
-  expReward: 5
+  expReward: 6
   itemRewards: {fileID: 11400000, guid: 6fd21c7884f09494082df16c550bff14, type: 2}
   statusEffects: []

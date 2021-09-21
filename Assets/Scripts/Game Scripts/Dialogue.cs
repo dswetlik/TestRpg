@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class Dialogue : ScriptableObject
 {
 
-    enum DialogueType
+    public enum DialogueType
     {
         basic,
         merchant,
@@ -22,7 +22,7 @@ public class Dialogue : ScriptableObject
     public string GetNPCLine() { return npcLine; }
     public string GetDialogueOption(int optionNumber) { return dialogueOptions[optionNumber]; }
     public Dialogue GetDialogueAnswers(int dialogueNumber) { return dialogueAnswers[dialogueNumber]; }
-
+    public DialogueType GetDialogueType(int dialogueNumber) { return dialogueAnswers[dialogueNumber].dialogueType; }
     public void SetNPCLine(string npcLine) { this.npcLine = npcLine; }
     public void SetDialogOption(string dialogueOption, int dialogueOptionNumber) { dialogueOptions[dialogueOptionNumber] = dialogueOption; }
     public void SetDialogueAnswers(Dialogue dialogue, int dialogueNumber) { dialogueAnswers[dialogueNumber] = dialogue; }

@@ -1360,32 +1360,39 @@ public class Engine : MonoBehaviour
             enemyDamageOutput = (int)enemy.GetBaseDamage() - playerDefValue;
             if (enemyDamageOutput < 0)
                 enemyDamageOutput = 0;
-            OutputToBattle(String.Format("{0} has attacked, dealing {1} damage.", enemy.GetName(), enemyDamageOutput));
+            OutputToBattle(String.Format(attack.GetDescription(), enemy.GetName(), enemyDamageOutput));
         }
         else
         {
-            if (attack.GetAttackType() == EnemyAttackType.AttackType.heal)
+            if (attack.GetAttackAttribute() == EnemyAttackType.AttackAttribute.mana)
             {
-                enemyDamageOutput = 0;
-
-                if (!CheckIfPoisoned(false))
+                if (attack.GetAttackType() == EnemyAttackType.AttackType.heal)
                 {
-                    int enemyHealRate = attack.GetDamageModifier();
-                    enemy.ChangeHealth(enemyHealRate);
-                    OutputToBattle(String.Format("{0} has healed {1} damage.", enemy.GetName(), enemyHealRate));
+                    enemyDamageOutput = 0;
+
+                    if (!CheckIfPoisoned(false))
+                    {
+                        int enemyHealRate = attack.GetDamageModifier();
+                        enemy.ChangeHealth(enemyHealRate);
+                        OutputToBattle(String.Format(attack.GetDescription(), enemy.GetName(), enemyHealRate));
+                    }
+                    else
+                        OutputToBattle(String.Format("{0} attempted to heal, but is poisoned!", enemy.GetName()));
+                    enemy.ChangeMana(-attack.GetManaCost());
+                }
+                else if(attack.GetAttackType() == EnemyAttackType.AttackType.effect)
+                {
+                    enemyDamageOutput = 0;
+                    OutputToBattle(String.Format(attack.GetDescription(), enemy.GetName()));
                 }
                 else
-                    OutputToBattle(String.Format("{0} attempted to heal, but is poisoned!", enemy.GetName()));
-                enemy.ChangeMana(-attack.GetManaCost());
-            }
-            else if (attack.GetAttackAttribute() == EnemyAttackType.AttackAttribute.mana)
-            {
-                enemyDamageOutput = (attack.GetDamageModifier() + (int)enemy.GetBaseDamage()) - playerDefValue;
-                if (enemyDamageOutput < 0)
-                    enemyDamageOutput = 0;
-                enemy.ChangeMana(-attack.GetManaCost());
-
-                OutputToBattle(String.Format("{0} has cast {1}, dealing {2} damage.", enemy.GetName(), attack.GetName(), enemyDamageOutput));
+                {
+                    enemyDamageOutput = (attack.GetDamageModifier() + (int)enemy.GetBaseDamage()) - playerDefValue;
+                    if (enemyDamageOutput < 0)
+                        enemyDamageOutput = 0;
+                    enemy.ChangeMana(-attack.GetManaCost());
+                    OutputToBattle(String.Format(attack.GetDescription(), enemy.GetName(), enemyDamageOutput));
+                }
             }
             else if (attack.GetAttackAttribute() == EnemyAttackType.AttackAttribute.stamina)
             {
@@ -1394,7 +1401,7 @@ public class Engine : MonoBehaviour
                     enemyDamageOutput = 0;
                 enemy.ChangeStamina(-attack.GetStaminaCost());
 
-                OutputToBattle(String.Format("{0} performed a {1}, dealing {2} damage.", enemy.GetName(), attack.GetName(), enemyDamageOutput));
+                OutputToBattle(String.Format(attack.GetDescription(), enemy.GetName(), enemyDamageOutput));
             }
         }
 
@@ -1764,6 +1771,9 @@ public class Engine : MonoBehaviour
                 itemWeightObj.SetActive(true);
                 itemValueObj.SetActive(true);
 
+                unequipItemBtn.gameObject.SetActive(false);
+                equipItemBtn.gameObject.SetActive(false)
+                    ;
                 nameTxt.text = activeItem.GetName();
                 descriptionTxt.text = activeItem.GetDescription();
                 valueTxt.text = activeItem.GetValue().ToString();

@@ -16,7 +16,7 @@ MonoBehaviour:
   name: Light Heal
   description: The smallest healing spell, capable of instantly healing small bumps
     and scrapes as well as over time.
-  actionMessage: You start healing your light wounds, healing {1} damage!
+  actionMessage: You start healing your light wounds, healing {0} damage!
   skillType: 0
   levelRequirement: 0
   isUnlocked: 0

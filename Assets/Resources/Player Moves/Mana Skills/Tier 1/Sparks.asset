@@ -16,7 +16,7 @@ MonoBehaviour:
   name: Sparks
   description: A small pulse of electricty that may fry some hairs. May be from shuffling
     your feet.
-  actionMessage: Player cast {0}, dealing {1} damage!
+  actionMessage: You launch some static from your fingers, dealing {0} damage!
   skillType: 0
   levelRequirement: 0
   isUnlocked: 0

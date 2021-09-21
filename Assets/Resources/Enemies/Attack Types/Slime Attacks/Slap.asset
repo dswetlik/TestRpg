@@ -13,9 +13,12 @@ MonoBehaviour:
   m_Name: Slap
   m_EditorClassIdentifier: 
   name: Slap
-  attackType: 4
-  attackAttribute: 0
+  description: The {0} uses a portion of its form to slap you, dealing {1} damage!
+  attackType: 3
+  attackAttribute: 1
   minDamageModifier: 0
   maxDamageModifier: 0
   staminaCost: 0
   manaCost: 0
+  hasStatusEffects: 0
+  statusEffects: []

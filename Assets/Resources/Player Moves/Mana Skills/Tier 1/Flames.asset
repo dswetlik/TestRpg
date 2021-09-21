@@ -15,13 +15,13 @@ MonoBehaviour:
   ID: 500
   name: Flames
   description: A small bout of flames, essentially a heat blast.
-  actionMessage: Player cast {0}, dealing {1} damage!
+  actionMessage: You send a blast of heat at the enemy, dealing {0} damage!
   skillType: 0
   levelRequirement: 0
   isUnlocked: 0
   isUnlockable: 1
   nextSkills:
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 1574080f2fe830649947992b7a175e88, type: 2}
   hasStatusEffects: 1
   statusEffects:
   - {fileID: 11400000, guid: 7ac92939fab2dac4886829e42771f8fe, type: 2}

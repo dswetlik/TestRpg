@@ -7,15 +7,10 @@ public class EnemyAttackType : ScriptableObject
 {
     public enum AttackType
     {
-        bite,
-        scratch,
-        slash,
-        stab,
-        bash,
-        burn,
-        shock,
-        freeze,
-        heal
+        none,
+        effect,
+        heal,
+        damage
     }
 
     public enum AttackAttribute
@@ -26,6 +21,7 @@ public class EnemyAttackType : ScriptableObject
     }
 
     [SerializeField] new string name;
+    [TextArea(3,5)] [SerializeField] string description;
     [SerializeField] AttackType attackType;
     [SerializeField] AttackAttribute attackAttribute;
     [SerializeField] int minDamageModifier;
@@ -36,6 +32,7 @@ public class EnemyAttackType : ScriptableObject
     [SerializeField] List<StatusEffect> statusEffects = new List<StatusEffect>();
 
     public string GetName() { return name; }
+    public string GetDescription() { return description; }
     public AttackType GetAttackType() { return attackType; }
     public AttackAttribute GetAttackAttribute() { return attackAttribute; }
     public int GetDamageModifier() { return Random.Range(minDamageModifier, maxDamageModifier + 1); }

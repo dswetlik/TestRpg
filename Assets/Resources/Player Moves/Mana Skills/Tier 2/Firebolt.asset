@@ -22,8 +22,7 @@ MonoBehaviour:
   levelRequirement: 6
   isUnlocked: 0
   isUnlockable: 0
-  nextSkills:
-  - {fileID: 11400000, guid: 62bb1eab6cc32004888f50a028d9f201, type: 2}
+  nextSkills: []
   hasStatusEffects: 1
   statusEffects:
   - {fileID: 11400000, guid: f1411c9c1b5362a4691454abae5c16fc, type: 2}

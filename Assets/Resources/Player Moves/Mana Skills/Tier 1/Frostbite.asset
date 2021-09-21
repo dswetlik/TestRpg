@@ -15,7 +15,7 @@ MonoBehaviour:
   ID: 501
   name: Frostbite
   description: A small burst of chilly wind radiating from your hand
-  actionMessage: Player cast {0}, dealing {1} damage!
+  actionMessage: You bring down the ambient temperature down a bit, dealing {0} damage!
   skillType: 0
   levelRequirement: 0
   isUnlocked: 0

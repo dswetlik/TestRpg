@@ -16,7 +16,7 @@ MonoBehaviour:
   name: Spectral Shield
   description: Summons a spectral shield that blocks a portion of damage directed
     at you.
-  actionMessage: You summon a spectral shield to protect you. ({1} damage)
+  actionMessage: You summon a spectral shield to protect you. ({0} damage)
   skillType: 0
   levelRequirement: 8
   isUnlocked: 0

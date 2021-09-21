@@ -13,9 +13,12 @@ MonoBehaviour:
   m_Name: Bite
   m_EditorClassIdentifier: 
   name: Bite
+  description: '{0} nipped at you, dealing {1} damage!'
   attackType: 0
   attackAttribute: 1
   minDamageModifier: 0
   maxDamageModifier: 0
   staminaCost: 0
   manaCost: 0
+  hasStatusEffects: 0
+  statusEffects: []
