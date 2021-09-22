@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28257dec9f78a6b4681aa8437391fa82, type: 3}
+  m_Name: MagicMortarGreeting
+  m_EditorClassIdentifier: 
+  npcName: Lyrine the Alchemist
+  npcLine: You look like you could use some good potions, good thing you came to
+    the Magic Mortar!
+  dialogueType: 0
+  dialogueOptions:
+  - What potions do you have in stock?
+  dialogueAnswers:
+  - {fileID: 11400000, guid: b510db67d66e3b0438ce14af9afa448b, type: 2}

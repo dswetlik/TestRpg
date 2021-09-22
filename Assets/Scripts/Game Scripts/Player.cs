@@ -346,6 +346,11 @@ public class Player
         }
     }
 
+    public void RemoveQuest(Quest quest)
+    {
+        questList.Remove(quest);
+    }
+
     public Quest GetQuest(uint id)
     {
         return questList.Find(x => x.GetID() == id);

@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2223d07b9b43c4141ae275046391dfe0, type: 3}
+  m_Name: HeavyAnvil
+  m_EditorClassIdentifier: 
+  name: The Heavy Anvil
+  itemList:
+  - {fileID: 11400000, guid: 5b16090bc7fd43947b709020b2140e66, type: 2}
+  - {fileID: 11400000, guid: 49d23910e8eccda40a501cde7a5901ba, type: 2}
+  - {fileID: 11400000, guid: d1c1322831d3642418dc3f6bfb02c3bc, type: 2}
+  - {fileID: 11400000, guid: 610aeb62773842e4c8803f083696559d, type: 2}
+  - {fileID: 11400000, guid: 558c8d31aded24d40a679071c99792dd, type: 2}
+  npc: {fileID: 11400000, guid: 09d783cf443fffd47a0c22f08fb02e8b, type: 2}

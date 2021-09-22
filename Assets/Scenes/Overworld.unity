@@ -3940,15 +3940,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 522950820}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2223d07b9b43c4141ae275046391dfe0, type: 3}
+  m_Script: {fileID: 11500000, guid: 942ae0ead6ab2da4b96b8fa97de362d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: The Heavy Anvil
-  defItemList:
-  - {fileID: 11400000, guid: 610aeb62773842e4c8803f083696559d, type: 2}
-  - {fileID: 11400000, guid: 76538cc43dfb1ba44afe04b693ee2f7d, type: 2}
-  - {fileID: 11400000, guid: 558c8d31aded24d40a679071c99792dd, type: 2}
-  - {fileID: 11400000, guid: dd6af988591040343987801e8ec0590d, type: 2}
+  store: {fileID: 11400000, guid: 9cbf69e67e5ff6c409ce0d73fcbd21a6, type: 2}
 --- !u!65 &522950823
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5486,20 +5481,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 673429319}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2223d07b9b43c4141ae275046391dfe0, type: 3}
+  m_Script: {fileID: 11500000, guid: 942ae0ead6ab2da4b96b8fa97de362d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: The Alchemist's Brew
-  defItemList:
-  - {fileID: 11400000, guid: 0bdbe513d1d77bf4297a682e35e80ea1, type: 2}
-  - {fileID: 11400000, guid: 0bdbe513d1d77bf4297a682e35e80ea1, type: 2}
-  - {fileID: 11400000, guid: 0bdbe513d1d77bf4297a682e35e80ea1, type: 2}
-  - {fileID: 11400000, guid: 47672e4e92f03b845a131afa02c57556, type: 2}
-  - {fileID: 11400000, guid: 47672e4e92f03b845a131afa02c57556, type: 2}
-  - {fileID: 11400000, guid: 47672e4e92f03b845a131afa02c57556, type: 2}
-  - {fileID: 11400000, guid: 9e35b3473e37f3c4b8edbdb7957b62c8, type: 2}
-  - {fileID: 11400000, guid: 9e35b3473e37f3c4b8edbdb7957b62c8, type: 2}
-  - {fileID: 11400000, guid: 9e35b3473e37f3c4b8edbdb7957b62c8, type: 2}
+  store: {fileID: 11400000, guid: 7942972daa3049a4cac526ac1dc7046b, type: 2}
 --- !u!65 &673429322
 BoxCollider:
   m_ObjectHideFlags: 0
