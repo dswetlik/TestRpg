@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ff840f9cf7349c40bba2ddb51b19845, type: 3}
+  m_Name: ManaDamageC
+  m_EditorClassIdentifier: 
+  ID: 922
+  name: Mana Damage III
+  description: Permanently increases damage from damage-dealing magic by +4!
+  actionMessage: 
+  skillType: 1
+  levelRequirement: 5
+  isUnlocked: 0
+  isUnlockable: 0
+  nextSkills:
+  - {fileID: 11400000, guid: b949177441004bf41b33ebc2b9b0a42c, type: 2}
+  hasStatusEffects: 0
+  statusEffects: []
+  attributeType: 5
+  isPercentage: 0
+  attributeChange: 4

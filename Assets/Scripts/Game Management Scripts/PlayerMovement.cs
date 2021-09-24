@@ -50,7 +50,7 @@ public class PlayerMovement : MonoBehaviour
         {
             totalMovement += 1f;
             GetComponent<CharacterController>().Move(transform.forward);
-            yield return new WaitForSeconds(movementSpeed);
+            yield return new WaitForSecondsRealtime(movementSpeed);
         }
 
         if(transform.position.x < 0)
@@ -76,7 +76,7 @@ public class PlayerMovement : MonoBehaviour
         {
             totalMovement += 1f;
             GetComponent<CharacterController>().Move(-transform.forward);
-            yield return new WaitForSeconds(movementSpeed);
+            yield return new WaitForSecondsRealtime(movementSpeed);
         }
 
 
@@ -103,7 +103,7 @@ public class PlayerMovement : MonoBehaviour
         {
             totalRotation += 5;
             transform.Rotate(Vector3.up, 5);
-            yield return new WaitForSeconds(turningSpeed);
+            yield return new WaitForSecondsRealtime(turningSpeed);
         }
         isMoving = false;
     }
@@ -116,7 +116,7 @@ public class PlayerMovement : MonoBehaviour
         {
             totalRotation += 5;
             transform.Rotate(Vector3.up, -5);
-            yield return new WaitForSeconds(turningSpeed);
+            yield return new WaitForSecondsRealtime(turningSpeed);
         }
         isMoving = false;
     }

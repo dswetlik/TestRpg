@@ -187,8 +187,12 @@ public class Engine : MonoBehaviour
     // UI Skill Variables
     GameObject skillScrollView;
     GameObject magicScrollView;
+    GameObject passiveScrollView;
 
     Skill selectedSkill;
+
+    GameObject skillCostGO;
+    GameObject skillDamageGO;
 
     Text skillNameTxt;
     Text skillDescriptionTxt;
@@ -320,6 +324,36 @@ public class Engine : MonoBehaviour
     ActiveSkill iceSpike;
     ActiveSkill lightning;
     ActiveSkill spectralShield;
+
+    PassiveSkill weaponDamageA;
+    PassiveSkill weaponDamageB;
+    PassiveSkill weaponDamageC;
+    PassiveSkill weaponDamageD;
+
+    PassiveSkill skillDamageA;
+    PassiveSkill skillDamageB;
+    PassiveSkill skillDamageC;
+    PassiveSkill skillDamageD;
+
+    PassiveSkill manaDamageA;
+    PassiveSkill manaDamageB;
+    PassiveSkill manaDamageC;
+    PassiveSkill manaDamageD;
+
+    PassiveSkill maxHealthA;
+    PassiveSkill maxHealthB;
+    PassiveSkill maxHealthC;
+    PassiveSkill maxHealthD;
+
+    PassiveSkill maxStaminaA;
+    PassiveSkill maxStaminaB;
+    PassiveSkill maxStaminaC;
+    PassiveSkill maxStaminaD;
+
+    PassiveSkill maxManaA;
+    PassiveSkill maxManaB;
+    PassiveSkill maxManaC;
+    PassiveSkill maxManaD;
 
     Enemy smallRat;
     Enemy ratPack;
@@ -555,6 +589,66 @@ public class Engine : MonoBehaviour
         SkillDictionary.Add(lightning.GetID(), lightning);
         SkillDictionary.Add(spectralShield.GetID(), spectralShield);
 
+        weaponDamageA = Instantiate(Resources.Load<PassiveSkill>("Player Moves/Passive Skills/WeaponDamage/WeaponDamageA"));
+        weaponDamageB = Instantiate(Resources.Load<PassiveSkill>("Player Moves/Passive Skills/WeaponDamage/WeaponDamageB"));
+        weaponDamageC = Instantiate(Resources.Load<PassiveSkill>("Player Moves/Passive Skills/WeaponDamage/WeaponDamageC"));
+        weaponDamageD = Instantiate(Resources.Load<PassiveSkill>("Player Moves/Passive Skills/WeaponDamage/WeaponDamageD"));
+
+        skillDamageA = Instantiate(Resources.Load<PassiveSkill>("Player Moves/Passive Skills/SkillDamage/SkillDamageA"));
+        skillDamageB = Instantiate(Resources.Load<PassiveSkill>("Player Moves/Passive Skills/SkillDamage/SkillDamageB"));
+        skillDamageC = Instantiate(Resources.Load<PassiveSkill>("Player Moves/Passive Skills/SkillDamage/SkillDamageC"));
+        skillDamageD = Instantiate(Resources.Load<PassiveSkill>("Player Moves/Passive Skills/SkillDamage/SkillDamageD"));
+
+        manaDamageA = Instantiate(Resources.Load<PassiveSkill>("Player Moves/Passive Skills/ManaDamage/ManaDamageA"));
+        manaDamageB = Instantiate(Resources.Load<PassiveSkill>("Player Moves/Passive Skills/ManaDamage/ManaDamageB"));
+        manaDamageC = Instantiate(Resources.Load<PassiveSkill>("Player Moves/Passive Skills/ManaDamage/ManaDamageC"));
+        manaDamageD = Instantiate(Resources.Load<PassiveSkill>("Player Moves/Passive Skills/ManaDamage/ManaDamageD"));
+
+        maxHealthA = Instantiate(Resources.Load<PassiveSkill>("Player Moves/Passive Skills/MaxHealth/MaxHealthA"));
+        maxHealthB = Instantiate(Resources.Load<PassiveSkill>("Player Moves/Passive Skills/MaxHealth/MaxHealthB"));
+        maxHealthC = Instantiate(Resources.Load<PassiveSkill>("Player Moves/Passive Skills/MaxHealth/MaxHealthC"));
+        maxHealthD = Instantiate(Resources.Load<PassiveSkill>("Player Moves/Passive Skills/MaxHealth/MaxHealthD"));
+
+        maxStaminaA = Instantiate(Resources.Load<PassiveSkill>("Player Moves/Passive Skills/MaxStamina/MaxStaminaA"));
+        maxStaminaB = Instantiate(Resources.Load<PassiveSkill>("Player Moves/Passive Skills/MaxStamina/MaxStaminaB"));
+        maxStaminaC = Instantiate(Resources.Load<PassiveSkill>("Player Moves/Passive Skills/MaxStamina/MaxStaminaC"));
+        maxStaminaD = Instantiate(Resources.Load<PassiveSkill>("Player Moves/Passive Skills/MaxStamina/MaxStaminaD"));
+
+        maxManaA = Instantiate(Resources.Load<PassiveSkill>("Player Moves/Passive Skills/MaxMana/MaxManaA"));
+        maxManaB = Instantiate(Resources.Load<PassiveSkill>("Player Moves/Passive Skills/MaxMana/MaxManaB"));
+        maxManaC = Instantiate(Resources.Load<PassiveSkill>("Player Moves/Passive Skills/MaxMana/MaxManaC"));
+        maxManaD = Instantiate(Resources.Load<PassiveSkill>("Player Moves/Passive Skills/MaxMana/MaxManaD"));
+
+        SkillDictionary.Add(weaponDamageA.GetID(), weaponDamageA);
+        SkillDictionary.Add(weaponDamageB.GetID(), weaponDamageB);
+        SkillDictionary.Add(weaponDamageC.GetID(), weaponDamageC);
+        SkillDictionary.Add(weaponDamageD.GetID(), weaponDamageD);
+
+        SkillDictionary.Add(skillDamageA.GetID(), skillDamageA);
+        SkillDictionary.Add(skillDamageB.GetID(), skillDamageB);
+        SkillDictionary.Add(skillDamageC.GetID(), skillDamageC);
+        SkillDictionary.Add(skillDamageD.GetID(), skillDamageD);
+
+        SkillDictionary.Add(manaDamageA.GetID(), manaDamageA);
+        SkillDictionary.Add(manaDamageB.GetID(), manaDamageB);
+        SkillDictionary.Add(manaDamageC.GetID(), manaDamageC);
+        SkillDictionary.Add(manaDamageD.GetID(), manaDamageD);
+
+        SkillDictionary.Add(maxHealthA.GetID(), maxHealthA);
+        SkillDictionary.Add(maxHealthB.GetID(), maxHealthB);
+        SkillDictionary.Add(maxHealthC.GetID(), maxHealthC);
+        SkillDictionary.Add(maxHealthD.GetID(), maxHealthD);
+
+        SkillDictionary.Add(maxStaminaA.GetID(), maxStaminaA);
+        SkillDictionary.Add(maxStaminaB.GetID(), maxStaminaB);
+        SkillDictionary.Add(maxStaminaC.GetID(), maxStaminaC);
+        SkillDictionary.Add(maxStaminaD.GetID(), maxStaminaD);
+
+        SkillDictionary.Add(maxManaA.GetID(), maxManaA);
+        SkillDictionary.Add(maxManaB.GetID(), maxManaB);
+        SkillDictionary.Add(maxManaC.GetID(), maxManaC);
+        SkillDictionary.Add(maxManaD.GetID(), maxManaD);
+
         rat = Instantiate(Resources.Load<Enemy>("Enemies/Rats/Rat"));
         ratKing = Instantiate(Resources.Load<Enemy>("Enemies/Rats/RatKing"));
         smallRat = Instantiate(Resources.Load<Enemy>("Enemies/Rats/Small Rat"));
@@ -572,9 +666,9 @@ public class Engine : MonoBehaviour
         EnemyDictionary.Add(greenSlime.GetID(), greenSlime);
         EnemyDictionary.Add(blueSlime.GetID(), blueSlime);
 
-        healthDrop = Resources.Load<Sprite>("Textures/Inventory Icons/skill_049");
-        staminaDrop = Resources.Load<Sprite>("Textures/Inventory Icons/skill_028");
-        manaDrop = Resources.Load<Sprite>("Textures/Inventory Icons/skill_alt_028");
+        healthDrop = Resources.Load<Sprite>("Textures/Inventory Icons/skill_alt_008");
+        staminaDrop = Resources.Load<Sprite>("Textures/Inventory Icons/skill_173");
+        manaDrop = Resources.Load<Sprite>("Textures/Inventory Icons/skill_008");
 
         player = new Player("Name", overworld, new Inventory());
         player.SetSkillPoints(3);
@@ -736,6 +830,9 @@ public class Engine : MonoBehaviour
         pickUpArmorObj = GameObject.Find("PickupItemArmor");
         pickUpConsumableObj = GameObject.Find("PickupItemConsumable");
 
+        pickUpDescriptionTxt.text = "";
+        pickUpNameTxt.text = "";
+
         pickUpWeightObj.SetActive(false);
         pickUpValueObj.SetActive(false);
         pickUpDamageObj.SetActive(false);
@@ -784,13 +881,21 @@ public class Engine : MonoBehaviour
 
         skillScrollView = GameObject.Find("SkillScrollView");
         magicScrollView = GameObject.Find("MagicScrollView");
+        passiveScrollView = GameObject.Find("PassiveScrollView");
         magicScrollView.SetActive(false);
+        passiveScrollView.SetActive(false);
+
+        skillCostGO = GameObject.Find("SkillCost");
+        skillDamageGO = GameObject.Find("SkillDamage");
 
         skillNameTxt = GameObject.Find("SkillNameTxt").GetComponent<Text>();
         skillDescriptionTxt = GameObject.Find("SkillDescriptionTxt").GetComponent<Text>();
         skillCostTxt = GameObject.Find("SkillCostTxt").GetComponent<Text>();
         skillDamageTxt = GameObject.Find("SkillDamageTxt").GetComponent<Text>();
         unlockedTxt = GameObject.Find("UnlockedTxt").GetComponent<Text>();
+
+        skillCostGO.SetActive(false);
+        skillDamageGO.SetActive(false);
 
         statsHealthTxt = GameObject.Find("StatsHealthTxt").GetComponent<Text>();
         statsStaminaTxt = GameObject.Find("StatsStaminaTxt").GetComponent<Text>();
@@ -890,7 +995,7 @@ public class Engine : MonoBehaviour
                 //enemy.RegenAttributes();
 
                 UpdateBattleAttributes(enemy);
-                yield return new WaitForSeconds(0.05f);
+                yield return new WaitForSecondsRealtime(0.01f);
             }
 
             if (playerSpeed >= 100 && playerSpeed >= enemySpeed && player.GetHealth() > 0)
@@ -1707,7 +1812,7 @@ public class Engine : MonoBehaviour
             if(isInShop)
             {
                 //currentShop.AddItem(activeItem);
-                player.ChangeGold((int)activeItem.GetValue());
+                player.ChangeGold((int)(activeItem.GetValue() * 0.75f));
             }
             RemoveFromInventory(activeItem);
         }
@@ -1762,7 +1867,7 @@ public class Engine : MonoBehaviour
             if (isInShop)
             {
                 //currentShop.RemoveItem(item);
-                player.ChangeGold((int)(item.GetValue()));
+                player.ChangeGold(-(int)(item.GetValue()));
                 if (player.GetGold() < item.GetValue())
                     pickupItemBtn.interactable = false;
             }                
@@ -1944,30 +2049,34 @@ public class Engine : MonoBehaviour
             UIBossScreen.SetActive(false);
     }
 
-    public void ActivateBossScreen(bool x)
-    {
-        UIBossScreen.SetActive(x);
-
-        levelSlider.value = player.GetLevel();
-
-        if (player.GetLevel() >= 5)
-            bossABtn.interactable = true;
-        if (player.GetLevel() >= 10)
-            bossBBtn.interactable = true;
-        if (player.GetLevel() >= 15)
-            bossCBtn.interactable = true;
-        if (player.GetLevel() >= 20)
-            bossDBtn.interactable = true;
-    }
-
     public void DisplaySkill(SkillContainer skillContainer)
     {
+        skillCostGO.SetActive(true);
+        skillDamageGO.SetActive(true);
+
         selectedSkill = SkillDictionary[skillContainer.GetSkill().GetID()];
 
         skillNameTxt.text = selectedSkill.GetName();
         skillDescriptionTxt.text = selectedSkill.GetDescription();
-        skillCostTxt.text = ((ActiveSkill)selectedSkill).GetAttributeChange().ToString();
-        skillDamageTxt.text = ((ActiveSkill)selectedSkill).GetMinDamageModifier().ToString() + " - " + ((ActiveSkill)selectedSkill).GetMaxDamageModifier().ToString();
+
+        if(selectedSkill.GetSkillType() == Skill.SkillType.active)
+        {
+            skillCostTxt.text = ((ActiveSkill)selectedSkill).GetAttributeChange().ToString();
+            skillDamageTxt.text = ((ActiveSkill)selectedSkill).GetMinDamageModifier().ToString() + " - " + ((ActiveSkill)selectedSkill).GetMaxDamageModifier().ToString();
+
+            if (((ActiveSkill)selectedSkill).GetAttributeType() == ActiveSkill.AttributeType.stamina)
+                skillCostGO.transform.GetChild(2).GetComponent<Image>().sprite = staminaDrop;
+            else if (((ActiveSkill)selectedSkill).GetAttributeType() == ActiveSkill.AttributeType.mana)
+                skillCostGO.transform.GetChild(2).GetComponent<Image>().sprite = manaDrop;
+
+            if (((ActiveSkill)selectedSkill).GetMaxDamageModifier() == 0)
+                skillDamageGO.SetActive(false);
+        }
+        else
+        {
+            skillCostGO.SetActive(false);
+            skillDamageGO.SetActive(false);
+        }
 
         if (player.GetSkillPoints() > 0 && !selectedSkill.IsUnlocked() && selectedSkill.IsUnlockable() && (player.GetLevel() >= selectedSkill.GetLevelRequirement()))
         {
@@ -2003,14 +2112,20 @@ public class Engine : MonoBehaviour
     public void UnlockSkill()
     {
         player.SetSkillPoints(player.GetSkillPoints() - 1);
-        if (((ActiveSkill)selectedSkill).GetAttributeType() == ActiveSkill.AttributeType.stamina)
-            player.AddActiveStaminaSkill((ActiveSkill)selectedSkill);
-        else if (((ActiveSkill)selectedSkill).GetAttributeType() == ActiveSkill.AttributeType.mana)
-            player.AddActiveManaSkill((ActiveSkill)selectedSkill);
+        if (selectedSkill.GetSkillType() == Skill.SkillType.active)
+        {
+            if (((ActiveSkill)selectedSkill).GetAttributeType() == ActiveSkill.AttributeType.stamina)
+                player.AddActiveStaminaSkill((ActiveSkill)selectedSkill);
+            else if (((ActiveSkill)selectedSkill).GetAttributeType() == ActiveSkill.AttributeType.mana)
+                player.AddActiveManaSkill((ActiveSkill)selectedSkill);
+        }
+        else
+            player.AddPassiveSkill((PassiveSkill)selectedSkill);
 
         selectedSkill.SetUnlocked();
         selectedSkill.UnlockNextSkills();
 
+        UpdateInventoryAttributes();
         UpdateExpSliders();
         DeactivateSkillSelection();
     }
@@ -2048,6 +2163,10 @@ public class Engine : MonoBehaviour
         player.ChangeGold((int)QuestDictionary[quest.GetID()].GetGoldReward());
         player.RemoveQuest(QuestDictionary[quest.GetID()]);
         OutputToText(String.Format("You have earned {0} exp and {1} gold.", QuestDictionary[quest.GetID()].GetExpReward(), QuestDictionary[quest.GetID()].GetGoldReward()));
+        if(QuestDictionary[quest.GetID()].GetQuestType() == Quest.QuestType.Fetch)
+        {
+            RemoveFromInventory(((FetchQuest)QuestDictionary[quest.GetID()]).GetFetchItem());
+        }
         if(QuestDictionary[quest.GetID()].HasItemReward())
         {
             List<Item> itemRewards = QuestDictionary[quest.GetID()].GetItemRewards();
@@ -2208,18 +2327,25 @@ public class Engine : MonoBehaviour
         UISkillScreen.SetActive(x);
     }
 
-    public void ActivateSkillScrollView(bool x)
+    public void ActivateSkillScrollView()
     {
-        if(x)
-        {
-            skillScrollView.SetActive(true);
-            magicScrollView.SetActive(false);
-        }
-        else
-        {
-            skillScrollView.SetActive(false);
-            magicScrollView.SetActive(true);
-        }
+        skillScrollView.SetActive(true);
+        magicScrollView.SetActive(false);
+        passiveScrollView.SetActive(false);
+    }
+
+    public void ActivateMagicScrollView()
+    {
+        skillScrollView.SetActive(false);
+        magicScrollView.SetActive(true);
+        passiveScrollView.SetActive(false);
+    }
+
+    public void ActivatePassiveScrollView()
+    {
+        skillScrollView.SetActive(false);
+        magicScrollView.SetActive(false);
+        passiveScrollView.SetActive(true);
     }
 
     public void ActivateStatsScreen(bool x)
@@ -2245,6 +2371,22 @@ public class Engine : MonoBehaviour
             Debug.Log("In Shop Dialogue");
         }
         UIDialogueScreen.SetActive(x);
+    }
+
+    public void ActivateBossScreen(bool x)
+    {
+        UIBossScreen.SetActive(x);
+
+        levelSlider.value = player.GetLevel();
+
+        if (player.GetLevel() >= 5)
+            bossABtn.interactable = true;
+        if (player.GetLevel() >= 10)
+            bossBBtn.interactable = true;
+        if (player.GetLevel() >= 15)
+            bossCBtn.interactable = true;
+        if (player.GetLevel() >= 20)
+            bossDBtn.interactable = true;
     }
 
     public void SelectDialogue(DialogueContainer dialogueContainer)
@@ -2358,7 +2500,7 @@ public class Engine : MonoBehaviour
         foreach(char c in text)
         {
             npcLineTxt.text += c;
-            yield return new WaitForSeconds(0.01f);
+            yield return new WaitForSecondsRealtime(0.01f);
         }
     }
 
