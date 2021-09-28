@@ -93,6 +93,19 @@ public class Inventory //: ISerializationCallbackReceiver
         }
     }
 
+    public int GetItemCount(uint id)
+    {
+        try
+        {
+            return (int)count[id];
+        }
+        catch(KeyNotFoundException)
+        {
+            return -1;
+        }
+    }
+
+
     /// <summary>
     /// Removes one count of item.id from inventory.
     /// </summary>

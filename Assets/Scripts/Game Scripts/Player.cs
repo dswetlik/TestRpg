@@ -129,6 +129,7 @@ public class Player
                 hands = armor;
                 break;
         }
+        CheckSpeed();
     }
     public void UnequipArmor(Armor armor)
     {
@@ -150,6 +151,7 @@ public class Player
                 hands = Engine.NULL_ARMOR;
                 break;
         }
+        CheckSpeed();
     }
 
     public void SetSpeed(float speed) { this.speed = speed; }
@@ -161,49 +163,49 @@ public class Player
         if(head != Engine.NULL_ARMOR)
         {
             if (head.GetArmorClass() == Armor.ArmorClass.heavy)
-                speed -= 5;
+                speed -= 0.1f;
             else if (head.GetArmorClass() == Armor.ArmorClass.light)
-                speed -= 2;
+                speed -= 0.05f;
         }
         if(chest != Engine.NULL_ARMOR)
         {
             if (chest.GetArmorClass() == Armor.ArmorClass.heavy)
-                speed -= 5;
+                speed -= 0.1f;
             else if (chest.GetArmorClass() == Armor.ArmorClass.light)
-                speed -= 2;
+                speed -= 0.05f;
         }
         if (legs != Engine.NULL_ARMOR)
         {
             if (legs.GetArmorClass() == Armor.ArmorClass.heavy)
-                speed -= 5;
+                speed -= 0.1f;
             else if (legs.GetArmorClass() == Armor.ArmorClass.light)
-                speed -= 2;
+                speed -= 0.05f;
         }
         if (feet != Engine.NULL_ARMOR)
         {
             if (feet.GetArmorClass() == Armor.ArmorClass.heavy)
-                speed -= 5;
+                speed -= 0.1f;
             else if (feet.GetArmorClass() == Armor.ArmorClass.light)
-                speed -= 2;
+                speed -= 0.05f;
         }
         if (hands != Engine.NULL_ARMOR)
         {
             if (hands.GetArmorClass() == Armor.ArmorClass.heavy)
-                speed -= 5;
+                speed -= 0.1f;
             else if (hands.GetArmorClass() == Armor.ArmorClass.light)
-                speed -= 2;
+                speed -= 0.05f;
         }
     }
 
     public void RegenAttributes()
     {
-        stamina += staminaRegen;
-        mana += manaRegen;
+        stamina += GetStaminaRegen();
+        mana += GetManaRegen();
 
-        if (stamina > maxStamina)
-            stamina = maxStamina;
-        if (mana > maxMana)
-            mana = maxMana;
+        if (stamina > GetMaxStamina())
+            stamina = GetMaxStamina();
+        if (mana > GetMaxMana())
+            mana = GetMaxMana();
     }
 
     // Set Functions
@@ -361,8 +363,8 @@ public class Player
         health += healthChange;
         if (health < 0)
             health = 0;
-        if (health > maxHealth)
-            health = maxHealth;
+        if (health > GetMaxHealth())
+            health = GetMaxHealth();
     }
 
     public void ChangeStamina(int staminaChange)
@@ -370,8 +372,8 @@ public class Player
         stamina += staminaChange;
         if (stamina < 0)
             stamina = 0;
-        if (stamina > maxStamina)
-            stamina = maxStamina;
+        if (stamina > GetMaxStamina())
+            stamina = GetMaxStamina();
     }
 
     public void ChangeMana(int manaChange)
@@ -379,8 +381,8 @@ public class Player
         mana += manaChange;
         if (mana < 0)
             mana = 0;
-        if (mana > maxMana)
-            mana = maxMana;
+        if (mana > GetMaxMana())
+            mana = GetMaxMana();
     }
 
 }

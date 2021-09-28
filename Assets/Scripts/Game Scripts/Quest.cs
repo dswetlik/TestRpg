@@ -23,22 +23,8 @@ public class Quest : ScriptableObject
     [SerializeField] bool isCompleted;
     [SerializeField] Dialogue dialogue;
     [SerializeField] bool hasItemReward;
-    [SerializeField] List<Item> itemRewards;
+    [SerializeField] List<Item> itemRewards = new List<Item>();
     [SerializeField] uint id, expReward, goldReward;
-
-    public Quest(Dialogue dialogue, QuestType questType, string name = "", string description = "", bool isCompleted = false, bool hasItemReward = false, uint id = 0, uint expReward = 0, uint goldReward = 0)
-    {
-        this.dialogue = dialogue;
-        this.questType = questType;
-        this.name = name;
-        this.description = description;
-        this.id = id;
-        this.expReward = expReward;
-        this.goldReward = goldReward;
-        this.hasItemReward = hasItemReward;
-        this.isCompleted = isCompleted;
-        itemRewards = new List<Item>();
-    }
 
     public Dialogue GetDialogue() { return dialogue; }
     public QuestType GetQuestType() { return questType; }

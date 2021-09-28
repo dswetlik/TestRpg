@@ -24,3 +24,4 @@ MonoBehaviour:
   expReward: 5
   goldReward: 10
   fetchItem: {fileID: 11400000, guid: 6d04b838730c5414c8b802d425ce77fc, type: 2}
+  itemCount: 1

@@ -10,12 +10,6 @@ using System.Threading.Tasks;
 public class LocationQuest : Quest
 {
     [SerializeField] Location location;
-    
-    public LocationQuest(Location location, Dialogue dialogue, QuestType questType, bool isCompleted, string name = "", string description = "", bool hasItemReward = false, uint id = 0, uint expReward = 0, uint goldReward = 0)
-        : base(dialogue, questType, name, description, isCompleted, hasItemReward, id, expReward, goldReward)
-    {
-        this.location = location;
-    }
 
     public Location GetLocation() { return location; }
 

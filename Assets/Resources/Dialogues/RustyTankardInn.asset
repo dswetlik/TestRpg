@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28257dec9f78a6b4681aa8437391fa82, type: 3}
+  m_Name: RustyTankardInn
+  m_EditorClassIdentifier: 
+  npcLine: We do have a room available, it'll be 10 gold to rent it for the day,
+    are you interested?
+  dialogueType: 0
+  dialogueOptions:
+  - I'll take it, thanks.
+  - No thank you.
+  dialogueAnswers:
+  - {fileID: 11400000, guid: 403266053f739df46af567d50c5631fa, type: 2}
+  - {fileID: 11400000, guid: 381909bab2f8aed40a8a5be4e0459dd9, type: 2}

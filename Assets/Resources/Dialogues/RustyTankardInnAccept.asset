@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 802708a540a43494f81957f0b3300bd3, type: 3}
-  m_Name: Invera
+  m_Script: {fileID: 11500000, guid: 28257dec9f78a6b4681aa8437391fa82, type: 3}
+  m_Name: RustyTankardInnAccept
   m_EditorClassIdentifier: 
-  name: Invera the Alchemist
-  npcType: 1
-  dialogue: {fileID: 11400000, guid: f7bae8383375df348b5953f721332d1a, type: 2}
-  store: {fileID: 11400000, guid: 7942972daa3049a4cac526ac1dc7046b, type: 2}
+  npcLine: Perfect, follow me!
+  dialogueType: 3
+  dialogueOptions: []
+  dialogueAnswers: []

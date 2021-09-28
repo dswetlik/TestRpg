@@ -11,21 +11,18 @@ public class FetchQuest : Quest
 {
 
     [SerializeField] Item fetchItem;
-
-    public FetchQuest(Item fetchItem, Dialogue dialogue, QuestType questType, string name = "", string description = "", bool isCompleted = false, bool hasItemReward = false, uint id = 0, uint expReward = 0, uint goldReward = 0)
-        : base(dialogue, questType, name, description, isCompleted, hasItemReward, id, expReward, goldReward)
-    {
-        this.fetchItem = fetchItem;
-    }
+    [SerializeField] int itemCount;
 
     public Item GetFetchItem() { return fetchItem; }
+    public int GetItemCount() { return itemCount; }
 
     public void SetItem(Item item) { fetchItem = item; }
 
     public override bool CheckQuestCompletion(Player player)
     {
-        if (player.GetInventory().CheckForItem(fetchItem.GetID()))
-            return true;
+        if (player.GetInventory().CheckForItem(fetchItem.GetID()) && !IsCompleted())
+            if (player.GetInventory().GetItemCount(fetchItem.GetID()) >= itemCount)
+                return true;
         return false;     
     }
 }

@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: Hirgird
   m_EditorClassIdentifier: 
   name: Hirgird the Blacksmith
+  npcType: 1
   dialogue: {fileID: 11400000, guid: a5dc87df2e21b404180d0b1ea659f018, type: 2}
+  store: {fileID: 11400000, guid: 9cbf69e67e5ff6c409ce0d73fcbd21a6, type: 2}
