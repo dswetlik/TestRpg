@@ -381,6 +381,8 @@ public class Engine : MonoBehaviour
     Sprite healthDrop;
     Sprite staminaDrop;
     Sprite manaDrop;
+    Sprite physicalDmgSprite;
+    Sprite manaDmgSprite;
 
     // Local Use Variables
     bool playerHasMoved, isInPickup = false, isInBattle = false, isInChest = false, isInNPC = false, isInStats = false;
@@ -681,9 +683,11 @@ public class Engine : MonoBehaviour
         EnemyDictionary.Add(greenSlime.GetID(), greenSlime);
         EnemyDictionary.Add(blueSlime.GetID(), blueSlime);
 
-        healthDrop = Resources.Load<Sprite>("Textures/Inventory Icons/skill_alt_008");
+        healthDrop = Resources.Load<Sprite>("Textures/Inventory Icons/skill_008");
         staminaDrop = Resources.Load<Sprite>("Textures/Inventory Icons/skill_173");
-        manaDrop = Resources.Load<Sprite>("Textures/Inventory Icons/skill_008");
+        manaDrop = Resources.Load<Sprite>("Textures/Inventory Icons/skill_alt_008");
+        physicalDmgSprite = Resources.Load<Sprite>("Textures/Inventory Icons/weapon_sword_02");
+        manaDmgSprite = Resources.Load<Sprite>("Textures/Inventory Icons/skill_016");
 
         player = new Player("Name", overworld, new Inventory());
         player.SetSkillPoints(3);
@@ -2105,10 +2109,15 @@ public class Engine : MonoBehaviour
             skillDamageTxt.text = ((ActiveSkill)selectedSkill).GetMinDamageModifier().ToString() + " - " + ((ActiveSkill)selectedSkill).GetMaxDamageModifier().ToString();
 
             if (((ActiveSkill)selectedSkill).GetAttributeType() == ActiveSkill.AttributeType.stamina)
+            {
                 skillCostGO.transform.GetChild(2).GetComponent<Image>().sprite = staminaDrop;
+                skillDamageGO.transform.GetChild(2).GetComponent<Image>().sprite = physicalDmgSprite;
+            }
             else if (((ActiveSkill)selectedSkill).GetAttributeType() == ActiveSkill.AttributeType.mana)
+            {
                 skillCostGO.transform.GetChild(2).GetComponent<Image>().sprite = manaDrop;
-
+                skillDamageGO.transform.GetChild(2).GetComponent<Image>().sprite = manaDmgSprite;
+            }
             if (((ActiveSkill)selectedSkill).GetMaxDamageModifier() == 0)
                 skillDamageGO.SetActive(false);
         }
@@ -2550,28 +2559,32 @@ public class Engine : MonoBehaviour
             QuestDialogue questDialogue = (QuestDialogue)dialogue;
             if (questDialogue.GetQuestDialogueType() == QuestDialogue.QuestDialogueType.start)
             {
-                if (!player.CheckForQuest(questDialogue.GetQuest().GetID()) && !QuestDictionary[questDialogue.GetQuest().GetID()].IsCompleted())
+                if (QuestDictionary[questDialogue.GetQuest().GetID()].GetQuestType() == Quest.QuestType.Fetch)
                 {
-                    textType = StartCoroutine(TypeText(questDialogue.GetNotStartedResponse()));
-                    List<Dialogue> dialogues = dialogue.GetDialogueAnswers();
-                    List<string> dialogueStrings = dialogue.GetDialogueOptions();
-                    for (int i = 0; i < dialogues.Count; i++)
+                    FetchQuest quest = (FetchQuest)QuestDictionary[questDialogue.GetQuest().GetID()];
+                    if (!player.CheckForQuest(quest.GetID()) && !quest.IsCompleted())
                     {
-                        GameObject dGO = Instantiate(dialogueBtn, responsePanel.transform);
+                        textType = StartCoroutine(TypeText(questDialogue.GetNotStartedResponse()));
+                        List<Dialogue> dialogues = dialogue.GetDialogueAnswers();
+                        List<string> dialogueStrings = dialogue.GetDialogueOptions();
+                        for (int i = 0; i < dialogues.Count; i++)
+                        {
+                            GameObject dGO = Instantiate(dialogueBtn, responsePanel.transform);
 
-                        dGO.GetComponent<DialogueContainer>().SetDialogue(dialogues[i]);
-                        dGO.transform.GetChild(0).GetComponent<Text>().text = dialogueStrings[i];
-                        dGO.GetComponent<Button>().onClick.AddListener(() => SelectDialogue(dGO.GetComponent<DialogueContainer>()));
+                            dGO.GetComponent<DialogueContainer>().SetDialogue(dialogues[i]);
+                            dGO.transform.GetChild(0).GetComponent<Text>().text = dialogueStrings[i];
+                            dGO.GetComponent<Button>().onClick.AddListener(() => SelectDialogue(dGO.GetComponent<DialogueContainer>()));
 
-                        dialogueOptionSlots.Add(dGO);
+                            dialogueOptionSlots.Add(dGO);
 
-                        Debug.Log("Adding Dialogue: " + 1);
+                            Debug.Log("Adding Dialogue: " + 1);
+                        }
                     }
+                    else if (!quest.IsCompleted())
+                        textType = StartCoroutine(TypeText(questDialogue.GetNotCompleteResponse()));
+                    else
+                        textType = StartCoroutine(TypeText(questDialogue.GetCompleteResponse()));
                 }
-                else if (!QuestDictionary[questDialogue.GetQuest().GetID()].IsCompleted())
-                    textType = StartCoroutine(TypeText(questDialogue.GetNotCompleteResponse()));
-                else
-                    textType = StartCoroutine(TypeText(questDialogue.GetCompleteResponse()));
             }
             else
             {
@@ -2597,9 +2610,11 @@ public class Engine : MonoBehaviour
 
     IEnumerator TypeText(string text)
     {
-        foreach(char c in text)
+        for(int i = 0; i < text.Length; i++)
         {
-            npcLineTxt.text += c;
+            npcLineTxt.text += text[i];
+            if(i%5 == 0)
+                GameObject.Find("TextAudioSource").GetComponent<AudioSource>().Play();
             yield return new WaitForSecondsRealtime(0.01f);
         }
     }
