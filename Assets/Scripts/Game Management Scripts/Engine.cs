@@ -10,6 +10,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading.Tasks;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class Engine : MonoBehaviour
 {
@@ -242,7 +243,7 @@ public class Engine : MonoBehaviour
     GameObject responsePanel;
 
     Text diagNPCNameTxt;
-    Text npcLineTxt;
+    TextMeshProUGUI npcLineTxt;
 
     // UI Load Variables
     Slider loadingSlider;
@@ -953,7 +954,7 @@ public class Engine : MonoBehaviour
         unlockSkillBtn = GameObject.Find("UnlockSkillBtn").GetComponent<Button>();
 
         diagNPCNameTxt = GameObject.Find("DiagNPCNameTxt").GetComponent<Text>();
-        npcLineTxt = GameObject.Find("NPCLineTxt").GetComponent<Text>();
+        npcLineTxt = GameObject.Find("NPCLineTxt").GetComponent<TextMeshProUGUI>();
         responsePanel = GameObject.Find("ResponsePanel");
 
         loadingSlider = GameObject.Find("LoadingSlider").GetComponent<Slider>();
@@ -2610,12 +2611,15 @@ public class Engine : MonoBehaviour
 
     IEnumerator TypeText(string text)
     {
-        for(int i = 0; i < text.Length; i++)
+        var waitTimer = new WaitForSeconds(0.025f);
+        npcLineTxt.text = text;
+        npcLineTxt.maxVisibleCharacters = 0;
+        for(int i = 1; i < text.Length + 1; i++)
         {
-            npcLineTxt.text += text[i];
-            if(i%5 == 0)
+            npcLineTxt.maxVisibleCharacters = i;
+            if(i%2 == 0)
                 GameObject.Find("TextAudioSource").GetComponent<AudioSource>().Play();
-            yield return new WaitForSecondsRealtime(0.01f);
+            yield return waitTimer;
         }
     }
 

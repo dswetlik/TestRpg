@@ -14,6 +14,8 @@ public class MainMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Application.targetFrameRate = 60;
+
         UILoadScreen = GameObject.Find("UI Main Load");
         mainLoadingPercentTxt = GameObject.Find("MainLoadingPercentTxt").GetComponent<Text>();
         mainLoadingSlider = GameObject.Find("MainLoadingSlider").GetComponent<Slider>();

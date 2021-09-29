@@ -10,6 +10,7 @@ TagManager:
   - LocationPortal
   - Enemy
   - NodeType
+  - Impassable
   layers:
   - Default
   - TransparentFX
