@@ -19,7 +19,7 @@ MonoBehaviour:
   skillType: 1
   levelRequirement: 0
   isUnlocked: 0
-  isUnlockable: 0
+  isUnlockable: 1
   nextSkills:
   - {fileID: 11400000, guid: f592bb394f73b5a4f8b7e38005ae8df5, type: 2}
   hasStatusEffects: 0

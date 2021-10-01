@@ -14,5 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Hirgird the Blacksmith
   npcType: 1
+  hasQuests: 1
+  questList:
+  - {fileID: 11400000, guid: d7309c988dacafe4083d907478feb9e7, type: 2}
+  hasGivenQuest: 0
+  givenQuest: {fileID: 0}
   dialogue: {fileID: 11400000, guid: a5dc87df2e21b404180d0b1ea659f018, type: 2}
   store: {fileID: 11400000, guid: 9cbf69e67e5ff6c409ce0d73fcbd21a6, type: 2}

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: RustyTankardInnAccept
   m_EditorClassIdentifier: 
   npcLine: Perfect, follow me!
-  dialogueType: 3
+  dialogueType: 4
   dialogueOptions: []
   dialogueAnswers: []

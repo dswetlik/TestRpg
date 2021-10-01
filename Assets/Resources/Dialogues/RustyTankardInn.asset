@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   npcLine: We do have a room available, it'll be 10 gold to rent it for the day,
     are you interested?
-  dialogueType: 0
+  dialogueType: 1
   dialogueOptions:
   - I'll take it, thanks.
   - No thank you.

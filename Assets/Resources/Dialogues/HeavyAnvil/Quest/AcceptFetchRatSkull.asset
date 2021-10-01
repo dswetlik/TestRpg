@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: AcceptFetchRatSkull
   m_EditorClassIdentifier: 
   npcLine: Hey, thanks! I'll be looking forward to that skull!
-  dialogueType: 2
+  dialogueType: 3
   dialogueOptions:
   - Alright, can I see your wares now?
   dialogueAnswers:

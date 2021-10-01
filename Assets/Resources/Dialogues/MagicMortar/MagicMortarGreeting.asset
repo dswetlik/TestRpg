@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28257dec9f78a6b4681aa8437391fa82, type: 3}
   m_Name: MagicMortarGreeting
   m_EditorClassIdentifier: 
-  npcName: Lyrine the Alchemist
   npcLine: You look like you could use some good potions, good thing you came to
     the Magic Mortar!
   dialogueType: 0

@@ -16,7 +16,5 @@ MonoBehaviour:
   dialogueType: 0
   dialogueOptions:
   - Sure, I'm interested in a new weapon.
-  - Are you looking for some help around the shop?
   dialogueAnswers:
   - {fileID: 11400000, guid: b510db67d66e3b0438ce14af9afa448b, type: 2}
-  - {fileID: 11400000, guid: a50d023035761e245827bcc9a663bb9c, type: 2}

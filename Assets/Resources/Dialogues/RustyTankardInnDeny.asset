@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: RustyTankardInnDeny
   m_EditorClassIdentifier: 
   npcLine: 'Well, let me know if you change your mind. '
-  dialogueType: 0
+  dialogueType: 1
   dialogueOptions:
   - On second thought, I would actually like that room.
   dialogueAnswers:

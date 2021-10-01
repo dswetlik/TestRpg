@@ -10,19 +10,26 @@ using System.Threading.Tasks;
 public class FetchQuest : Quest
 {
 
-    [SerializeField] Item fetchItem;
-    [SerializeField] int itemCount;
+    [SerializeField] List<Item> fetchItems;
+    [SerializeField] List<int> itemCounts;
 
-    public Item GetFetchItem() { return fetchItem; }
-    public int GetItemCount() { return itemCount; }
-
-    public void SetItem(Item item) { fetchItem = item; }
+    public List<Item> GetFetchItems() { return fetchItems; }
+    public List<int> GetItemCounts() { return itemCounts; }
 
     public override bool CheckQuestCompletion(Player player)
     {
-        if (player.GetInventory().CheckForItem(fetchItem.GetID()) && !IsCompleted())
-            if (player.GetInventory().GetItemCount(fetchItem.GetID()) >= itemCount)
-                return true;
-        return false;     
+        for (int i = 0; i < fetchItems.Count; i++)
+        {
+            if (player.GetInventory().CheckForItem(fetchItems[i].GetID()) && !IsCompleted())
+            {
+                if (player.GetInventory().GetItemCount(fetchItems[i].GetID()) >= itemCounts[i])
+                    continue;
+                else
+                    return false;
+            }
+            else
+                return false;
+        }
+        return true;    
     }
 }

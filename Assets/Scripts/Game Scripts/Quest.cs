@@ -20,6 +20,7 @@ public class Quest : ScriptableObject
     [SerializeField] new string name;
     [TextArea(3,5)]
     [SerializeField] string description;
+    [SerializeField] int levelRequirement;
     [SerializeField] bool isCompleted;
     [SerializeField] Dialogue dialogue;
     [SerializeField] bool hasItemReward;
@@ -30,6 +31,7 @@ public class Quest : ScriptableObject
     public QuestType GetQuestType() { return questType; }
     public string GetName() { return name; }
     public string GetDescription() { return description; }
+    public int GetLevelRequirement() { return levelRequirement; }
     public bool IsCompleted() { return isCompleted; }
     public bool HasItemReward() { return hasItemReward; }
     public uint GetID() { return id; }

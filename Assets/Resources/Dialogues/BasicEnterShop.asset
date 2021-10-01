@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28257dec9f78a6b4681aa8437391fa82, type: 3}
   m_Name: BasicEnterShop
   m_EditorClassIdentifier: 
-  npcName: 
   npcLine: 
-  dialogueType: 1
+  dialogueType: 2
   dialogueOptions: []
   dialogueAnswers: []

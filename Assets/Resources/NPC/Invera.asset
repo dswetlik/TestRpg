@@ -14,5 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Invera the Alchemist
   npcType: 1
+  hasQuests: 0
+  questList:
+  - {fileID: 11400000, guid: 1a2e84888078d75469dfce76f4048883, type: 2}
+  hasGivenQuest: 0
+  givenQuest: {fileID: 0}
   dialogue: {fileID: 11400000, guid: f7bae8383375df348b5953f721332d1a, type: 2}
   store: {fileID: 11400000, guid: 7942972daa3049a4cac526ac1dc7046b, type: 2}

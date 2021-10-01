@@ -9,7 +9,8 @@ public class Dialogue : ScriptableObject
 
     public enum DialogueType
     {
-        basic,
+        start,
+        conversation,
         merchant,
         quest,
         inn

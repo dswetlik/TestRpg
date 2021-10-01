@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   npcLine: No worries. The offer will still be standing later. I want that skull
     but I'm stuck back here.
-  dialogueType: 2
+  dialogueType: 3
   dialogueOptions:
   - Alright, can I see your wares now?
   dialogueAnswers:
