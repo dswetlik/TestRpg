@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebe832ef0b3855348b377c74e480d076, type: 3}
+  m_Name: Copper Spear
+  m_EditorClassIdentifier: 
+  itemType: 1
+  sprite: {fileID: 21300000, guid: a2d9ee05b384c424ca192ec1629b53be, type: 3}
+  id: 104
+  name: Copper Spear
+  description: "This looks like a retired fisherman's lance. There won't be any fish
+    in the arena, right?\t"
+  weight: 2
+  value: 9
+  weaponType: 0
+  weaponSkills:
+  - {fileID: 11400000, guid: 599f83945ae651648a626484a7b39715, type: 2}
+  - {fileID: 11400000, guid: 74c0999807e0d474bba219360e72ba8c, type: 2}
+  minDamage: 3
+  maxDamage: 4

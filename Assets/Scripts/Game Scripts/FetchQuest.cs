@@ -18,18 +18,22 @@ public class FetchQuest : Quest
 
     public override bool CheckQuestCompletion(Player player)
     {
-        for (int i = 0; i < fetchItems.Count; i++)
+        if (player.CheckForQuest(GetID()))
         {
-            if (player.GetInventory().CheckForItem(fetchItems[i].GetID()) && !IsCompleted())
+            for (int i = 0; i < fetchItems.Count; i++)
             {
-                if (player.GetInventory().GetItemCount(fetchItems[i].GetID()) >= itemCounts[i])
-                    continue;
+                if (player.GetInventory().CheckForItem(fetchItems[i].GetID()) && !IsCompleted())
+                {
+                    if (player.GetInventory().GetItemCount(fetchItems[i].GetID()) >= itemCounts[i])
+                        continue;
+                    else
+                        return false;
+                }
                 else
                     return false;
             }
-            else
-                return false;
+            return true;
         }
-        return true;    
+        return false;
     }
 }

@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: The Heavy Anvil
   itemList:
-  - {fileID: 11400000, guid: 5b16090bc7fd43947b709020b2140e66, type: 2}
-  - {fileID: 11400000, guid: 49d23910e8eccda40a501cde7a5901ba, type: 2}
-  - {fileID: 11400000, guid: d1c1322831d3642418dc3f6bfb02c3bc, type: 2}
-  - {fileID: 11400000, guid: 610aeb62773842e4c8803f083696559d, type: 2}
-  - {fileID: 11400000, guid: 558c8d31aded24d40a679071c99792dd, type: 2}
+  - {fileID: 11400000, guid: 5aaccfce22c10434c83b3656a4b7b4c4, type: 2}
+  - {fileID: 11400000, guid: ea8c7a45282f89c4a92e3a24a918b6f4, type: 2}
+  - {fileID: 11400000, guid: 4c558984ee4e94f49821279d008ba84a, type: 2}
+  - {fileID: 11400000, guid: 4467e521a2fd9604fae9426bc68d6169, type: 2}
+  - {fileID: 11400000, guid: b4eb9b3a451da064da304f84bfe14e1c, type: 2}
   npc: {fileID: 11400000, guid: 09d783cf443fffd47a0c22f08fb02e8b, type: 2}

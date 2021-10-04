@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65a18b26719fe2648aed386f4dd52f3a, type: 3}
+  m_Name: Accept_FetchRatFur
+  m_EditorClassIdentifier: 
+  npcLine: Alight, I'll be waiting for that fur then!
+  dialogueType: 3
+  dialogueOptions:
+  - Let me see what you've got for sale now.
+  dialogueAnswers:
+  - {fileID: 11400000, guid: b510db67d66e3b0438ce14af9afa448b, type: 2}
+  questDialogueType: 1
+  quest: {fileID: 11400000, guid: f9c3ee6b18b28a94ea9955802ecf2a62, type: 2}
+  notStartedResponse: 
+  notCompleteResponse: 
+  completeResponse: 

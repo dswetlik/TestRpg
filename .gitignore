@@ -69,3 +69,9 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+/Assets/Materials/DungeonFont.ttf
+/Assets/Materials/m5x7.ttf
+/Assets/Materials/m5x7.ttf.meta
+/Assets/Materials/DungeonFont.ttf.meta
+/Spreadsheets/WeaponStats.xlsx
+/Spreadsheets

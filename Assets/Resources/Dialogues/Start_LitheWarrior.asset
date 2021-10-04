@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28257dec9f78a6b4681aa8437391fa82, type: 3}
+  m_Name: Start_LitheWarrior
+  m_EditorClassIdentifier: 
+  npcLine: So you want to become the best gladiator around? You've come to the right
+    store, the Lithe Warrior!
+  dialogueType: 0
+  dialogueOptions:
+  - Let me see what you have for sale.
+  - Why is this place called the Lithe Warrior?
+  dialogueAnswers:
+  - {fileID: 11400000, guid: b510db67d66e3b0438ce14af9afa448b, type: 2}
+  - {fileID: 11400000, guid: c954e347291c4a04fb022feb1b06b68f, type: 2}

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   npcLine: I just need 9 flasks of slime essense, 3 from each kind of slime. Thank
     you so much, you're the most helpful gladiator here!
-  dialogueType: 0
+  dialogueType: 3
   dialogueOptions:
   - Can I see what you do have in stock now?
   dialogueAnswers:

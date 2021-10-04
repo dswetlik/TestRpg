@@ -274,16 +274,17 @@ public class Engine : MonoBehaviour
     Item redSlimeGoo;
     Item unknownBone;
 
-    Weapon rustyIronDagger;
-    Weapon ironDagger;
-    Weapon ironSword;
-    Weapon steelSword;
-    Weapon steelDagger;
+    Weapon crookedDagger;
+
+    Weapon copperDagger;
+    Weapon copperSword;
+    Weapon copperAxe;
+    Weapon copperSpear;
+    Weapon copperMace;
 
     Armor tatteredShirt;
-    Armor tatteredPants;
-    Armor tatteredBoots;
 
+    Armor leatherHelmet;
     Armor leatherShirt;
     Armor leatherPants;
     Armor leatherBoots;
@@ -303,9 +304,16 @@ public class Engine : MonoBehaviour
     Quest leaveTheCave;
     FetchQuest fetchRatSkull;
     FetchQuest fetchSlimeGoo;
+    FetchQuest fetchRatFur;
 
     ActiveSkill slash;
     ActiveSkill stab;
+    ActiveSkill bash;
+    ActiveSkill cleave;
+    ActiveSkill hamstring;
+    ActiveSkill jab;
+    ActiveSkill pierce;
+    ActiveSkill punch;
 
     ActiveSkill heavySwing;
     ActiveSkill lightSpectralArrow;
@@ -416,10 +424,9 @@ public class Engine : MonoBehaviour
     {
         //AddToQuestList(leaveTheCave);
 
-        player.GetInventory().AddToInventory(rustyIronDagger);
+        player.GetInventory().AddToInventory(crookedDagger);
         player.GetInventory().AddToInventory(tatteredShirt);
-        player.GetInventory().AddToInventory(tatteredPants);
-        player.GetInventory().AddToInventory(tatteredBoots);
+
         player.GetInventory().AddToInventory(smallHealthPotion, 5);
         player.GetInventory().OnBeforeSerialize();
         player.GetInventory().OnAfterDeserialize();
@@ -476,18 +483,19 @@ public class Engine : MonoBehaviour
         redSlimeGoo = Resources.Load<Item>("Items/Miscellaneous/SlimeItems/RedSlimeGoo");
         unknownBone = Resources.Load<Item>("Items/Miscellaneous/SlimeItems/UnknownBone");
 
-        rustyIronDagger = Resources.Load<Weapon>("Items/Weapons/Rusty Iron Dagger");
-        ironDagger = Resources.Load<Weapon>("Items/Weapons/Iron Dagger");
-        ironSword = Resources.Load<Weapon>("Items/Weapons/Iron Sword");
-        steelSword = Resources.Load<Weapon>("Items/Weapons/Steel Sword");
-        steelDagger = Resources.Load<Weapon>("Items/Weapons/Steel Dagger");
+        crookedDagger = Resources.Load<Weapon>("Items/Weapons/Crooked Dagger");
+
+        copperDagger = Resources.Load<Weapon>("Items/Weapons/Copper/Copper Dagger");
+        copperSword = Resources.Load<Weapon>("Items/Weapons/Copper/Copper Sword");
+        copperAxe = Resources.Load<Weapon>("Items/Weapons/Copper/Copper Axe");
+        copperSpear = Resources.Load<Weapon>("Items/Weapons/Copper/Copper Spear");
+        copperMace = Resources.Load<Weapon>("Items/Weapons/Copper/Copper Mace");
 
         tatteredShirt = Resources.Load<Armor>("Items/Armors/Tattered/Tattered Shirt");
-        tatteredPants = Resources.Load<Armor>("Items/Armors/Tattered/Tattered Pants");
-        tatteredBoots = Resources.Load<Armor>("Items/Armors/Tattered/Tattered Boots");
 
+        leatherHelmet = Resources.Load<Armor>("Items/Armors/Leather/Leather Helmet");
         leatherShirt = Resources.Load<Armor>("Items/Armors/Leather/Leather Shirt");
-        leatherPants = Resources.Load<Armor>("Items/Armors/Leather/Leather Pants");
+        leatherPants = Resources.Load<Armor>("Items/Armors/Leather/Leather Belt");
         leatherBoots = Resources.Load<Armor>("Items/Armors/Leather/Leather Boots");
         leatherGloves = Resources.Load<Armor>("Items/Armors/Leather/Leather Gloves");
 
@@ -509,14 +517,17 @@ public class Engine : MonoBehaviour
         ItemDictionary.Add(redSlimeGoo.GetID(), redSlimeGoo);
         ItemDictionary.Add(unknownBone.GetID(), unknownBone);
 
-        ItemDictionary.Add(ironSword.GetID(), ironSword);
-        ItemDictionary.Add(steelSword.GetID(), steelSword);
-        ItemDictionary.Add(steelDagger.GetID(), steelDagger);
+        ItemDictionary.Add(crookedDagger.GetID(), crookedDagger);
+
+        ItemDictionary.Add(copperDagger.GetID(), copperDagger);
+        ItemDictionary.Add(copperSword.GetID(), copperSword);
+        ItemDictionary.Add(copperAxe.GetID(), copperAxe);
+        ItemDictionary.Add(copperSpear.GetID(), copperSpear);
+        ItemDictionary.Add(copperMace.GetID(), copperMace);
 
         ItemDictionary.Add(tatteredShirt.GetID(), tatteredShirt);
-        ItemDictionary.Add(tatteredPants.GetID(), tatteredPants);
-        ItemDictionary.Add(tatteredBoots.GetID(), tatteredBoots);
 
+        ItemDictionary.Add(leatherHelmet.GetID(), leatherHelmet);
         ItemDictionary.Add(leatherShirt.GetID(), leatherShirt);
         ItemDictionary.Add(leatherPants.GetID(), leatherPants);
         ItemDictionary.Add(leatherBoots.GetID(), leatherBoots);
@@ -538,6 +549,12 @@ public class Engine : MonoBehaviour
 
         slash = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Weapon Skills/Slash"));
         stab = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Weapon Skills/Stab"));
+        bash = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Weapon Skills/Bash"));
+        cleave = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Weapon Skills/Cleave"));
+        hamstring = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Weapon Skills/Hamstring"));
+        jab = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Weapon Skills/Jab"));
+        pierce = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Weapon Skills/Pierce"));
+        punch = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Weapon Skills/Punch"));
 
         heavySwing = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Stamina Skills/Tier 1/Heavy Swing"));
         lightSpectralArrow = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Stamina Skills/Tier 1/Light Spectral Arrow"));
@@ -573,6 +590,12 @@ public class Engine : MonoBehaviour
 
         SkillDictionary.Add(slash.GetID(), slash);
         SkillDictionary.Add(stab.GetID(), stab);
+        SkillDictionary.Add(bash.GetID(), bash);
+        SkillDictionary.Add(cleave.GetID(), cleave);
+        SkillDictionary.Add(hamstring.GetID(), hamstring);
+        SkillDictionary.Add(jab.GetID(), jab);
+        SkillDictionary.Add(pierce.GetID(), pierce);
+        SkillDictionary.Add(punch.GetID(), punch);
 
         SkillDictionary.Add(heavySwing.GetID(), heavySwing);
         SkillDictionary.Add(lightSpectralArrow.GetID(), lightSpectralArrow);
@@ -697,11 +720,14 @@ public class Engine : MonoBehaviour
     {
         testBaseQuest = Resources.Load<Quest>("Quests/TestBaseQuest");
         leaveTheCave = Resources.Load<Quest>("Quests/Leave The Cave");
+
         fetchRatSkull = Instantiate(Resources.Load<FetchQuest>("Quests/FetchRatSkull"));
         fetchSlimeGoo = Instantiate(Resources.Load<FetchQuest>("Quests/FetchSlimeGoo"));
+        fetchRatFur = Instantiate(Resources.Load<FetchQuest>("Quests/FetchRatFur"));
 
         QuestDictionary.Add(fetchRatSkull.GetID(), fetchRatSkull);
         QuestDictionary.Add(fetchSlimeGoo.GetID(), fetchSlimeGoo);
+        QuestDictionary.Add(fetchRatFur.GetID(), fetchRatFur);
     }
 
     void InitializeUI()
@@ -2190,6 +2216,12 @@ public class Engine : MonoBehaviour
         activeQuest = selectedQuest;
         questName.text = activeQuest.GetName();
         questDescription.text = activeQuest.GetDescription();
+
+        foreach (GameObject fGO in uiFetchQuestObjects.ToList<GameObject>())
+        {
+            uiFetchQuestObjects.Remove(fGO);
+            Destroy(fGO);
+        }
 
         if (activeQuest.GetQuestType() == Quest.QuestType.Fetch)
         {
