@@ -18,6 +18,8 @@ public class QuestDialogue : Dialogue
 
     [TextArea(3, 5)][SerializeField] string notStartedResponse;
     [TextArea(3, 5)][SerializeField] string notCompleteResponse;
+    [SerializeField] List<string> notCompleteDialogueOptions;
+    [SerializeField] List<Dialogue> notCompleteDialogueAnswers;
     [TextArea(3, 5)][SerializeField] string completeResponse;
 
     public QuestDialogueType GetQuestDialogueType() { return questDialogueType; }
@@ -25,6 +27,8 @@ public class QuestDialogue : Dialogue
     
     public string GetNotStartedResponse() { return notStartedResponse; }
     public string GetNotCompleteResponse() { return notCompleteResponse; }
+    public List<string> GetNotCompleteDialogueOptions() { return notCompleteDialogueOptions; }
+    public List<Dialogue> GetNotCompleteDialogueAnswers() { return notCompleteDialogueAnswers; }
     public string GetCompleteResponse() { return completeResponse; }
 
 }

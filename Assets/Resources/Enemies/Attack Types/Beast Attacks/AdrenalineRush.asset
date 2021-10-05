@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Adrenaline Rush
   description: '{0} amps itself up into a furious state, healing itself {1} damage!'
-  attackType: 8
+  attackType: 2
   attackAttribute: 2
   minDamageModifier: 1
   maxDamageModifier: 10

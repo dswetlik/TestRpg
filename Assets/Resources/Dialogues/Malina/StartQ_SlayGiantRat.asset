@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65a18b26719fe2648aed386f4dd52f3a, type: 3}
+  m_Name: StartQ_SlayGiantRat
+  m_EditorClassIdentifier: 
+  npcLine: You said something about there being rats in your basement?
+  dialogueType: 3
+  dialogueOptions:
+  - Alright, alright, I'll go down there and kill it.
+  - How about no? I hate rats too!
+  dialogueAnswers:
+  - {fileID: 11400000, guid: f526a92ff73fe0c44931498ac12ba7d1, type: 2}
+  - {fileID: 11400000, guid: 7b1dd507b10c189458aa7de30d86b59e, type: 2}
+  questDialogueType: 0
+  quest: {fileID: 11400000, guid: dce4508bdd23d1048a626719a27dfa87, type: 2}
+  notStartedResponse: Yes, there are rats in my basement, lots of rats! If that weren't
+    problematic enough there is a big rat, a massive rat down there. Go down there
+    and kill it!
+  notCompleteResponse: I can still hear that massive beast skittering around, are
+    you ready to get rid of it yet?
+  notCompleteDialogueOptions:
+  - Yes, I'm ready now.
+  - Actually, I still need some more time.
+  notCompleteDialogueAnswers:
+  - {fileID: 11400000, guid: 455b2a6416f5df440b7cc41d7dfc0d91, type: 2}
+  - {fileID: 11400000, guid: 923ae83920199ae40bdaa82f23ee889a, type: 2}
+  completeResponse: Oh thank you, thank you for killing that horrendous monster!
+    I can finally sleep in peace in my own home! Here, take this, you deserve it!

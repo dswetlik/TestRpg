@@ -358,6 +358,8 @@ public class Player
         return questList.Find(x => x.GetID() == id);
     }
 
+    public List<Quest> GetQuestList() { return questList; }
+
     public void ChangeHealth(int healthChange)
     {
         health += healthChange;

@@ -305,6 +305,7 @@ public class Engine : MonoBehaviour
     FetchQuest fetchRatSkull;
     FetchQuest fetchSlimeGoo;
     FetchQuest fetchRatFur;
+    SlayQuest slayGiantRat;
 
     ActiveSkill slash;
     ActiveSkill stab;
@@ -378,6 +379,7 @@ public class Engine : MonoBehaviour
     PassiveSkill maxManaD;
 
     Enemy smallRat;
+    Enemy giantRat;
     Enemy ratPack;
     Enemy rat;
     Enemy ratKing;
@@ -409,8 +411,10 @@ public class Engine : MonoBehaviour
     public void InitializeGame()
     {
         InitializeAssets();
-        InitializeUI();
+        InitializeSkills();
         InitializeQuests();
+
+        InitializeUI();
 
         if (isLoadingGame)
             LoadGame();
@@ -461,9 +465,7 @@ public class Engine : MonoBehaviour
     void InitializeAssets()
     {
         ItemDictionary = new SortedDictionary<uint, Item>();
-        QuestDictionary = new SortedDictionary<uint, Quest>();
         LocationDictionary = new SortedDictionary<uint, Location>();
-        SkillDictionary = new SortedDictionary<uint, Skill>();
         EnemyDictionary = new SortedDictionary<uint, Enemy>();
 
         NULL_ITEM = Resources.Load<Item>("Items/NULL_ITEM");
@@ -546,6 +548,38 @@ public class Engine : MonoBehaviour
         LocationDictionary.Add(overworld.GetID(), overworld);
         LocationDictionary.Add(floor1.GetID(), floor1);
         LocationDictionary.Add(floor2.GetID(), floor2);
+
+        rat = Instantiate(Resources.Load<Enemy>("Enemies/Rats/Rat"));
+        giantRat = Instantiate(Resources.Load<Enemy>("Enemies/Rats/GiantRat"));
+        ratKing = Instantiate(Resources.Load<Enemy>("Enemies/Rats/RatKing"));
+        smallRat = Instantiate(Resources.Load<Enemy>("Enemies/Rats/Small Rat"));
+        ratPack = Instantiate(Resources.Load<Enemy>("Enemies/Rats/RatPack"));
+
+        redSlime = Instantiate(Resources.Load<Enemy>("Enemies/Slimes/RedSlime"));
+        greenSlime = Instantiate(Resources.Load<Enemy>("Enemies/Slimes/GreenSlime"));
+        blueSlime = Instantiate(Resources.Load<Enemy>("Enemies/Slimes/BlueSlime"));
+
+        EnemyDictionary.Add(rat.GetID(), rat);
+        EnemyDictionary.Add(smallRat.GetID(), smallRat);
+        EnemyDictionary.Add(ratPack.GetID(), ratPack);
+
+        EnemyDictionary.Add(redSlime.GetID(), redSlime);
+        EnemyDictionary.Add(greenSlime.GetID(), greenSlime);
+        EnemyDictionary.Add(blueSlime.GetID(), blueSlime);
+
+        healthDrop = Resources.Load<Sprite>("Textures/Inventory Icons/skill_008");
+        staminaDrop = Resources.Load<Sprite>("Textures/Inventory Icons/skill_173");
+        manaDrop = Resources.Load<Sprite>("Textures/Inventory Icons/skill_alt_008");
+        physicalDmgSprite = Resources.Load<Sprite>("Textures/Inventory Icons/weapon_sword_02");
+        manaDmgSprite = Resources.Load<Sprite>("Textures/Inventory Icons/skill_016");
+
+        player = new Player("Name", overworld, new Inventory());
+        player.SetSkillPoints(3);
+    }
+
+    void InitializeSkills()
+    {
+        SkillDictionary = new SortedDictionary<uint, Skill>();
 
         slash = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Weapon Skills/Slash"));
         stab = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Weapon Skills/Stab"));
@@ -688,46 +722,24 @@ public class Engine : MonoBehaviour
         SkillDictionary.Add(maxManaB.GetID(), maxManaB);
         SkillDictionary.Add(maxManaC.GetID(), maxManaC);
         SkillDictionary.Add(maxManaD.GetID(), maxManaD);
-
-        rat = Instantiate(Resources.Load<Enemy>("Enemies/Rats/Rat"));
-        ratKing = Instantiate(Resources.Load<Enemy>("Enemies/Rats/RatKing"));
-        smallRat = Instantiate(Resources.Load<Enemy>("Enemies/Rats/Small Rat"));
-        ratPack = Instantiate(Resources.Load<Enemy>("Enemies/Rats/RatPack"));
-
-        redSlime = Instantiate(Resources.Load<Enemy>("Enemies/Slimes/RedSlime"));
-        greenSlime = Instantiate(Resources.Load<Enemy>("Enemies/Slimes/GreenSlime"));
-        blueSlime = Instantiate(Resources.Load<Enemy>("Enemies/Slimes/BlueSlime"));
-
-        EnemyDictionary.Add(rat.GetID(), rat);
-        EnemyDictionary.Add(smallRat.GetID(), smallRat);
-        EnemyDictionary.Add(ratPack.GetID(), ratPack);
-
-        EnemyDictionary.Add(redSlime.GetID(), redSlime);
-        EnemyDictionary.Add(greenSlime.GetID(), greenSlime);
-        EnemyDictionary.Add(blueSlime.GetID(), blueSlime);
-
-        healthDrop = Resources.Load<Sprite>("Textures/Inventory Icons/skill_008");
-        staminaDrop = Resources.Load<Sprite>("Textures/Inventory Icons/skill_173");
-        manaDrop = Resources.Load<Sprite>("Textures/Inventory Icons/skill_alt_008");
-        physicalDmgSprite = Resources.Load<Sprite>("Textures/Inventory Icons/weapon_sword_02");
-        manaDmgSprite = Resources.Load<Sprite>("Textures/Inventory Icons/skill_016");
-
-        player = new Player("Name", overworld, new Inventory());
-        player.SetSkillPoints(3);
     }
 
     void InitializeQuests()
     {
+        QuestDictionary = new SortedDictionary<uint, Quest>();
+
         testBaseQuest = Resources.Load<Quest>("Quests/TestBaseQuest");
         leaveTheCave = Resources.Load<Quest>("Quests/Leave The Cave");
 
         fetchRatSkull = Instantiate(Resources.Load<FetchQuest>("Quests/FetchRatSkull"));
         fetchSlimeGoo = Instantiate(Resources.Load<FetchQuest>("Quests/FetchSlimeGoo"));
         fetchRatFur = Instantiate(Resources.Load<FetchQuest>("Quests/FetchRatFur"));
+        slayGiantRat = Instantiate(Resources.Load<SlayQuest>("Quests/SlayGiantRat"));
 
         QuestDictionary.Add(fetchRatSkull.GetID(), fetchRatSkull);
         QuestDictionary.Add(fetchSlimeGoo.GetID(), fetchSlimeGoo);
         QuestDictionary.Add(fetchRatFur.GetID(), fetchRatFur);
+        QuestDictionary.Add(slayGiantRat.GetID(), slayGiantRat);
     }
 
     void InitializeUI()
@@ -1153,6 +1165,15 @@ public class Engine : MonoBehaviour
             {
                 GameObject.Destroy(sGO);
                 enemyStatusEffectSlots.Remove(sGO);
+            }
+
+            foreach(KeyValuePair<uint, Quest> kvp in QuestDictionary)
+            {
+                if (kvp.Value.GetQuestType() == Quest.QuestType.Slay)
+                {
+                    SlayQuest quest = (SlayQuest)kvp.Value;
+                    quest.IncrementSlainEnemy(enemy);
+                }
             }
 
             UIBattleScreen.SetActive(false);
@@ -2232,6 +2253,7 @@ public class Engine : MonoBehaviour
 
                 fGO.transform.GetChild(0).GetComponent<Slider>().maxValue = fetchQuest.GetItemCounts()[i];
                 fGO.transform.GetChild(1).GetComponent<Text>().text = fetchQuest.GetFetchItems()[i].GetName();
+                fGO.transform.GetChild(2).GetComponent<Text>().text = "Fetch";
 
                 if (player.GetInventory().GetItemCount(((FetchQuest)activeQuest).GetFetchItems()[i].GetID()) > 0)
                 {
@@ -2247,12 +2269,22 @@ public class Engine : MonoBehaviour
                 uiFetchQuestObjects.Add(fGO);
             }
         }
-        else
+        else if (activeQuest.GetQuestType() == Quest.QuestType.Slay)
         {
-            foreach(GameObject fGO in uiFetchQuestObjects.ToList<GameObject>())
+            Debug.Log("Activting Slay Quest");
+            SlayQuest slayQuest = ((SlayQuest)activeQuest);
+            for (int i = 0; i < slayQuest.GetSlayEnemies().Count; i++)
             {
-                uiFetchQuestObjects.Remove(fGO);
-                Destroy(fGO);
+                GameObject fGO = Instantiate(uiFetchQuestObject, activeQuestPanel.transform);
+
+                fGO.transform.GetChild(0).GetComponent<Slider>().maxValue = slayQuest.GetNumSlayEnemies()[i];
+                fGO.transform.GetChild(1).GetComponent<Text>().text = slayQuest.GetSlayEnemies()[i].GetName();
+                fGO.transform.GetChild(2).GetComponent<Text>().text = "Slay";
+
+                fGO.transform.GetChild(0).GetChild(2).GetChild(0).GetComponent<Text>().text = slayQuest.GetCountSlayEnemies()[i].ToString();
+                fGO.transform.GetChild(0).GetComponent<Slider>().value = slayQuest.GetCountSlayEnemies()[i];
+
+                uiFetchQuestObjects.Add(fGO);
             }
         }
 
@@ -2288,6 +2320,7 @@ public class Engine : MonoBehaviour
                 AddToInventory(item);
         }
 
+        UpdateInventoryAttributes();
         DeactivateQuestSelection();
         DeactivateActiveQuest();
     }
@@ -2308,12 +2341,13 @@ public class Engine : MonoBehaviour
         if (activeQuest != null && activeQuest.GetQuestType() == Quest.QuestType.Fetch)
         {
             FetchQuest fetchQuest = ((FetchQuest)activeQuest);
-            for(int i = 0; i < uiFetchQuestObjects.Count; i++)
+            for (int i = 0; i < uiFetchQuestObjects.Count; i++)
             {
                 GameObject fGO = uiFetchQuestObjects[i];
 
                 fGO.transform.GetChild(0).GetComponent<Slider>().maxValue = fetchQuest.GetItemCounts()[i];
                 fGO.transform.GetChild(1).GetComponent<Text>().text = fetchQuest.GetFetchItems()[i].GetName();
+                fGO.transform.GetChild(2).GetComponent<Text>().text = "Fetch";
 
                 if (player.GetInventory().GetItemCount(((FetchQuest)activeQuest).GetFetchItems()[i].GetID()) > 0)
                 {
@@ -2325,6 +2359,21 @@ public class Engine : MonoBehaviour
                     fGO.transform.GetChild(0).GetChild(2).GetChild(0).GetComponent<Text>().text = "0";
                     fGO.transform.GetChild(0).GetComponent<Slider>().value = 0;
                 }
+            }
+        }
+        else if (activeQuest != null && activeQuest.GetQuestType() == Quest.QuestType.Slay)
+        {
+            SlayQuest slayQuest = ((SlayQuest)activeQuest);
+            for (int i = 0; i < uiFetchQuestObjects.Count; i++)
+            {
+                GameObject fGO = uiFetchQuestObjects[i];
+
+                fGO.transform.GetChild(0).GetComponent<Slider>().maxValue = slayQuest.GetNumSlayEnemies()[i];
+                fGO.transform.GetChild(1).GetComponent<Text>().text = slayQuest.GetSlayEnemies()[i].GetName();
+                fGO.transform.GetChild(2).GetComponent<Text>().text = "Slay";
+
+                fGO.transform.GetChild(0).GetChild(2).GetChild(0).GetComponent<Text>().text = slayQuest.GetCountSlayEnemies()[i].ToString();
+                fGO.transform.GetChild(0).GetComponent<Slider>().value = slayQuest.GetCountSlayEnemies()[i];           
             }
         }
 
@@ -2561,6 +2610,12 @@ public class Engine : MonoBehaviour
                         TurnInQuest(questDialogue.GetQuest());
                         currentNPC.SetHasGivenQuest(false);
                     }
+                if(questDialogue.GetQuest().GetQuestType() == Quest.QuestType.Slay)
+                    if(((SlayQuest)QuestDictionary[questDialogue.GetQuest().GetID()]).CheckQuestCompletion(player))
+                    {
+                        TurnInQuest(questDialogue.GetQuest());
+                        currentNPC.SetHasGivenQuest(false);
+                    }
             }
             if(questDialogue.GetQuestDialogueType() == QuestDialogue.QuestDialogueType.accept)
             {
@@ -2578,6 +2633,13 @@ public class Engine : MonoBehaviour
             ClearDialogue();
             SetDialogues(dialogueContainer.GetDialogue());
             StartCoroutine(EnterInn());
+        }
+        else if(dialogueContainer.GetDialogue().GetDialogueType() == Dialogue.DialogueType.battle)
+        {
+            ClearDialogue();
+            Enemy enemy = ((BattleDialogue)dialogueContainer.GetDialogue()).GetEnemy();
+            SetDialogues(dialogueContainer.GetDialogue());
+            StartCoroutine(EnterBattle(enemy));
         }
 
     }
@@ -2690,7 +2752,67 @@ public class Engine : MonoBehaviour
                         }
                     }
                     else if (!quest.IsCompleted())
+                    {
                         textType = StartCoroutine(TypeText(questDialogue.GetNotCompleteResponse()));
+                        List<Dialogue> dialogues = questDialogue.GetNotCompleteDialogueAnswers();
+                        List<string> dialogueStrings = questDialogue.GetNotCompleteDialogueOptions();
+                        for (int i = 0; i < dialogues.Count; i++)
+                        {
+                            GameObject dGO = Instantiate(dialogueBtn, responsePanel.transform);
+
+                            dGO.GetComponent<DialogueContainer>().SetDialogue(dialogues[i]);
+                            dGO.transform.GetChild(0).GetComponent<Text>().text = dialogueStrings[i];
+                            dGO.GetComponent<Button>().onClick.AddListener(() => SelectDialogue(dGO.GetComponent<DialogueContainer>()));
+
+                            dialogueOptionSlots.Add(dGO);
+
+                            Debug.Log("Adding Dialogue: " + 1);
+                        }
+
+                    }
+                    else
+                        textType = StartCoroutine(TypeText(questDialogue.GetCompleteResponse()));
+                }
+                else if (QuestDictionary[questDialogue.GetQuest().GetID()].GetQuestType() == Quest.QuestType.Slay)
+                {
+                    SlayQuest quest = (SlayQuest)QuestDictionary[questDialogue.GetQuest().GetID()];
+                    if (!player.CheckForQuest(quest.GetID()) && !quest.IsCompleted())
+                    {
+                        textType = StartCoroutine(TypeText(questDialogue.GetNotStartedResponse()));
+                        List<Dialogue> dialogues = dialogue.GetDialogueAnswers();
+                        List<string> dialogueStrings = dialogue.GetDialogueOptions();
+                        for (int i = 0; i < dialogues.Count; i++)
+                        {
+                            GameObject dGO = Instantiate(dialogueBtn, responsePanel.transform);
+
+                            dGO.GetComponent<DialogueContainer>().SetDialogue(dialogues[i]);
+                            dGO.transform.GetChild(0).GetComponent<Text>().text = dialogueStrings[i];
+                            dGO.GetComponent<Button>().onClick.AddListener(() => SelectDialogue(dGO.GetComponent<DialogueContainer>()));
+
+                            dialogueOptionSlots.Add(dGO);
+
+                            Debug.Log("Adding Dialogue: " + 1);
+                        }
+                    }
+                    else if (!quest.IsCompleted())
+                    {
+                        textType = StartCoroutine(TypeText(questDialogue.GetNotCompleteResponse()));
+                        List<Dialogue> dialogues = questDialogue.GetNotCompleteDialogueAnswers();
+                        List<string> dialogueStrings = questDialogue.GetNotCompleteDialogueOptions();
+                        for (int i = 0; i < dialogues.Count; i++)
+                        {
+                            GameObject dGO = Instantiate(dialogueBtn, responsePanel.transform);
+
+                            dGO.GetComponent<DialogueContainer>().SetDialogue(dialogues[i]);
+                            dGO.transform.GetChild(0).GetComponent<Text>().text = dialogueStrings[i];
+                            dGO.GetComponent<Button>().onClick.AddListener(() => SelectDialogue(dGO.GetComponent<DialogueContainer>()));
+
+                            dialogueOptionSlots.Add(dGO);
+
+                            Debug.Log("Adding Dialogue: " + 1);
+                        }
+
+                    }
                     else
                         textType = StartCoroutine(TypeText(questDialogue.GetCompleteResponse()));
                 }
@@ -2713,6 +2835,25 @@ public class Engine : MonoBehaviour
 
                     Debug.Log("Adding Dialogue: " + 1);
                 }
+            }
+        }
+        else
+        {
+            textType = StartCoroutine(TypeText(dialogue.GetNPCLine()));
+
+            List<Dialogue> dialogues = dialogue.GetDialogueAnswers();
+            List<string> dialogueStrings = dialogue.GetDialogueOptions();
+            for (int i = 0; i < dialogues.Count; i++)
+            {
+                GameObject dGO = Instantiate(dialogueBtn, responsePanel.transform);
+
+                dGO.GetComponent<DialogueContainer>().SetDialogue(dialogues[i]);
+                dGO.transform.GetChild(0).GetComponent<Text>().text = dialogueStrings[i];
+                dGO.GetComponent<Button>().onClick.AddListener(() => SelectDialogue(dGO.GetComponent<DialogueContainer>()));
+
+                dialogueOptionSlots.Add(dGO);
+
+                Debug.Log("Adding Dialogue: " + 1);
             }
         }
     }
@@ -2747,8 +2888,8 @@ public class Engine : MonoBehaviour
         UICoverScreen.raycastTarget = true;
         while (UICoverScreen.color.a < 1)
         {
-            UICoverScreen.color = new Color(UICoverScreen.color.r, UICoverScreen.color.g, UICoverScreen.color.b, UICoverScreen.color.a + 0.01f);
-            yield return new WaitForSecondsRealtime(0.025f);
+            UICoverScreen.color = new Color(UICoverScreen.color.r, UICoverScreen.color.g, UICoverScreen.color.b, UICoverScreen.color.a + (0.01f));
+            yield return new WaitForSecondsRealtime(0.005f * Time.deltaTime);
         }
 
         ActivateDialogueScreen(false);
@@ -2768,8 +2909,28 @@ public class Engine : MonoBehaviour
 
         while(UICoverScreen.color.a > 0)
         {
-            UICoverScreen.color = new Color(UICoverScreen.color.r, UICoverScreen.color.g, UICoverScreen.color.b, UICoverScreen.color.a - 0.01f);
-            yield return new WaitForSecondsRealtime(0.025f);
+            UICoverScreen.color = new Color(UICoverScreen.color.r, UICoverScreen.color.g, UICoverScreen.color.b, UICoverScreen.color.a - (0.01f));
+            yield return new WaitForSecondsRealtime(0.005f * Time.deltaTime);
+        }
+        UICoverScreen.raycastTarget = false;
+    }
+
+    IEnumerator EnterBattle(Enemy enemy)
+    {
+        UICoverScreen.raycastTarget = true;
+        while (UICoverScreen.color.a < 1)
+        {
+            UICoverScreen.color = new Color(UICoverScreen.color.r, UICoverScreen.color.g, UICoverScreen.color.b, UICoverScreen.color.a + (0.01f));
+            yield return new WaitForSecondsRealtime(0.01f * Time.deltaTime);
+        }
+
+        ActivateDialogueScreen(false);
+        StartCoroutine(Battle(enemy));
+
+        while (UICoverScreen.color.a > 0)
+        {
+            UICoverScreen.color = new Color(UICoverScreen.color.r, UICoverScreen.color.g, UICoverScreen.color.b, UICoverScreen.color.a - (0.01f));
+            yield return new WaitForSecondsRealtime(0.01f * Time.deltaTime);
         }
         UICoverScreen.raycastTarget = false;
     }

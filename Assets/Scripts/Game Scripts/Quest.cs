@@ -13,7 +13,8 @@ public class Quest : ScriptableObject
     public enum QuestType
     {
         Location,
-        Fetch
+        Fetch,
+        Slay
     };
 
     [SerializeField] QuestType questType;

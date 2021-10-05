@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: HeavyBite
   m_EditorClassIdentifier: 
   name: Heavy Bite
-  attackType: 0
+  description: '{0} clamped its jaws on you hard, dealing {1} damage.'
+  attackType: 3
   attackAttribute: 1
   minDamageModifier: 2
   maxDamageModifier: 5

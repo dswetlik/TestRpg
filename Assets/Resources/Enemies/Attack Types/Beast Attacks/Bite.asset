@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Bite
   description: '{0} nipped at you, dealing {1} damage!'
-  attackType: 0
+  attackType: 3
   attackAttribute: 1
   minDamageModifier: 0
   maxDamageModifier: 0

@@ -30,5 +30,7 @@ MonoBehaviour:
     you well.
   notCompleteResponse: Do you have the fur yet? No? Come on, I have lots of orders
     for those boots already, get on it!
+  notCompleteDialogueOptions: []
+  notCompleteDialogueAnswers: []
   completeResponse: You have the fur? Perfect, this will work wonderfully. I don't
     know how to thank you enough!

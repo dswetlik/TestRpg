@@ -13,7 +13,8 @@ public class Dialogue : ScriptableObject
         conversation,
         merchant,
         quest,
-        inn
+        inn,
+        battle
     }
 
     [TextArea(3,5)][SerializeField] string npcLine;
