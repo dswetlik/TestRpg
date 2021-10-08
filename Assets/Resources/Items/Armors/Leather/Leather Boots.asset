@@ -20,5 +20,5 @@ MonoBehaviour:
   weight: 1
   value: 10
   armorType: 3
-  armorClass: 0
+  armorClass: 1
   rating: 1

@@ -25,12 +25,10 @@ public class SlayQuest : Quest
 
     public override bool CheckQuestCompletion(Player player)
     {
-        Debug.Log("Checking Completion of " + GetName());
         if(player.CheckForQuest(GetID()))
         {
             for(int i = 0; i < slayEnemies.Count; i++)
             {
-                Debug.Log("Needed Slain: " + numSlayEnemies[i] + "; Slain Count: " + countSlayEnemies[i]);
                 if (numSlayEnemies[i] <= countSlayEnemies[i])
                     continue;
                 else

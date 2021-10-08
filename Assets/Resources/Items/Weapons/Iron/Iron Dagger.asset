@@ -14,14 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemType: 1
   sprite: {fileID: 21300000, guid: 1e3ba06a89e6071428f98f7415b965d9, type: 3}
-  id: 101
+  id: 106
   name: Iron Dagger
   description: A basic, trusty iron dagger.
   weight: 3
-  value: 20
+  value: 15
   weaponType: 0
   weaponSkills:
   - {fileID: 11400000, guid: 7d57fe5ee52be9c41acea2a16275c96e, type: 2}
   - {fileID: 11400000, guid: 599f83945ae651648a626484a7b39715, type: 2}
-  minDamage: 2
-  maxDamage: 4
+  minDamage: 4
+  maxDamage: 6

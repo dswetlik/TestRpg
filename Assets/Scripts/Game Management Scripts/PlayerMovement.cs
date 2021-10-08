@@ -64,7 +64,6 @@ public class PlayerMovement : MonoBehaviour
 
             if ((collisionFlags & CollisionFlags.Sides) != 0)
             {
-                Debug.Log("Collision on Flags");
                 break;
             }
 
@@ -98,7 +97,6 @@ public class PlayerMovement : MonoBehaviour
 
             if ((collisionFlags & CollisionFlags.Sides) != 0)
             {
-                Debug.Log("Collision on Flags");
                 break;
             }
 

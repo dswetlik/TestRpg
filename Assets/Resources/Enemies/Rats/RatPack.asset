@@ -17,7 +17,7 @@ MonoBehaviour:
   description: A pack of rats just let loose from a burlap bag. They are not happy.
   id: 102
   minLevel: 3
-  maxLevel: 5
+  maxLevel: 20
   minDamage: 2
   maxDamage: 4
   defense: 0

@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: RedSlimeGoo
   m_EditorClassIdentifier: 
   itemType: 0
+  sprite: {fileID: 21300000, guid: 1efd86d4a90c6ef479ac38cecb884db5, type: 3}
   id: 6
-  name: Red Slime Goo
-  description: Goo from a red slime.
+  name: Red Slime Essense
+  description: Essense from a red slime.
   weight: 1
   value: 4

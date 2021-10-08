@@ -6,11 +6,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-[CreateAssetMenu(fileName = "New Enemy", menuName = "Enemies", order = 0)]
+[CreateAssetMenu(fileName = "New Enemy", menuName = "Enemy/Normal Enemy", order = 0)]
 public class Enemy : ScriptableObject
 {
-    [SerializeField] Material material;
+    
+    public enum EnemyType
+    {
+        normal,
+        boss
+    }
 
+    [SerializeField] EnemyType enemyType;
     [SerializeField] new string name;
     [TextArea(3,5)][SerializeField] string description;
     [SerializeField] uint id;
@@ -24,7 +30,7 @@ public class Enemy : ScriptableObject
     [SerializeField] ItemLootTable itemRewards;
     [SerializeField] List<StatusEffect> statusEffects = new List<StatusEffect>();
 
-    public Material GetMaterial() { return material; }
+    public EnemyType GetEnemyType() { return enemyType; }
     public string GetName() { return name; }
     public string GetDescription() { return description; }
     public uint GetID() { return id; }
@@ -86,11 +92,8 @@ public class Enemy : ScriptableObject
         int maxDamage = 0;
         EnemyAttackType maxAttack = null;
 
-        Debug.Log(attackTypes.Count);
-
         foreach (EnemyAttackType attackType in attackTypes)
         {
-            Debug.Log(attackType.GetName());
             if (attackType.GetAttackType() == EnemyAttackType.AttackType.heal)
             {
                 if (health < maxHealth * 0.25f && mana >= attackType.GetManaCost())
@@ -127,11 +130,9 @@ public class Enemy : ScriptableObject
 
     public void DecrementStatusEffectTurn()
     {
-        Debug.Log("Enemy Status Effect Count: " + statusEffects.Count);
         if (statusEffects.Count > 0)
             foreach (StatusEffect statusEffect in statusEffects.ToList<StatusEffect>())
             {
-                Debug.Log("Decrement in Enemy: " + statusEffect.GetName());
                 statusEffect.DecrementTurnCount();
                 if (statusEffect.GetTurnAmount() < 1)
                     RemoveStatusEffect(statusEffect);

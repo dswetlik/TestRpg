@@ -19,10 +19,8 @@ public class EnemyTable : ScriptableObject
             float key = Random.Range(0, 100.0f);
             for (int j = 0; j < enemies.Count; j++)
             {
-                Debug.Log("Key: " + key + "   Enemy: " + enemies[j].GetName());
                 if (key <= enemyProbability[j])
                 {
-                    Debug.Log(string.Format("Adding {0} to {1}.", enemies[j], location.GetName()));
                     enemySpawn.Add(enemies[j]);
                     i++;
                 }

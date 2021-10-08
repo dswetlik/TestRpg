@@ -75,8 +75,6 @@ public class MainMenu : MonoBehaviour
 
         if (thisScene.IsValid())
         {
-            //Debug.Log("Scene is Valid");
-
             SceneManager.SetActiveScene(thisScene);
         }
         SceneManager.UnloadSceneAsync(currentScene);

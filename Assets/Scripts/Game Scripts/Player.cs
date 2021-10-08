@@ -344,7 +344,7 @@ public class Player
         }
         catch (ArgumentException)
         {
-            Debug.LogFormat("Quest already exists in questlist!");
+
         }
     }
 

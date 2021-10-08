@@ -14,14 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemType: 1
   sprite: {fileID: 21300000, guid: fbaf96824b2b66a40ac36267672a335a, type: 3}
-  id: 107
+  id: 112
   name: Steel Sword
-  description: A basic steel sword.
-  weight: 6
-  value: 50
+  description: A sharp steel sword, a common issue equipment for Aredenian soldiers.
+  weight: 3
+  value: 55
   weaponType: 0
   weaponSkills:
   - {fileID: 11400000, guid: 599f83945ae651648a626484a7b39715, type: 2}
   - {fileID: 11400000, guid: 7d57fe5ee52be9c41acea2a16275c96e, type: 2}
-  minDamage: 3
-  maxDamage: 8
+  minDamage: 6
+  maxDamage: 15

@@ -34,7 +34,7 @@ MonoBehaviour:
   maxMana: 15
   manaRegen: 3
   goldReward: 6
-  speed: 1.75
+  speed: 1.4
   expReward: 10
   itemRewards: {fileID: 11400000, guid: 5831117a999096b4f9dfaab812d0b6d7, type: 2}
   statusEffects: []

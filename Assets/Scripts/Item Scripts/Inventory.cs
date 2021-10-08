@@ -37,7 +37,6 @@ public class Inventory //: ISerializationCallbackReceiver
         {
             count[item.GetID()] += 1;
         }
-        //Debug.LogFormat("A {0} was added to your inventory.", item.ToString());
     }
 
     /// <summary>
@@ -60,7 +59,6 @@ public class Inventory //: ISerializationCallbackReceiver
             {
                 count[item.GetID()] += numberOfItems;
             }
-            //Debug.LogFormat("{0} {1}s were added to your inventory.", numberOfItems, item.ToString());
         }
     }
 
@@ -223,7 +221,7 @@ public class Inventory //: ISerializationCallbackReceiver
             }
             catch (KeyNotFoundException e)
             {
-                Debug.Log("Item failed to be obtained: " + list[i]);
+            
             }
         }
     }

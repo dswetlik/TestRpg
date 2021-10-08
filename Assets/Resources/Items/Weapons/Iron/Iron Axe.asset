@@ -14,14 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemType: 1
   sprite: {fileID: 21300000, guid: 82ea2f69d7fd0184e8b53c9b3ae60920, type: 3}
-  id: 103
+  id: 108
   name: Iron Axe
-  description: A basic, trusty iron axe.
-  weight: 2
-  value: 25
+  description: A nice axe, looks like it was built for fighting instead of chopping
+    wood.
+  weight: 3
+  value: 21
   weaponType: 0
   weaponSkills:
-  - {fileID: 0}
-  - {fileID: 0}
-  minDamage: 0
-  maxDamage: 0
+  - {fileID: 11400000, guid: 2f43c0a13b3d0a443899cc3b5f42749c, type: 2}
+  - {fileID: 11400000, guid: 481a0ed09dfc2d84f9d66cf6c15af1c5, type: 2}
+  minDamage: 4
+  maxDamage: 7

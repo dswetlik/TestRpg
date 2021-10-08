@@ -248,6 +248,9 @@ public class Engine : MonoBehaviour
 
     Text loadingPercentTxt;
 
+    // UI Cover Variables
+    Text messageTxt;
+
     // Game Variables
     public static SortedDictionary<uint, Item> ItemDictionary;
     public static SortedDictionary<uint, Quest> QuestDictionary;
@@ -281,6 +284,30 @@ public class Engine : MonoBehaviour
     Weapon copperAxe;
     Weapon copperSpear;
     Weapon copperMace;
+
+    Weapon ironDagger;
+    Weapon ironSword;
+    Weapon ironAxe;
+    Weapon ironSpear;
+    Weapon ironMace;
+
+    Weapon steelDagger;
+    Weapon steelSword;
+    Weapon steelAxe;
+    Weapon steelSpear;
+    Weapon steelMace;
+
+    Weapon electrumDagger;
+    Weapon electrumSword;
+    Weapon electrumAxe;
+    Weapon electrumSpear;
+    Weapon electrumMace;
+
+    Weapon royalDagger;
+    Weapon royalSword;
+    Weapon royalAxe;
+    Weapon royalSpear;
+    Weapon royalMace;
 
     Armor tatteredShirt;
 
@@ -493,6 +520,30 @@ public class Engine : MonoBehaviour
         copperSpear = Resources.Load<Weapon>("Items/Weapons/Copper/Copper Spear");
         copperMace = Resources.Load<Weapon>("Items/Weapons/Copper/Copper Mace");
 
+        ironDagger = Resources.Load<Weapon>("Items/Weapons/Iron/Iron Dagger");
+        ironSword = Resources.Load<Weapon>("Items/Weapons/Iron/Iron Sword");
+        ironAxe = Resources.Load<Weapon>("Items/Weapons/Iron/Iron Axe");
+        ironSpear = Resources.Load<Weapon>("Items/Weapons/Iron/Iron Spear");
+        ironMace = Resources.Load<Weapon>("Items/Weapons/Iron/Iron Mace");
+
+        steelDagger = Resources.Load<Weapon>("Items/Weapons/Steel/Steel Dagger");
+        steelSword = Resources.Load<Weapon>("Items/Weapons/Steel/Steel Sword");
+        steelAxe = Resources.Load<Weapon>("Items/Weapons/Steel/Steel Axe");
+        steelSpear = Resources.Load<Weapon>("Items/Weapons/Steel/Steel Spear");
+        steelMace = Resources.Load<Weapon>("Items/Weapons/Steel/Steel Mace");
+
+        electrumDagger = Resources.Load<Weapon>("Items/Weapons/Electrum/Electrum Dagger");
+        electrumSword = Resources.Load<Weapon>("Items/Weapons/Electrum/Electrum Sword");
+        electrumAxe = Resources.Load<Weapon>("Items/Weapons/Electrum/Electrum Axe");
+        electrumSpear = Resources.Load<Weapon>("Items/Weapons/Electrum/Electrum Spear");
+        electrumMace = Resources.Load<Weapon>("Items/Weapons/Electrum/Electrum Mace");
+
+        royalDagger = Resources.Load<Weapon>("Items/Weapons/Royal/Royal Dagger");
+        royalSword = Resources.Load<Weapon>("Items/Weapons/Royal/Royal Sword");
+        royalAxe = Resources.Load<Weapon>("Items/Weapons/Royal/Royal Axe");
+        royalSpear = Resources.Load<Weapon>("Items/Weapons/Royal/Royal Spear");
+        royalMace = Resources.Load<Weapon>("Items/Weapons/Royal/Royal Mace");
+
         tatteredShirt = Resources.Load<Armor>("Items/Armors/Tattered/Tattered Shirt");
 
         leatherHelmet = Resources.Load<Armor>("Items/Armors/Leather/Leather Helmet");
@@ -526,6 +577,30 @@ public class Engine : MonoBehaviour
         ItemDictionary.Add(copperAxe.GetID(), copperAxe);
         ItemDictionary.Add(copperSpear.GetID(), copperSpear);
         ItemDictionary.Add(copperMace.GetID(), copperMace);
+
+        ItemDictionary.Add(ironDagger.GetID(), ironDagger);
+        ItemDictionary.Add(ironSword.GetID(), ironSword);
+        ItemDictionary.Add(ironAxe.GetID(), ironAxe);
+        ItemDictionary.Add(ironSpear.GetID(), ironSpear);
+        ItemDictionary.Add(ironMace.GetID(), ironMace);
+
+        ItemDictionary.Add(steelDagger.GetID(), steelDagger);
+        ItemDictionary.Add(steelSword.GetID(), steelSword);
+        ItemDictionary.Add(steelAxe.GetID(), steelAxe);
+        ItemDictionary.Add(steelSpear.GetID(), steelSpear);
+        ItemDictionary.Add(steelMace.GetID(), steelMace);
+
+        ItemDictionary.Add(electrumDagger.GetID(), electrumDagger);
+        ItemDictionary.Add(electrumSword.GetID(), electrumSword);
+        ItemDictionary.Add(electrumAxe.GetID(), electrumAxe);
+        ItemDictionary.Add(electrumSpear.GetID(), electrumSpear);
+        ItemDictionary.Add(electrumMace.GetID(), electrumMace);
+
+        ItemDictionary.Add(royalDagger.GetID(), royalDagger);
+        ItemDictionary.Add(royalSword.GetID(), royalSword);
+        ItemDictionary.Add(royalAxe.GetID(), royalAxe);
+        ItemDictionary.Add(royalSpear.GetID(), royalSpear);
+        ItemDictionary.Add(royalMace.GetID(), royalMace);
 
         ItemDictionary.Add(tatteredShirt.GetID(), tatteredShirt);
 
@@ -826,6 +901,8 @@ public class Engine : MonoBehaviour
         armorValueTxt.text = "0";
         damageValueTxt.text = "0";
 
+        invScroll.verticalNormalizedPosition = 1;
+
         activeQuestScroll = GameObject.Find("ActiveQuestScroll").GetComponent<ScrollRect>();
 
         questName = GameObject.Find("ActiveQuestNameTxt").GetComponent<Text>();
@@ -992,7 +1069,7 @@ public class Engine : MonoBehaviour
         loadingSlider = GameObject.Find("LoadingSlider").GetComponent<Slider>();
         loadingPercentTxt = GameObject.Find("LoadingPercentTxt").GetComponent<Text>();
 
-        invScroll.verticalNormalizedPosition = 1;
+        messageTxt = GameObject.Find("MessageTxt").GetComponent<Text>();
 
         UIInventoryScreen.SetActive(false);
         UIQuestScreen.SetActive(false);
@@ -1180,8 +1257,7 @@ public class Engine : MonoBehaviour
         }
         else
         {
-            UIBattleScreen.SetActive(false);
-            OutputToText("You have Died.");
+            StartCoroutine(HasDied());
         }
 
         UpdateInventoryAttributes();
@@ -1503,7 +1579,7 @@ public class Engine : MonoBehaviour
             foreach (StatusEffect statusEffect in statusEffects)
             {
                 float hitChance = UnityEngine.Random.Range(0, 1.0f);
-                Debug.Log("Going through status effect foreach; Hit Chance: " + hitChance);
+
                 if (hitChance > statusEffect.GetHitChance())
                 {
                     if (statusEffect.IsNegative())
@@ -1519,7 +1595,6 @@ public class Engine : MonoBehaviour
     {
         if (isPlayer)
         {
-            Debug.Log("Adding Status Effect " + statusEffect.GetName());
             player.AddStatusEffect(statusEffect);
 
             GameObject GO = Instantiate(statusEffectSlot, playerStatusEffectGO.transform);
@@ -1528,7 +1603,6 @@ public class Engine : MonoBehaviour
         }
         else
         {
-            Debug.Log("Adding Status Effect to Enemy " + statusEffect.GetName());
             enemy.AddStatusEffect(statusEffect);
 
             GameObject GO = Instantiate(statusEffectSlot, enemyStatusEffectGO.transform);
@@ -1622,7 +1696,7 @@ public class Engine : MonoBehaviour
             foreach (StatusEffect statusEffect in statusEffects)
             {
                 float hitChance = UnityEngine.Random.Range(0, 1.0f);
-                Debug.Log("Going through status effect foreach; Hit Chance: " + hitChance);
+
                 if (hitChance > statusEffect.GetHitChance())
                 {
                     if (statusEffect.IsNegative())
@@ -1636,12 +1710,10 @@ public class Engine : MonoBehaviour
 
     void PopulateLocationChests()
     {
-        Debug.Log(String.Format("Populating Chests for {0}.", player.GetLocation().GetName()));
         //ChestInventory[] chests = GameObject.Find("ChestList").GetComponentsInChildren<ChestInventory>();
         GameObject[] chests = GameObject.FindGameObjectsWithTag("Chest");
         foreach (GameObject chest in chests)
         {
-            Debug.Log(String.Format("Populating {0}", chest.name));
             ChestInventory ch = chest.GetComponent<ChestInventory>();
 
             if (!ch.HasBeenSearched())
@@ -1680,7 +1752,7 @@ public class Engine : MonoBehaviour
             {
                 GameObject eGo = Instantiate(enemyObject, GameObject.Find("EnemyList").transform);
 
-                int i = UnityEngine.Random.Range(0, nodes.Count); Debug.Log("Random Node Count: " + i);
+                int i = UnityEngine.Random.Range(0, nodes.Count);
                 if (i == 0)
                 {
                     eGo.GetComponent<EnemyMovement>().SetCurrentNode(nodes[i].GetComponent<NodeType>());
@@ -1694,7 +1766,7 @@ public class Engine : MonoBehaviour
 
                 eGo.GetComponent<EnemyMovement>().MoveToNode(nodes[i].GetComponent<NodeType>());
                 eGo.GetComponent<EnemyMovement>().SetEnemy(Instantiate(enemy));
-                eGo.GetComponent<Renderer>().material = enemy.GetMaterial();
+
             }
         }
     }
@@ -2044,7 +2116,6 @@ public class Engine : MonoBehaviour
         }
         else
         {
-            Debug.Log("Is In Pickup");
             if (itemContainer.GetItem() != NULL_ITEM && itemContainer.GetItem() != NULL_WEAPON && itemContainer.GetItem() != NULL_ARMOR)
             {
 
@@ -2271,7 +2342,6 @@ public class Engine : MonoBehaviour
         }
         else if (activeQuest.GetQuestType() == Quest.QuestType.Slay)
         {
-            Debug.Log("Activting Slay Quest");
             SlayQuest slayQuest = ((SlayQuest)activeQuest);
             for (int i = 0; i < slayQuest.GetSlayEnemies().Count; i++)
             {
@@ -2591,7 +2661,6 @@ public class Engine : MonoBehaviour
             ClearDialogue();
             ActivateDialogueScreen(false);
             ActivatePickupScreen(true);
-            Debug.Log("Selected Merchant Dialogue");
         }
         else if(dialogueContainer.GetDialogue().GetDialogueType() == Dialogue.DialogueType.conversation)
         {
@@ -2662,8 +2731,6 @@ public class Engine : MonoBehaviour
                 dGO.GetComponent<Button>().onClick.AddListener(() => SelectDialogue(dGO.GetComponent<DialogueContainer>()));
 
                 dialogueOptionSlots.Add(dGO);
-
-                Debug.Log("Adding Dialogue: " + 1);
             }
             if(currentNPC.HasQuests() && !currentNPC.HasGivenQuest())
             {
@@ -2687,8 +2754,6 @@ public class Engine : MonoBehaviour
                     dGO.GetComponent<Button>().onClick.AddListener(() => SelectDialogue(dGO.GetComponent<DialogueContainer>()));
 
                     dialogueOptionSlots.Add(dGO);
-
-                    Debug.Log("Adding Quest Dialogue at Start");
                 }
             }
             else if(currentNPC.HasQuests() && currentNPC.HasGivenQuest())
@@ -2702,8 +2767,6 @@ public class Engine : MonoBehaviour
                 dGO.GetComponent<Button>().onClick.AddListener(() => SelectDialogue(dGO.GetComponent<DialogueContainer>()));
 
                 dialogueOptionSlots.Add(dGO);
-
-                Debug.Log("Adding Current Quest Dialogue at Start"); 
             }
         }
         else if(dialogue.GetDialogueType() == Dialogue.DialogueType.conversation)
@@ -2721,8 +2784,6 @@ public class Engine : MonoBehaviour
                 dGO.GetComponent<Button>().onClick.AddListener(() => SelectDialogue(dGO.GetComponent<DialogueContainer>()));
 
                 dialogueOptionSlots.Add(dGO);
-
-                Debug.Log("Adding Dialogue: " + 1);
             }
         }
         else if(dialogue.GetDialogueType() == Dialogue.DialogueType.quest)
@@ -2747,8 +2808,6 @@ public class Engine : MonoBehaviour
                             dGO.GetComponent<Button>().onClick.AddListener(() => SelectDialogue(dGO.GetComponent<DialogueContainer>()));
 
                             dialogueOptionSlots.Add(dGO);
-
-                            Debug.Log("Adding Dialogue: " + 1);
                         }
                     }
                     else if (!quest.IsCompleted())
@@ -2765,10 +2824,7 @@ public class Engine : MonoBehaviour
                             dGO.GetComponent<Button>().onClick.AddListener(() => SelectDialogue(dGO.GetComponent<DialogueContainer>()));
 
                             dialogueOptionSlots.Add(dGO);
-
-                            Debug.Log("Adding Dialogue: " + 1);
                         }
-
                     }
                     else
                         textType = StartCoroutine(TypeText(questDialogue.GetCompleteResponse()));
@@ -2790,8 +2846,6 @@ public class Engine : MonoBehaviour
                             dGO.GetComponent<Button>().onClick.AddListener(() => SelectDialogue(dGO.GetComponent<DialogueContainer>()));
 
                             dialogueOptionSlots.Add(dGO);
-
-                            Debug.Log("Adding Dialogue: " + 1);
                         }
                     }
                     else if (!quest.IsCompleted())
@@ -2809,9 +2863,7 @@ public class Engine : MonoBehaviour
 
                             dialogueOptionSlots.Add(dGO);
 
-                            Debug.Log("Adding Dialogue: " + 1);
                         }
-
                     }
                     else
                         textType = StartCoroutine(TypeText(questDialogue.GetCompleteResponse()));
@@ -2832,8 +2884,6 @@ public class Engine : MonoBehaviour
                     dGO.GetComponent<Button>().onClick.AddListener(() => SelectDialogue(dGO.GetComponent<DialogueContainer>()));
 
                     dialogueOptionSlots.Add(dGO);
-
-                    Debug.Log("Adding Dialogue: " + 1);
                 }
             }
         }
@@ -2852,8 +2902,6 @@ public class Engine : MonoBehaviour
                 dGO.GetComponent<Button>().onClick.AddListener(() => SelectDialogue(dGO.GetComponent<DialogueContainer>()));
 
                 dialogueOptionSlots.Add(dGO);
-
-                Debug.Log("Adding Dialogue: " + 1);
             }
         }
     }
@@ -2879,16 +2927,18 @@ public class Engine : MonoBehaviour
         {
             dialogueOptionSlots.Remove(dGO);
             Destroy(dGO);
-            Debug.Log("Clearing Dialogue");
         }
     }
 
     IEnumerator EnterInn()
     {
+        messageTxt.text = "You rest, healing and rejuvenating you.";
+
         UICoverScreen.raycastTarget = true;
         while (UICoverScreen.color.a < 1)
         {
             UICoverScreen.color = new Color(UICoverScreen.color.r, UICoverScreen.color.g, UICoverScreen.color.b, UICoverScreen.color.a + (0.01f));
+            messageTxt.color = new Color(messageTxt.color.r, messageTxt.color.g, messageTxt.color.b, messageTxt.color.a + 0.01f);
             yield return new WaitForSecondsRealtime(0.005f * Time.deltaTime);
         }
 
@@ -2910,6 +2960,7 @@ public class Engine : MonoBehaviour
         while(UICoverScreen.color.a > 0)
         {
             UICoverScreen.color = new Color(UICoverScreen.color.r, UICoverScreen.color.g, UICoverScreen.color.b, UICoverScreen.color.a - (0.01f));
+            messageTxt.color = new Color(messageTxt.color.r, messageTxt.color.g, messageTxt.color.b, messageTxt.color.a - 0.01f);
             yield return new WaitForSecondsRealtime(0.005f * Time.deltaTime);
         }
         UICoverScreen.raycastTarget = false;
@@ -2917,10 +2968,13 @@ public class Engine : MonoBehaviour
 
     IEnumerator EnterBattle(Enemy enemy)
     {
+        messageTxt.text = "Prepare for Battle";
+
         UICoverScreen.raycastTarget = true;
         while (UICoverScreen.color.a < 1)
         {
             UICoverScreen.color = new Color(UICoverScreen.color.r, UICoverScreen.color.g, UICoverScreen.color.b, UICoverScreen.color.a + (0.01f));
+            messageTxt.color = new Color(messageTxt.color.r, messageTxt.color.g, messageTxt.color.b, messageTxt.color.a + 0.01f);
             yield return new WaitForSecondsRealtime(0.01f * Time.deltaTime);
         }
 
@@ -2930,9 +2984,25 @@ public class Engine : MonoBehaviour
         while (UICoverScreen.color.a > 0)
         {
             UICoverScreen.color = new Color(UICoverScreen.color.r, UICoverScreen.color.g, UICoverScreen.color.b, UICoverScreen.color.a - (0.01f));
+            messageTxt.color = new Color(messageTxt.color.r, messageTxt.color.g, messageTxt.color.b, messageTxt.color.a - 0.01f);
             yield return new WaitForSecondsRealtime(0.01f * Time.deltaTime);
         }
         UICoverScreen.raycastTarget = false;
+    }
+
+    IEnumerator HasDied()
+    {
+        messageTxt.text = "You have Died";
+
+        UICoverScreen.raycastTarget = true;
+        while (UICoverScreen.color.a < 1)
+        {
+            UICoverScreen.color = new Color(UICoverScreen.color.r, UICoverScreen.color.g, UICoverScreen.color.b, UICoverScreen.color.a + (0.01f));
+            messageTxt.color = new Color(messageTxt.color.r, messageTxt.color.g, messageTxt.color.b, messageTxt.color.a + 0.01f);
+            yield return new WaitForSecondsRealtime(0.01f * Time.deltaTime);
+        }
+
+        UIBattleScreen.SetActive(false);
     }
 
     public void UseItem()
@@ -3357,7 +3427,6 @@ public class Engine : MonoBehaviour
 
         while (newScene.progress < 0.9f)
         {
-            //Debug.Log("Loading scene: " + newScene.progress);
             yield return null;
         }
 
@@ -3387,7 +3456,7 @@ public class Engine : MonoBehaviour
     IEnumerator LoadScene(Location location)
     {
         Scene currentScene = SceneManager.GetActiveScene();
-        //GameObject player = GameObject.Find("Player");
+        
         AsyncOperation newScene = SceneManager.LoadSceneAsync(location.GetSceneName(), LoadSceneMode.Additive);
         newScene.allowSceneActivation = false;
         UILoadScreen.SetActive(true);
@@ -3397,9 +3466,6 @@ public class Engine : MonoBehaviour
 
         while (newScene.progress < 0.9f)
         {
-            //Debug.Log("Loading scene: " + newScene.progress);
-            //loadingSlider.value = newScene.progress;
-
             loadingSlider.value = Mathf.MoveTowards(newScene.progress * 100, 90.0f, 0.25f * Time.deltaTime);
 
             loadingPercentTxt.text = ((int)Mathf.MoveTowards(newScene.progress * 100, 90.0f, 0.25f * Time.deltaTime)) + "%";
@@ -3412,7 +3478,7 @@ public class Engine : MonoBehaviour
 
         while (!newScene.isDone)
         {
-            //Debug.Log("Loading scene: " + newScene.progress);
+            
             loadingSlider.value = Mathf.MoveTowards(newScene.progress * 100, 90.0f, 0.25f * Time.deltaTime);
             loadingPercentTxt.text = ((int)Mathf.MoveTowards(newScene.progress * 100, 90.0f, 0.25f * Time.deltaTime)) + "%";
             yield return new WaitForFixedUpdate();

@@ -11,7 +11,6 @@ public class EventTable : ScriptableObject
     public Event RandomEvent()
     {
         float key = Random.Range(0, 100.0f);
-        //Debug.Log(key);
         bool eventFound = false;
         int x = 0;
 

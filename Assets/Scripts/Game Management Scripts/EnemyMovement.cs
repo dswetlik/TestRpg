@@ -22,7 +22,6 @@ public class EnemyMovement : MonoBehaviour
 
     IEnumerator GetNextNode()
     {
-        Debug.Log("Determining Move");
         List<NodeType> nearbyNodes = currentNode.GetComponent<NodeType>().GetNearbyNodes();
 
         GameObject player = GameObject.Find("Player");
@@ -33,7 +32,6 @@ public class EnemyMovement : MonoBehaviour
         }
         else
         {
-            Debug.Log("Node Count: " + nearbyNodes.Count);
             NodeType nearestNode = nearbyNodes[0];
             float distanceTo = Vector3.Distance(currentNode.transform.position, nearestNode.transform.position) + Vector3.Distance(nearestNode.transform.position, player.transform.position);
             for(int i = 0; i < nearbyNodes.Count; i++)
@@ -56,7 +54,6 @@ public class EnemyMovement : MonoBehaviour
 
     public void MoveToNode(NodeType node)
     {
-        Debug.Log("Moving");
         transform.position = node.transform.position;
         previousNode = currentNode;
         currentNode = node;
