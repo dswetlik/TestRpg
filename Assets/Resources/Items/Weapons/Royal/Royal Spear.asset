@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ebe832ef0b3855348b377c74e480d076, type: 3}
-  m_Name: Electrum Spear
+  m_Name: Royal Spear
   m_EditorClassIdentifier: 
   itemType: 1
-  sprite: {fileID: 21300000, guid: f9adc2c571b7c2847be34bd02930cfa3, type: 3}
-  id: 119
-  name: Electrum Spear
-  description: A spear made out of the rare metal Electrum, its primary use is in
-    public execution by impalement.
+  sprite: {fileID: 21300000, guid: a085c532e0541f24897d01718ad75cdf, type: 3}
+  id: 124
+  name: Royal Spear
+  description: A spear generally reserved for royalty, it's driven through a map
+    of an opposing kingdom as a declaration of war.
   weight: 2
-  value: 107
+  value: 124
   weaponType: 0
   weaponSkills:
   - {fileID: 11400000, guid: 599f83945ae651648a626484a7b39715, type: 2}
   - {fileID: 11400000, guid: 74c0999807e0d474bba219360e72ba8c, type: 2}
-  minDamage: 18
-  maxDamage: 22
+  minDamage: 32
+  maxDamage: 37

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2223d07b9b43c4141ae275046391dfe0, type: 3}
   m_Name: MagicMortar
   m_EditorClassIdentifier: 
+  id: 2
   name: Magic Mortar
   itemList:
   - {fileID: 11400000, guid: 0bdbe513d1d77bf4297a682e35e80ea1, type: 2}

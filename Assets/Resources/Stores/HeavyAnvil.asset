@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2223d07b9b43c4141ae275046391dfe0, type: 3}
   m_Name: HeavyAnvil
   m_EditorClassIdentifier: 
+  id: 0
   name: The Heavy Anvil
   itemList:
-  - {fileID: 11400000, guid: 5aaccfce22c10434c83b3656a4b7b4c4, type: 2}
   - {fileID: 11400000, guid: ea8c7a45282f89c4a92e3a24a918b6f4, type: 2}
-  - {fileID: 11400000, guid: 4c558984ee4e94f49821279d008ba84a, type: 2}
   - {fileID: 11400000, guid: 4467e521a2fd9604fae9426bc68d6169, type: 2}
   - {fileID: 11400000, guid: b4eb9b3a451da064da304f84bfe14e1c, type: 2}
+  - {fileID: 11400000, guid: 5aaccfce22c10434c83b3656a4b7b4c4, type: 2}
+  - {fileID: 11400000, guid: 4c558984ee4e94f49821279d008ba84a, type: 2}
   npc: {fileID: 11400000, guid: 09d783cf443fffd47a0c22f08fb02e8b, type: 2}

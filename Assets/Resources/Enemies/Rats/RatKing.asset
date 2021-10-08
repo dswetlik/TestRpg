@@ -9,17 +9,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da3ae000e98a71d489bf062b749ae76f, type: 3}
+  m_Script: {fileID: 11500000, guid: 69dcb926d5dd74c4799c018f51e456e0, type: 3}
   m_Name: RatKing
   m_EditorClassIdentifier: 
-  material: {fileID: 2100000, guid: 88b6ccca07b0f19479181430530ac5e1, type: 2}
+  enemyType: 1
   name: Rat King
   description: A large bundle of angry rats tied at the tail.
   id: 103
   minLevel: 5
   maxLevel: 20
-  minDamage: 2
-  maxDamage: 4
+  minDamage: 3
+  maxDamage: 5
   defense: 0
   attackTypes:
   - {fileID: 11400000, guid: c4c112e9746a14b43a84465341717600, type: 2}
@@ -33,8 +33,15 @@ MonoBehaviour:
   mana: 10
   maxMana: 10
   manaRegen: 1
-  goldReward: 5
+  goldReward: 20
   speed: 0.75
-  expReward: 10
+  expReward: 20
   itemRewards: {fileID: 11400000, guid: 3c6a8e6f94c7a754b86382385dafca5a, type: 2}
   statusEffects: []
+  unlockedItems:
+  - {fileID: 11400000, guid: a488a6750f7fb154682b49c570235313, type: 2}
+  - {fileID: 11400000, guid: 76538cc43dfb1ba44afe04b693ee2f7d, type: 2}
+  - {fileID: 11400000, guid: 829e8da893e4c5b4181f27571dd45435, type: 2}
+  - {fileID: 11400000, guid: 3d1159b921de97d40a39c750e6acc310, type: 2}
+  - {fileID: 11400000, guid: 558c8d31aded24d40a679071c99792dd, type: 2}
+  unlockedItemsCount: 0100000001000000010000000100000001000000

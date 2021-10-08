@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ebe832ef0b3855348b377c74e480d076, type: 3}
-  m_Name: Electrum Axe
+  m_Name: Royal Axe
   m_EditorClassIdentifier: 
   itemType: 1
-  sprite: {fileID: 21300000, guid: 1d0ef292976de544a8f8ca3769b3490d, type: 3}
-  id: 118
-  name: Electrum Axe
-  description: An axe made out of the rare metal Electrum, this could fell a tree
-    in two strokes.
+  sprite: {fileID: 21300000, guid: ced186769fe1f144181512fab950cef7, type: 3}
+  id: 123
+  name: Royal Axe
+  description: An axe generally reserved for royalty, it could split someone in two
+    easily.
   weight: 3
-  value: 100
+  value: 210
   weaponType: 0
   weaponSkills:
   - {fileID: 11400000, guid: 481a0ed09dfc2d84f9d66cf6c15af1c5, type: 2}
   - {fileID: 11400000, guid: 2f43c0a13b3d0a443899cc3b5f42749c, type: 2}
-  minDamage: 15
-  maxDamage: 22
+  minDamage: 27
+  maxDamage: 37

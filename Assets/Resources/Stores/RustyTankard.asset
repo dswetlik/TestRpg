@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2223d07b9b43c4141ae275046391dfe0, type: 3}
   m_Name: RustyTankard
   m_EditorClassIdentifier: 
-  name: 
+  id: 3
+  name: Rusty Tankard
   itemList: []
   npc: {fileID: 0}

@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ebe832ef0b3855348b377c74e480d076, type: 3}
-  m_Name: Electrum Mace
+  m_Name: Royal Mace
   m_EditorClassIdentifier: 
   itemType: 1
-  sprite: {fileID: 21300000, guid: c18e9bb859e7c4648a77738159331dfa, type: 3}
-  id: 120
-  name: Electrum Mace
-  description: A mace made out of the rare metal Electrum, its used as a symbol of
-    power for the minor kings of Aredenia.
+  sprite: {fileID: 21300000, guid: 58d393acf01ab934cb468518d5f52960, type: 3}
+  id: 125
+  name: Royal Mace
+  description: A mace generally reserved for royalty, its the symbol of power for
+    the king of Aredenia.
   weight: 3
-  value: 100
+  value: 210
   weaponType: 0
   weaponSkills:
   - {fileID: 11400000, guid: 481a0ed09dfc2d84f9d66cf6c15af1c5, type: 2}
   - {fileID: 11400000, guid: 7ac70904a12978745a8e0318e4b304fa, type: 2}
-  minDamage: 15
-  maxDamage: 22
+  minDamage: 27
+  maxDamage: 37

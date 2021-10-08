@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 802708a540a43494f81957f0b3300bd3, type: 3}
   m_Name: Invera
   m_EditorClassIdentifier: 
+  id: 1
   name: Invera
   npcType: 1
   hasQuests: 1

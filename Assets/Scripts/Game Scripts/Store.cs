@@ -7,10 +7,12 @@ using System.Linq;
 public class Store : ScriptableObject
 {
 
+    [SerializeField] uint id;
     [SerializeField] new string name;
     [SerializeField] List<Item> itemList = new List<Item>();
     [SerializeField] NPC npc;
     
+    public uint GetID() { return id; }
 
     public string GetName() { return name; }
 

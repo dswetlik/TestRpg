@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2223d07b9b43c4141ae275046391dfe0, type: 3}
   m_Name: LitheWarrior
   m_EditorClassIdentifier: 
+  id: 1
   name: The Lithe Warrior
   itemList:
+  - {fileID: 11400000, guid: d1c1322831d3642418dc3f6bfb02c3bc, type: 2}
   - {fileID: 11400000, guid: 5b16090bc7fd43947b709020b2140e66, type: 2}
   - {fileID: 11400000, guid: 49d23910e8eccda40a501cde7a5901ba, type: 2}
-  - {fileID: 11400000, guid: d1c1322831d3642418dc3f6bfb02c3bc, type: 2}
   - {fileID: 11400000, guid: 610aeb62773842e4c8803f083696559d, type: 2}
   - {fileID: 11400000, guid: 2390336561f7a4748b7945956eacd402, type: 2}
   npc: {fileID: 11400000, guid: 3fe4ed4cfc8c22446a9f44b57cbfe8f4, type: 2}

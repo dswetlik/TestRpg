@@ -257,6 +257,8 @@ public class Engine : MonoBehaviour
     public static SortedDictionary<uint, Location> LocationDictionary;
     public static SortedDictionary<uint, Skill> SkillDictionary;
     public static SortedDictionary<uint, Enemy> EnemyDictionary;
+    public static SortedDictionary<uint, NPC> NPCDictionary;
+    public static SortedDictionary<uint, Store> StoreDictionary;
 
     Player player;
 
@@ -409,12 +411,23 @@ public class Engine : MonoBehaviour
     Enemy giantRat;
     Enemy ratPack;
     Enemy rat;
-    Enemy ratKing;
+
+    BossEnemy ratKing;
 
     Enemy redSlime;
     Enemy greenSlime;
     Enemy blueSlime;
 
+    NPC hirgirdBlacksmith;
+    NPC inveraAlchemist;
+    NPC kiarnilLeathersmith;
+    NPC serikInnkeeper;
+    NPC malina;
+
+    Store heavyAnvil;
+    Store litheWarrior;
+    Store magicMortar;
+    
     Sprite healthDrop;
     Sprite staminaDrop;
     Sprite manaDrop;
@@ -459,6 +472,11 @@ public class Engine : MonoBehaviour
         player.GetInventory().AddToInventory(tatteredShirt);
 
         player.GetInventory().AddToInventory(smallHealthPotion, 5);
+
+        player.SetSkillPoints(3);
+        player.AddExp(200);
+        player.ChangeGold(200);
+
         player.GetInventory().OnBeforeSerialize();
         player.GetInventory().OnAfterDeserialize();
 
@@ -494,6 +512,8 @@ public class Engine : MonoBehaviour
         ItemDictionary = new SortedDictionary<uint, Item>();
         LocationDictionary = new SortedDictionary<uint, Location>();
         EnemyDictionary = new SortedDictionary<uint, Enemy>();
+        NPCDictionary = new SortedDictionary<uint, NPC>();
+        StoreDictionary = new SortedDictionary<uint, Store>();
 
         NULL_ITEM = Resources.Load<Item>("Items/NULL_ITEM");
         NULL_WEAPON = Resources.Load<Weapon>("Items/NULL_WEAPON");
@@ -626,9 +646,10 @@ public class Engine : MonoBehaviour
 
         rat = Instantiate(Resources.Load<Enemy>("Enemies/Rats/Rat"));
         giantRat = Instantiate(Resources.Load<Enemy>("Enemies/Rats/GiantRat"));
-        ratKing = Instantiate(Resources.Load<Enemy>("Enemies/Rats/RatKing"));
         smallRat = Instantiate(Resources.Load<Enemy>("Enemies/Rats/Small Rat"));
         ratPack = Instantiate(Resources.Load<Enemy>("Enemies/Rats/RatPack"));
+
+        ratKing = Instantiate(Resources.Load<BossEnemy>("Enemies/Rats/RatKing"));
 
         redSlime = Instantiate(Resources.Load<Enemy>("Enemies/Slimes/RedSlime"));
         greenSlime = Instantiate(Resources.Load<Enemy>("Enemies/Slimes/GreenSlime"));
@@ -642,6 +663,26 @@ public class Engine : MonoBehaviour
         EnemyDictionary.Add(greenSlime.GetID(), greenSlime);
         EnemyDictionary.Add(blueSlime.GetID(), blueSlime);
 
+        hirgirdBlacksmith = Instantiate(Resources.Load<NPC>("NPC/Hirgird"));
+        inveraAlchemist = Instantiate(Resources.Load<NPC>("NPC/Invera"));
+        kiarnilLeathersmith = Instantiate(Resources.Load<NPC>("NPC/Kiarnil"));
+        serikInnkeeper = Instantiate(Resources.Load<NPC>("NPC/Serik"));
+        malina = Instantiate(Resources.Load<NPC>("NPC/Malina"));
+
+        NPCDictionary.Add(hirgirdBlacksmith.GetID(), hirgirdBlacksmith);
+        NPCDictionary.Add(inveraAlchemist.GetID(), inveraAlchemist);
+        NPCDictionary.Add(kiarnilLeathersmith.GetID(), kiarnilLeathersmith);
+        NPCDictionary.Add(serikInnkeeper.GetID(), serikInnkeeper);
+        NPCDictionary.Add(malina.GetID(), malina);
+
+        heavyAnvil = Instantiate(Resources.Load<Store>("Stores/HeavyAnvil"));
+        litheWarrior = Instantiate(Resources.Load<Store>("Stores/LitheWarrior"));
+        magicMortar = Instantiate(Resources.Load<Store>("Stores/MagicMortar"));
+
+        StoreDictionary.Add(heavyAnvil.GetID(), heavyAnvil);
+        StoreDictionary.Add(litheWarrior.GetID(), litheWarrior);
+        StoreDictionary.Add(magicMortar.GetID(), magicMortar);
+
         healthDrop = Resources.Load<Sprite>("Textures/Inventory Icons/skill_008");
         staminaDrop = Resources.Load<Sprite>("Textures/Inventory Icons/skill_173");
         manaDrop = Resources.Load<Sprite>("Textures/Inventory Icons/skill_alt_008");
@@ -649,7 +690,6 @@ public class Engine : MonoBehaviour
         manaDmgSprite = Resources.Load<Sprite>("Textures/Inventory Icons/skill_016");
 
         player = new Player("Name", overworld, new Inventory());
-        player.SetSkillPoints(3);
     }
 
     void InitializeSkills()
@@ -1237,6 +1277,31 @@ public class Engine : MonoBehaviour
             OutputToText(String.Format("You have killed {0}, gaining {1} exp and {2} gold.", enemy.GetName(), enemy.GetExpReward(), enemy.GetGoldReward()));
             player.AddExp(enemy.GetExpReward());
             player.ChangeGold(enemy.GetGoldReward());
+
+            if(enemy.GetEnemyType() == Enemy.EnemyType.boss)
+            {
+                BossEnemy boss = (BossEnemy)enemy;
+                for(int i = 0; i < boss.GetUnlockedItems().Count; i++)
+                {
+                    Item item = boss.GetUnlockedItems()[i];
+                    for(int j = 0; j < boss.GetUnlockedItemsCount()[i]; j++)
+                    {
+                        if(item.IsWeapon())
+                        {
+                            StoreDictionary[NPCDictionary[hirgirdBlacksmith.GetID()].GetStore().GetID()].AddItem(item);
+                        }
+                        else if (item.IsArmor())
+                        {
+                            if (((Armor)item).GetArmorClass() == Armor.ArmorClass.light)
+                                StoreDictionary[NPCDictionary[kiarnilLeathersmith.GetID()].GetStore().GetID()].AddItem(item);
+                        }
+                        else if(item.IsConsumable())
+                        {
+                            StoreDictionary[NPCDictionary[inveraAlchemist.GetID()].GetStore().GetID()].AddItem(item);
+                        }
+                    }
+                }
+            }
 
             foreach (GameObject sGO in enemyStatusEffectSlots.ToList<GameObject>())
             {
@@ -2014,9 +2079,9 @@ public class Engine : MonoBehaviour
             AddToInventory(item);
             if (isInChest)
                 activeChest.RemoveItem(item);
-            if (isInNPC)
+            if (isInNPC && !isInBattle)
             {
-                //currentShop.RemoveItem(item);
+                StoreDictionary[currentNPC.GetStore().GetID()].RemoveItem(item);
                 player.ChangeGold(-(int)(item.GetValue()));
                 if (player.GetGold() < item.GetValue())
                     pickupItemBtn.interactable = false;
@@ -2454,7 +2519,7 @@ public class Engine : MonoBehaviour
     {
         isInNPC = x;
         if (x)
-            currentNPC = NPC.GetComponent<NPCContainer>().GetNPC();
+            currentNPC = NPCDictionary[NPC.GetComponent<NPCContainer>().GetNPC().GetID()];
         else
             currentNPC = null;
 
@@ -2479,7 +2544,7 @@ public class Engine : MonoBehaviour
             {
                 if (currentNPC.GetNPCType() == NPC.NPCType.merchant)
                 {
-                    Store currentShop = currentNPC.GetStore();
+                    Store currentShop = StoreDictionary[currentNPC.GetStore().GetID()];
                     sourceName = currentShop.GetName();
                     pickupDropItemBtn.gameObject.transform.GetChild(0).GetComponent<Text>().text = "Sell Item";
                     pickupItemBtn.gameObject.transform.GetChild(0).GetComponent<Text>().text = "Buy Item";
@@ -2935,6 +3000,7 @@ public class Engine : MonoBehaviour
         messageTxt.text = "You rest, healing and rejuvenating you.";
 
         UICoverScreen.raycastTarget = true;
+        messageTxt.raycastTarget = true;
         while (UICoverScreen.color.a < 1)
         {
             UICoverScreen.color = new Color(UICoverScreen.color.r, UICoverScreen.color.g, UICoverScreen.color.b, UICoverScreen.color.a + (0.01f));
@@ -2964,6 +3030,7 @@ public class Engine : MonoBehaviour
             yield return new WaitForSecondsRealtime(0.005f * Time.deltaTime);
         }
         UICoverScreen.raycastTarget = false;
+        messageTxt.raycastTarget = false;
     }
 
     IEnumerator EnterBattle(Enemy enemy)
@@ -2971,6 +3038,7 @@ public class Engine : MonoBehaviour
         messageTxt.text = "Prepare for Battle";
 
         UICoverScreen.raycastTarget = true;
+        messageTxt.raycastTarget = true;
         while (UICoverScreen.color.a < 1)
         {
             UICoverScreen.color = new Color(UICoverScreen.color.r, UICoverScreen.color.g, UICoverScreen.color.b, UICoverScreen.color.a + (0.01f));
@@ -2988,6 +3056,7 @@ public class Engine : MonoBehaviour
             yield return new WaitForSecondsRealtime(0.01f * Time.deltaTime);
         }
         UICoverScreen.raycastTarget = false;
+        messageTxt.raycastTarget = false;
     }
 
     IEnumerator HasDied()

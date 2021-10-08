@@ -12,6 +12,7 @@ public class NPC : ScriptableObject
         merchant
     }
 
+    [SerializeField] uint id;
     [SerializeField] new string name;
     [SerializeField] NPCType npcType;
     [SerializeField] bool hasQuests;
@@ -21,6 +22,7 @@ public class NPC : ScriptableObject
     [SerializeField] Dialogue dialogue;
     [SerializeField] Store store;
 
+    public uint GetID() { return id; }
     public string GetName() { return name; }
     public NPCType GetNPCType() { return npcType; }
 
