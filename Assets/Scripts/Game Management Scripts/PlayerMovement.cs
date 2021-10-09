@@ -49,10 +49,14 @@ public class PlayerMovement : MonoBehaviour
         Vector3 target = transform.position + (transform.forward * 10);
         Vector3 offset = target - transform.position;
         CollisionFlags collisionFlags = CollisionFlags.None;
+        AudioSource walk = GameObject.Find("FootstepAudioSource").GetComponent<AudioSource>();
 
         while (true)
         {
             offset = target - transform.position;
+
+            if (!walk.isPlaying)
+                walk.Play();
 
             if (offset.magnitude > 0.1f)
             {
@@ -82,10 +86,14 @@ public class PlayerMovement : MonoBehaviour
         Vector3 target = transform.position + (-transform.forward * 10);
         Vector3 offset = target - transform.position;
         CollisionFlags collisionFlags = CollisionFlags.None;
+        AudioSource walk = GameObject.Find("FootstepAudioSource").GetComponent<AudioSource>();
 
         while (true)
         {
             offset = target - transform.position;
+
+            if (!walk.isPlaying)
+                walk.Play();
 
             if (offset.magnitude > 0.1f)
             {

@@ -1,0 +1,5 @@
+{
+    "folderName": "Localization",
+    "longVersion": "1.2.5",
+    "shortVersion": 2
+}

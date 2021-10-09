@@ -1483,10 +1483,17 @@ public class Engine : MonoBehaviour
 
 
         GameObject.Find("PlayerCardALocation").transform.GetChild(0).GetComponent<Button>().onClick.AddListener(delegate { PlayerAttack(cardASkill); });
-        if(cardBSkill != null)
+        GameObject.Find("PlayerCardALocation").transform.GetChild(0).GetComponent<Button>().onClick.AddListener(delegate { GameObject.Find("WeaponAudioSource").GetComponent<AudioSource>().Play(); });
+        if (cardBSkill != null)
+        {
             GameObject.Find("PlayerCardBLocation").transform.GetChild(0).GetComponent<Button>().onClick.AddListener(delegate { PlayerAttack(cardBSkill); });
-        if(cardCSkill != null)
+            GameObject.Find("PlayerCardBLocation").transform.GetChild(0).GetComponent<Button>().onClick.AddListener(delegate { GameObject.Find("SkillAudioSource").GetComponent<AudioSource>().Play(); });
+        }
+        if (cardCSkill != null)
+        {
             GameObject.Find("PlayerCardCLocation").transform.GetChild(0).GetComponent<Button>().onClick.AddListener(delegate { PlayerAttack(cardCSkill); });
+            GameObject.Find("PlayerCardCLocation").transform.GetChild(0).GetComponent<Button>().onClick.AddListener(delegate { GameObject.Find("MagicAudioSource").GetComponent<AudioSource>().Play(); });
+        }
 
         SetCard(GameObject.Find("PlayerCardALocation").transform.GetChild(0).gameObject, cardASkill);
         if(cardBSkill != null)
@@ -1870,6 +1877,7 @@ public class Engine : MonoBehaviour
             GameObject questSlot = GameObject.Instantiate(uiQuestSlot, questPanel.transform);
             questSlot.GetComponent<QuestContainer>().SetQuest(QuestDictionary[quest.GetID()]);
             questSlot.GetComponent<Button>().onClick.AddListener(() => DisplayQuest(questSlot.GetComponent<QuestContainer>()));
+            questSlot.GetComponent<Button>().onClick.AddListener(() => GameObject.Find("ButtonAudioSource").GetComponent<AudioSource>().Play());
             uiQuestSlots.Add(QuestDictionary[quest.GetID()].GetID(), questSlot);
             player.AddQuest(QuestDictionary[quest.GetID()]);
         }       
@@ -1893,6 +1901,7 @@ public class Engine : MonoBehaviour
                 invSlot.GetComponent<ItemContainer>().SetItem(item);
                 // Adds new onClick command to invSlot's button component
                 invSlot.GetComponent<Button>().onClick.AddListener(() => DisplayItem(invSlot.GetComponent<ItemContainer>()));
+                invSlot.GetComponent<Button>().onClick.AddListener(() => GameObject.Find("ButtonAudioSource").GetComponent<AudioSource>().Play());
                 // adds invSlot to invSlots
                 uiInvSlots.Add(item.GetID(), invSlot);
                 // adds item to player's inventory
@@ -1993,7 +2002,7 @@ public class Engine : MonoBehaviour
             pickupSlot.GetComponent<ItemContainer>().SetItem(item);
 
             pickupSlot.GetComponent<Button>().onClick.AddListener(() => DisplayItem(pickupSlot.GetComponent<ItemContainer>()));
-
+            pickupSlot.GetComponent<Button>().onClick.AddListener(() => GameObject.Find("ButtonAudioSource").GetComponent<AudioSource>().Play());
             uiPickupSlots.Add(item.GetID(), pickupSlot);
 
             OrderDictionary(uiPickupSlots);
@@ -3083,19 +3092,23 @@ public class Engine : MonoBehaviour
         switch(c.GetConsumableType())
         {
             case Consumable.ConsumableType.healthPotion:
+                GameObject.Find("FoodDrinkAudioSource").GetComponent<AudioSource>().Play();
                 UpdateHealthSliders();
                 break;
             case Consumable.ConsumableType.staminaPotion:
+                GameObject.Find("FoodDrinkAudioSource").GetComponent<AudioSource>().Play();
                 UpdateStaminaSliders();
                 break;
             case Consumable.ConsumableType.manaPotion:
+                GameObject.Find("FoodDrinkAudioSource").GetComponent<AudioSource>().Play();
                 UpdateManaSliders();
                 break;
             case Consumable.ConsumableType.food:
+                GameObject.Find("FoodEatAudioSource").GetComponent<AudioSource>().Play();
                 UpdateHealthSliders();
                 break;
             case Consumable.ConsumableType.drink:
-                
+                GameObject.Find("FoodDrinkAudioSource").GetComponent<AudioSource>().Play();
                 break;
         }
 

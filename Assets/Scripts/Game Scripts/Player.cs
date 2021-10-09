@@ -367,6 +367,27 @@ public class Player
             health = 0;
         if (health > GetMaxHealth())
             health = GetMaxHealth();
+
+        if(health < GetMaxHealth() * 0.1f)
+        {
+            Debug.Log("Playing Fast Heartbeat");
+            GameObject.Find("HeartbeatSlowLoopAudioSource").GetComponent<AudioSource>().Stop();
+            if(!GameObject.Find("HeartbeatFastLoopAudioSource").GetComponent<AudioSource>().isPlaying)
+                GameObject.Find("HeartbeatFastLoopAudioSource").GetComponent<AudioSource>().Play();
+        }
+        else if(health < GetMaxHealth() * 0.25f)
+        {
+            Debug.Log("Playing Slow Heartbeat");
+            GameObject.Find("HeartbeatFastLoopAudioSource").GetComponent<AudioSource>().Stop();
+            if (!GameObject.Find("HeartbeatSlowLoopAudioSource").GetComponent<AudioSource>().isPlaying)
+                GameObject.Find("HeartbeatSlowLoopAudioSource").GetComponent<AudioSource>().Play();
+        }
+        else
+        {
+            Debug.Log("Not Playing Heartbeat");
+            GameObject.Find("HeartbeatFastLoopAudioSource").GetComponent<AudioSource>().Stop();
+            GameObject.Find("HeartbeatSlowLoopAudioSource").GetComponent<AudioSource>().Stop();
+        }
     }
 
     public void ChangeStamina(int staminaChange)

@@ -1,0 +1,5 @@
+{
+    "folderName": "JumpyCompleteGame",
+    "longVersion": "1.4.15",
+    "shortVersion": 5
+}
