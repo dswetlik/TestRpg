@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Slam
   description: The {0} body slams into you, dealing {1} damage!
+  audioClip: {fileID: 8300000, guid: 9d815060bf0af1244b9249052ed27d46, type: 3}
   attackType: 3
   attackAttribute: 1
   minDamageModifier: 4

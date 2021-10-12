@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Adrenaline Rush
   description: '{0} amps itself up into a furious state, healing itself {1} damage!'
+  audioClip: {fileID: 8300000, guid: 6ebfb999c92b23c4aa28a20bdcfdb636, type: 3}
   attackType: 2
   attackAttribute: 2
   minDamageModifier: 1

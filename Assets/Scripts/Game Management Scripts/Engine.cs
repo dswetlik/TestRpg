@@ -319,10 +319,73 @@ public class Engine : MonoBehaviour
     Armor leatherBoots;
     Armor leatherGloves;
 
+    Armor copperBelt;
+    Armor copperBoots;
+    Armor copperGloves;
+    Armor copperHelmet;
+    Armor copperChest;
+
+    Armor silverBelt;
+    Armor silverBoots;
+    Armor silverGloves;
+    Armor silverHelmet;
+    Armor silverChest;
+
+    Armor titaniumBelt;
+    Armor titaniumBoots;
+    Armor titaniumGloves;
+    Armor titaniumHelmet;
+    Armor titaniumChest;
+
+    Armor heroicBelt;
+    Armor heroicBoots;
+    Armor heroicGloves;
+    Armor heroicHelmet;
+    Armor heroicChest;
+
+    Armor ironBelt;
+    Armor ironBoots;
+    Armor ironGloves;
+    Armor ironHelmet;
+    Armor ironChest;
+
+    Armor steelBelt;
+    Armor steelBoots;
+    Armor steelGloves;
+    Armor steelHelmet;
+    Armor steelChest;
+
+    Armor electrumBelt;
+    Armor electrumBoots;
+    Armor electrumGloves;
+    Armor electrumHelmet;
+    Armor electrumChest;
+
+    Armor magneniumBelt;
+    Armor magneniumBoots;
+    Armor magneniumGloves;
+    Armor magneniumHelmet;
+    Armor magneniumChest;
+
+    Armor demonicBelt;
+    Armor demonicBoots;
+    Armor demonicGloves;
+    Armor demonicHelmet;
+    Armor demonicChest;
+
     Consumable ratMeat;
     Consumable smallHealthPotion;
     Consumable smallStaminaPotion;
     Consumable smallManaPotion;
+    Consumable healthPotion;
+    Consumable staminaPotion;
+    Consumable manaPotion;
+    Consumable largeHealthPotion;
+    Consumable largeStaminaPotion;
+    Consumable largeManaPotion;
+    Consumable giantHealthPotion;
+    Consumable giantStaminaPotion;
+    Consumable giantManaPotion;
 
     Location border;
     Location overworld;
@@ -422,11 +485,13 @@ public class Engine : MonoBehaviour
     NPC inveraAlchemist;
     NPC kiarnilLeathersmith;
     NPC serikInnkeeper;
+    NPC varianArmorsmith;
     NPC malina;
 
     Store heavyAnvil;
     Store litheWarrior;
     Store magicMortar;
+    Store theBulwark;
     
     Sprite healthDrop;
     Sprite staminaDrop;
@@ -572,10 +637,73 @@ public class Engine : MonoBehaviour
         leatherBoots = Resources.Load<Armor>("Items/Armors/Leather/Leather Boots");
         leatherGloves = Resources.Load<Armor>("Items/Armors/Leather/Leather Gloves");
 
+        copperBelt = Resources.Load<Armor>("Items/Armors/Copper/Copper Belt");
+        copperBoots = Resources.Load<Armor>("Items/Armors/Copper/Copper Boots");
+        copperGloves = Resources.Load<Armor>("Items/Armors/Copper/Copper Gloves");
+        copperHelmet = Resources.Load<Armor>("Items/Armors/Copper/Copper Helmet");
+        copperChest = Resources.Load<Armor>("Items/Armors/Copper/Copper Shirt");
+
+        silverBelt = Resources.Load<Armor>("Items/Armors/Silver/Silver Belt");
+        silverBoots = Resources.Load<Armor>("Items/Armors/Silver/Silver Boots");
+        silverGloves = Resources.Load<Armor>("Items/Armors/Silver/Silver Gloves");
+        silverHelmet = Resources.Load<Armor>("Items/Armors/Silver/Silver Helmet");
+        silverChest = Resources.Load<Armor>("Items/Armors/Silver/Silver Shirt");
+
+        titaniumBelt = Resources.Load<Armor>("Items/Armors/Titanium/Titanium Belt");
+        titaniumBoots = Resources.Load<Armor>("Items/Armors/Titanium/Titanium Boots");
+        titaniumGloves = Resources.Load<Armor>("Items/Armors/Titanium/Titanium Gloves");
+        titaniumHelmet = Resources.Load<Armor>("Items/Armors/Titanium/Titanium Helmet");
+        titaniumChest = Resources.Load<Armor>("Items/Armors/Titanium/Titanium Shirt");
+
+        heroicBelt = Resources.Load<Armor>("Items/Armors/Heroic/Heroic Belt");
+        heroicBoots = Resources.Load<Armor>("Items/Armors/Heroic/Heroic Boots");
+        heroicGloves = Resources.Load<Armor>("Items/Armors/Heroic/Heroic Gloves");
+        heroicHelmet = Resources.Load<Armor>("Items/Armors/Heroic/Heroic Helmet");
+        heroicChest = Resources.Load<Armor>("Items/Armors/Heroic/Heroic Shirt");
+
+        ironBelt = Resources.Load<Armor>("Items/Armors/Iron/Iron Belt");
+        ironBoots = Resources.Load<Armor>("Items/Armors/Iron/Iron Boots");
+        ironGloves = Resources.Load<Armor>("Items/Armors/Iron/Iron Gloves");
+        ironHelmet = Resources.Load<Armor>("Items/Armors/Iron/Iron Helmet");
+        ironChest = Resources.Load<Armor>("Items/Armors/Iron/Iron Chestpiece");
+
+        steelBelt = Resources.Load<Armor>("Items/Armors/Steel/Steel Belt");
+        steelBoots = Resources.Load<Armor>("Items/Armors/Steel/Steel Boots");
+        steelGloves = Resources.Load<Armor>("Items/Armors/Steel/Steel Gloves");
+        steelHelmet = Resources.Load<Armor>("Items/Armors/Steel/Steel Helmet");
+        steelChest = Resources.Load<Armor>("Items/Armors/Steel/Steel Chestpiece");
+
+        electrumBelt = Resources.Load<Armor>("Items/Armors/Electrum/Electrum Belt");
+        electrumBoots = Resources.Load<Armor>("Items/Armors/Electrum/Electrum Boots");
+        electrumGloves = Resources.Load<Armor>("Items/Armors/Electrum/Electrum Gloves");
+        electrumHelmet = Resources.Load<Armor>("Items/Armors/Electrum/Electrum Helmet");
+        electrumChest = Resources.Load<Armor>("Items/Armors/Electrum/Electrum Chestpiece");
+
+        magneniumBelt = Resources.Load<Armor>("Items/Armors/Magnenium/Magnenium Belt");
+        magneniumBoots = Resources.Load<Armor>("Items/Armors/Magnenium/Magnenium Boots");
+        magneniumGloves = Resources.Load<Armor>("Items/Armors/Magnenium/Magnenium Gloves");
+        magneniumHelmet = Resources.Load<Armor>("Items/Armors/Magnenium/Magnenium Helmet");
+        magneniumChest = Resources.Load<Armor>("Items/Armors/Magnenium/Magnenium Chestpiece");
+
+        demonicBelt = Resources.Load<Armor>("Items/Armors/Demonic/Demonic Belt");
+        demonicBoots = Resources.Load<Armor>("Items/Armors/Demonic/Demonic Boots");
+        demonicGloves = Resources.Load<Armor>("Items/Armors/Demonic/Demonic Gloves");
+        demonicHelmet = Resources.Load<Armor>("Items/Armors/Demonic/Demonic Helmet");
+        demonicChest = Resources.Load<Armor>("Items/Armors/Demonic/Demonic Chestpiece");
+
         ratMeat = Resources.Load<Consumable>("Items/Consumables/Rat Meat");
         smallHealthPotion = Resources.Load<Consumable>("Items/Consumables/Small Health Potion");
         smallStaminaPotion = Resources.Load<Consumable>("Items/Consumables/Small Stamina Potion");
         smallManaPotion = Resources.Load<Consumable>("Items/Consumables/Small Mana Potion");
+        healthPotion = Resources.Load<Consumable>("Items/Consumables/Health Potion");
+        staminaPotion = Resources.Load<Consumable>("Items/Consumables/Stamina Potion");
+        manaPotion = Resources.Load<Consumable>("Items/Consumables/Mana Potion");
+        largeHealthPotion = Resources.Load<Consumable>("Items/Consumables/Large Health Potion");
+        largeStaminaPotion = Resources.Load<Consumable>("Items/Consumables/Large Stamina Potion");
+        largeManaPotion = Resources.Load<Consumable>("Items/Consumables/Large Mana Potion");
+        giantHealthPotion = Resources.Load<Consumable>("Items/Consumables/Giant Health Potion");
+        giantStaminaPotion = Resources.Load<Consumable>("Items/Consumables/Giant Stamina Potion");
+        giantManaPotion = Resources.Load<Consumable>("Items/Consumables/Giant Mana Potion");
 
         ItemDictionary.Add(key.GetID(), key);
 
@@ -630,9 +758,73 @@ public class Engine : MonoBehaviour
         ItemDictionary.Add(leatherBoots.GetID(), leatherBoots);
         ItemDictionary.Add(leatherGloves.GetID(), leatherGloves);
 
+        ItemDictionary.Add(copperBelt.GetID(), copperBelt);
+        ItemDictionary.Add(copperBoots.GetID(), copperBoots);
+        ItemDictionary.Add(copperGloves.GetID(), copperGloves);
+        ItemDictionary.Add(copperHelmet.GetID(), copperHelmet);
+        ItemDictionary.Add(copperChest.GetID(), copperChest);
+
+        ItemDictionary.Add(silverBelt.GetID(), silverBelt);
+        ItemDictionary.Add(silverBoots.GetID(), silverBoots);
+        ItemDictionary.Add(silverGloves.GetID(), silverGloves);
+        ItemDictionary.Add(silverHelmet.GetID(), silverHelmet);
+        ItemDictionary.Add(silverChest.GetID(), silverChest);
+
+        ItemDictionary.Add(titaniumBelt.GetID(), titaniumBelt);
+        ItemDictionary.Add(titaniumBoots.GetID(), titaniumBoots);
+        ItemDictionary.Add(titaniumGloves.GetID(), titaniumGloves);
+        ItemDictionary.Add(titaniumHelmet.GetID(), titaniumHelmet);
+        ItemDictionary.Add(titaniumChest.GetID(), titaniumChest);
+
+        ItemDictionary.Add(heroicBelt.GetID(), heroicBelt);
+        ItemDictionary.Add(heroicBoots.GetID(), heroicBoots);
+        ItemDictionary.Add(heroicGloves.GetID(), heroicGloves);
+        ItemDictionary.Add(heroicHelmet.GetID(), heroicHelmet);
+        ItemDictionary.Add(heroicChest.GetID(), heroicChest);
+
+        ItemDictionary.Add(ironBelt.GetID(), ironBelt);
+        ItemDictionary.Add(ironBoots.GetID(), ironBoots);
+        ItemDictionary.Add(ironGloves.GetID(), ironGloves);
+        ItemDictionary.Add(ironHelmet.GetID(), ironHelmet);
+        ItemDictionary.Add(ironChest.GetID(), ironChest);
+
+        ItemDictionary.Add(steelBelt.GetID(), steelBelt);
+        ItemDictionary.Add(steelBoots.GetID(), steelBoots);
+        ItemDictionary.Add(steelGloves.GetID(), steelGloves);
+        ItemDictionary.Add(steelHelmet.GetID(), steelHelmet);
+        ItemDictionary.Add(steelChest.GetID(), steelChest);
+
+        ItemDictionary.Add(electrumBelt.GetID(), electrumBelt);
+        ItemDictionary.Add(electrumBoots.GetID(), electrumBoots);
+        ItemDictionary.Add(electrumGloves.GetID(), electrumGloves);
+        ItemDictionary.Add(electrumHelmet.GetID(), electrumHelmet);
+        ItemDictionary.Add(electrumChest.GetID(), electrumChest);
+
+        ItemDictionary.Add(magneniumBelt.GetID(), magneniumBelt);
+        ItemDictionary.Add(magneniumBoots.GetID(), magneniumBoots);
+        ItemDictionary.Add(magneniumGloves.GetID(), magneniumGloves);
+        ItemDictionary.Add(magneniumHelmet.GetID(), magneniumHelmet);
+        ItemDictionary.Add(magneniumChest.GetID(), magneniumChest);
+
+        ItemDictionary.Add(demonicBelt.GetID(), demonicBelt);
+        ItemDictionary.Add(demonicBoots.GetID(), demonicBoots);
+        ItemDictionary.Add(demonicGloves.GetID(), demonicGloves);
+        ItemDictionary.Add(demonicHelmet.GetID(), demonicHelmet);
+        ItemDictionary.Add(demonicChest.GetID(), demonicChest);
+
         ItemDictionary.Add(ratMeat.GetID(), ratMeat);
         ItemDictionary.Add(smallHealthPotion.GetID(), smallHealthPotion);
         ItemDictionary.Add(smallStaminaPotion.GetID(), smallStaminaPotion);
+        ItemDictionary.Add(smallManaPotion.GetID(), smallManaPotion);
+        ItemDictionary.Add(healthPotion.GetID(), healthPotion);
+        ItemDictionary.Add(staminaPotion.GetID(), staminaPotion);
+        ItemDictionary.Add(manaPotion.GetID(), manaPotion);
+        ItemDictionary.Add(largeHealthPotion.GetID(), largeHealthPotion);
+        ItemDictionary.Add(largeStaminaPotion.GetID(), largeStaminaPotion);
+        ItemDictionary.Add(largeManaPotion.GetID(), largeManaPotion);
+        ItemDictionary.Add(giantHealthPotion.GetID(), giantHealthPotion);
+        ItemDictionary.Add(giantStaminaPotion.GetID(), giantStaminaPotion);
+        ItemDictionary.Add(giantManaPotion.GetID(), giantManaPotion);
 
         border = Resources.Load<Location>("Locations/Border");
         overworld = Resources.Load<Location>("Locations/Overworld");
@@ -1133,6 +1325,9 @@ public class Engine : MonoBehaviour
 
     IEnumerator Battle(Enemy eGO)
     {
+        if (GameObject.Find("OverworldMusicAudioSource").GetComponent<AudioSource>().isPlaying)
+            GameObject.Find("OverworldMusicAudioSource").GetComponent<AudioSource>().Stop();
+        GameObject.Find("BattleMusicAudioSource").GetComponent<AudioSource>().Play();
         isInBattle = true;
 
         playerDamageOutput = 0;
@@ -1272,6 +1467,7 @@ public class Engine : MonoBehaviour
 
         if (enemy.GetHealth() <= 0)
         {
+            GameObject.Find("BattleWinMusicAudioSource").GetComponent<AudioSource>().Play();
             ActivatePickupScreen(true);
             GenerateItemPickup(enemy.GetItemRewards());
             OutputToText(String.Format("You have killed {0}, gaining {1} exp and {2} gold.", enemy.GetName(), enemy.GetExpReward(), enemy.GetGoldReward()));
@@ -1328,6 +1524,7 @@ public class Engine : MonoBehaviour
         UpdateInventoryAttributes();
         battleOutputTxt.text = "";
         isInBattle = false;
+        GameObject.Find("BattleMusicAudioSource").GetComponent<AudioSource>().Stop();
     }
 
     bool CheckIfStunned(bool isPlayer)
@@ -1438,7 +1635,7 @@ public class Engine : MonoBehaviour
         }
     }
 
-    void UpdateBattleAttributes(Enemy enemy)                                            
+    void UpdateBattleAttributes(Enemy enemy)
     {
         enemyHealthSlider.maxValue = enemy.GetMaxHealth();
         enemyStaminaSlider.maxValue = enemy.GetMaxStamina();
@@ -1777,6 +1974,12 @@ public class Engine : MonoBehaviour
                         AddStatusEffect(Instantiate(statusEffect), false, enemy);                  
                 }
             }
+        }
+
+        if (attack.GetAudioClip() != null)
+        {
+            GameObject.Find("MonsterAudioSource").GetComponent<AudioSource>().clip = attack.GetAudioClip();
+            GameObject.Find("MonsterAudioSource").GetComponent<AudioSource>().Play();
         }
     }
 
@@ -3070,6 +3273,8 @@ public class Engine : MonoBehaviour
 
     IEnumerator HasDied()
     {
+        GameObject.Find("BattleLoseMusicAudioSource").GetComponent<AudioSource>().Play();
+        GameObject.Find("HeartbeatFastLoopAudioSource").GetComponent<AudioSource>().Stop();
         messageTxt.text = "You have Died";
 
         UICoverScreen.raycastTarget = true;
@@ -3594,11 +3799,27 @@ public class Engine : MonoBehaviour
         playerObject.transform.rotation = location.GetSpawnRotation();
 
         UILoadScreen.SetActive(false);
-
+        StartCoroutine(OverworldMusic());
     }
 
     IEnumerator DirectionalOutput()
     {
         yield return null;
+    }
+
+    IEnumerator OverworldMusic()
+    {
+        GameObject overworldMusic = GameObject.Find("OverworldMusicAudioSource");
+        List<AudioClip> audioClips = overworldMusic.GetComponent<AudioClipContainer>().GetAudioClips();
+        yield return new WaitForSecondsRealtime(10.0f);
+        while(true)
+        {
+            if(!isInBattle && !overworldMusic.GetComponent<AudioSource>().isPlaying)
+            {
+                overworldMusic.GetComponent<AudioSource>().clip = audioClips[UnityEngine.Random.Range(0, audioClips.Count)];
+                overworldMusic.GetComponent<AudioSource>().Play();
+            }
+            yield return new WaitForSecondsRealtime(60.0f);
+        }
     }
 }

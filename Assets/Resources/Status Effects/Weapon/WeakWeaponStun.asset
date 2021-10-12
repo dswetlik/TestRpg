@@ -15,7 +15,7 @@ MonoBehaviour:
   statusEffectType: 6
   name: Weak Stun
   description: You are stunned for a short duration.
-  hitChance: 0.1
+  hitChance: 0.9
   turnAmount: 1
   isNegative: 1
   isPercentage: 0

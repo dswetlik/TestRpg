@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Bite
   description: '{0} nipped at you, dealing {1} damage!'
+  audioClip: {fileID: 8300000, guid: aa3d55d4effb04b4e83e42a92370df8c, type: 3}
   attackType: 3
   attackAttribute: 1
   minDamageModifier: 0

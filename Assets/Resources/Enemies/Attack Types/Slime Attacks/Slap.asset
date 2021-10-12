@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Slap
   description: The {0} uses a portion of its form to slap you, dealing {1} damage!
+  audioClip: {fileID: 8300000, guid: 290a629374ee7ec43b21e75cdcf4b89b, type: 3}
   attackType: 3
   attackAttribute: 1
   minDamageModifier: 0

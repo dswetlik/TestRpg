@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Small Mana Potion
   m_EditorClassIdentifier: 
   itemType: 3
-  sprite: {fileID: 21300000, guid: 276d2e55d68313e4ea95bf9e6d0b09e4, type: 3}
-  id: 503
+  sprite: {fileID: 21300000, guid: 486fd83202803c54cb04128a5d3e6735, type: 3}
+  id: 501
   name: Small Mana Potion
   description: A small vial of murky blue liquid.
   weight: 1
   value: 5
   consumableType: 2
-  statChange: 20
+  statChange: 10

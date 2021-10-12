@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemType: 2
   sprite: {fileID: 21300000, guid: 530fce8a3c9e71a41a4d81997bba6612, type: 3}
-  id: 305
+  id: 309
   name: Leather Helmet
   description: A basic leather helmet.
   weight: 2
   value: 15
   armorType: 0
   armorClass: 1
-  rating: 2
+  rating: 1

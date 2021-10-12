@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Haste
   description: The {0} starts moving faster for some time!
+  audioClip: {fileID: 8300000, guid: 520541055e38f854bbdf87e5282fb317, type: 3}
   attackType: 1
   attackAttribute: 2
   minDamageModifier: 0

@@ -15,7 +15,7 @@ MonoBehaviour:
   statusEffectType: 7
   name: Weak Defense Break
   description: Your defense is lowered for some time.
-  hitChance: 0.1
+  hitChance: 0.9
   turnAmount: 2
   isNegative: 1
   isPercentage: 1

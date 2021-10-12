@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemType: 2
   sprite: {fileID: 21300000, guid: 586cd7edb4f89bd4ebfc911f3a5e38db, type: 3}
-  id: 306
+  id: 310
   name: Leather Chestpiece
   description: A basic leather chestpiece.
   weight: 3
   value: 20
   armorType: 1
   armorClass: 1
-  rating: 3
+  rating: 2

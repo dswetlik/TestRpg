@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Heavy Bite
   description: '{0} clamped its jaws on you hard, dealing {1} damage.'
+  audioClip: {fileID: 8300000, guid: 77ea15d6a32cadb4391dd30f325c27b7, type: 3}
   attackType: 3
   attackAttribute: 1
   minDamageModifier: 2

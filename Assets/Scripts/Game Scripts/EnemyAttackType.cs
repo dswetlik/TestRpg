@@ -22,6 +22,7 @@ public class EnemyAttackType : ScriptableObject
 
     [SerializeField] new string name;
     [TextArea(3,5)] [SerializeField] string description;
+    [SerializeField] AudioClip audioClip;
     [SerializeField] AttackType attackType;
     [SerializeField] AttackAttribute attackAttribute;
     [SerializeField] int minDamageModifier;
@@ -33,6 +34,7 @@ public class EnemyAttackType : ScriptableObject
 
     public string GetName() { return name; }
     public string GetDescription() { return description; }
+    public AudioClip GetAudioClip() { return audioClip; }
     public AttackType GetAttackType() { return attackType; }
     public AttackAttribute GetAttackAttribute() { return attackAttribute; }
     public int GetDamageModifier() { return Random.Range(minDamageModifier, maxDamageModifier + 1); }

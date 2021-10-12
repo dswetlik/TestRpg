@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2223d07b9b43c4141ae275046391dfe0, type: 3}
+  m_Name: TheBulwark
+  m_EditorClassIdentifier: 
+  id: 4
+  name: The Bulwark
+  itemList:
+  - {fileID: 11400000, guid: 85ea3f82246cdbc428cc8a9aa2c337ab, type: 2}
+  - {fileID: 11400000, guid: ce7404cdd6508ae46828161d0fd994e0, type: 2}
+  - {fileID: 11400000, guid: ed6936107686fdc42963d209777bf867, type: 2}
+  - {fileID: 11400000, guid: 2f391e2026680404c87906f14c4a4f53, type: 2}
+  - {fileID: 11400000, guid: a2f8a0061daa94b4cbfd3e8dabd7dffd, type: 2}
+  npc: {fileID: 0}

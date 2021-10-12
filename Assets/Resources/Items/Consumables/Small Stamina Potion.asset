@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Small Stamina Potion
   m_EditorClassIdentifier: 
   itemType: 3
-  sprite: {fileID: 21300000, guid: 197f89cef6fbbfe4d9a3afdc5075874b, type: 3}
+  sprite: {fileID: 21300000, guid: ce1e9a2fd2e7d154cad00d93f7fe1bc0, type: 3}
   id: 502
   name: Small Stamina Potion
   description: A small vial of a murky green liquid.
   weight: 1
   value: 5
   consumableType: 1
-  statChange: 20
+  statChange: 10

@@ -15,7 +15,7 @@ MonoBehaviour:
   statusEffectType: 8
   name: Weak Slow
   description: You've been slowed down for a short time.
-  hitChance: 0.1
+  hitChance: 0.9
   turnAmount: 2
   isNegative: 1
   isPercentage: 1

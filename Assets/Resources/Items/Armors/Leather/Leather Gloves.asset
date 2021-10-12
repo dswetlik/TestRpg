@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemType: 2
   sprite: {fileID: 21300000, guid: 13f65a87d9f199140a015c05b7e1d45f, type: 3}
-  id: 309
+  id: 308
   name: Leather Gloves
   description: A basic pair of leather gloves.
   weight: 1

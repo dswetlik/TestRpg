@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 260fa37f68ea92244a0aa68cd2bd666f, type: 3}
+  m_Name: Iron Gloves
+  m_EditorClassIdentifier: 
+  itemType: 2
+  sprite: {fileID: 21300000, guid: b890247fbef42964a9b04a5336a5f730, type: 3}
+  id: 353
+  name: Iron Gloves
+  description: A basic pair of iron gloves, favorite of new heavy gladiators.
+  weight: 2
+  value: 15
+  armorType: 4
+  armorClass: 2
+  rating: 2
