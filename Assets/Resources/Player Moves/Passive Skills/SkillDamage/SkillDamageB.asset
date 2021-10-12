@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: 911
   name: Skill Damage II
-  description: Permanently increases damage from damage-dealing skills by +2!
+  description: Permanently increases damage from damage-dealing skills by +4!
   actionMessage: 
   skillType: 1
-  levelRequirement: 3
+  levelRequirement: 6
   isUnlocked: 0
   isUnlockable: 0
   nextSkills:
@@ -26,4 +26,4 @@ MonoBehaviour:
   statusEffects: []
   attributeType: 4
   isPercentage: 0
-  attributeChange: 2
+  attributeChange: 4

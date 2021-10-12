@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Amalgamation
   description: The {0} starts reforming itself, healing for {1} damage!
+  audioClip: {fileID: 8300000, guid: 80a0d7cbd75a6544aadd7783bd1d0778, type: 3}
   attackType: 2
   attackAttribute: 2
   minDamageModifier: 5

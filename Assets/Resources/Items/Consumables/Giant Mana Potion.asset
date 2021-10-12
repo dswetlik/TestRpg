@@ -10,14 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f8f0c6683f822946be0f4ab2364b585, type: 3}
-  m_Name: Mana Potion 1
+  m_Name: Giant Mana Potion
   m_EditorClassIdentifier: 
   itemType: 3
-  sprite: {fileID: 21300000, guid: 31c4bdacb121c7f4189ac4ef41156428, type: 3}
-  id: 504
-  name: Mana Potion
-  description: A bottle of murky blue liquid.
+  sprite: {fileID: 21300000, guid: 477e0ffc956b08e4ba81b03616fe5d9c, type: 3}
+  id: 510
+  name: Giant Mana Potion
+  description: What is practically a bucket of a murky blue liquid. How do you plan
+    to drink all of this?
   weight: 1
-  value: 20
+  value: 100
   consumableType: 2
-  statChange: 25
+  statChange: 100

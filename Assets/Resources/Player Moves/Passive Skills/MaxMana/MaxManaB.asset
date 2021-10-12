@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: 951
   name: Max Mana II
-  description: Permanently increases your max mana by +5!
+  description: Permanently increases your max mana by +10!
   actionMessage: 
   skillType: 1
-  levelRequirement: 3
+  levelRequirement: 6
   isUnlocked: 0
   isUnlockable: 0
   nextSkills:
@@ -26,4 +26,4 @@ MonoBehaviour:
   statusEffects: []
   attributeType: 9
   isPercentage: 0
-  attributeChange: 5
+  attributeChange: 10

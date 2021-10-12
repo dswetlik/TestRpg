@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: 944
   name: Max Stamina IV
-  description: Permanently increases your max stamina by +10!
+  description: Permanently increases your max stamina by +20!
   actionMessage: 
   skillType: 1
-  levelRequirement: 7
+  levelRequirement: 16
   isUnlocked: 0
   isUnlockable: 0
   nextSkills: []
@@ -25,4 +25,4 @@ MonoBehaviour:
   statusEffects: []
   attributeType: 8
   isPercentage: 0
-  attributeChange: 10
+  attributeChange: 20

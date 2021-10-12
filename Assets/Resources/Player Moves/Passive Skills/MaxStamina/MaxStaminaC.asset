@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: 943
   name: Max Stamina III
-  description: Permanently increases your max stamina by +10!
+  description: Permanently increases your max stamina by +15!
   actionMessage: 
   skillType: 1
-  levelRequirement: 0
+  levelRequirement: 11
   isUnlocked: 0
   isUnlockable: 0
   nextSkills:
@@ -26,4 +26,4 @@ MonoBehaviour:
   statusEffects: []
   attributeType: 8
   isPercentage: 0
-  attributeChange: 10
+  attributeChange: 15

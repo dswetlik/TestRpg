@@ -18,3 +18,5 @@ MonoBehaviour:
   - On second thought, I would actually like that room.
   dialogueAnswers:
   - {fileID: 11400000, guid: 403266053f739df46af567d50c5631fa, type: 2}
+  dialogueSprites:
+  - {fileID: 0}

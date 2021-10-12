@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: 902
   name: Weapon Damage III
-  description: Permanently increases your weapon damage by +4!
+  description: Permanently increases your weapon damage by +6!
   actionMessage: 
   skillType: 1
-  levelRequirement: 5
+  levelRequirement: 11
   isUnlocked: 0
   isUnlockable: 0
   nextSkills:
@@ -26,4 +26,4 @@ MonoBehaviour:
   statusEffects: []
   attributeType: 3
   isPercentage: 0
-  attributeChange: 4
+  attributeChange: 6

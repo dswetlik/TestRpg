@@ -22,10 +22,12 @@ public class Dialogue : ScriptableObject
 
     [SerializeField] List<string> dialogueOptions;
     [SerializeField] List<Dialogue> dialogueAnswers;
+    [SerializeField] List<Sprite> dialogueSprites;
     
     public string GetNPCLine() { return npcLine; }
     public List<string> GetDialogueOptions() { return dialogueOptions; }
     public List<Dialogue> GetDialogueAnswers() { return dialogueAnswers; }
+    public List<Sprite> GetDialogueSprites() { return dialogueSprites; }
     public DialogueType GetDialogueType() { return dialogueType; }
 
 }

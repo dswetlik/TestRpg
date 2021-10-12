@@ -17,7 +17,7 @@ MonoBehaviour:
   description: Permanently increases damage from damage-dealing magic by +2!
   actionMessage: 
   skillType: 1
-  levelRequirement: 0
+  levelRequirement: 1
   isUnlocked: 0
   isUnlockable: 1
   nextSkills:

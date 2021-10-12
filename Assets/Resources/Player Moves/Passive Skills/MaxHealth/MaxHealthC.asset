@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: 932
   name: Max Health III
-  description: Permanently increases your max health by +10!
+  description: Permanently increases your max health by +15!
   actionMessage: 
   skillType: 1
-  levelRequirement: 5
+  levelRequirement: 11
   isUnlocked: 0
   isUnlockable: 0
   nextSkills:
@@ -26,4 +26,4 @@ MonoBehaviour:
   statusEffects: []
   attributeType: 7
   isPercentage: 0
-  attributeChange: 10
+  attributeChange: 15

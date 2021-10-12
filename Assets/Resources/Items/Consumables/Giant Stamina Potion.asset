@@ -10,14 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f8f0c6683f822946be0f4ab2364b585, type: 3}
-  m_Name: Stamina Potion
+  m_Name: Giant Stamina Potion
   m_EditorClassIdentifier: 
   itemType: 3
-  sprite: {fileID: 21300000, guid: aa55df2dc1de54d4882a853c2cb35a67, type: 3}
-  id: 505
-  name: Stamina Potion
-  description: A bottle of a murky green liquid.
+  sprite: {fileID: 21300000, guid: 5545410ae503189419db44a0c0556904, type: 3}
+  id: 511
+  name: Giant Stamina Potion
+  description: What is practically a bucket of a murky green liquid. How do you plan
+    to drink all of this?
   weight: 1
-  value: 20
+  value: 100
   consumableType: 1
-  statChange: 25
+  statChange: 100

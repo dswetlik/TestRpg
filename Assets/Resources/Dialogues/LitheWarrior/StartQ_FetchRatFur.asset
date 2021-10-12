@@ -20,6 +20,10 @@ MonoBehaviour:
   dialogueAnswers:
   - {fileID: 11400000, guid: 470402cff7d031d4ca9be928643732fc, type: 2}
   - {fileID: 11400000, guid: 99d5085fa7898dd4da8e2380c66c414a, type: 2}
+  dialogueSprites:
+  - {fileID: 21300000, guid: 410d4695f99727a48abf7546484779a1, type: 3}
+  - {fileID: 21300000, guid: 9b0ff9c0bc1422f4180d84408e1bfb8d, type: 3}
+  openingSprite: {fileID: 21300000, guid: 5d247f9aa35a77b42a6a1555fbda4e49, type: 3}
   questDialogueType: 0
   quest: {fileID: 11400000, guid: f9c3ee6b18b28a94ea9955802ecf2a62, type: 2}
   notStartedResponse: There's a strange fad that has been appearing across the kingdom
@@ -32,5 +36,6 @@ MonoBehaviour:
     for those boots already, get on it!
   notCompleteDialogueOptions: []
   notCompleteDialogueAnswers: []
+  notCompleteDialogueSprites: []
   completeResponse: You have the fur? Perfect, this will work wonderfully. I don't
     know how to thank you enough!

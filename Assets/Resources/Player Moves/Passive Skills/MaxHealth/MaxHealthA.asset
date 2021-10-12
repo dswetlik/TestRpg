@@ -17,7 +17,7 @@ MonoBehaviour:
   description: Permanently increases your max health by +5!
   actionMessage: 
   skillType: 1
-  levelRequirement: 0
+  levelRequirement: 1
   isUnlocked: 0
   isUnlockable: 1
   nextSkills:

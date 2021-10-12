@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: 901
   name: Weapon Damage II
-  description: Permanently increases your weapon damage by +2!
+  description: Permanently increases your weapon damage by +4!
   actionMessage: 
   skillType: 1
-  levelRequirement: 3
+  levelRequirement: 6
   isUnlocked: 0
   isUnlockable: 0
   nextSkills:
@@ -26,4 +26,4 @@ MonoBehaviour:
   statusEffects: []
   attributeType: 3
   isPercentage: 0
-  attributeChange: 2
+  attributeChange: 4

@@ -18,6 +18,9 @@ MonoBehaviour:
   - Alright, can I see your wares now?
   dialogueAnswers:
   - {fileID: 11400000, guid: b510db67d66e3b0438ce14af9afa448b, type: 2}
+  dialogueSprites:
+  - {fileID: 21300000, guid: 658edffd73bae1e469903fa2790e34e1, type: 3}
+  openingSprite: {fileID: 0}
   questDialogueType: 1
   quest: {fileID: 11400000, guid: d7309c988dacafe4083d907478feb9e7, type: 2}
   notStartedResponse: 'Thank you for the offer, but I can''t think of anything that
@@ -30,4 +33,7 @@ MonoBehaviour:
     pieces of gold for the trouble.'
   notCompleteResponse: What do you mean? You don't have the skull yet? Well go get
     it then!
+  notCompleteDialogueOptions: []
+  notCompleteDialogueAnswers: []
+  notCompleteDialogueSprites: []
   completeResponse: You've already done me a great service, thank you.

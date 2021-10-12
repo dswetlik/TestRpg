@@ -43,6 +43,7 @@ public class MainMenu : MonoBehaviour
 
     IEnumerator LoadStartScene(string sceneName, bool loadGame)
     {
+        yield return new WaitForSecondsRealtime(1.0f);
         Scene currentScene = SceneManager.GetActiveScene();
 
         AsyncOperation newScene = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);

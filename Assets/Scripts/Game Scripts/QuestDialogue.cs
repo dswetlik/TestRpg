@@ -13,6 +13,7 @@ public class QuestDialogue : Dialogue
         reject
     }
 
+    [SerializeField] Sprite openingSprite;
     [SerializeField] QuestDialogueType questDialogueType;
     [SerializeField] Quest quest;
 
@@ -20,8 +21,10 @@ public class QuestDialogue : Dialogue
     [TextArea(3, 5)][SerializeField] string notCompleteResponse;
     [SerializeField] List<string> notCompleteDialogueOptions;
     [SerializeField] List<Dialogue> notCompleteDialogueAnswers;
+    [SerializeField] List<Sprite> notCompleteDialogueSprites;
     [TextArea(3, 5)][SerializeField] string completeResponse;
 
+    public Sprite GetOpeningSprite() { return openingSprite; }
     public QuestDialogueType GetQuestDialogueType() { return questDialogueType; }
     public Quest GetQuest() { return quest; }
     
@@ -29,6 +32,7 @@ public class QuestDialogue : Dialogue
     public string GetNotCompleteResponse() { return notCompleteResponse; }
     public List<string> GetNotCompleteDialogueOptions() { return notCompleteDialogueOptions; }
     public List<Dialogue> GetNotCompleteDialogueAnswers() { return notCompleteDialogueAnswers; }
+    public List<Sprite> GetNotCompleteDialogueSprites() { return notCompleteDialogueSprites; }
     public string GetCompleteResponse() { return completeResponse; }
 
 }

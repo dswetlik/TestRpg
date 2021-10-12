@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: 922
   name: Mana Damage III
-  description: Permanently increases damage from damage-dealing magic by +4!
+  description: Permanently increases damage from damage-dealing magic by +6!
   actionMessage: 
   skillType: 1
-  levelRequirement: 5
+  levelRequirement: 11
   isUnlocked: 0
   isUnlockable: 0
   nextSkills:
@@ -26,4 +26,4 @@ MonoBehaviour:
   statusEffects: []
   attributeType: 5
   isPercentage: 0
-  attributeChange: 4
+  attributeChange: 6

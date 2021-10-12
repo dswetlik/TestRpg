@@ -18,3 +18,5 @@ MonoBehaviour:
   - What's so wrong with rats?
   dialogueAnswers:
   - {fileID: 11400000, guid: 4921e297db58131479ca4f110f9a0d18, type: 2}
+  dialogueSprites:
+  - {fileID: 0}

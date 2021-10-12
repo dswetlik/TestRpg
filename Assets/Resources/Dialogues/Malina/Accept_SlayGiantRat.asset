@@ -20,10 +20,15 @@ MonoBehaviour:
   dialogueAnswers:
   - {fileID: 11400000, guid: 455b2a6416f5df440b7cc41d7dfc0d91, type: 2}
   - {fileID: 11400000, guid: 923ae83920199ae40bdaa82f23ee889a, type: 2}
+  dialogueSprites:
+  - {fileID: 21300000, guid: 856bca097c625fd488c2893c643fe767, type: 3}
+  - {fileID: 0}
+  openingSprite: {fileID: 0}
   questDialogueType: 1
   quest: {fileID: 11400000, guid: dce4508bdd23d1048a626719a27dfa87, type: 2}
   notStartedResponse: 
   notCompleteResponse: 
   notCompleteDialogueOptions: []
   notCompleteDialogueAnswers: []
+  notCompleteDialogueSprites: []
   completeResponse: 

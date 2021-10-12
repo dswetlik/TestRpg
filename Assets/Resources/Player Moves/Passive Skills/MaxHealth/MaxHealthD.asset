@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: 933
   name: Max Health IV
-  description: Permanently increases your max health by +10!
+  description: Permanently increases your max health by +20!
   actionMessage: 
   skillType: 1
-  levelRequirement: 7
+  levelRequirement: 16
   isUnlocked: 0
   isUnlockable: 0
   nextSkills: []
@@ -25,4 +25,4 @@ MonoBehaviour:
   statusEffects: []
   attributeType: 7
   isPercentage: 0
-  attributeChange: 10
+  attributeChange: 20

@@ -20,6 +20,10 @@ MonoBehaviour:
   dialogueAnswers:
   - {fileID: 11400000, guid: b97e1fe3a91607d419b7a22ee36ec02c, type: 2}
   - {fileID: 11400000, guid: fa3f9dfaa1472644495173cf4be4213b, type: 2}
+  dialogueSprites:
+  - {fileID: 21300000, guid: 410d4695f99727a48abf7546484779a1, type: 3}
+  - {fileID: 21300000, guid: 9b0ff9c0bc1422f4180d84408e1bfb8d, type: 3}
+  openingSprite: {fileID: 21300000, guid: 5d247f9aa35a77b42a6a1555fbda4e49, type: 3}
   questDialogueType: 0
   quest: {fileID: 11400000, guid: d7309c988dacafe4083d907478feb9e7, type: 2}
   notStartedResponse: 'Thank you for the offer, but I can''t think of anything that
@@ -32,5 +36,8 @@ MonoBehaviour:
     pieces of gold for the trouble.'
   notCompleteResponse: What do you mean? You don't have the skull yet? Well go get
     it then!
+  notCompleteDialogueOptions: []
+  notCompleteDialogueAnswers: []
+  notCompleteDialogueSprites: []
   completeResponse: This skull will look amazing above a roaring fire. You've done
     me a great service, thank you.
