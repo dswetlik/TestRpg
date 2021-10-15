@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da3ae000e98a71d489bf062b749ae76f, type: 3}
   m_Name: GreenSlime
   m_EditorClassIdentifier: 
-  material: {fileID: 2100000, guid: 6fb0ba0e24b54574984035ce3ed02b68, type: 2}
+  enemyType: 0
   name: Green Slime
   description: A speedy-looking ball of green slime
-  id: 4
+  id: 106
   minLevel: 3
   maxLevel: 5
   minDamage: 1

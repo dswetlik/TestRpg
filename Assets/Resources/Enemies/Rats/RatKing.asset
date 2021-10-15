@@ -18,8 +18,8 @@ MonoBehaviour:
   id: 103
   minLevel: 5
   maxLevel: 20
-  minDamage: 3
-  maxDamage: 5
+  minDamage: 5
+  maxDamage: 6
   defense: 0
   attackTypes:
   - {fileID: 11400000, guid: c4c112e9746a14b43a84465341717600, type: 2}
@@ -58,3 +58,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ccc1aac0d39582741ae01ff20499286c, type: 2}
   - {fileID: 11400000, guid: c5409a057d72b614aa4bd34115c0e89e, type: 2}
   unlockedItemsCount: 010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000050000000500000005000000
+  hasBeenDefeated: 0

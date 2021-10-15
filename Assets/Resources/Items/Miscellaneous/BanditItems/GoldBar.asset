@@ -10,12 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3aa9392236713c147a660c83e1823dbb, type: 3}
-  m_Name: UnknownBone
+  m_Name: GoldBar
   m_EditorClassIdentifier: 
   itemType: 0
-  sprite: {fileID: 21300000, guid: 27f568ade836569499e92b5ab3af577c, type: 3}
-  id: 9
-  name: Unknown Bone
-  description: A bone from a creature that the slime digested.
-  weight: 1
-  value: 2
+  sprite: {fileID: 21300000, guid: 2934bce1ce3bbab4dbf0be754a3db649, type: 3}
+  id: 11
+  name: Gold Bar
+  description: What looks to be a gold bar. If you picked this up off of a bandit,
+    there's no way to know if it's real or not.
+  weight: 2
+  value: 15

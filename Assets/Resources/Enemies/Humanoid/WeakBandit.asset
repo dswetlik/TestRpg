@@ -10,29 +10,32 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: da3ae000e98a71d489bf062b749ae76f, type: 3}
-  m_Name: Bandit
+  m_Name: WeakBandit
   m_EditorClassIdentifier: 
-  material: {fileID: 0}
+  enemyType: 0
   name: Weak Bandit
   description: A bandit weakened by months of imprisonment, now fighting for his
     freedom.
-  id: 0
+  id: 110
   minLevel: 5
   maxLevel: 10
   minDamage: 5
-  maxDamage: 9
+  maxDamage: 10
   defense: 2
-  attackTypes: []
-  health: 0
-  maxHealth: 0
-  stamina: 0
-  maxStamina: 0
-  stamRegen: 0
-  mana: 0
-  maxMana: 0
-  manaRegen: 0
-  goldReward: 0
-  speed: 0
-  expReward: 0
-  itemRewards: {fileID: 0}
+  attackTypes:
+  - {fileID: 11400000, guid: 464a6e33d66af7d4f8063b762f559bfe, type: 2}
+  - {fileID: 11400000, guid: 5109d22077ba07440921d51013b6ad37, type: 2}
+  - {fileID: 11400000, guid: c29c5de414544664ca25bb60da0b94ae, type: 2}
+  health: 30
+  maxHealth: 30
+  stamina: 10
+  maxStamina: 15
+  stamRegen: 2
+  mana: 10
+  maxMana: 10
+  manaRegen: 1
+  goldReward: 20
+  speed: 0.75
+  expReward: 20
+  itemRewards: {fileID: 11400000, guid: 3b12251138c04904a996de43e7d7c658, type: 2}
   statusEffects: []

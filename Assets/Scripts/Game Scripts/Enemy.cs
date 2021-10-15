@@ -96,7 +96,7 @@ public class Enemy : ScriptableObject
         {
             if (attackType.GetAttackType() == EnemyAttackType.AttackType.heal)
             {
-                if (health < maxHealth * 0.25f && mana >= attackType.GetManaCost())
+                if (health < maxHealth * 0.3f && mana >= attackType.GetManaCost())
                     return attackType;
             }
             else
@@ -104,20 +104,64 @@ public class Enemy : ScriptableObject
                 if (attackType.GetAttackAttribute() == EnemyAttackType.AttackAttribute.stamina)
                 {
                     if (stamina >= attackType.GetStaminaCost())
-                        if (maxDamage <= attackType.GetDamageModifier())
+                    {
+                        if (attackType.GetAttackType() == EnemyAttackType.AttackType.damage)
                         {
-                            maxDamage = attackType.GetDamageModifier();
-                            maxAttack = attackType;
+                            if (maxDamage <= attackType.GetDamageModifier())
+                            {
+                                maxDamage = attackType.GetDamageModifier();
+                                maxAttack = attackType;
+                            }
                         }
+                        else if (attackType.GetAttackType() == EnemyAttackType.AttackType.effect)
+                        {
+                            if(!statusEffects.Any(x => attackType.GetStatusEffects().Any(y => (x.GetName() == y.GetName() && !x.IsNegative() && !y.IsNegative()))))
+                            {
+                                if (attackType.GetStatusEffects().Any(x => x.GetStatusEffectType() == StatusEffect.StatusEffectType.heal) && health < maxHealth * 0.5f)
+                                {
+                                    if (UnityEngine.Random.Range(0, 2) == 0)
+                                        return attackType;
+                                }
+                                else
+                                {
+                                    if (UnityEngine.Random.Range(0, 4) == 0)
+                                        return attackType;
+                                }
+                                    
+                            }
+                        }
+                    }
                 }
                 else if (attackType.GetAttackAttribute() == EnemyAttackType.AttackAttribute.mana)
                 {
                     if (mana >= attackType.GetManaCost())
-                        if (maxDamage <= attackType.GetDamageModifier())
+                    {
+                        if (attackType.GetAttackType() == EnemyAttackType.AttackType.damage)
                         {
-                            maxDamage = attackType.GetDamageModifier();
-                            maxAttack = attackType;
+                            if (maxDamage <= attackType.GetDamageModifier())
+                            {
+                                maxDamage = attackType.GetDamageModifier();
+                                maxAttack = attackType;
+                            }
                         }
+                        else if (attackType.GetAttackType() == EnemyAttackType.AttackType.effect)
+                        {
+                            if (!statusEffects.Any(x => attackType.GetStatusEffects().Any(y => (x.GetName() == y.GetName() && !x.IsNegative() && !y.IsNegative()))))
+                            {
+                                if (attackType.GetStatusEffects().Any(x => x.GetStatusEffectType() == StatusEffect.StatusEffectType.heal) && health < maxHealth * 0.5f)
+                                {
+                                    if (UnityEngine.Random.Range(0, 2) == 0)
+                                        return attackType;
+                                }
+                                else
+                                {
+                                    if (UnityEngine.Random.Range(0, 4) == 0)
+                                        return attackType;
+                                }
+
+                            }
+                        }
+                    }
                 }
             }
         }

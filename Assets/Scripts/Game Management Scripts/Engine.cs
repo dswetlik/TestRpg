@@ -10,6 +10,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading.Tasks;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
 using TMPro;
 
 public class Engine : MonoBehaviour
@@ -22,12 +23,12 @@ public class Engine : MonoBehaviour
     GameObject UIBattleScreen;
     GameObject UIPickupScreen;
     GameObject UIArenaScreen;
-    GameObject UIBossScreen;
     GameObject UISkillScreen;
     GameObject UIStatsScreen;
     GameObject UIDialogueScreen;
     GameObject UILoadScreen;
-    Image UICoverScreen;
+    GameObject UIPauseScreen;
+    GameObject UICoverScreen;
 
     // Directional UI Variables
     Button northBtn;
@@ -38,8 +39,6 @@ public class Engine : MonoBehaviour
     Button enterDialogueBtn;
 
     Queue<string> outputQueue;
-    static Text outputTxt;
-    public ScrollRect mainGameScroll;
 
     // Inventory / Pickup Variables
     public GameObject uiInvSlot;
@@ -183,13 +182,7 @@ public class Engine : MonoBehaviour
     GameObject arenaEnemyDamageObj;
     GameObject arenaEnemySpeedObj;
 
-    // UI Boss Variables
-    Slider levelSlider;
-
-    Button bossABtn;
-    Button bossBBtn;
-    Button bossCBtn;
-    Button bossDBtn;
+    GameObject arenaBossImg;
 
     // UI Skill Variables
     GameObject skillScrollView;
@@ -249,6 +242,10 @@ public class Engine : MonoBehaviour
 
     Text loadingPercentTxt;
 
+    // UI Pause Variables
+    Slider musicSlider;
+    Slider sfxSlider;
+
     // UI Cover Variables
     Text messageTxt;
     Button deadRestartBtn;
@@ -274,12 +271,18 @@ public class Engine : MonoBehaviour
     Item ratKingsCrown;
     Item ratLuckyPaw;
     Item ratSkull;
-    Item ratTooth;
+    
 
     Item blueSlimeGoo;
     Item greenSlimeGoo;
     Item redSlimeGoo;
     Item unknownBone;
+
+    Item brokenSword;
+    Item goldBar;
+    Item lockpickSet;
+
+    Item wolfTooth;
 
     Weapon crookedDagger;
 
@@ -483,6 +486,8 @@ public class Engine : MonoBehaviour
     Enemy greenSlime;
     Enemy blueSlime;
 
+    Enemy weakBandit;
+
     NPC hirgirdBlacksmith;
     NPC inveraAlchemist;
     NPC kiarnilLeathersmith;
@@ -512,6 +517,7 @@ public class Engine : MonoBehaviour
     public GameObject card;
     NPC currentNPC;
     Coroutine textType;
+    public AudioMixer mixer;
 
     public bool isLoadingGame;
 
@@ -538,8 +544,9 @@ public class Engine : MonoBehaviour
         player.GetInventory().AddToInventory(crookedDagger);
         player.GetInventory().AddToInventory(tatteredShirt);
 
-        player.GetInventory().AddToInventory(smallHealthPotion, 5);
-
+        player.GetInventory().AddToInventory(smallHealthPotion, 1);
+        player.ChangeGold(200);
+        player.AddExp(200);
         player.GetInventory().OnBeforeSerialize();
         player.GetInventory().OnAfterDeserialize();
 
@@ -558,7 +565,12 @@ public class Engine : MonoBehaviour
 
             player = load.LoadPlayer();
 
+            load.LoadNPCs();
+            load.LoadStores();
+            load.LoadBossEnemies();
+
             LoadEquipmentSlots();
+            LoadQuestSlots();
             SetCurrentWeight();
 
             StartCoroutine(LoadScene(overworld));
@@ -590,12 +602,17 @@ public class Engine : MonoBehaviour
         ratKingsCrown = Resources.Load<Item>("Items/Miscellaneous/RatItems/RatKingsCrown");
         ratLuckyPaw = Resources.Load<Item>("Items/Miscellaneous/RatItems/RatLuckyPaw");
         ratSkull = Resources.Load<Item>("Items/Miscellaneous/RatItems/RatSkull");
-        ratTooth = Resources.Load<Item>("Items/Miscellaneous/RatItems/RatTooth");
 
         blueSlimeGoo = Resources.Load<Item>("Items/Miscellaneous/SlimeItems/BlueSlimeGoo");
         greenSlimeGoo = Resources.Load<Item>("Items/Miscellaneous/SlimeItems/GreenSlimeGoo");
         redSlimeGoo = Resources.Load<Item>("Items/Miscellaneous/SlimeItems/RedSlimeGoo");
         unknownBone = Resources.Load<Item>("Items/Miscellaneous/SlimeItems/UnknownBone");
+
+        brokenSword = Resources.Load<Item>("Items/Miscellaneous/BanditItems/BrokenSword");
+        goldBar = Resources.Load<Item>("Items/Miscellaneous/BanditItems/GoldBar");
+        lockpickSet = Resources.Load<Item>("Items/Miscellaneous/BanditItems/LockpickSet");
+
+        wolfTooth = Resources.Load<Item>("Items/Miscellaneous/WolfItems/WolfTooth");
 
         crookedDagger = Resources.Load<Weapon>("Items/Weapons/Crooked Dagger");
 
@@ -711,12 +728,17 @@ public class Engine : MonoBehaviour
         ItemDictionary.Add(ratKingsCrown.GetID(), ratKingsCrown);
         ItemDictionary.Add(ratLuckyPaw.GetID(), ratLuckyPaw);
         ItemDictionary.Add(ratSkull.GetID(), ratSkull);
-        ItemDictionary.Add(ratTooth.GetID(), ratTooth);
 
         ItemDictionary.Add(blueSlimeGoo.GetID(), blueSlimeGoo);
         ItemDictionary.Add(greenSlimeGoo.GetID(), greenSlimeGoo);
         ItemDictionary.Add(redSlimeGoo.GetID(), redSlimeGoo);
         ItemDictionary.Add(unknownBone.GetID(), unknownBone);
+
+        ItemDictionary.Add(brokenSword.GetID(), brokenSword);
+        ItemDictionary.Add(goldBar.GetID(), goldBar);
+        ItemDictionary.Add(lockpickSet.GetID(), lockpickSet);
+
+        ItemDictionary.Add(wolfTooth.GetID(), wolfTooth);
 
         ItemDictionary.Add(crookedDagger.GetID(), crookedDagger);
 
@@ -847,13 +869,19 @@ public class Engine : MonoBehaviour
         greenSlime = Instantiate(Resources.Load<Enemy>("Enemies/Slimes/GreenSlime"));
         blueSlime = Instantiate(Resources.Load<Enemy>("Enemies/Slimes/BlueSlime"));
 
+        weakBandit = Instantiate(Resources.Load<Enemy>("Enemies/Humanoid/WeakBandit"));
+
         EnemyDictionary.Add(rat.GetID(), rat);
         EnemyDictionary.Add(smallRat.GetID(), smallRat);
         EnemyDictionary.Add(ratPack.GetID(), ratPack);
+        EnemyDictionary.Add(giantRat.GetID(), giantRat);
+        EnemyDictionary.Add(ratKing.GetID(), ratKing);
 
         EnemyDictionary.Add(redSlime.GetID(), redSlime);
         EnemyDictionary.Add(greenSlime.GetID(), greenSlime);
         EnemyDictionary.Add(blueSlime.GetID(), blueSlime);
+
+        EnemyDictionary.Add(weakBandit.GetID(), weakBandit);
 
         hirgirdBlacksmith = Instantiate(Resources.Load<NPC>("NPC/Hirgird"));
         inveraAlchemist = Instantiate(Resources.Load<NPC>("NPC/Invera"));
@@ -1061,12 +1089,12 @@ public class Engine : MonoBehaviour
         UIBattleScreen = GameObject.Find("UI Battle");
         UIPickupScreen = GameObject.Find("UI Pickup");
         UIArenaScreen = GameObject.Find("UI Arena");
-        UIBossScreen = GameObject.Find("UI Boss");
         UISkillScreen = GameObject.Find("UI Skill");
         UIStatsScreen = GameObject.Find("UI Stats");
         UIDialogueScreen = GameObject.Find("UI Dialogue");
         UILoadScreen = GameObject.Find("UI Load");
-        UICoverScreen = GameObject.Find("UI Cover").GetComponent<Image>();
+        UIPauseScreen = GameObject.Find("UI Pause");
+        UICoverScreen = GameObject.Find("UI Cover");
 
         northBtn = GameObject.Find("NorthBtn").GetComponent<Button>();
         eastBtn = GameObject.Find("EastBtn").GetComponent<Button>();
@@ -1153,9 +1181,6 @@ public class Engine : MonoBehaviour
         selQuestName.text = "";
         selQuestDescription.text = "";
 
-        outputTxt = GameObject.Find("GameTxt").GetComponent<Text>();
-        outputTxt.text = "";
-
         playerStatusEffectGO = GameObject.Find("PlayerStatusEffects");
         enemyStatusEffectGO = GameObject.Find("EnemyStatusEffects");
 
@@ -1236,23 +1261,15 @@ public class Engine : MonoBehaviour
         arenaEnemySpeedObj = GameObject.Find("ArenaEnemySpeed");
         arenaEnemyDamageObj = GameObject.Find("ArenaEnemyDamage");
 
+        arenaBossImg = GameObject.Find("ArenaBossImg");
+
         arenaEnemyHealthObj.SetActive(false);
         arenaEnemyStaminaObj.SetActive(false);
         arenaEnemyManaObj.SetActive(false);
         arenaEnemySpeedObj.SetActive(false);
         arenaEnemyDamageObj.SetActive(false);
 
-        levelSlider = GameObject.Find("LevelSlider").GetComponent<Slider>();
-
-        bossABtn = GameObject.Find("BossAButton").GetComponent<Button>();
-        bossBBtn = GameObject.Find("BossBButton").GetComponent<Button>();
-        bossCBtn = GameObject.Find("BossCButton").GetComponent<Button>();
-        bossDBtn = GameObject.Find("BossDButton").GetComponent<Button>();
-
-        bossABtn.interactable = false;
-        bossBBtn.interactable = false;
-        bossCBtn.interactable = false;
-        bossDBtn.interactable = false;
+        arenaBossImg.SetActive(false);
 
         skillScrollView = GameObject.Find("SkillScrollView");
         magicScrollView = GameObject.Find("MagicScrollView");
@@ -1305,6 +1322,11 @@ public class Engine : MonoBehaviour
         loadingSlider = GameObject.Find("LoadingSlider").GetComponent<Slider>();
         loadingPercentTxt = GameObject.Find("LoadingPercentTxt").GetComponent<Text>();
 
+        musicSlider = GameObject.Find("MusicVolumeSetting").transform.GetChild(1).GetComponent<Slider>();
+        sfxSlider = GameObject.Find("SFXVolumeSetting").transform.GetChild(1).GetComponent<Slider>();
+        musicSlider.value = PlayerPrefs.GetFloat("MusicAudio", 0.75f);
+        sfxSlider.value = PlayerPrefs.GetFloat("SFXAudio", 0.75f);
+
         messageTxt = GameObject.Find("MessageTxt").GetComponent<Text>();
         deadRestartBtn = GameObject.Find("DeadRestartBtn").GetComponent<Button>();
 
@@ -1313,10 +1335,10 @@ public class Engine : MonoBehaviour
         UIBattleScreen.SetActive(false);
         UIPickupScreen.SetActive(false);
         UIArenaScreen.SetActive(false);
-        UIBossScreen.SetActive(false);
         UISkillScreen.SetActive(false);
         UIStatsScreen.SetActive(false);
         UIDialogueScreen.SetActive(false);
+        UIPauseScreen.SetActive(false);
         UILoadScreen.SetActive(false);
 
         UpdateInventoryAttributes();
@@ -1482,6 +1504,8 @@ public class Engine : MonoBehaviour
             if(enemy.GetEnemyType() == Enemy.EnemyType.boss)
             {
                 BossEnemy boss = (BossEnemy)enemy;
+                ((BossEnemy)EnemyDictionary[boss.GetID()]).SetHasBeenDefeated(true);
+                Debug.Log(((BossEnemy)EnemyDictionary[boss.GetID()]).HasBeenDefeated());
                 for(int i = 0; i < boss.GetUnlockedItems().Count; i++)
                 {
                     Item item = boss.GetUnlockedItems()[i];
@@ -1957,12 +1981,33 @@ public class Engine : MonoBehaviour
             }
             else if (attack.GetAttackAttribute() == EnemyAttackType.AttackAttribute.stamina)
             {
-                enemyDamageOutput = (attack.GetDamageModifier() + (int)enemy.GetBaseDamage()) - playerDefValue;
-                if (enemyDamageOutput < 0)
+                if (attack.GetAttackType() == EnemyAttackType.AttackType.heal)
+                {
                     enemyDamageOutput = 0;
-                enemy.ChangeStamina(-attack.GetStaminaCost());
 
-                OutputToBattle(String.Format(attack.GetDescription(), enemy.GetName(), enemyDamageOutput));
+                    if(!CheckIfPoisoned(false))
+                    {
+                        int enemyHealRate = attack.GetDamageModifier();
+                        enemy.ChangeHealth(enemyHealRate);
+                        OutputToBattle(String.Format(attack.GetDescription(), enemy.GetName(), enemyHealRate));
+                    }
+                    else
+                        OutputToBattle(String.Format("{0} attempted to heal, but is poisoned!", enemy.GetName()));
+                    enemy.ChangeStamina(-attack.GetStaminaCost());
+                }
+                else if (attack.GetAttackType() == EnemyAttackType.AttackType.effect)
+                {
+                    enemyDamageOutput = 0;
+                    OutputToBattle(String.Format(attack.GetDescription(), enemy.GetName()));
+                }
+                else
+                {
+                    enemyDamageOutput = (attack.GetDamageModifier() + (int)enemy.GetBaseDamage()) - playerDefValue;
+                    if (enemyDamageOutput < 0)
+                        enemyDamageOutput = 0;
+                    enemy.ChangeStamina(-attack.GetStaminaCost());
+                    OutputToBattle(String.Format(attack.GetDescription(), enemy.GetName(), enemyDamageOutput));
+                }
             }
         }
 
@@ -2129,6 +2174,18 @@ public class Engine : MonoBehaviour
             SetCurrentWeight();
         }
         invScroll.verticalNormalizedPosition = 1;
+    }
+
+    void LoadQuestSlots()
+    {
+        for(int i = 0; i < player.GetQuestList().Count; i++)
+        {
+            GameObject questSlot = Instantiate(uiQuestSlot, questPanel.transform);
+            questSlot.GetComponent<QuestContainer>().SetQuest(QuestDictionary[player.GetQuestList()[i].GetID()]);
+            questSlot.GetComponent<Button>().onClick.AddListener(() => DisplayQuest(questSlot.GetComponent<QuestContainer>()));
+            questSlot.GetComponent<Button>().onClick.AddListener(() => GameObject.Find("ButtonAudioSource").GetComponent<AudioSource>().Play());
+            uiQuestSlots.Add(QuestDictionary[player.GetQuestList()[i].GetID()].GetID(), questSlot);
+        }
     }
 
     void LoadEquipmentSlots()
@@ -2478,8 +2535,10 @@ public class Engine : MonoBehaviour
         arenaEnemySpeedObj.SetActive(true);
         arenaEnemyDamageObj.SetActive(true);
 
-        if (UIBossScreen.activeSelf)
-            UIBossScreen.SetActive(false);
+        if (selectedEnemy.GetEnemyType() == Enemy.EnemyType.boss)
+            arenaBossImg.SetActive(true);
+        else
+            arenaBossImg.SetActive(false);
     }
 
     public void DisplaySkill(SkillContainer skillContainer)
@@ -2657,6 +2716,7 @@ public class Engine : MonoBehaviour
         player.AddExp(QuestDictionary[quest.GetID()].GetExpReward());
         player.ChangeGold((int)QuestDictionary[quest.GetID()].GetGoldReward());
         player.RemoveQuest(QuestDictionary[quest.GetID()]);
+        player.AddCompletedQuest(QuestDictionary[quest.GetID()]);
         OutputToText(String.Format("You have earned {0} exp and {1} gold.", QuestDictionary[quest.GetID()].GetExpReward(), QuestDictionary[quest.GetID()].GetGoldReward()));
 
         if(QuestDictionary[quest.GetID()].GetQuestType() == Quest.QuestType.Fetch)
@@ -2827,12 +2887,12 @@ public class Engine : MonoBehaviour
             Enemy e = kvp.Value;
             if (leveledEnemies.Contains(e))
             {
-                if (player.GetLevel() > e.GetMaxLevel() || player.GetLevel() < e.GetMinLevel())
+                if (player.GetLevel() > e.GetMaxLevel() || player.GetLevel() < e.GetMinLevel() || ((BossEnemy)EnemyDictionary[e.GetID()]).HasBeenDefeated())
                     leveledEnemies.Remove(e);
             }
             else
             {
-                if (player.GetLevel() <= e.GetMaxLevel() && player.GetLevel() >= e.GetMinLevel())
+                if (player.GetLevel() <= e.GetMaxLevel() && player.GetLevel() >= e.GetMinLevel() && !((BossEnemy)EnemyDictionary[e.GetID()]).HasBeenDefeated())
                     leveledEnemies.Add(e);
             }
         }
@@ -2902,22 +2962,6 @@ public class Engine : MonoBehaviour
         UIStatsScreen.SetActive(x);
     }
 
-    public void ActivateBossScreen(bool x)
-    {
-        UIBossScreen.SetActive(x);
-
-        levelSlider.value = player.GetLevel();
-
-        if (player.GetLevel() >= 5)
-            bossABtn.interactable = true;
-        if (player.GetLevel() >= 10)
-            bossBBtn.interactable = true;
-        if (player.GetLevel() >= 15)
-            bossCBtn.interactable = true;
-        if (player.GetLevel() >= 20)
-            bossDBtn.interactable = true;
-    }
-
     public void ActivateDialogueScreen(bool x)
     {
         if (!x)
@@ -2935,6 +2979,11 @@ public class Engine : MonoBehaviour
         }
         isInDialogue = x;
         UIDialogueScreen.SetActive(x);
+    }
+
+    public void ActivatePauseScreen(bool x)
+    {
+        UIPauseScreen.SetActive(x);
     }
 
     public void SelectDialogue(DialogueContainer dialogueContainer)
@@ -3267,11 +3316,11 @@ public class Engine : MonoBehaviour
     {
         messageTxt.text = "You rest, healing and rejuvenating you.";
 
-        UICoverScreen.raycastTarget = true;
+        UICoverScreen.GetComponent<Image>().raycastTarget = true;
         messageTxt.raycastTarget = true;
-        while (UICoverScreen.color.a < 1)
+        while (UICoverScreen.GetComponent<Image>().color.a < 1)
         {
-            UICoverScreen.color = new Color(UICoverScreen.color.r, UICoverScreen.color.g, UICoverScreen.color.b, UICoverScreen.color.a + (0.01f));
+            UICoverScreen.GetComponent<Image>().color = new Color(UICoverScreen.GetComponent<Image>().color.r, UICoverScreen.GetComponent<Image>().color.g, UICoverScreen.GetComponent<Image>().color.b, UICoverScreen.GetComponent<Image>().color.a + (0.01f));
             messageTxt.color = new Color(messageTxt.color.r, messageTxt.color.g, messageTxt.color.b, messageTxt.color.a + 0.01f);
             yield return new WaitForSecondsRealtime(0.005f * Time.deltaTime);
         }
@@ -3293,13 +3342,13 @@ public class Engine : MonoBehaviour
 
         GameObject.Find("Player").transform.position = new Vector3(30, 1.8f, 70);
 
-        while(UICoverScreen.color.a > 0)
+        while(UICoverScreen.GetComponent<Image>().color.a > 0)
         {
-            UICoverScreen.color = new Color(UICoverScreen.color.r, UICoverScreen.color.g, UICoverScreen.color.b, UICoverScreen.color.a - (0.01f));
+            UICoverScreen.GetComponent<Image>().color = new Color(UICoverScreen.GetComponent<Image>().color.r, UICoverScreen.GetComponent<Image>().color.g, UICoverScreen.GetComponent<Image>().color.b, UICoverScreen.GetComponent<Image>().color.a - (0.01f));
             messageTxt.color = new Color(messageTxt.color.r, messageTxt.color.g, messageTxt.color.b, messageTxt.color.a - 0.01f);
             yield return new WaitForSecondsRealtime(0.005f * Time.deltaTime);
         }
-        UICoverScreen.raycastTarget = false;
+        UICoverScreen.GetComponent<Image>().raycastTarget = false;
         messageTxt.raycastTarget = false;
     }
 
@@ -3307,11 +3356,11 @@ public class Engine : MonoBehaviour
     {
         messageTxt.text = "Prepare for Battle";
 
-        UICoverScreen.raycastTarget = true;
+        UICoverScreen.GetComponent<Image>().raycastTarget = true;
         messageTxt.raycastTarget = true;
-        while (UICoverScreen.color.a < 1)
+        while (UICoverScreen.GetComponent<Image>().color.a < 1)
         {
-            UICoverScreen.color = new Color(UICoverScreen.color.r, UICoverScreen.color.g, UICoverScreen.color.b, UICoverScreen.color.a + (0.01f));
+            UICoverScreen.GetComponent<Image>().color = new Color(UICoverScreen.GetComponent<Image>().color.r, UICoverScreen.GetComponent<Image>().color.g, UICoverScreen.GetComponent<Image>().color.b, UICoverScreen.GetComponent<Image>().color.a + (0.01f));
             messageTxt.color = new Color(messageTxt.color.r, messageTxt.color.g, messageTxt.color.b, messageTxt.color.a + 0.01f);
             yield return new WaitForSecondsRealtime(0.01f * Time.deltaTime);
         }
@@ -3319,13 +3368,13 @@ public class Engine : MonoBehaviour
         ActivateDialogueScreen(false);
         StartCoroutine(Battle(enemy));
 
-        while (UICoverScreen.color.a > 0)
+        while (UICoverScreen.GetComponent<Image>().color.a > 0)
         {
-            UICoverScreen.color = new Color(UICoverScreen.color.r, UICoverScreen.color.g, UICoverScreen.color.b, UICoverScreen.color.a - (0.01f));
+            UICoverScreen.GetComponent<Image>().color = new Color(UICoverScreen.GetComponent<Image>().color.r, UICoverScreen.GetComponent<Image>().color.g, UICoverScreen.GetComponent<Image>().color.b, UICoverScreen.GetComponent<Image>().color.a - (0.01f));
             messageTxt.color = new Color(messageTxt.color.r, messageTxt.color.g, messageTxt.color.b, messageTxt.color.a - 0.01f);
             yield return new WaitForSecondsRealtime(0.01f * Time.deltaTime);
         }
-        UICoverScreen.raycastTarget = false;
+        UICoverScreen.GetComponent<Image>().raycastTarget = false;
         messageTxt.raycastTarget = false;
     }
 
@@ -3335,12 +3384,12 @@ public class Engine : MonoBehaviour
         GameObject.Find("HeartbeatFastLoopAudioSource").GetComponent<AudioSource>().Stop();
         messageTxt.text = "You have Died";
 
-        UICoverScreen.raycastTarget = true;
+        UICoverScreen.GetComponent<Image>().raycastTarget = true;
         deadRestartBtn.image.raycastTarget = true;
         deadRestartBtn.interactable = true;
-        while (UICoverScreen.color.a < 1)
+        while (UICoverScreen.GetComponent<Image>().color.a < 1)
         {
-            UICoverScreen.color = new Color(UICoverScreen.color.r, UICoverScreen.color.g, UICoverScreen.color.b, UICoverScreen.color.a + (0.01f));
+            UICoverScreen.GetComponent<Image>().color = new Color(UICoverScreen.GetComponent<Image>().color.r, UICoverScreen.GetComponent<Image>().color.g, UICoverScreen.GetComponent<Image>().color.b, UICoverScreen.GetComponent<Image>().color.a + (0.01f));
             messageTxt.color = new Color(messageTxt.color.r, messageTxt.color.g, messageTxt.color.b, messageTxt.color.a + 0.01f);
             deadRestartBtn.image.color = new Color(deadRestartBtn.image.color.r, deadRestartBtn.image.color.g, deadRestartBtn.image.color.b, deadRestartBtn.image.color.a + 0.01f);
             deadRestartBtn.gameObject.GetComponentInChildren<Text>().color = new Color(deadRestartBtn.gameObject.GetComponentInChildren<Text>().color.r,
@@ -3757,6 +3806,9 @@ public class Engine : MonoBehaviour
         SaveLoad saveLoad = new SaveLoad();
 
         saveLoad.SavePlayer(player);
+        saveLoad.SaveNPCs();
+        saveLoad.SaveStores();
+        saveLoad.SaveBossEnemies();
 
         return saveLoad;
     }
@@ -3770,6 +3822,12 @@ public class Engine : MonoBehaviour
         bf.Serialize(file, save);
         file.Close();
 
+        UIPauseScreen.SetActive(false);
+        OutputToText("Game Successfully Saved.");
+    }
+
+    public void ToMain()
+    {
         StartCoroutine(LoadToMain());
     }
 
@@ -3960,5 +4018,17 @@ public class Engine : MonoBehaviour
             }
             yield return new WaitForSecondsRealtime(60.0f);
         }
+    }
+
+    public void SetMusicLevel(float sliderValue)
+    {
+        mixer.SetFloat("MusicAudio", Mathf.Log10(sliderValue) * 20);
+        PlayerPrefs.SetFloat("MusicAudio", sliderValue);
+    }
+
+    public void SetSFXLevel(float sliderValue)
+    {
+        mixer.SetFloat("SFXAudio", Mathf.Log10(sliderValue) * 20);
+        PlayerPrefs.SetFloat("SFXAudio", sliderValue);
     }
 }

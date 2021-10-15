@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da3ae000e98a71d489bf062b749ae76f, type: 3}
   m_Name: RedSlime
   m_EditorClassIdentifier: 
-  material: {fileID: 2100000, guid: 311eff41e7ec3bf40a0aa04ee19d4ede, type: 2}
+  enemyType: 0
   name: Red Slime
   description: A ball of angry-looking red slime.
-  id: 3
+  id: 107
   minLevel: 3
   maxLevel: 5
   minDamage: 4

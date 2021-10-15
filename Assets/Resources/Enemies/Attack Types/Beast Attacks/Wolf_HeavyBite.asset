@@ -10,16 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 299be0d63f38ef945b5952b2c16587d7, type: 3}
-  m_Name: Weak Stab
+  m_Name: Wolf_HeavyBite
   m_EditorClassIdentifier: 
-  name: Weak Stab
-  description: The {0} stabs his blade at you, dealing {1} damage.
-  audioClip: {fileID: 8300000, guid: a684ae4f7af324043bf36d8aa5be0ee1, type: 3}
+  name: Heavy Bite
+  description: '{0} clamped its jaws on you hard, dealing {1} damage.'
+  audioClip: {fileID: 8300000, guid: 77ea15d6a32cadb4391dd30f325c27b7, type: 3}
   attackType: 3
   attackAttribute: 1
-  minDamageModifier: 0
-  maxDamageModifier: 0
-  staminaCost: 0
+  minDamageModifier: 2
+  maxDamageModifier: 5
+  staminaCost: 10
   manaCost: 0
-  hasStatusEffects: 0
-  statusEffects: []
+  hasStatusEffects: 1
+  statusEffects:
+  - {fileID: 11400000, guid: 8132c8d3bf60d5148a1d4b0b082d9a46, type: 2}

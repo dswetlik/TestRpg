@@ -13,12 +13,16 @@ MonoBehaviour:
   m_Name: Weak Battle Cry
   m_EditorClassIdentifier: 
   name: Weak Battle Cry
-  description: 
-  attackType: 0
-  attackAttribute: 0
+  description: The {0} lets out a fierce battle cry! ({1} damage)
+  audioClip: {fileID: 8300000, guid: 0a3ca4f9a66e14d4cb1f9d47d9270175, type: 3}
+  attackType: 1
+  attackAttribute: 1
   minDamageModifier: 0
   maxDamageModifier: 0
-  staminaCost: 0
+  staminaCost: 10
   manaCost: 0
   hasStatusEffects: 0
-  statusEffects: []
+  statusEffects:
+  - {fileID: 11400000, guid: 10ce62290e4cf20438c49cf29aaad543, type: 2}
+  - {fileID: 11400000, guid: 3eff5cbe6ecd2e74686f93d8362114fd, type: 2}
+  - {fileID: 11400000, guid: 928d33e5e7998f3489951e222fd27cec, type: 2}

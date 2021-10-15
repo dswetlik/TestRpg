@@ -21,6 +21,7 @@ public class Player
     int health, stamina, mana, maxHealth, maxStamina, maxMana, staminaRegen, manaRegen, defense, gold;
     float speed;
     List<Quest> questList = new List<Quest>();
+    List<Quest> completedQuests = new List<Quest>();
     List<StatusEffect> statusEffects = new List<StatusEffect>();
     List<ActiveSkill> activeStaminaSkills = new List<ActiveSkill>();
     List<ActiveSkill> activeManaSkills = new List<ActiveSkill>();
@@ -76,9 +77,14 @@ public class Player
     public int GetHealth() { return health; }
     public int GetStamina() { return stamina; }
     public int GetMana() { return mana; }
+    public int GetBaseMaxHealth() { return maxHealth; }
+    public int GetBaseMaxStamina() { return maxStamina; }
+    public int GetBaseMaxMana() { return maxMana; }
     public int GetMaxHealth() { return (int)((maxHealth + GetPassiveFlat(PassiveSkill.AttributeType.maxHealth)) * GetPassivePercent(PassiveSkill.AttributeType.maxHealth)); }
     public int GetMaxStamina() { return (int)((maxStamina + GetPassiveFlat(PassiveSkill.AttributeType.maxStamina)) * GetPassivePercent(PassiveSkill.AttributeType.maxStamina)); }
     public int GetMaxMana() { return (int)((maxMana + GetPassiveFlat(PassiveSkill.AttributeType.maxMana)) * GetPassivePercent(PassiveSkill.AttributeType.maxMana)); }
+    public int GetBaseStaminaRegen() { return staminaRegen; }
+    public int GetBaseManaRegen() { return manaRegen; }
     public int GetStaminaRegen() { return (int)((staminaRegen + GetPassiveFlat(PassiveSkill.AttributeType.staminaRegen)) * GetPassivePercent(PassiveSkill.AttributeType.staminaRegen)); }
     public int GetManaRegen() { return (int)((manaRegen + GetPassiveFlat(PassiveSkill.AttributeType.manaRegen)) * GetPassivePercent(PassiveSkill.AttributeType.manaRegen)); }
     public int GetDefense() {
@@ -359,6 +365,10 @@ public class Player
     }
 
     public List<Quest> GetQuestList() { return questList; }
+
+    public void AddCompletedQuest(Quest quest) { completedQuests.Add(quest); }
+    public void RemoveCompletedQuest(Quest quest) { completedQuests.Remove(quest); }
+    public List<Quest> GetCompletedQuests() { return completedQuests; }
 
     public void ChangeHealth(int healthChange)
     {

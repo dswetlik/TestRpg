@@ -794,7 +794,8 @@ AudioSource:
   m_GameObject: {fileID: 568539916}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -2843051194027481879, guid: 4aac148aae6028443ba0cab17fe2e5ca,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 1387fad635c5d37449874df7dce03c75, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.05
@@ -921,7 +922,8 @@ AudioSource:
   m_GameObject: {fileID: 654772314}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 7460452460077832804, guid: 4aac148aae6028443ba0cab17fe2e5ca,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 488a425fd77876d46a2b6189aaca42ad, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.1
@@ -1127,7 +1129,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1080, y: 1920}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -1524,7 +1526,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 349871264}
-        m_MethodName: NewGame
+        m_MethodName: LoadGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 299be0d63f38ef945b5952b2c16587d7, type: 3}
-  m_Name: Small Health Potion
+  m_Name: Wolf_Bite
   m_EditorClassIdentifier: 
-  name: Small Health Portion
-  description: The {0} quickly drinks a small health potion, healing for {1} damage!
-  audioClip: {fileID: 8300000, guid: 31c5d09189f5cff45b250ab895d7ab45, type: 3}
-  attackType: 2
-  attackAttribute: 2
-  minDamageModifier: 10
-  maxDamageModifier: 20
+  name: Bite
+  description: '{0} nipped at you, dealing {1} damage!'
+  audioClip: {fileID: 8300000, guid: aa3d55d4effb04b4e83e42a92370df8c, type: 3}
+  attackType: 3
+  attackAttribute: 1
+  minDamageModifier: 0
+  maxDamageModifier: 0
   staminaCost: 0
-  manaCost: 10
+  manaCost: 0
   hasStatusEffects: 0
   statusEffects: []

@@ -23,5 +23,7 @@ public class Store : ScriptableObject
     public void AddItem(Item item) { itemList.Add(item); }
 
     public void RemoveItem(Item item) { itemList.Remove(item); }
+
+    public void ClearInventory() { itemList.Clear(); }
     
 }

@@ -14,12 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   statusEffectType: 8
   name: Haste
-  description: 'You feel amped up, ready to fight
-
-    .'
+  description: You feel amped up, ready to fight.
   hitChance: 0.4
   turnAmount: 3
   isNegative: 0
-  isPercentage: 1
+  isPercentage: 0
   statChange: 0.25
   sprite: {fileID: 21300000, guid: 15eb2c9c5ddebb347a1bfa330fdae5df, type: 3}

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: RatLuckyPaw
   m_EditorClassIdentifier: 
   itemType: 0
-  sprite: {fileID: 21300000, guid: 214f37186cc478b488f794bc7a9fc7ce, type: 3}
+  sprite: {fileID: 21300000, guid: 2668a2847f2fe344dbefee271b889834, type: 3}
   id: 5
   name: Rat's Lucky Paw
   description: Some consider the paw of a rat to be lucky.

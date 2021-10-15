@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 299be0d63f38ef945b5952b2c16587d7, type: 3}
+  m_Name: Wolf_AdrenalineRush
+  m_EditorClassIdentifier: 
+  name: Adrenaline Rush
+  description: '{0} amps itself up into a furious state, healing itself {1} damage!'
+  audioClip: {fileID: 8300000, guid: 6ebfb999c92b23c4aa28a20bdcfdb636, type: 3}
+  attackType: 2
+  attackAttribute: 2
+  minDamageModifier: 1
+  maxDamageModifier: 10
+  staminaCost: 0
+  manaCost: 10
+  hasStatusEffects: 1
+  statusEffects:
+  - {fileID: 11400000, guid: 44d77c23e493d3e4db561638263721df, type: 2}
+  - {fileID: 11400000, guid: 928d33e5e7998f3489951e222fd27cec, type: 2}
