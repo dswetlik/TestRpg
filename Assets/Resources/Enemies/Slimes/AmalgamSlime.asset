@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da3ae000e98a71d489bf062b749ae76f, type: 3}
+  m_Name: AmalgamSlime
+  m_EditorClassIdentifier: 
+  enemyType: 0
+  name: Amalgam Slime
+  description: A much larger slime made up of the three other colors of slime.
+  id: 108
+  minLevel: 6
+  maxLevel: 20
+  minDamage: 4
+  maxDamage: 6
+  defense: 0
+  attackTypes:
+  - {fileID: 11400000, guid: b1c664d91f6c61d499f755bbeab0ee60, type: 2}
+  - {fileID: 11400000, guid: a6288402b34b63244ad0a0871a5ba504, type: 2}
+  - {fileID: 11400000, guid: de9363d9b27aa60408cc5c3f9539f482, type: 2}
+  - {fileID: 11400000, guid: e20cc3aa4e7f4e648b830aea770f011f, type: 2}
+  - {fileID: 11400000, guid: 3269b50028b694040b1e2582c2a91e98, type: 2}
+  health: 25
+  maxHealth: 25
+  stamina: 20
+  maxStamina: 20
+  stamRegen: 3
+  mana: 20
+  maxMana: 20
+  manaRegen: 3
+  goldReward: 15
+  speed: 1
+  expReward: 25
+  itemRewards: {fileID: 11400000, guid: 247b8cfaa25fea746a5c2fc9cfde770e, type: 2}
+  statusEffects: []

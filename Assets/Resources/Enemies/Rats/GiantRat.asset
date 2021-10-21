@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da3ae000e98a71d489bf062b749ae76f, type: 3}
   m_Name: GiantRat
   m_EditorClassIdentifier: 
-  material: {fileID: 0}
+  enemyType: 0
   name: Giant Rat
   description: A massive rat, seriously, I've never seen one this size before!
-  id: 104
+  id: 103
   minLevel: 0
   maxLevel: 0
   minDamage: 2

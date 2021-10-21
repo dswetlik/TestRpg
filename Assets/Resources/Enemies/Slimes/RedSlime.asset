@@ -35,6 +35,6 @@ MonoBehaviour:
   manaRegen: 3
   goldReward: 6
   speed: 0.6
-  expReward: 10
+  expReward: 15
   itemRewards: {fileID: 11400000, guid: e260beb7a9342524c8a983f58357d75e, type: 2}
   statusEffects: []

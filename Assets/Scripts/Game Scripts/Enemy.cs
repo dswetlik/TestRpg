@@ -21,7 +21,7 @@ public class Enemy : ScriptableObject
     [TextArea(3,5)][SerializeField] string description;
     [SerializeField] uint id;
     [SerializeField] int minLevel, maxLevel;
-    [SerializeField] int minDamage, maxDamage;
+    [SerializeField] int baseDamage;
     [SerializeField] int defense;
     [SerializeField] List<EnemyAttackType> attackTypes;
     [SerializeField] int health, maxHealth, stamina, maxStamina, stamRegen, mana, maxMana, manaRegen, goldReward;
@@ -36,10 +36,8 @@ public class Enemy : ScriptableObject
     public uint GetID() { return id; }
     public int GetMinLevel() { return minLevel; }
     public int GetMaxLevel() { return maxLevel; }
-    public int GetMaxDamage() { return maxDamage; }
-    public int GetMinDamage() { return minDamage; }
     public int GetDefense() { return defense; }
-    public int GetBaseDamage() { return UnityEngine.Random.Range(minDamage, maxDamage + 1); }
+    public int GetBaseDamage() { return baseDamage; }
     public uint GetExpReward() { return expReward; }
     public int GetGoldReward() { return goldReward; }
     public int GetHealth() { return health; }
@@ -53,6 +51,17 @@ public class Enemy : ScriptableObject
     public float GetSpeed() { return speed; }
     public List<EnemyAttackType> GetEnemyAttackTypes() { return attackTypes; }
     public ItemLootTable GetItemRewards() { return itemRewards; }
+
+    public int GetMaxDamage()
+    {
+        int maxDamage = 0;
+        foreach(EnemyAttackType attack in attackTypes)
+        {
+            if (attack.GetMaxDamageModifier() > maxDamage)
+                maxDamage = attack.GetMaxDamageModifier();
+        }
+        return maxDamage + baseDamage;
+    }
 
     public void RegenAttributes()
     {

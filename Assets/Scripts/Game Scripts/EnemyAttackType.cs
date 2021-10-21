@@ -25,8 +25,7 @@ public class EnemyAttackType : ScriptableObject
     [SerializeField] AudioClip audioClip;
     [SerializeField] AttackType attackType;
     [SerializeField] AttackAttribute attackAttribute;
-    [SerializeField] int minDamageModifier;
-    [SerializeField] int maxDamageModifier;
+    [SerializeField] int damageModifier;
     [SerializeField] int staminaCost;
     [SerializeField] int manaCost;
     [SerializeField] bool hasStatusEffects;
@@ -37,13 +36,12 @@ public class EnemyAttackType : ScriptableObject
     public AudioClip GetAudioClip() { return audioClip; }
     public AttackType GetAttackType() { return attackType; }
     public AttackAttribute GetAttackAttribute() { return attackAttribute; }
-    public int GetDamageModifier() { return Random.Range(minDamageModifier, maxDamageModifier + 1); }
-    public int GetMinDamageModifier() { return minDamageModifier; }
-    public int GetMaxDamageModifier() { return maxDamageModifier; }
-
+    public int GetDamageModifier() { return Random.Range(0, damageModifier + 1); }
     public int GetStaminaCost() { return staminaCost; }
     public int GetManaCost() { return manaCost; }
 
     public bool HasStatusEffects() { return hasStatusEffects; }
     public List<StatusEffect> GetStatusEffects() { return statusEffects; }
+
+    public int GetMaxDamageModifier() { return damageModifier; }
 }

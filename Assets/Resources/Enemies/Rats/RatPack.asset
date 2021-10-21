@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da3ae000e98a71d489bf062b749ae76f, type: 3}
   m_Name: RatPack
   m_EditorClassIdentifier: 
-  material: {fileID: 0}
+  enemyType: 0
   name: Pack of Rats
   description: A pack of rats just let loose from a burlap bag. They are not happy.
   id: 102
@@ -35,6 +35,6 @@ MonoBehaviour:
   manaRegen: 0
   goldReward: 5
   speed: 0.75
-  expReward: 6
+  expReward: 10
   itemRewards: {fileID: 11400000, guid: 6fd21c7884f09494082df16c550bff14, type: 2}
   statusEffects: []

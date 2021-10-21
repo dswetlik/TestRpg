@@ -15,18 +15,18 @@ MonoBehaviour:
   enemyType: 1
   name: Rat King
   description: A large bundle of angry rats tied at the tail.
-  id: 103
+  id: 104
   minLevel: 5
   maxLevel: 20
-  minDamage: 5
-  maxDamage: 6
+  minDamage: 6
+  maxDamage: 7
   defense: 0
   attackTypes:
   - {fileID: 11400000, guid: c4c112e9746a14b43a84465341717600, type: 2}
   - {fileID: 11400000, guid: ec4a780c87016a1459c601ffbe4381ea, type: 2}
   - {fileID: 11400000, guid: 8ea4b0e6bc68f994cbf0ad5531fd153d, type: 2}
-  health: 20
-  maxHealth: 20
+  health: 30
+  maxHealth: 30
   stamina: 10
   maxStamina: 10
   stamRegen: 1

@@ -271,8 +271,7 @@ public class Engine : MonoBehaviour
     Item ratKingsCrown;
     Item ratLuckyPaw;
     Item ratSkull;
-    
-
+   
     Item blueSlimeGoo;
     Item greenSlimeGoo;
     Item redSlimeGoo;
@@ -283,6 +282,8 @@ public class Engine : MonoBehaviour
     Item lockpickSet;
 
     Item wolfTooth;
+    Item wolfPelt;
+    Item wolfGem;
 
     Weapon crookedDagger;
 
@@ -485,8 +486,14 @@ public class Engine : MonoBehaviour
     Enemy redSlime;
     Enemy greenSlime;
     Enemy blueSlime;
+    Enemy amalgamSlime;
 
     Enemy weakBandit;
+    Enemy castleGuard;
+    BossEnemy banditChief;
+
+    Enemy grayWolf;
+    Enemy direWolf;
 
     NPC hirgirdBlacksmith;
     NPC inveraAlchemist;
@@ -494,6 +501,9 @@ public class Engine : MonoBehaviour
     NPC serikInnkeeper;
     NPC varianArmorsmith;
     NPC malina;
+    NPC cityGuard;
+    NPC castleGuardNPC;
+    NPC temrik;
 
     Store heavyAnvil;
     Store litheWarrior;
@@ -613,6 +623,8 @@ public class Engine : MonoBehaviour
         lockpickSet = Resources.Load<Item>("Items/Miscellaneous/BanditItems/LockpickSet");
 
         wolfTooth = Resources.Load<Item>("Items/Miscellaneous/WolfItems/WolfTooth");
+        wolfPelt = Resources.Load<Item>("Items/Miscellaneous/WolfItems/WolfPelt");
+        wolfGem = Resources.Load<Item>("Items/Miscellaneous/WolfItems/WolfGem");
 
         crookedDagger = Resources.Load<Weapon>("Items/Weapons/Crooked Dagger");
 
@@ -739,6 +751,8 @@ public class Engine : MonoBehaviour
         ItemDictionary.Add(lockpickSet.GetID(), lockpickSet);
 
         ItemDictionary.Add(wolfTooth.GetID(), wolfTooth);
+        ItemDictionary.Add(wolfPelt.GetID(), wolfPelt);
+        ItemDictionary.Add(wolfGem.GetID(), wolfGem);
 
         ItemDictionary.Add(crookedDagger.GetID(), crookedDagger);
 
@@ -868,8 +882,14 @@ public class Engine : MonoBehaviour
         redSlime = Instantiate(Resources.Load<Enemy>("Enemies/Slimes/RedSlime"));
         greenSlime = Instantiate(Resources.Load<Enemy>("Enemies/Slimes/GreenSlime"));
         blueSlime = Instantiate(Resources.Load<Enemy>("Enemies/Slimes/BlueSlime"));
+        amalgamSlime = Instantiate(Resources.Load<Enemy>("Enemies/Slimes/AmalgamSlime"));
 
         weakBandit = Instantiate(Resources.Load<Enemy>("Enemies/Humanoid/WeakBandit"));
+        banditChief = Instantiate(Resources.Load<BossEnemy>("Enemies/Humanoid/BanditChief"));
+        castleGuard = Instantiate(Resources.Load<Enemy>("Enemies/Humanoid/CastleGuard"));
+
+        grayWolf = Instantiate(Resources.Load<Enemy>("Enemies/Wolves/GrayWolf"));
+        direWolf = Instantiate(Resources.Load<Enemy>("Enemies/Wolves/DireWolf"));
 
         EnemyDictionary.Add(rat.GetID(), rat);
         EnemyDictionary.Add(smallRat.GetID(), smallRat);
@@ -880,8 +900,14 @@ public class Engine : MonoBehaviour
         EnemyDictionary.Add(redSlime.GetID(), redSlime);
         EnemyDictionary.Add(greenSlime.GetID(), greenSlime);
         EnemyDictionary.Add(blueSlime.GetID(), blueSlime);
+        EnemyDictionary.Add(amalgamSlime.GetID(), amalgamSlime);
 
         EnemyDictionary.Add(weakBandit.GetID(), weakBandit);
+        EnemyDictionary.Add(banditChief.GetID(), banditChief);
+        EnemyDictionary.Add(castleGuard.GetID(), castleGuard);
+
+        EnemyDictionary.Add(grayWolf.GetID(), grayWolf);
+        EnemyDictionary.Add(direWolf.GetID(), direWolf);
 
         hirgirdBlacksmith = Instantiate(Resources.Load<NPC>("NPC/Hirgird"));
         inveraAlchemist = Instantiate(Resources.Load<NPC>("NPC/Invera"));
@@ -889,6 +915,9 @@ public class Engine : MonoBehaviour
         serikInnkeeper = Instantiate(Resources.Load<NPC>("NPC/Serik"));
         varianArmorsmith = Instantiate(Resources.Load<NPC>("NPC/Varian"));
         malina = Instantiate(Resources.Load<NPC>("NPC/Malina"));
+        cityGuard = Instantiate(Resources.Load<NPC>("NPC/GateGuard"));
+        castleGuardNPC = Instantiate(Resources.Load<NPC>("NPC/CastleGuard"));
+        temrik = Instantiate(Resources.Load<NPC>("NPC/Temrik"));
 
         NPCDictionary.Add(hirgirdBlacksmith.GetID(), hirgirdBlacksmith);
         NPCDictionary.Add(inveraAlchemist.GetID(), inveraAlchemist);
@@ -896,6 +925,9 @@ public class Engine : MonoBehaviour
         NPCDictionary.Add(serikInnkeeper.GetID(), serikInnkeeper);
         NPCDictionary.Add(varianArmorsmith.GetID(), varianArmorsmith);
         NPCDictionary.Add(malina.GetID(), malina);
+        NPCDictionary.Add(cityGuard.GetID(), cityGuard);
+        NPCDictionary.Add(castleGuardNPC.GetID(), castleGuardNPC);
+        NPCDictionary.Add(temrik.GetID(), temrik);
 
         heavyAnvil = Instantiate(Resources.Load<Store>("Stores/HeavyAnvil"));
         litheWarrior = Instantiate(Resources.Load<Store>("Stores/LitheWarrior"));
@@ -2887,16 +2919,24 @@ public class Engine : MonoBehaviour
             Enemy e = kvp.Value;
             if (leveledEnemies.Contains(e))
             {
-                if (player.GetLevel() > e.GetMaxLevel() || player.GetLevel() < e.GetMinLevel() || ((BossEnemy)EnemyDictionary[e.GetID()]).HasBeenDefeated())
-                    leveledEnemies.Remove(e);
+                if (player.GetLevel() > e.GetMaxLevel() || player.GetLevel() < e.GetMinLevel() || e.GetEnemyType() == Enemy.EnemyType.boss)
+                {
+                    if(e.GetEnemyType() == Enemy.EnemyType.normal || ((BossEnemy)EnemyDictionary[e.GetID()]).HasBeenDefeated())
+                        leveledEnemies.Remove(e);
+                }
             }
             else
             {
-                if (player.GetLevel() <= e.GetMaxLevel() && player.GetLevel() >= e.GetMinLevel() && !((BossEnemy)EnemyDictionary[e.GetID()]).HasBeenDefeated())
-                    leveledEnemies.Add(e);
+                if (player.GetLevel() <= e.GetMaxLevel() && player.GetLevel() >= e.GetMinLevel())
+                {
+                    if(e.GetEnemyType() == Enemy.EnemyType.normal || !((BossEnemy)EnemyDictionary[e.GetID()]).HasBeenDefeated())
+                        leveledEnemies.Add(e);
+                }
             }
         }
 
+        //leveledEnemies.ForEach(y => Debug.Log(y.GetName()));
+        
         enemyA.GetComponent<EnemyContainer>().SetEnemy(leveledEnemies[UnityEngine.Random.Range(0, leveledEnemies.Count)]);
         enemyB.GetComponent<EnemyContainer>().SetEnemy(leveledEnemies[UnityEngine.Random.Range(0, leveledEnemies.Count)]);
         enemyC.GetComponent<EnemyContainer>().SetEnemy(leveledEnemies[UnityEngine.Random.Range(0, leveledEnemies.Count)]);
@@ -2915,8 +2955,31 @@ public class Engine : MonoBehaviour
         arenaEnemySpeedObj.SetActive(false);
         arenaEnemyDamageObj.SetActive(false);
 
+        arenaBossImg.SetActive(false);
+
         GameObject.Find("Player").transform.position = new Vector3(0, 2.2f, 10);
         GameObject.Find("Player").transform.transform.rotation = new Quaternion(0, 0, 0, 0);
+    }
+
+    public void CheckSkillArrows(Vector2 position)
+    {
+        GameObject scrollView;
+        if (skillScrollView.activeSelf)
+            scrollView = skillScrollView;
+        else if (magicScrollView.activeSelf)
+            scrollView = magicScrollView;
+        else
+            scrollView = passiveScrollView;
+
+        if (position.x > 0.9)
+            scrollView.transform.GetChild(1).gameObject.SetActive(false);
+        else
+            scrollView.transform.GetChild(1).gameObject.SetActive(true);
+
+        if (position.y > 0.1)
+            scrollView.transform.GetChild(2).gameObject.SetActive(true);
+        else
+            scrollView.transform.GetChild(2).gameObject.SetActive(false);
     }
 
     public void ActivateSkillScreen(bool x)
@@ -2937,6 +3000,9 @@ public class Engine : MonoBehaviour
         skillScrollView.SetActive(true);
         magicScrollView.SetActive(false);
         passiveScrollView.SetActive(false);
+
+        skillScrollView.GetComponent<ScrollRect>().verticalNormalizedPosition = 1;
+        skillScrollView.GetComponent<ScrollRect>().horizontalNormalizedPosition = 0;
     }
 
     public void ActivateMagicScrollView()

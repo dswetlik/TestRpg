@@ -16,8 +16,8 @@ MonoBehaviour:
   name: Gray Wolf
   description: A regular-looking gray wolf, seemingly plucked from the Lisdend Forest
     nearby and dropped in the arena.
-  id: 111
-  minLevel: 5
+  id: 113
+  minLevel: 6
   maxLevel: 10
   minDamage: 4
   maxDamage: 8

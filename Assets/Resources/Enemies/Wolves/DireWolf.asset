@@ -15,9 +15,9 @@ MonoBehaviour:
   enemyType: 0
   name: Dire Wolf
   description: A larger, slightly more pissed off version of the gray wolf.
-  id: 112
+  id: 114
   minLevel: 7
-  maxLevel: 10
+  maxLevel: 20
   minDamage: 8
   maxDamage: 12
   defense: 0

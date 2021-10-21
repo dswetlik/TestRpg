@@ -13,14 +13,14 @@ MonoBehaviour:
   m_Name: WeakBandit
   m_EditorClassIdentifier: 
   enemyType: 0
-  name: Weak Bandit
+  name: Captured Bandit
   description: A bandit weakened by months of imprisonment, now fighting for his
     freedom.
   id: 110
-  minLevel: 5
+  minLevel: 6
   maxLevel: 10
   minDamage: 5
-  maxDamage: 10
+  maxDamage: 9
   defense: 2
   attackTypes:
   - {fileID: 11400000, guid: 464a6e33d66af7d4f8063b762f559bfe, type: 2}
@@ -28,7 +28,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c29c5de414544664ca25bb60da0b94ae, type: 2}
   health: 30
   maxHealth: 30
-  stamina: 10
+  stamina: 15
   maxStamina: 15
   stamRegen: 2
   mana: 10

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Weak Battle Cry
   m_EditorClassIdentifier: 
   name: Weak Battle Cry
-  description: The {0} lets out a fierce battle cry! ({1} damage)
+  description: The {0} lets out a weak battle cry!
   audioClip: {fileID: 8300000, guid: 0a3ca4f9a66e14d4cb1f9d47d9270175, type: 3}
   attackType: 1
   attackAttribute: 1
