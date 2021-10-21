@@ -12,8 +12,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float movementSpeed;
     [SerializeField] float rotationSpeed;
 
-    // Update is called once per frame
-    void Update()
+
+    private void Start()
     {
         characterController = GetComponent<CharacterController>();
     }
