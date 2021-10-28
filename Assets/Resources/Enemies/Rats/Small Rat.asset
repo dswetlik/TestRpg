@@ -12,17 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da3ae000e98a71d489bf062b749ae76f, type: 3}
   m_Name: Small Rat
   m_EditorClassIdentifier: 
-  material: {fileID: 0}
+  enemyType: 0
   name: Small Rat
   description: A small rat, an insult to fight as a gladiator.
   id: 100
   minLevel: 1
   maxLevel: 3
-  minDamage: 0
-  maxDamage: 2
+  baseDamage: 0
   defense: 0
   attackTypes:
-  - {fileID: 11400000, guid: c4c112e9746a14b43a84465341717600, type: 2}
+  - {fileID: 11400000, guid: 3f49f6476a0dc0f478a121285a78e077, type: 2}
   health: 5
   maxHealth: 5
   stamina: 0

@@ -105,14 +105,14 @@ public class Enemy : ScriptableObject
         {
             if (attackType.GetAttackType() == EnemyAttackType.AttackType.heal)
             {
-                if (health < maxHealth * 0.3f && mana >= attackType.GetManaCost())
+                if (health < maxHealth * 0.3f && mana >= attackType.GetAttributeCost())
                     return attackType;
             }
             else
             {
                 if (attackType.GetAttackAttribute() == EnemyAttackType.AttackAttribute.stamina)
                 {
-                    if (stamina >= attackType.GetStaminaCost())
+                    if (stamina >= attackType.GetAttributeCost())
                     {
                         if (attackType.GetAttackType() == EnemyAttackType.AttackType.damage)
                         {
@@ -143,7 +143,7 @@ public class Enemy : ScriptableObject
                 }
                 else if (attackType.GetAttackAttribute() == EnemyAttackType.AttackAttribute.mana)
                 {
-                    if (mana >= attackType.GetManaCost())
+                    if (mana >= attackType.GetAttributeCost())
                     {
                         if (attackType.GetAttackType() == EnemyAttackType.AttackType.damage)
                         {

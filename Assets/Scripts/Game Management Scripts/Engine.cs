@@ -480,20 +480,32 @@ public class Engine : MonoBehaviour
     Enemy giantRat;
     Enemy ratPack;
     Enemy rat;
-
-    BossEnemy ratKing;
-
     Enemy redSlime;
     Enemy greenSlime;
     Enemy blueSlime;
+
+    BossEnemy ratKing;
+
     Enemy amalgamSlime;
-
-    Enemy weakBandit;
+    Enemy goblinShaman;
+    Enemy capturedBandit;
     Enemy castleGuard;
-    BossEnemy banditChief;
-
     Enemy grayWolf;
     Enemy direWolf;
+
+    BossEnemy banditChief;
+
+    Enemy gladiator;
+    Enemy warlock;
+    Enemy witch;
+
+    BossEnemy veteran;
+
+    Enemy chiefBattlemage;
+    Enemy chiefKnight;
+    Enemy warWolf;
+
+    BossEnemy arenaGrandmaster;
 
     NPC hirgirdBlacksmith;
     NPC inveraAlchemist;
@@ -876,38 +888,63 @@ public class Engine : MonoBehaviour
         giantRat = Instantiate(Resources.Load<Enemy>("Enemies/Rats/GiantRat"));
         smallRat = Instantiate(Resources.Load<Enemy>("Enemies/Rats/Small Rat"));
         ratPack = Instantiate(Resources.Load<Enemy>("Enemies/Rats/RatPack"));
-
-        ratKing = Instantiate(Resources.Load<BossEnemy>("Enemies/Rats/RatKing"));
-
         redSlime = Instantiate(Resources.Load<Enemy>("Enemies/Slimes/RedSlime"));
         greenSlime = Instantiate(Resources.Load<Enemy>("Enemies/Slimes/GreenSlime"));
         blueSlime = Instantiate(Resources.Load<Enemy>("Enemies/Slimes/BlueSlime"));
+
+        ratKing = Instantiate(Resources.Load<BossEnemy>("Enemies/Rats/RatKing"));
+
         amalgamSlime = Instantiate(Resources.Load<Enemy>("Enemies/Slimes/AmalgamSlime"));
-
-        weakBandit = Instantiate(Resources.Load<Enemy>("Enemies/Humanoid/WeakBandit"));
-        banditChief = Instantiate(Resources.Load<BossEnemy>("Enemies/Humanoid/BanditChief"));
+        goblinShaman = Instantiate(Resources.Load<Enemy>("Enemies/Humanoid/GoblinShaman"));
+        capturedBandit = Instantiate(Resources.Load<Enemy>("Enemies/Humanoid/CapturedBandit"));
         castleGuard = Instantiate(Resources.Load<Enemy>("Enemies/Humanoid/CastleGuard"));
-
         grayWolf = Instantiate(Resources.Load<Enemy>("Enemies/Wolves/GrayWolf"));
         direWolf = Instantiate(Resources.Load<Enemy>("Enemies/Wolves/DireWolf"));
+
+        banditChief = Instantiate(Resources.Load<BossEnemy>("Enemies/Humanoid/BanditChief"));
+
+        gladiator = Instantiate(Resources.Load<Enemy>("Enemies/Humanoid/Gladiator"));
+        warlock = Instantiate(Resources.Load<Enemy>("Enemies/Humanoid/Warlock"));
+        witch = Instantiate(Resources.Load<Enemy>("Enemies/Humanoid/Witch"));
+
+        veteran = Instantiate(Resources.Load<BossEnemy>("Enemies/Humanoid/Veteran"));
+
+        chiefBattlemage = Instantiate(Resources.Load<Enemy>("Enemies/Humanoid/ChiefBattlemage"));
+        chiefKnight = Instantiate(Resources.Load<Enemy>("Enemies/Humanoid/ChiefKnight"));
+        warWolf = Instantiate(Resources.Load<Enemy>("Enemies/Wolves/WarWolf"));
+
+        arenaGrandmaster = Instantiate(Resources.Load<BossEnemy>("Enemies/Humanoid/ArenaGrandmaster"));
 
         EnemyDictionary.Add(rat.GetID(), rat);
         EnemyDictionary.Add(smallRat.GetID(), smallRat);
         EnemyDictionary.Add(ratPack.GetID(), ratPack);
         EnemyDictionary.Add(giantRat.GetID(), giantRat);
-        EnemyDictionary.Add(ratKing.GetID(), ratKing);
-
         EnemyDictionary.Add(redSlime.GetID(), redSlime);
         EnemyDictionary.Add(greenSlime.GetID(), greenSlime);
         EnemyDictionary.Add(blueSlime.GetID(), blueSlime);
+
+        EnemyDictionary.Add(ratKing.GetID(), ratKing);
+
         EnemyDictionary.Add(amalgamSlime.GetID(), amalgamSlime);
-
-        EnemyDictionary.Add(weakBandit.GetID(), weakBandit);
-        EnemyDictionary.Add(banditChief.GetID(), banditChief);
+        EnemyDictionary.Add(goblinShaman.GetID(), goblinShaman);
+        EnemyDictionary.Add(capturedBandit.GetID(), capturedBandit);
         EnemyDictionary.Add(castleGuard.GetID(), castleGuard);
-
         EnemyDictionary.Add(grayWolf.GetID(), grayWolf);
         EnemyDictionary.Add(direWolf.GetID(), direWolf);
+
+        EnemyDictionary.Add(banditChief.GetID(), banditChief);
+
+        EnemyDictionary.Add(gladiator.GetID(), gladiator);
+        EnemyDictionary.Add(warlock.GetID(), warlock);
+        EnemyDictionary.Add(witch.GetID(), witch);
+
+        EnemyDictionary.Add(veteran.GetID(), veteran);
+
+        EnemyDictionary.Add(chiefBattlemage.GetID(), chiefBattlemage);
+        EnemyDictionary.Add(chiefKnight.GetID(), chiefKnight);
+        EnemyDictionary.Add(warWolf.GetID(), warWolf);
+
+        EnemyDictionary.Add(arenaGrandmaster.GetID(), arenaGrandmaster);
 
         hirgirdBlacksmith = Instantiate(Resources.Load<NPC>("NPC/Hirgird"));
         inveraAlchemist = Instantiate(Resources.Load<NPC>("NPC/Invera"));
@@ -1995,7 +2032,7 @@ public class Engine : MonoBehaviour
                     }
                     else
                         OutputToBattle(String.Format("{0} attempted to heal, but is poisoned!", enemy.GetName()));
-                    enemy.ChangeMana(-attack.GetManaCost());
+                    enemy.ChangeMana(-attack.GetAttributeCost());
                 }
                 else if(attack.GetAttackType() == EnemyAttackType.AttackType.effect)
                 {
@@ -2007,7 +2044,7 @@ public class Engine : MonoBehaviour
                     enemyDamageOutput = (attack.GetDamageModifier() + (int)enemy.GetBaseDamage()) - playerDefValue;
                     if (enemyDamageOutput < 0)
                         enemyDamageOutput = 0;
-                    enemy.ChangeMana(-attack.GetManaCost());
+                    enemy.ChangeMana(-attack.GetAttributeCost());
                     OutputToBattle(String.Format(attack.GetDescription(), enemy.GetName(), enemyDamageOutput));
                 }
             }
@@ -2025,7 +2062,7 @@ public class Engine : MonoBehaviour
                     }
                     else
                         OutputToBattle(String.Format("{0} attempted to heal, but is poisoned!", enemy.GetName()));
-                    enemy.ChangeStamina(-attack.GetStaminaCost());
+                    enemy.ChangeStamina(-attack.GetAttributeCost());
                 }
                 else if (attack.GetAttackType() == EnemyAttackType.AttackType.effect)
                 {
@@ -2037,7 +2074,7 @@ public class Engine : MonoBehaviour
                     enemyDamageOutput = (attack.GetDamageModifier() + (int)enemy.GetBaseDamage()) - playerDefValue;
                     if (enemyDamageOutput < 0)
                         enemyDamageOutput = 0;
-                    enemy.ChangeStamina(-attack.GetStaminaCost());
+                    enemy.ChangeStamina(-attack.GetAttributeCost());
                     OutputToBattle(String.Format(attack.GetDescription(), enemy.GetName(), enemyDamageOutput));
                 }
             }

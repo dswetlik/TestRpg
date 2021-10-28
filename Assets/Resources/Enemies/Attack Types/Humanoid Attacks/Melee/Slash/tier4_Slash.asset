@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 299be0d63f38ef945b5952b2c16587d7, type: 3}
+  m_Name: tier4_Slash
+  m_EditorClassIdentifier: 
+  name: Master Slash
+  description: The {0} lashes out and lacerates you, dealing {1} damage
+  audioClip: {fileID: 0}
+  attackType: 3
+  attackAttribute: 1
+  damageModifier: 5
+  attributeCost: 25
+  hasStatusEffects: 1
+  statusEffects:
+  - {fileID: 11400000, guid: 4dda95571aa8fc047aa57704d81af3e3, type: 2}

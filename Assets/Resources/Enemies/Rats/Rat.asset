@@ -12,25 +12,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da3ae000e98a71d489bf062b749ae76f, type: 3}
   m_Name: Rat
   m_EditorClassIdentifier: 
-  material: {fileID: 2100000, guid: 88b6ccca07b0f19479181430530ac5e1, type: 2}
+  enemyType: 0
   name: Rat
   description: A furry rat, a classic fight.
   id: 101
   minLevel: 1
   maxLevel: 5
-  minDamage: 1
-  maxDamage: 2
+  baseDamage: 1
   defense: 0
   attackTypes:
-  - {fileID: 11400000, guid: c4c112e9746a14b43a84465341717600, type: 2}
+  - {fileID: 11400000, guid: 3f49f6476a0dc0f478a121285a78e077, type: 2}
+  - {fileID: 11400000, guid: 7b5e4f8c78b95d84a91ec01dc187a4c1, type: 2}
   health: 10
   maxHealth: 10
   stamina: 10
   maxStamina: 10
   stamRegen: 1
-  mana: 10
-  maxMana: 10
-  manaRegen: 1
+  mana: 0
+  maxMana: 0
+  manaRegen: 0
   goldReward: 2
   speed: 1.5
   expReward: 5

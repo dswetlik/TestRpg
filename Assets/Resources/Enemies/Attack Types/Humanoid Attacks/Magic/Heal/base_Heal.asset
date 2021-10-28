@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 299be0d63f38ef945b5952b2c16587d7, type: 3}
+  m_Name: base_Heal
+  m_EditorClassIdentifier: 
+  name: Weak Heal
+  description: The {0} casts a weak healing spell over themselves, healing for {1}
+    HP.
+  audioClip: {fileID: 0}
+  attackType: 2
+  attackAttribute: 2
+  damageModifier: 15
+  attributeCost: 15
+  hasStatusEffects: 1
+  statusEffects:
+  - {fileID: 11400000, guid: 44d77c23e493d3e4db561638263721df, type: 2}

@@ -18,20 +18,19 @@ MonoBehaviour:
   id: 104
   minLevel: 5
   maxLevel: 20
-  minDamage: 6
-  maxDamage: 7
+  baseDamage: 6
   defense: 0
   attackTypes:
-  - {fileID: 11400000, guid: c4c112e9746a14b43a84465341717600, type: 2}
-  - {fileID: 11400000, guid: ec4a780c87016a1459c601ffbe4381ea, type: 2}
-  - {fileID: 11400000, guid: 8ea4b0e6bc68f994cbf0ad5531fd153d, type: 2}
+  - {fileID: 11400000, guid: 02e5573009c448f43a2520f178dc1d26, type: 2}
+  - {fileID: 11400000, guid: 1688c12820d4a244192809c6ed89caa6, type: 2}
+  - {fileID: 11400000, guid: 044675963e5f4ec4c8b26c348ec21c5f, type: 2}
   health: 30
   maxHealth: 30
-  stamina: 10
-  maxStamina: 10
+  stamina: 15
+  maxStamina: 15
   stamRegen: 1
-  mana: 10
-  maxMana: 10
+  mana: 15
+  maxMana: 15
   manaRegen: 1
   goldReward: 20
   speed: 0.75

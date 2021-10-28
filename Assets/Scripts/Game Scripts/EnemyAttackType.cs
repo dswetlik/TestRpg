@@ -26,8 +26,7 @@ public class EnemyAttackType : ScriptableObject
     [SerializeField] AttackType attackType;
     [SerializeField] AttackAttribute attackAttribute;
     [SerializeField] int damageModifier;
-    [SerializeField] int staminaCost;
-    [SerializeField] int manaCost;
+    [SerializeField] int attributeCost;
     [SerializeField] bool hasStatusEffects;
     [SerializeField] List<StatusEffect> statusEffects = new List<StatusEffect>();
 
@@ -37,8 +36,7 @@ public class EnemyAttackType : ScriptableObject
     public AttackType GetAttackType() { return attackType; }
     public AttackAttribute GetAttackAttribute() { return attackAttribute; }
     public int GetDamageModifier() { return Random.Range(0, damageModifier + 1); }
-    public int GetStaminaCost() { return staminaCost; }
-    public int GetManaCost() { return manaCost; }
+    public int GetAttributeCost() { return attributeCost; }
 
     public bool HasStatusEffects() { return hasStatusEffects; }
     public List<StatusEffect> GetStatusEffects() { return statusEffects; }
