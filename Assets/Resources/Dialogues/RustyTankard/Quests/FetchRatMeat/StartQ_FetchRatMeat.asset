@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65a18b26719fe2648aed386f4dd52f3a, type: 3}
+  m_Name: StartQ_FetchRatMeat
+  m_EditorClassIdentifier: 
+  npcLine: Have anything to eat?
+  dialogueType: 3
+  dialogueOptions:
+  - As long as I get the first dish, I'm in.
+  - That sounds absolutely disgusting, no.
+  dialogueAnswers:
+  - {fileID: 11400000, guid: 972118c18e858334090f215d89c40018, type: 2}
+  - {fileID: 11400000, guid: 4200d08820f4ecd429eda5e0902cf3aa, type: 2}
+  dialogueSprites:
+  - {fileID: 21300000, guid: 410d4695f99727a48abf7546484779a1, type: 3}
+  - {fileID: 21300000, guid: 9b0ff9c0bc1422f4180d84408e1bfb8d, type: 3}
+  openingSprite: {fileID: 21300000, guid: 5d247f9aa35a77b42a6a1555fbda4e49, type: 3}
+  questDialogueType: 0
+  quest: {fileID: 11400000, guid: 56ccbad5fbc03804fb664f4697df2e72, type: 2}
+  notStartedResponse: Actually, I don't right now. Rats broke into my storeroom and
+    ate practically everything. This may sound odd, and no one can know this, but
+    I'd like you to collect some rat meat so I can make it into a stew.
+  notCompleteResponse: Hey, I have some really hungry customers, can you get me that
+    rat meat?
+  notCompleteDialogueOptions: []
+  notCompleteDialogueAnswers: []
+  notCompleteDialogueSprites: []
+  completeResponse: Sweet, I'll stew this real fast. Here's some gold for your troubles.

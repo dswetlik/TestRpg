@@ -17,6 +17,8 @@ MonoBehaviour:
   dialogueType: 3
   dialogueOptions: []
   dialogueAnswers: []
+  dialogueSprites: []
+  openingSprite: {fileID: 0}
   questDialogueType: 2
   quest: {fileID: 11400000, guid: 1a2e84888078d75469dfce76f4048883, type: 2}
   notStartedResponse: Yes actually, you gladiators always storm through here and
@@ -24,6 +26,9 @@ MonoBehaviour:
     potions on the house!
   notCompleteResponse: Please go get me those ingredients I asked for. I'll be out
     of ingredients shortly!
+  notCompleteDialogueOptions: []
+  notCompleteDialogueAnswers: []
+  notCompleteDialogueSprites: []
   completeResponse: 'Thank you so much for getting these for me! Stay here a moment,
     let me whip up some potions for you
 

@@ -18,7 +18,7 @@ MonoBehaviour:
     Chief Knight, and the War Wolf.
   levelRequirement: 15
   isCompleted: 0
-  dialogue: {fileID: 0}
+  dialogue: {fileID: 11400000, guid: 5635752c7ab02264fb5daad32e478373, type: 2}
   hasItemReward: 0
   itemRewards: []
   id: 9

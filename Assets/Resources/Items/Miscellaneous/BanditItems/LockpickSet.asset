@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemType: 0
   sprite: {fileID: 21300000, guid: a6ac83883bae67e479c787f708b68936, type: 3}
-  id: 10
+  id: 20
   name: Lockpick Set
   description: A set of lockpicks used by bandits for their nefarious deeds.
   weight: 1

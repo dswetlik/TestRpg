@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: Deny_SlayAmalgamSlime
   m_EditorClassIdentifier: 
   npcLine: Okay, that's fine. The bounty will wait for you to be ready.
-  dialogueType: 0
+  dialogueType: 3
   dialogueOptions: []
   dialogueAnswers: []
   dialogueSprites: []
   openingSprite: {fileID: 0}
   questDialogueType: 2
-  quest: {fileID: 11400000, guid: fde7ecb308218a049bf5d7f4cc5a202e, type: 2}
+  quest: {fileID: 11400000, guid: 5615383f0edc54e48891ecfb9381249a, type: 2}
   notStartedResponse: 
   notCompleteResponse: 
   notCompleteDialogueOptions: []

@@ -18,7 +18,7 @@ MonoBehaviour:
     freedom.
   id: 110
   minLevel: 6
-  maxLevel: 10
+  maxLevel: 20
   baseDamage: 5
   defense: 2
   attackTypes:

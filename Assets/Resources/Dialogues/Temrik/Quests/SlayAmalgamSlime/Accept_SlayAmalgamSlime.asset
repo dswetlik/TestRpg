@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   npcLine: Great, check back in once you've killed five slimes and you'll get your
     reward.
-  dialogueType: 0
+  dialogueType: 3
   dialogueOptions: []
   dialogueAnswers: []
   dialogueSprites: []
   openingSprite: {fileID: 0}
   questDialogueType: 1
-  quest: {fileID: 11400000, guid: fde7ecb308218a049bf5d7f4cc5a202e, type: 2}
+  quest: {fileID: 11400000, guid: 5615383f0edc54e48891ecfb9381249a, type: 2}
   notStartedResponse: 
   notCompleteResponse: 
   notCompleteDialogueOptions: []

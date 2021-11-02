@@ -17,7 +17,7 @@ MonoBehaviour:
   description: It is time to slay your fellow gladiator. Get to it!
   levelRequirement: 11
   isCompleted: 0
-  dialogue: {fileID: 0}
+  dialogue: {fileID: 11400000, guid: 557c347e154d26641a2040405245befd, type: 2}
   hasItemReward: 0
   itemRewards: []
   id: 8

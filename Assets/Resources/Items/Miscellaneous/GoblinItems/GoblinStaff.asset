@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemType: 0
   sprite: {fileID: 21300000, guid: 5f406c1654253cf40872da030b5b732f, type: 3}
-  id: 20
+  id: 13
   name: Horned Staff
   description: A staff taken from a defeated goblin shaman. It doesn't actually seem
     to do anything, probably because you can't get one of their gems to work.

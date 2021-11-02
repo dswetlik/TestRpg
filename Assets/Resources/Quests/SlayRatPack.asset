@@ -18,7 +18,7 @@ MonoBehaviour:
     Get to it!
   levelRequirement: 3
   isCompleted: 0
-  dialogue: {fileID: 0}
+  dialogue: {fileID: 11400000, guid: c389d5fd0994eaf4295da91453bed466, type: 2}
   hasItemReward: 0
   itemRewards: []
   id: 5

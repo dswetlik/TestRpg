@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dd088f7b1c60d247bc4ffa5f456a9d1, type: 3}
+  m_Name: FetchLockpick
+  m_EditorClassIdentifier: 
+  questType: 1
+  name: He Picked You
+  description: You've been tasked by that mysterious fellow to go get some lockpicks
+    from bandits.
+  levelRequirement: 6
+  isCompleted: 0
+  dialogue: {fileID: 11400000, guid: 06a504194ce01184b9629bc6ab708084, type: 2}
+  hasItemReward: 0
+  itemRewards: []
+  id: 10
+  expReward: 50
+  goldReward: 25
+  fetchItems:
+  - {fileID: 11400000, guid: 30250aa4ed7c64c46bbe86374908bf48, type: 2}
+  itemCounts: 03000000

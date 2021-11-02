@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 65a18b26719fe2648aed386f4dd52f3a, type: 3}
-  m_Name: Accept_SlayRatPack
+  m_Name: Accept_SlayGladiator
   m_EditorClassIdentifier: 
-  npcLine: Great, check back in once you've cleaned up five packs of rats and you'll
-    get your reward.
+  npcLine: Great, check back in once you've dominated 5 gladiators you'll get your
+    reward.
   dialogueType: 0
   dialogueOptions: []
   dialogueAnswers: []
   dialogueSprites: []
   openingSprite: {fileID: 0}
   questDialogueType: 1
-  quest: {fileID: 11400000, guid: fde7ecb308218a049bf5d7f4cc5a202e, type: 2}
+  quest: {fileID: 11400000, guid: 003c3827e61c4844095a09c8080837ad, type: 2}
   notStartedResponse: 
   notCompleteResponse: 
   notCompleteDialogueOptions: []

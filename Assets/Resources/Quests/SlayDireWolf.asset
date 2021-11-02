@@ -18,7 +18,7 @@ MonoBehaviour:
     you have to take out the wolves.
   levelRequirement: 7
   isCompleted: 0
-  dialogue: {fileID: 0}
+  dialogue: {fileID: 11400000, guid: c1760c9ac2cdf8548a76f80e61ceec29, type: 2}
   hasItemReward: 0
   itemRewards: []
   id: 7

@@ -413,6 +413,12 @@ public class Engine : MonoBehaviour
     FetchQuest fetchRatSkull;
     FetchQuest fetchSlimeGoo;
     FetchQuest fetchRatFur;
+    FetchQuest fetchLockpick;
+    FetchQuest fetchRatMeat;
+    FetchQuest fetchWolfFur;
+    FetchQuest fetchWolfMeat;
+    FetchQuest fetchArmorPiece;
+    FetchQuest fetchMedicalSupply;
 
     SlayQuest slayGiantRat;
     SlayQuest slayRatPack;
@@ -532,6 +538,7 @@ public class Engine : MonoBehaviour
     NPC cityGuard;
     NPC castleGuardNPC;
     NPC temrik;
+    NPC mysteriousMan;
 
     Store heavyAnvil;
     Store litheWarrior;
@@ -660,10 +667,10 @@ public class Engine : MonoBehaviour
         goblinGem = Resources.Load<Item>("Items/Miscellaneous/GoblinItems/GoblinGem");
         goblinStaff = Resources.Load<Item>("Items/Miscellaneous/GoblinItems/GoblinStaff");
 
-        grimore = Resources.Load<Item>("Items/Miscellaneous/MagicItem/Grimore");
-        magicRune = Resources.Load<Item>("Items/Miscellaneous/MagicItem/MagicRune");
-        mortar = Resources.Load<Item>("Items/Miscellaneous/MagicItem/Mortar");
-        splinteredStaff = Resources.Load<Item>("Items/Miscellaneous/MagicItem/SplinteredStaff");
+        grimore = Resources.Load<Item>("Items/Miscellaneous/MagicItems/Grimore");
+        magicRune = Resources.Load<Item>("Items/Miscellaneous/MagicItems/MagicRune");
+        mortar = Resources.Load<Item>("Items/Miscellaneous/MagicItems/Mortar");
+        splinteredStaff = Resources.Load<Item>("Items/Miscellaneous/MagicItems/SplinteredStaff");
 
         crookedDagger = Resources.Load<Weapon>("Items/Weapons/Crooked Dagger");
 
@@ -995,6 +1002,7 @@ public class Engine : MonoBehaviour
         cityGuard = Instantiate(Resources.Load<NPC>("NPC/GateGuard"));
         castleGuardNPC = Instantiate(Resources.Load<NPC>("NPC/CastleGuard"));
         temrik = Instantiate(Resources.Load<NPC>("NPC/Temrik"));
+        mysteriousMan = Instantiate(Resources.Load<NPC>("NPC/MysteriousMan"));
 
         NPCDictionary.Add(hirgirdBlacksmith.GetID(), hirgirdBlacksmith);
         NPCDictionary.Add(inveraAlchemist.GetID(), inveraAlchemist);
@@ -1005,6 +1013,7 @@ public class Engine : MonoBehaviour
         NPCDictionary.Add(cityGuard.GetID(), cityGuard);
         NPCDictionary.Add(castleGuardNPC.GetID(), castleGuardNPC);
         NPCDictionary.Add(temrik.GetID(), temrik);
+        NPCDictionary.Add(mysteriousMan.GetID(), mysteriousMan);
 
         heavyAnvil = Instantiate(Resources.Load<Store>("Stores/HeavyAnvil"));
         litheWarrior = Instantiate(Resources.Load<Store>("Stores/LitheWarrior"));
@@ -1179,6 +1188,12 @@ public class Engine : MonoBehaviour
         fetchRatSkull = Instantiate(Resources.Load<FetchQuest>("Quests/FetchRatSkull"));
         fetchSlimeGoo = Instantiate(Resources.Load<FetchQuest>("Quests/FetchSlimeGoo"));
         fetchRatFur = Instantiate(Resources.Load<FetchQuest>("Quests/FetchRatFur"));
+        fetchLockpick = Instantiate(Resources.Load<FetchQuest>("Quests/FetchLockpick"));
+        fetchRatMeat = Instantiate(Resources.Load<FetchQuest>("Quests/FetchRatMeat"));
+        fetchWolfFur = Instantiate(Resources.Load<FetchQuest>("Quests/FetchWolfFur"));
+        fetchWolfMeat = Instantiate(Resources.Load<FetchQuest>("Quests/FetchWolfMeat"));
+        fetchArmorPiece = Instantiate(Resources.Load<FetchQuest>("Quests/FetchArmorPiece"));
+        fetchMedicalSupply = Instantiate(Resources.Load<FetchQuest>("Quests/FetchMedicalSupply"));
 
         slayGiantRat = Instantiate(Resources.Load<SlayQuest>("Quests/SlayGiantRat"));
         slayRatPack = Instantiate(Resources.Load<SlayQuest>("Quests/SlayRatPack"));
@@ -1190,6 +1205,12 @@ public class Engine : MonoBehaviour
         QuestDictionary.Add(fetchRatSkull.GetID(), fetchRatSkull);
         QuestDictionary.Add(fetchSlimeGoo.GetID(), fetchSlimeGoo);
         QuestDictionary.Add(fetchRatFur.GetID(), fetchRatFur);
+        QuestDictionary.Add(fetchLockpick.GetID(), fetchLockpick);
+        QuestDictionary.Add(fetchRatMeat.GetID(), fetchRatMeat);
+        QuestDictionary.Add(fetchWolfMeat.GetID(), fetchWolfMeat);
+        QuestDictionary.Add(fetchWolfFur.GetID(), fetchWolfFur);
+        QuestDictionary.Add(fetchArmorPiece.GetID(), fetchArmorPiece);
+        QuestDictionary.Add(fetchMedicalSupply.GetID(), fetchMedicalSupply);
 
         QuestDictionary.Add(slayGiantRat.GetID(), slayGiantRat);
         QuestDictionary.Add(slayRatPack.GetID(), slayRatPack);
@@ -2474,7 +2495,7 @@ public class Engine : MonoBehaviour
             AddToInventory(item);
             if (isInChest)
                 activeChest.RemoveItem(item);
-            if (isInNPC && !isInBattle)
+            if (isInNPC && !isInBattle && currentNPC.HasStore())
             {
                 StoreDictionary[currentNPC.GetStore().GetID()].RemoveItem(item);
                 player.ChangeGold(-(int)(item.GetValue()));

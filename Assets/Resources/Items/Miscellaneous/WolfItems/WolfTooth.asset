@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemType: 0
   sprite: {fileID: 21300000, guid: 27b0f6769413dde49ba45a8b97d2222f, type: 3}
-  id: 2
+  id: 23
   name: Wolf Canine
   description: A sharp, yellowed tooth from a wolf, though the texture is not really
     yellow.

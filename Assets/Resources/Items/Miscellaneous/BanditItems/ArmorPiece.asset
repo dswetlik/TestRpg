@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemType: 0
   sprite: {fileID: 21300000, guid: 384b95258e6aaa6428276dd384b61e79, type: 3}
-  id: 15
+  id: 16
   name: Piece of Armor
   description: A piece of armor sliced off of an enemy. Clearly they needed better
     armor.

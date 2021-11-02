@@ -15,8 +15,10 @@ MonoBehaviour:
   id: 4
   name: Serik
   npcType: 0
-  hasQuests: 0
-  questList: []
+  hasQuests: 1
+  questList:
+  - {fileID: 11400000, guid: 56ccbad5fbc03804fb664f4697df2e72, type: 2}
+  - {fileID: 11400000, guid: cd02f349a6963f849af602ba1118dad8, type: 2}
   hasGivenQuest: 0
   givenQuest: {fileID: 0}
   dialogue: {fileID: 11400000, guid: 6f16230fcf43f9a45ba65025d046a96b, type: 2}

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemType: 0
   sprite: {fileID: 21300000, guid: daaf4264c079e6947af8f18d8fa633c3, type: 3}
-  id: 20
+  id: 18
   name: Gold Amulet
   description: A golden amulet symbolic of the war god Varilotik. It is said that
     only true warriors can hold this amulet, so you should probably drop it soon.

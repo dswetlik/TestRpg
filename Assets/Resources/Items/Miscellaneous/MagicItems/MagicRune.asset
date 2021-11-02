@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemType: 0
   sprite: {fileID: 21300000, guid: 32263b6a85c1fb645a1ee20c4edd1ca4, type: 3}
-  id: 17
+  id: 27
   name: Magic Rune
   description: A magical rune taken from some mage slain in the arena. It's humming
     with energy, magical energy.

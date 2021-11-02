@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemType: 0
   sprite: {fileID: 21300000, guid: 2934bce1ce3bbab4dbf0be754a3db649, type: 3}
-  id: 11
+  id: 19
   name: Gold Bar
   description: What looks to be a gold bar. If you picked this up off of a bandit,
     there's no way to know if it's real or not.

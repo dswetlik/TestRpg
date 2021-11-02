@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemType: 0
   sprite: {fileID: 21300000, guid: 9e3a0705f42ea6a4bab92d6e75e186e2, type: 3}
-  id: 16
+  id: 26
   name: Grimore
   description: An illegible book of spells taken from some mage in the arena. You
     can't read it...yet...

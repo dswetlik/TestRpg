@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: SplinteredStaff
   m_EditorClassIdentifier: 
   itemType: 0
-  sprite: {fileID: 0}
-  id: 19
+  sprite: {fileID: 21300000, guid: ddc555da87905964ca26f70a8b32800a, type: 3}
+  id: 29
   name: Splintered Staff
   description: A staff that you probably could have used if you didn't break it killing
     the mage. Unlike those cool looking goblin staves.

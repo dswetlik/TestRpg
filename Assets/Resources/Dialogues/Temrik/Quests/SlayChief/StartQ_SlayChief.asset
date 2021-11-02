@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 65a18b26719fe2648aed386f4dd52f3a, type: 3}
-  m_Name: StartQ_SlayRatPack
+  m_Name: StartQ_SlayChief
   m_EditorClassIdentifier: 
   npcLine: Do you have any bounties for me?
   dialogueType: 3
@@ -25,12 +25,13 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 9b0ff9c0bc1422f4180d84408e1bfb8d, type: 3}
   openingSprite: {fileID: 21300000, guid: 5d247f9aa35a77b42a6a1555fbda4e49, type: 3}
   questDialogueType: 0
-  quest: {fileID: 11400000, guid: fde7ecb308218a049bf5d7f4cc5a202e, type: 2}
-  notStartedResponse: As a matter of fact, I do. We need you to go in the arena and
-    clean out some of the packs of rats. We're tired of the fights being interrupted
-    by rat stampedes. Will you take this bounty?
-  notCompleteResponse: The bounty is for 5 packs of rats. Get back in there and fulfill
-    the bounty!
+  quest: {fileID: 11400000, guid: f1c59d9ff1981a84891187fbb14aabc2, type: 2}
+  notStartedResponse: You're at the end of the line, gladiator. All that's left is
+    to take out three more enemies, our city's chief battlemage and chief knight,
+    along with his trained war wolf. It's a little challenge they do to test themselves
+    against the best in the arena. Are you ready?
+  notCompleteResponse: You haven't taken the three out yet. Get back in there and
+    fulfill the bounty!
   notCompleteDialogueOptions: []
   notCompleteDialogueAnswers: []
   notCompleteDialogueSprites: []

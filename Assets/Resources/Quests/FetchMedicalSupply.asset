@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dd088f7b1c60d247bc4ffa5f456a9d1, type: 3}
+  m_Name: FetchMedicalSupply
+  m_EditorClassIdentifier: 
+  questType: 1
+  name: Basically an Alchemist
+  description: 'Invera needs you again, but is giving you quite the shopping list.
+
+    -
+    A new mortar;
+
+    - 9 chunks of slime goo (3 of each color);
+
+    - A magic
+    rune to imbue the potions.
+
+    You''ve got this.'
+  levelRequirement: 15
+  isCompleted: 0
+  dialogue: {fileID: 0}
+  hasItemReward: 0
+  itemRewards: []
+  id: 14
+  expReward: 100
+  goldReward: 100
+  fetchItems:
+  - {fileID: 11400000, guid: ee10c6d2b404663468bf359a3c580580, type: 2}
+  - {fileID: 11400000, guid: 29852b94097501748ae549fcb07a28c5, type: 2}
+  - {fileID: 11400000, guid: a19c02e67cca50e4185336df95943d13, type: 2}
+  - {fileID: 11400000, guid: 39641b4188e4eb34fa102fca3ecaaa3f, type: 2}
+  - {fileID: 11400000, guid: 7f8b8c67328663a4a8ee9909e60da381, type: 2}
+  itemCounts: 0100000003000000030000000300000001000000

@@ -25,7 +25,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 9b0ff9c0bc1422f4180d84408e1bfb8d, type: 3}
   openingSprite: {fileID: 21300000, guid: 5d247f9aa35a77b42a6a1555fbda4e49, type: 3}
   questDialogueType: 0
-  quest: {fileID: 11400000, guid: fde7ecb308218a049bf5d7f4cc5a202e, type: 2}
+  quest: {fileID: 11400000, guid: 5615383f0edc54e48891ecfb9381249a, type: 2}
   notStartedResponse: We do have your second bounty ready. When we ordered amalgam
     slimes to fight, they delivered double what we purchased. There are too many
     and they're overrunning the arena. Are you ready for this one?

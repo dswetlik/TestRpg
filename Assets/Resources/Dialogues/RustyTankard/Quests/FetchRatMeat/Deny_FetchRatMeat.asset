@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65a18b26719fe2648aed386f4dd52f3a, type: 3}
+  m_Name: Deny_FetchRatMeat
+  m_EditorClassIdentifier: 
+  npcLine: It does sound like a messy job, but it has to be done at some point. Come
+    back when you're ready.
+  dialogueType: 3
+  dialogueOptions: []
+  dialogueAnswers: []
+  dialogueSprites: []
+  openingSprite: {fileID: 0}
+  questDialogueType: 2
+  quest: {fileID: 11400000, guid: 56ccbad5fbc03804fb664f4697df2e72, type: 2}
+  notStartedResponse: 
+  notCompleteResponse: 
+  notCompleteDialogueOptions: []
+  notCompleteDialogueAnswers: []
+  notCompleteDialogueSprites: []
+  completeResponse: 
