@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: RatFur
   m_EditorClassIdentifier: 
   itemType: 0
-  sprite: {fileID: 21300000, guid: 43956349ef742c4459069dd8fa042e8c, type: 3}
+  sprite: {fileID: 21300000, guid: cc49d1bb59becef4595b9af06785d08f, type: 3}
   id: 1
   name: Rat Fur
-  description: A small bundle of rat fur.
+  description: A small bundle of rat fur, plucked off of a furry rat.
   weight: 1
   value: 2

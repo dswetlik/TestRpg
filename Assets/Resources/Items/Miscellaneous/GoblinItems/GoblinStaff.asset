@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3aa9392236713c147a660c83e1823dbb, type: 3}
+  m_Name: GoblinStaff
+  m_EditorClassIdentifier: 
+  itemType: 0
+  sprite: {fileID: 21300000, guid: 5f406c1654253cf40872da030b5b732f, type: 3}
+  id: 20
+  name: Horned Staff
+  description: A staff taken from a defeated goblin shaman. It doesn't actually seem
+    to do anything, probably because you can't get one of their gems to work.
+  weight: 3
+  value: 20

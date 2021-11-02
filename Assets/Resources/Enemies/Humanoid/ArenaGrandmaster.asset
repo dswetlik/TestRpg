@@ -12,26 +12,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69dcb926d5dd74c4799c018f51e456e0, type: 3}
   m_Name: ArenaGrandmaster
   m_EditorClassIdentifier: 
-  enemyType: 0
-  name: 
-  description: 
-  id: 0
-  minLevel: 0
-  maxLevel: 0
-  baseDamage: 0
-  defense: 0
-  attackTypes: []
-  health: 0
-  maxHealth: 0
-  stamina: 0
-  maxStamina: 0
-  stamRegen: 0
-  mana: 0
-  maxMana: 0
-  manaRegen: 0
-  goldReward: 0
-  speed: 0
-  expReward: 0
+  enemyType: 1
+  name: Arena Grandmaster
+  description: The current grandmaster of the arena, who fought his way up the chain
+    just like you. Can you best him to become the new grandmaster?
+  id: 122
+  minLevel: 20
+  maxLevel: 20
+  baseDamage: 20
+  defense: 12
+  attackTypes:
+  - {fileID: 11400000, guid: 2a1996c471169814c84f1f92d1997f84, type: 2}
+  - {fileID: 11400000, guid: 33c8ebbb38c394742aab5d150c1ab284, type: 2}
+  - {fileID: 11400000, guid: 28d6c95f2da987548a83524cacabf07a, type: 2}
+  - {fileID: 11400000, guid: 3e4524b99f9f9b34ca333fdc5635a540, type: 2}
+  - {fileID: 11400000, guid: 6c53c77c037e22645a2b759dfe19974a, type: 2}
+  health: 80
+  maxHealth: 80
+  stamina: 60
+  maxStamina: 60
+  stamRegen: 12
+  mana: 50
+  maxMana: 50
+  manaRegen: 10
+  goldReward: 200
+  speed: 1
+  expReward: 400
   itemRewards: {fileID: 0}
   statusEffects: []
   unlockedItems: []

@@ -18,12 +18,14 @@ MonoBehaviour:
   id: 115
   minLevel: 11
   maxLevel: 20
-  baseDamage: 0
+  baseDamage: 10
   defense: 6
   attackTypes:
-  - {fileID: 11400000, guid: 3517e4cab7a70454787b2aa51c24a9dc, type: 2}
-  - {fileID: 11400000, guid: 863d7fc970e2c5149a3a03647cdba7a7, type: 2}
-  - {fileID: 11400000, guid: 7fb31da3470bce94083431c7518d98ac, type: 2}
+  - {fileID: 11400000, guid: 34e14bff51fdafb4a8c5f032bdba52ee, type: 2}
+  - {fileID: 11400000, guid: 915a55cf5c255ec4eada0991636fe0df, type: 2}
+  - {fileID: 11400000, guid: 09077531e0ea6b14bb6289c1004da0d1, type: 2}
+  - {fileID: 11400000, guid: ee51f4ddc06cfc84aa561289cab9ad2c, type: 2}
+  - {fileID: 11400000, guid: 9622880d97b381447b79479d91573b69, type: 2}
   health: 50
   maxHealth: 50
   stamina: 25

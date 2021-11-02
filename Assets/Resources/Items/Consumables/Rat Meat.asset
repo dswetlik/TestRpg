@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Rat Meat
   m_EditorClassIdentifier: 
   itemType: 3
-  sprite: {fileID: 21300000, guid: 76ba8d469a1223b4d8295abdd43a7121, type: 3}
+  sprite: {fileID: 21300000, guid: fd02a6ff060f2f944b3669d86ebadaca, type: 3}
   id: 599
   name: Rat Meat
   description: A small portion of rat meat.

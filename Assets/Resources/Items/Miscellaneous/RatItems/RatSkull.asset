@@ -16,6 +16,7 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: b27c667b8ac19bf449af8b79e45d3e05, type: 3}
   id: 3
   name: Rat Skull
-  description: A cracked skull from a rat.
+  description: A great skull from a rat, it shows the hunting prowess of a small
+    terrier.
   weight: 1
   value: 1

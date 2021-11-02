@@ -13,24 +13,30 @@ MonoBehaviour:
   m_Name: Witch
   m_EditorClassIdentifier: 
   enemyType: 0
-  name: 
-  description: 
-  id: 0
-  minLevel: 0
-  maxLevel: 0
-  baseDamage: 0
+  name: Witch
+  description: A witch that studied arts of battle, who delivered themselves into
+    the arena to test their skills.
+  id: 117
+  minLevel: 11
+  maxLevel: 15
+  baseDamage: 8
   defense: 0
-  attackTypes: []
-  health: 0
-  maxHealth: 0
+  attackTypes:
+  - {fileID: 11400000, guid: 22a294f0afdb0de4a91ba320c3c860ef, type: 2}
+  - {fileID: 11400000, guid: 01bba4c6e80221c499fe7d86404c675f, type: 2}
+  - {fileID: 11400000, guid: 3707c8f62f649c44b89938087d0186b3, type: 2}
+  - {fileID: 11400000, guid: 589db6472e2d1a047be506d2fcc4c5bb, type: 2}
+  - {fileID: 11400000, guid: 3df9602754d6f4b4cbe2a94161c6d3bc, type: 2}
+  health: 40
+  maxHealth: 40
   stamina: 0
   maxStamina: 0
   stamRegen: 0
-  mana: 0
-  maxMana: 0
-  manaRegen: 0
-  goldReward: 0
-  speed: 0
-  expReward: 0
+  mana: 55
+  maxMana: 55
+  manaRegen: 5
+  goldReward: 25
+  speed: 0.8
+  expReward: 70
   itemRewards: {fileID: 0}
   statusEffects: []

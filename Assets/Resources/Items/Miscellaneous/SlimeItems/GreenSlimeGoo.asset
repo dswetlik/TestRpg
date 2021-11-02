@@ -15,7 +15,7 @@ MonoBehaviour:
   itemType: 0
   sprite: {fileID: 21300000, guid: 87ece886f98a63b428377aaa7044d149, type: 3}
   id: 7
-  name: Green Slime Essense
-  description: Essense from a green slime.
+  name: Green Slime Goo
+  description: Goo from a blue slime. Just kidding, it was a green one.
   weight: 1
   value: 4

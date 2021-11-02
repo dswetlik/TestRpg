@@ -280,10 +280,21 @@ public class Engine : MonoBehaviour
     Item brokenSword;
     Item goldBar;
     Item lockpickSet;
+    Item goldAmulet;
+    Item armorPiece;
 
     Item wolfTooth;
     Item wolfPelt;
     Item wolfGem;
+
+    Item grimore;
+    Item magicRune;
+    Item mortar;
+    Item splinteredStaff;
+
+    Item goblinEye;
+    Item goblinGem;
+    Item goblinStaff;
 
     Weapon crookedDagger;
 
@@ -380,6 +391,7 @@ public class Engine : MonoBehaviour
     Armor demonicChest;
 
     Consumable ratMeat;
+    Consumable wolfMeat;
     Consumable smallHealthPotion;
     Consumable smallStaminaPotion;
     Consumable smallManaPotion;
@@ -398,12 +410,16 @@ public class Engine : MonoBehaviour
     Location floor1;
     Location floor2;
 
-    Quest testBaseQuest;
-    Quest leaveTheCave;
     FetchQuest fetchRatSkull;
     FetchQuest fetchSlimeGoo;
     FetchQuest fetchRatFur;
+
     SlayQuest slayGiantRat;
+    SlayQuest slayRatPack;
+    SlayQuest slayAmalgamSlime;
+    SlayQuest slayDireWolf;
+    SlayQuest slayGladiator;
+    SlayQuest slayChief;
 
     ActiveSkill slash;
     ActiveSkill stab;
@@ -633,10 +649,21 @@ public class Engine : MonoBehaviour
         brokenSword = Resources.Load<Item>("Items/Miscellaneous/BanditItems/BrokenSword");
         goldBar = Resources.Load<Item>("Items/Miscellaneous/BanditItems/GoldBar");
         lockpickSet = Resources.Load<Item>("Items/Miscellaneous/BanditItems/LockpickSet");
+        goldAmulet = Resources.Load<Item>("Items/Miscellaneous/BanditItems/GoldAmulet");
+        armorPiece = Resources.Load<Item>("Items/Miscellaneous/BanditItems/ArmorPiece");
 
         wolfTooth = Resources.Load<Item>("Items/Miscellaneous/WolfItems/WolfTooth");
         wolfPelt = Resources.Load<Item>("Items/Miscellaneous/WolfItems/WolfPelt");
         wolfGem = Resources.Load<Item>("Items/Miscellaneous/WolfItems/WolfGem");
+
+        goblinEye = Resources.Load<Item>("Items/Miscellaneous/GoblinItems/GoblinEye");
+        goblinGem = Resources.Load<Item>("Items/Miscellaneous/GoblinItems/GoblinGem");
+        goblinStaff = Resources.Load<Item>("Items/Miscellaneous/GoblinItems/GoblinStaff");
+
+        grimore = Resources.Load<Item>("Items/Miscellaneous/MagicItem/Grimore");
+        magicRune = Resources.Load<Item>("Items/Miscellaneous/MagicItem/MagicRune");
+        mortar = Resources.Load<Item>("Items/Miscellaneous/MagicItem/Mortar");
+        splinteredStaff = Resources.Load<Item>("Items/Miscellaneous/MagicItem/SplinteredStaff");
 
         crookedDagger = Resources.Load<Weapon>("Items/Weapons/Crooked Dagger");
 
@@ -733,6 +760,7 @@ public class Engine : MonoBehaviour
         demonicChest = Resources.Load<Armor>("Items/Armors/Demonic/Demonic Chestpiece");
 
         ratMeat = Resources.Load<Consumable>("Items/Consumables/Rat Meat");
+        wolfMeat = Resources.Load<Consumable>("Items/Consumables/Wolf Meat");
         smallHealthPotion = Resources.Load<Consumable>("Items/Consumables/Small Health Potion");
         smallStaminaPotion = Resources.Load<Consumable>("Items/Consumables/Small Stamina Potion");
         smallManaPotion = Resources.Load<Consumable>("Items/Consumables/Small Mana Potion");
@@ -761,10 +789,21 @@ public class Engine : MonoBehaviour
         ItemDictionary.Add(brokenSword.GetID(), brokenSword);
         ItemDictionary.Add(goldBar.GetID(), goldBar);
         ItemDictionary.Add(lockpickSet.GetID(), lockpickSet);
+        ItemDictionary.Add(goldAmulet.GetID(), goldAmulet);
+        ItemDictionary.Add(armorPiece.GetID(), armorPiece);
 
         ItemDictionary.Add(wolfTooth.GetID(), wolfTooth);
         ItemDictionary.Add(wolfPelt.GetID(), wolfPelt);
         ItemDictionary.Add(wolfGem.GetID(), wolfGem);
+
+        ItemDictionary.Add(goblinEye.GetID(), goblinEye);
+        ItemDictionary.Add(goblinGem.GetID(), goblinGem);
+        ItemDictionary.Add(goblinStaff.GetID(), goblinStaff);
+
+        ItemDictionary.Add(grimore.GetID(), grimore);
+        ItemDictionary.Add(magicRune.GetID(), magicRune);
+        ItemDictionary.Add(mortar.GetID(), mortar);
+        ItemDictionary.Add(splinteredStaff.GetID(), splinteredStaff);
 
         ItemDictionary.Add(crookedDagger.GetID(), crookedDagger);
 
@@ -861,6 +900,7 @@ public class Engine : MonoBehaviour
         ItemDictionary.Add(demonicChest.GetID(), demonicChest);
 
         ItemDictionary.Add(ratMeat.GetID(), ratMeat);
+        ItemDictionary.Add(wolfMeat.GetID(), wolfMeat);
         ItemDictionary.Add(smallHealthPotion.GetID(), smallHealthPotion);
         ItemDictionary.Add(smallStaminaPotion.GetID(), smallStaminaPotion);
         ItemDictionary.Add(smallManaPotion.GetID(), smallManaPotion);
@@ -1136,18 +1176,28 @@ public class Engine : MonoBehaviour
     {
         QuestDictionary = new SortedDictionary<uint, Quest>();
 
-        testBaseQuest = Resources.Load<Quest>("Quests/TestBaseQuest");
-        leaveTheCave = Resources.Load<Quest>("Quests/Leave The Cave");
-
         fetchRatSkull = Instantiate(Resources.Load<FetchQuest>("Quests/FetchRatSkull"));
         fetchSlimeGoo = Instantiate(Resources.Load<FetchQuest>("Quests/FetchSlimeGoo"));
         fetchRatFur = Instantiate(Resources.Load<FetchQuest>("Quests/FetchRatFur"));
+
         slayGiantRat = Instantiate(Resources.Load<SlayQuest>("Quests/SlayGiantRat"));
+        slayRatPack = Instantiate(Resources.Load<SlayQuest>("Quests/SlayRatPack"));
+        slayAmalgamSlime = Instantiate(Resources.Load<SlayQuest>("Quests/SlayAmalgamSlime"));
+        slayDireWolf = Instantiate(Resources.Load<SlayQuest>("Quests/SlayDireWolf"));
+        slayGladiator = Instantiate(Resources.Load<SlayQuest>("Quests/SlayGladiator"));
+        slayChief = Instantiate(Resources.Load<SlayQuest>("Quests/SlayChief"));
 
         QuestDictionary.Add(fetchRatSkull.GetID(), fetchRatSkull);
         QuestDictionary.Add(fetchSlimeGoo.GetID(), fetchSlimeGoo);
         QuestDictionary.Add(fetchRatFur.GetID(), fetchRatFur);
+
         QuestDictionary.Add(slayGiantRat.GetID(), slayGiantRat);
+        QuestDictionary.Add(slayRatPack.GetID(), slayRatPack);
+        QuestDictionary.Add(slayAmalgamSlime.GetID(), slayAmalgamSlime);
+        QuestDictionary.Add(slayDireWolf.GetID(), slayDireWolf);
+        QuestDictionary.Add(slayGladiator.GetID(), slayGladiator);
+        QuestDictionary.Add(slayChief.GetID(), slayChief);
+
     }
 
     void InitializeUI()

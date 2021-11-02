@@ -16,6 +16,7 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: 2668a2847f2fe344dbefee271b889834, type: 3}
   id: 5
   name: Rat's Lucky Paw
-  description: Some consider the paw of a rat to be lucky.
+  description: Some consider the paw of a rat to be lucky, others don't like holding
+    onto bloody paws.
   weight: 1
   value: 10

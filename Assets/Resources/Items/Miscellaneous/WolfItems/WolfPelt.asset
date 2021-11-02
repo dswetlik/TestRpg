@@ -16,6 +16,7 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: 9de202c13bffb4c448f3c048e74b7787, type: 3}
   id: 13
   name: Wolf Pelt
-  description: The pelt of a wolf, usually used for making warm clothing.
+  description: The pelt of a wolf, usually used for making warm clothing. Could also
+    be successfully used in front of a fireplace.
   weight: 2
   value: 10

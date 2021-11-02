@@ -16,6 +16,7 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: 27f568ade836569499e92b5ab3af577c, type: 3}
   id: 9
   name: Unknown Bone
-  description: A bone from a creature that the slime digested.
+  description: A bone from a creature that the slime digested. It's probably from
+    a rat, since there seems to be a lot of them here.
   weight: 1
   value: 2
