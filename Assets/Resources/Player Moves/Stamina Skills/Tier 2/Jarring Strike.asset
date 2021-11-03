@@ -18,7 +18,7 @@ MonoBehaviour:
     the enemy.
   actionMessage: You bash the enemy as hard as you can, dealing {0} damage!
   skillType: 0
-  levelRequirement: 10
+  levelRequirement: 16
   isUnlocked: 0
   isUnlockable: 0
   nextSkills: []

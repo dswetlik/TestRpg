@@ -17,7 +17,7 @@ MonoBehaviour:
   description: Channel your energy into a bolt of lightning.
   actionMessage: You throw a lightning bolt at the enemy, dealing {0} damage!
   skillType: 0
-  levelRequirement: 6
+  levelRequirement: 10
   isUnlocked: 0
   isUnlockable: 0
   nextSkills: []

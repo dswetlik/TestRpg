@@ -17,7 +17,7 @@ MonoBehaviour:
   description: Apply a more potent venom on your weapon before attacking with it.
   actionMessage: You attack with your venomed weapon, dealing {0} damage!
   skillType: 0
-  levelRequirement: 8
+  levelRequirement: 13
   isUnlocked: 0
   isUnlockable: 0
   nextSkills: []

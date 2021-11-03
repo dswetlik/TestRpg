@@ -17,7 +17,7 @@ MonoBehaviour:
   description: Swing the blunt side of your weapon, trying to stun the enemy.
   actionMessage: You swing the blunt side of your weapon, dealing {0} damage.
   skillType: 0
-  levelRequirement: 5
+  levelRequirement: 7
   isUnlocked: 0
   isUnlockable: 1
   nextSkills:

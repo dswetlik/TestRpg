@@ -17,7 +17,7 @@ MonoBehaviour:
   description: Call upon the power of Light to smite your foe.
   actionMessage: You smite down the enemy, dealing {0} damage!
   skillType: 0
-  levelRequirement: 6
+  levelRequirement: 10
   isUnlocked: 0
   isUnlockable: 0
   nextSkills: []

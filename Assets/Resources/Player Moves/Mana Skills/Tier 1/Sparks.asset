@@ -18,7 +18,7 @@ MonoBehaviour:
     your feet.
   actionMessage: You launch some static from your fingers, dealing {0} damage!
   skillType: 0
-  levelRequirement: 0
+  levelRequirement: 1
   isUnlocked: 0
   isUnlockable: 1
   nextSkills:

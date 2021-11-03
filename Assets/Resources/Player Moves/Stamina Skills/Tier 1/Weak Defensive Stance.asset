@@ -17,7 +17,7 @@ MonoBehaviour:
   description: Adopt a defensive stance to mitigate a little damage.
   actionMessage: You adopt a defensive stance! ({0} damage)
   skillType: 0
-  levelRequirement: 0
+  levelRequirement: 1
   isUnlocked: 0
   isUnlockable: 1
   nextSkills:

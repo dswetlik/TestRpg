@@ -18,7 +18,7 @@ MonoBehaviour:
     at you.
   actionMessage: You summon a spectral shield to protect you. ({0} damage)
   skillType: 0
-  levelRequirement: 8
+  levelRequirement: 13
   isUnlocked: 0
   isUnlockable: 0
   nextSkills: []

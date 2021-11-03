@@ -17,7 +17,7 @@ MonoBehaviour:
   description: Channel your sorrow into an ice spike.
   actionMessage: You throw an ice spike at the enemy, dealing {0} damage!
   skillType: 0
-  levelRequirement: 6
+  levelRequirement: 10
   isUnlocked: 0
   isUnlockable: 0
   nextSkills: []

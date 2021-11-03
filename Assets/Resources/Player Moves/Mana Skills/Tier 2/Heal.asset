@@ -17,7 +17,7 @@ MonoBehaviour:
   description: Heal your wounds, along with creating a regenerative effect over yourself.
   actionMessage: You start healing your wounds, healing {0} damage!
   skillType: 0
-  levelRequirement: 6
+  levelRequirement: 10
   isUnlocked: 0
   isUnlockable: 0
   nextSkills: []

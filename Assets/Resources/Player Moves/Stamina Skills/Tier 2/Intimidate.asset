@@ -17,7 +17,7 @@ MonoBehaviour:
   description: Intimidate your enemy, slowing their attacks for some time.
   actionMessage: 
   skillType: 0
-  levelRequirement: 0
+  levelRequirement: 13
   isUnlocked: 0
   isUnlockable: 0
   nextSkills: []

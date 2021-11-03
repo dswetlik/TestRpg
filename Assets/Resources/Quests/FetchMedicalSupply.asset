@@ -27,7 +27,7 @@ MonoBehaviour:
     You''ve got this.'
   levelRequirement: 15
   isCompleted: 0
-  dialogue: {fileID: 0}
+  dialogue: {fileID: 11400000, guid: c93d4c7bd500f914d8756667959eeb7a, type: 2}
   hasItemReward: 0
   itemRewards: []
   id: 14

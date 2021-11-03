@@ -26,7 +26,7 @@ public class NPC : ScriptableObject
     public string GetName() { return name; }
     public NPCType GetNPCType() { return npcType; }
 
-    public bool HasStore() { return store == null ? true : false; }
+    public bool HasStore() { return store != null ? true : false; }
     public bool HasQuests() { return hasQuests; }
     public List<Quest> GetQuests() { return questList; }
     public bool HasGivenQuest() { return hasGivenQuest;}

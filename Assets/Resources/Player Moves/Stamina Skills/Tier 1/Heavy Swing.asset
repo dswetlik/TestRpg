@@ -18,7 +18,7 @@ MonoBehaviour:
   actionMessage: You really put your weight behind swinging your weapon, dealing
     {0} damage!
   skillType: 0
-  levelRequirement: 0
+  levelRequirement: 1
   isUnlocked: 0
   isUnlockable: 1
   nextSkills:

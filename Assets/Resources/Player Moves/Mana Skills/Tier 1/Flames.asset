@@ -17,7 +17,7 @@ MonoBehaviour:
   description: A small bout of flames, essentially a heat blast.
   actionMessage: You send a blast of heat at the enemy, dealing {0} damage!
   skillType: 0
-  levelRequirement: 0
+  levelRequirement: 1
   isUnlocked: 0
   isUnlockable: 1
   nextSkills:

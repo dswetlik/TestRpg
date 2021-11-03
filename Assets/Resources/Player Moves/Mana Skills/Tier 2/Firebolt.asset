@@ -19,7 +19,7 @@ MonoBehaviour:
 
 '
   skillType: 0
-  levelRequirement: 6
+  levelRequirement: 10
   isUnlocked: 0
   isUnlockable: 0
   nextSkills: []

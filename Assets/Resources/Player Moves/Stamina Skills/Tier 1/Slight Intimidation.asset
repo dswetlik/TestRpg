@@ -17,7 +17,7 @@ MonoBehaviour:
   description: Intimidate your enemy to ward off attacks for a short time.
   actionMessage: You attempt to intimidate your enemy! ({0] damage)
   skillType: 0
-  levelRequirement: 3
+  levelRequirement: 4
   isUnlocked: 0
   isUnlockable: 1
   nextSkills:

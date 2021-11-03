@@ -18,7 +18,7 @@ MonoBehaviour:
     some time.
   actionMessage: You amp yourself up for battle! ({0} damage)
   skillType: 0
-  levelRequirement: 3
+  levelRequirement: 4
   isUnlocked: 0
   isUnlockable: 1
   nextSkills:

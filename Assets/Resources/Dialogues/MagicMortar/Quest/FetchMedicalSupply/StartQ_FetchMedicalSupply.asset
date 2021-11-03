@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: StartQ_FetchMedicalSupply
   m_EditorClassIdentifier: 
   npcLine: How are your stockpiles looking now?
-  dialogueType: 0
+  dialogueType: 3
   dialogueOptions:
   - That doesn't sound like much trouble, sure.
   - No, I don't really want to.
   dialogueAnswers:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: a1be5ce9f6be67f46a5a814193d177ad, type: 2}
+  - {fileID: 11400000, guid: e3676ac4ebbf45f4ca13b35b01b41c02, type: 2}
   dialogueSprites:
   - {fileID: 21300000, guid: 410d4695f99727a48abf7546484779a1, type: 3}
   - {fileID: 21300000, guid: 9b0ff9c0bc1422f4180d84408e1bfb8d, type: 3}

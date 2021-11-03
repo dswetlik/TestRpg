@@ -17,7 +17,7 @@ MonoBehaviour:
   description: You dig your edge in slightly deeper, creating a larger bleeding wound.
   actionMessage: You slash the enemy deeper, dealing {0} damage!
   skillType: 0
-  levelRequirement: 8
+  levelRequirement: 13
   isUnlocked: 0
   isUnlockable: 0
   nextSkills: []

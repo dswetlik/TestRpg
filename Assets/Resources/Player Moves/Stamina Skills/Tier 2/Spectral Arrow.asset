@@ -17,7 +17,7 @@ MonoBehaviour:
   description: Summons a spectral bow to launch an arrow to pierce the enemy's armor.
   actionMessage: You launched an arrow at the enemy, dealing {0} damage!
   skillType: 0
-  levelRequirement: 0
+  levelRequirement: 10
   isUnlocked: 0
   isUnlockable: 0
   nextSkills: []

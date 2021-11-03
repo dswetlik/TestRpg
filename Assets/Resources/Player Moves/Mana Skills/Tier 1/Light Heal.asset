@@ -18,7 +18,7 @@ MonoBehaviour:
     and scrapes as well as over time.
   actionMessage: You start healing your light wounds, healing {0} damage!
   skillType: 0
-  levelRequirement: 0
+  levelRequirement: 1
   isUnlocked: 0
   isUnlockable: 1
   nextSkills: []

@@ -17,7 +17,7 @@ MonoBehaviour:
   description: Cleanse yourself, taking time off of your status effects.
   actionMessage: You cleanse yourself. ({0} damage)
   skillType: 0
-  levelRequirement: 10
+  levelRequirement: 16
   isUnlocked: 0
   isUnlockable: 0
   nextSkills: []

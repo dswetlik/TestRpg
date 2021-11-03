@@ -114,6 +114,7 @@ public class Engine : MonoBehaviour
     Text enemyHealthTxt;
     Text enemyStaminaTxt;
     Text enemyManaTxt;
+    Text playerBattleNameTxt;
     Text playerBattleHealthTxt;
     Text playerBattleStaminaTxt;
     Text playerBattleManaTxt;
@@ -203,7 +204,7 @@ public class Engine : MonoBehaviour
     Button unlockSkillBtn;
 
     // UI Stats Variales
-    Text statsPlayerName;
+    Text statsPlayerNameTxt;
     Text statsHealthTxt;
     Text statsStaminaTxt;
     Text statsManaTxt;
@@ -249,6 +250,8 @@ public class Engine : MonoBehaviour
     // UI Cover Variables
     Text messageTxt;
     Button deadRestartBtn;
+    Button acceptNameBtn;
+    InputField nameInputField;
 
     // Game Variables
     public static SortedDictionary<uint, Item> ItemDictionary;
@@ -539,6 +542,7 @@ public class Engine : MonoBehaviour
     NPC castleGuardNPC;
     NPC temrik;
     NPC mysteriousMan;
+    NPC talkingGroup;
 
     Store heavyAnvil;
     Store litheWarrior;
@@ -588,14 +592,18 @@ public class Engine : MonoBehaviour
 
         player.GetInventory().AddToInventory(crookedDagger);
         player.GetInventory().AddToInventory(tatteredShirt);
-
         player.GetInventory().AddToInventory(smallHealthPotion, 1);
-        player.ChangeGold(200);
-        player.AddExp(200);
+
         player.GetInventory().OnBeforeSerialize();
         player.GetInventory().OnAfterDeserialize();
 
-        StartCoroutine(LoadScene(overworld));
+        activeItem = crookedDagger;
+        EquipItem();
+        activeItem = tatteredShirt;
+        EquipItem();
+        activeItem = null;
+
+        StartCoroutine(LoadScene(overworld, false));
     }
 
     void LoadGame()
@@ -618,7 +626,11 @@ public class Engine : MonoBehaviour
             LoadQuestSlots();
             SetCurrentWeight();
 
-            StartCoroutine(LoadScene(overworld));
+            playerBattleNameTxt.text = player.GetName();
+            statsPlayerNameTxt.text = player.GetName();
+            playerPickUpNameTxt.text = player.GetName();
+
+            StartCoroutine(LoadScene(overworld, true));
         }
         else
         {
@@ -1003,6 +1015,7 @@ public class Engine : MonoBehaviour
         castleGuardNPC = Instantiate(Resources.Load<NPC>("NPC/CastleGuard"));
         temrik = Instantiate(Resources.Load<NPC>("NPC/Temrik"));
         mysteriousMan = Instantiate(Resources.Load<NPC>("NPC/MysteriousMan"));
+        talkingGroup = Instantiate(Resources.Load<NPC>("NPC/TalkingGroup"));
 
         NPCDictionary.Add(hirgirdBlacksmith.GetID(), hirgirdBlacksmith);
         NPCDictionary.Add(inveraAlchemist.GetID(), inveraAlchemist);
@@ -1014,6 +1027,7 @@ public class Engine : MonoBehaviour
         NPCDictionary.Add(castleGuardNPC.GetID(), castleGuardNPC);
         NPCDictionary.Add(temrik.GetID(), temrik);
         NPCDictionary.Add(mysteriousMan.GetID(), mysteriousMan);
+        NPCDictionary.Add(talkingGroup.GetID(), talkingGroup);
 
         heavyAnvil = Instantiate(Resources.Load<Store>("Stores/HeavyAnvil"));
         litheWarrior = Instantiate(Resources.Load<Store>("Stores/LitheWarrior"));
@@ -1332,6 +1346,7 @@ public class Engine : MonoBehaviour
         enemyStaminaSlider = GameObject.Find("EnemyStaminaSlider").GetComponent<Slider>();
         enemyManaSlider = GameObject.Find("EnemyManaSlider").GetComponent<Slider>();
 
+        playerBattleNameTxt = GameObject.Find("PlayerBattleName").GetComponent<Text>();
         playerBattleHealthTxt = GameObject.Find("PlayerBattleHealthTxt").GetComponent<Text>();
         playerBattleStaminaTxt = GameObject.Find("PlayerBattleStaminaTxt").GetComponent<Text>();
         playerBattleManaTxt = GameObject.Find("PlayerBattleManaTxt").GetComponent<Text>();
@@ -1429,6 +1444,7 @@ public class Engine : MonoBehaviour
         skillCostGO.SetActive(false);
         skillDamageGO.SetActive(false);
 
+        statsPlayerNameTxt = GameObject.Find("StatsNameTxt").GetComponent<Text>();
         statsHealthTxt = GameObject.Find("StatsHealthTxt").GetComponent<Text>();
         statsStaminaTxt = GameObject.Find("StatsStaminaTxt").GetComponent<Text>();
         statsManaTxt = GameObject.Find("StatsManaTxt").GetComponent<Text>();
@@ -1469,6 +1485,8 @@ public class Engine : MonoBehaviour
 
         messageTxt = GameObject.Find("MessageTxt").GetComponent<Text>();
         deadRestartBtn = GameObject.Find("DeadRestartBtn").GetComponent<Button>();
+        acceptNameBtn = GameObject.Find("NameAcceptBtn").GetComponent<Button>();
+        nameInputField = GameObject.Find("NameInputField").GetComponent<InputField>();
 
         UIInventoryScreen.SetActive(false);
         UIQuestScreen.SetActive(false);
@@ -2240,7 +2258,7 @@ public class Engine : MonoBehaviour
 
     public void EnterLocation(Location location)
     {
-        StartCoroutine(LoadScene(location));
+        StartCoroutine(LoadScene(location, true));
     }
 
     void SetPlayerLocation(Location location)
@@ -3118,6 +3136,9 @@ public class Engine : MonoBehaviour
         skillScrollView.SetActive(false);
         magicScrollView.SetActive(true);
         passiveScrollView.SetActive(false);
+
+        magicScrollView.GetComponent<ScrollRect>().verticalNormalizedPosition = 1;
+        magicScrollView.GetComponent<ScrollRect>().horizontalNormalizedPosition = 0;
     }
 
     public void ActivatePassiveScrollView()
@@ -3125,6 +3146,9 @@ public class Engine : MonoBehaviour
         skillScrollView.SetActive(false);
         magicScrollView.SetActive(false);
         passiveScrollView.SetActive(true);
+
+        passiveScrollView.GetComponent<ScrollRect>().verticalNormalizedPosition = 1;
+        passiveScrollView.GetComponent<ScrollRect>().horizontalNormalizedPosition = 0;
     }
 
     public void ActivateStatsScreen(bool x)
@@ -3158,6 +3182,7 @@ public class Engine : MonoBehaviour
     public void ActivatePauseScreen(bool x)
     {
         UIPauseScreen.SetActive(x);
+        UIPauseScreen.GetComponent<Image>().raycastTarget = x;
     }
 
     public void SelectDialogue(DialogueContainer dialogueContainer)
@@ -3484,6 +3509,127 @@ public class Engine : MonoBehaviour
             dialogueOptionSlots.Remove(dGO);
             Destroy(dGO);
         }
+    }
+
+    IEnumerator StartGame()
+    {
+        UICoverScreen.GetComponent<Image>().raycastTarget = true;
+        UICoverScreen.GetComponent<Image>().color = new Color(0, 0, 0, 1);
+        messageTxt.color = new Color(255, 255, 255, 0);
+
+        messageTxt.text = "Wake up.";
+
+        while(messageTxt.color.a < 1)
+        {
+            messageTxt.color = new Color(messageTxt.color.r, messageTxt.color.g, messageTxt.color.b, messageTxt.color.a + 0.01f);
+            yield return new WaitForSecondsRealtime(0.05f * Time.deltaTime);
+        }
+        yield return new WaitForSecondsRealtime(1f);
+        while (messageTxt.color.a > 0)
+        {
+            messageTxt.color = new Color(messageTxt.color.r, messageTxt.color.g, messageTxt.color.b, messageTxt.color.a - 0.01f);
+            yield return new WaitForSecondsRealtime(0.05f * Time.deltaTime);
+        }
+        yield return new WaitForSecondsRealtime(1f);
+
+        messageTxt.text = "What is your name, gladiator?";
+
+        while (messageTxt.color.a < 1)
+        {
+            messageTxt.color = new Color(messageTxt.color.r, messageTxt.color.g, messageTxt.color.b, messageTxt.color.a + 0.01f);
+            yield return new WaitForSecondsRealtime(0.05f * Time.deltaTime);
+        }
+        yield return new WaitForSecondsRealtime(1f);
+        while (messageTxt.color.a > 0)
+        {
+            messageTxt.color = new Color(messageTxt.color.r, messageTxt.color.g, messageTxt.color.b, messageTxt.color.a - 0.01f);
+            yield return new WaitForSecondsRealtime(0.05f * Time.deltaTime);
+        }
+        yield return new WaitForSecondsRealtime(1f);
+
+        while (acceptNameBtn.GetComponent<Image>().color.a < 1)
+        {
+            acceptNameBtn.GetComponent<Image>().color = new Color(acceptNameBtn.GetComponent<Image>().color.r, acceptNameBtn.GetComponent<Image>().color.g,
+                acceptNameBtn.GetComponent<Image>().color.b, acceptNameBtn.GetComponent<Image>().color.a + 0.01f);
+            nameInputField.GetComponent<Image>().color = new Color(nameInputField.GetComponent<Image>().color.r, nameInputField.GetComponent<Image>().color.g,
+                nameInputField.GetComponent<Image>().color.b, nameInputField.GetComponent<Image>().color.a + 0.01f);
+            yield return new WaitForSecondsRealtime(0.05f * Time.deltaTime);
+        }
+        yield return new WaitForUIButtons(acceptNameBtn);
+        acceptNameBtn.interactable = false;
+
+        string name = nameInputField.text != null ? nameInputField.text : "Player";
+        player.SetName(name);
+        playerBattleNameTxt.text = name;
+        statsPlayerNameTxt.text = name;
+        playerPickUpNameTxt.text = name;
+
+        while (acceptNameBtn.GetComponent<Image>().color.a > 0)
+        {
+            acceptNameBtn.GetComponent<Image>().color = new Color(acceptNameBtn.GetComponent<Image>().color.r, acceptNameBtn.GetComponent<Image>().color.g,
+                acceptNameBtn.GetComponent<Image>().color.b, acceptNameBtn.GetComponent<Image>().color.a - 0.01f);
+            nameInputField.GetComponent<Image>().color = new Color(nameInputField.GetComponent<Image>().color.r, nameInputField.GetComponent<Image>().color.g,
+                nameInputField.GetComponent<Image>().color.b, nameInputField.GetComponent<Image>().color.a - 0.01f);
+            yield return new WaitForSecondsRealtime(0.05f * Time.deltaTime);
+        }
+        acceptNameBtn.gameObject.SetActive(false);
+        nameInputField.gameObject.SetActive(false);
+        yield return new WaitForSecondsRealtime(1f);
+
+        messageTxt.text = "I've given you a crooked dagger and a tattered shirt.";
+        while (messageTxt.color.a < 1)
+        {
+            messageTxt.color = new Color(messageTxt.color.r, messageTxt.color.g, messageTxt.color.b, messageTxt.color.a + 0.01f);
+            yield return new WaitForSecondsRealtime(0.05f * Time.deltaTime);
+        }
+        yield return new WaitForSecondsRealtime(1f);
+        while (messageTxt.color.a > 0)
+        {
+            messageTxt.color = new Color(messageTxt.color.r, messageTxt.color.g, messageTxt.color.b, messageTxt.color.a - 0.01f);
+            yield return new WaitForSecondsRealtime(0.05f * Time.deltaTime);
+        }
+        yield return new WaitForSecondsRealtime(1f);
+
+        messageTxt.text = "It should be all you need for now.";
+
+        while (messageTxt.color.a < 1)
+        {
+            messageTxt.color = new Color(messageTxt.color.r, messageTxt.color.g, messageTxt.color.b, messageTxt.color.a + 0.01f);
+            yield return new WaitForSecondsRealtime(0.05f * Time.deltaTime);
+        }
+        yield return new WaitForSecondsRealtime(1f);
+        while (messageTxt.color.a > 0)
+        {
+            messageTxt.color = new Color(messageTxt.color.r, messageTxt.color.g, messageTxt.color.b, messageTxt.color.a - 0.01f);
+            yield return new WaitForSecondsRealtime(0.05f * Time.deltaTime);
+        }
+        yield return new WaitForSecondsRealtime(1f);
+
+        messageTxt.text = "Prove your worth to me, " + name + ".";
+
+        while (messageTxt.color.a < 1)
+        {
+            messageTxt.color = new Color(messageTxt.color.r, messageTxt.color.g, messageTxt.color.b, messageTxt.color.a + 0.01f);
+            yield return new WaitForSecondsRealtime(0.05f * Time.deltaTime);
+        }
+        yield return new WaitForSecondsRealtime(1f);
+        while (messageTxt.color.a > 0)
+        {
+            messageTxt.color = new Color(messageTxt.color.r, messageTxt.color.g, messageTxt.color.b, messageTxt.color.a - 0.01f);
+            yield return new WaitForSecondsRealtime(0.05f * Time.deltaTime);
+        }
+        yield return new WaitForSecondsRealtime(1f);
+
+        StartCoroutine(OverworldMusic());
+        StartCoroutine(DirectionalOutput());
+        GameObject.Find("BirdsLoopAudioSource").GetComponent<AudioSource>().Play();
+        GameObject.Find("WindAmbianceLoopAudioSource").GetComponent<AudioSource>().Play();
+        while (UICoverScreen.GetComponent<Image>().color.a > 0)
+        {
+            UICoverScreen.GetComponent<Image>().color = new Color(UICoverScreen.GetComponent<Image>().color.r, UICoverScreen.GetComponent<Image>().color.g, UICoverScreen.GetComponent<Image>().color.b, UICoverScreen.GetComponent<Image>().color.a - (0.01f));
+            yield return new WaitForSecondsRealtime(0.05f * Time.deltaTime);
+        }
+        UICoverScreen.GetComponent<Image>().raycastTarget = false;
     }
 
     IEnumerator EnterInn()
@@ -3840,44 +3986,6 @@ public class Engine : MonoBehaviour
         unlockedTxt.gameObject.SetActive(false);
     }
 
-   /* public void OpenDoor()
-    {
-        if (activeDoor.IsLocked())
-        {
-            if (player.GetInventory().CheckForItem(0))
-            {
-                RemoveFromInventory(player.GetInventory().GetItem(0));
-                activeDoor.OpenDoor();
-                SetActiveDoor(activeDoor, false);
-            }
-            else
-                OutputToText("Door is locked!");
-        }
-        else
-        {
-            activeDoor.OpenDoor();
-            SetActiveDoor(activeDoor, false);
-        }
-    } */
-    
-    void ChangeHealth(int health)
-    {
-        player.ChangeHealth(health);
-        UpdateHealthSliders();
-    }
-
-    void ChangeStamina(int stamina)
-    {
-        player.ChangeStamina(stamina);
-        UpdateStaminaSliders();
-    }
-
-    void ChangeMana(int mana)
-    {
-        player.ChangeMana(mana);
-        UpdateManaSliders();
-    }
-
     public void OutputToText(string output)
     {
         outputQueue.Enqueue(output);
@@ -4039,7 +4147,7 @@ public class Engine : MonoBehaviour
 
     }
 
-    IEnumerator LoadScene(Location location)
+    IEnumerator LoadScene(Location location, bool isLoading)
     {
         Scene currentScene = SceneManager.GetActiveScene();
         
@@ -4098,8 +4206,14 @@ public class Engine : MonoBehaviour
         playerObject.transform.rotation = location.GetSpawnRotation();
 
         UILoadScreen.SetActive(false);
-        StartCoroutine(OverworldMusic());
-        StartCoroutine(DirectionalOutput());
+
+        if (isLoading)
+        {
+            StartCoroutine(OverworldMusic());
+            StartCoroutine(DirectionalOutput());
+        }
+        else
+            StartCoroutine(StartGame());
     }
 
     public void Restart()
@@ -4152,6 +4266,9 @@ public class Engine : MonoBehaviour
         {
             yield return null;
         }
+
+        StartCoroutine(OverworldMusic());
+        StartCoroutine(DirectionalOutput());
     }
 
     IEnumerator DirectionalOutput()

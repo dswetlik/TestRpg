@@ -17,7 +17,7 @@ MonoBehaviour:
   description: A small burst of chilly wind radiating from your hand
   actionMessage: You bring down the ambient temperature down a bit, dealing {0} damage!
   skillType: 0
-  levelRequirement: 0
+  levelRequirement: 1
   isUnlocked: 0
   isUnlockable: 1
   nextSkills:

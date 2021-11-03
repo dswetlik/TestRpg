@@ -18,8 +18,8 @@ MonoBehaviour:
   - Of course, I'll take the bounty.
   - Actually, now isn't a good time for me to take that.
   dialogueAnswers:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 25103e6332dd8ae429c6ec555925666b, type: 2}
+  - {fileID: 11400000, guid: 4e2f0f601b41bd24189ae7506fffdf22, type: 2}
   dialogueSprites:
   - {fileID: 21300000, guid: 410d4695f99727a48abf7546484779a1, type: 3}
   - {fileID: 21300000, guid: 9b0ff9c0bc1422f4180d84408e1bfb8d, type: 3}
