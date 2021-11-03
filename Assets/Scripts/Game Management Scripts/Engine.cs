@@ -200,6 +200,7 @@ public class Engine : MonoBehaviour
     Text skillCostTxt;
     Text skillDamageTxt;
     Text unlockedTxt;
+    Text skillSkillPointsTxt;
 
     Button unlockSkillBtn;
 
@@ -577,6 +578,11 @@ public class Engine : MonoBehaviour
         InitializeQuests();
 
         InitializeUI();
+
+        musicSlider.value = PlayerPrefs.GetFloat("MusicAudio", 0.7f);
+        sfxSlider.value = PlayerPrefs.GetFloat("SFXAudio", 0.7f);
+        mixer.SetFloat("MusicAudio", PlayerPrefs.GetFloat("MusicAudio", 0.7f));
+        mixer.SetFloat("SFXAudio", PlayerPrefs.GetFloat("SFXAudio", 0.7f));
 
         if (isLoadingGame)
             LoadGame();
@@ -1439,6 +1445,7 @@ public class Engine : MonoBehaviour
         skillDescriptionTxt = GameObject.Find("SkillDescriptionTxt").GetComponent<Text>();
         skillCostTxt = GameObject.Find("SkillCostTxt").GetComponent<Text>();
         skillDamageTxt = GameObject.Find("SkillDamageTxt").GetComponent<Text>();
+        skillSkillPointsTxt = GameObject.Find("SkillSkillPointsTxt").GetComponent<Text>();
         unlockedTxt = GameObject.Find("UnlockedTxt").GetComponent<Text>();
 
         skillCostGO.SetActive(false);
@@ -4019,6 +4026,7 @@ public class Engine : MonoBehaviour
         statsExpSlider.value = player.GetExp();
         statsTotalExpTxt.text = player.GetTotalExp().ToString();
         statsSkillPointsTxt.text = player.GetSkillPoints().ToString();
+        skillSkillPointsTxt.text = player.GetSkillPoints().ToString();
         statsLvlTxt.text = player.GetLevel().ToString();
         statsExpTxt.text = player.GetExp() + "/" + player.GetToLevelExp();
     }

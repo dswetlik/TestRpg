@@ -22,11 +22,9 @@ public class MainMenu : MonoBehaviour
     Slider sfxSlider;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         Application.targetFrameRate = 60;
-
-
 
         UIPauseScreen = GameObject.Find("UI Main Pause");
         UICreditsScreen = GameObject.Find("UI Main Credits");
@@ -40,6 +38,8 @@ public class MainMenu : MonoBehaviour
 
         musicSlider.value = PlayerPrefs.GetFloat("MusicAudio", 0.7f);
         sfxSlider.value = PlayerPrefs.GetFloat("SFXAudio", 0.7f);
+        mixer.SetFloat("MusicAudio", PlayerPrefs.GetFloat("MusicAudio", 0.7f));
+        mixer.SetFloat("SFXAudio", PlayerPrefs.GetFloat("SFXAudio", 0.7f));
 
         if (File.Exists(Application.persistentDataPath + "/save.tpg"))
             GameObject.Find("LoadBtn").GetComponent<Button>().interactable = true;
