@@ -12,10 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28257dec9f78a6b4681aa8437391fa82, type: 3}
   m_Name: Conv_ArenaQuestion
   m_EditorClassIdentifier: 
-  npcLine: Ah, yes. This arena is the pride, the shining gem of Burunsville. It brings
-    viewers from all over Arenthia, and their wealth to our shops. Many come looking
-    to fight and many die, others are forced into it. So which are you?
+  npcLine: Ah, yes. Welcome to Buruns, the smallest city with the largest arena in
+    Arenthia. It is our shining jewel, bringing viewers from all over Arenthia and
+    their wealth to our shops. Many come looking to fight and many die, others are
+    forced into it. So which are you?
   dialogueType: 1
-  dialogueOptions: []
-  dialogueAnswers: []
-  dialogueSprites: []
+  dialogueOptions:
+  - I'm not sure, I think I was forced into it?
+  dialogueAnswers:
+  - {fileID: 11400000, guid: 1da51f4a505f3e64ca41cd353328b29e, type: 2}
+  dialogueSprites:
+  - {fileID: 0}

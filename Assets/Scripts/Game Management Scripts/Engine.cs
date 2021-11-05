@@ -2630,16 +2630,28 @@ public class Engine : MonoBehaviour
 
                 activeItem = itemContainer.GetItem();
 
+                bool npcContainsItem = false;
+                foreach (GameObject item in uiPickupSlots.Values.ToList())
+                {
+                    if (item.GetComponent<ItemContainer>().GetItem() == activeItem)
+                    {
+                        npcContainsItem = true;
+                        break;
+                    }
+                }
+
+                Debug.Log((npcContainsItem && (!isInNPC || isInNPC && !currentNPC.HasStore())) ? "True" : "False");
+                Debug.Log(((isInNPC && currentNPC.HasStore() && npcContainsItem && activeItem.GetValue() < player.GetGold())) ? "True" : "False");
+
+                if ((npcContainsItem && (!isInNPC || isInNPC && !currentNPC.HasStore())) || (isInNPC && currentNPC.HasStore() && npcContainsItem && activeItem.GetValue() < player.GetGold()))
+                    pickupItemBtn.interactable = true;
+                else
+                    pickupItemBtn.interactable = false;
+
                 if (player.GetInventory().CheckForItem(activeItem.GetID()))
                     pickupDropItemBtn.interactable = true;
                 else
                     pickupDropItemBtn.interactable = false;
-
-                if (activeItem.GetValue() > player.GetGold() && isInNPC)
-                    pickupItemBtn.interactable = false;
-                else
-                    pickupItemBtn.interactable = true;
-                    
 
                 pickUpNameTxt.text = activeItem.GetName();
                 pickUpDescriptionTxt.text = activeItem.GetDescription();
@@ -3565,7 +3577,7 @@ public class Engine : MonoBehaviour
         yield return new WaitForUIButtons(acceptNameBtn);
         acceptNameBtn.interactable = false;
 
-        string name = nameInputField.text != null ? nameInputField.text : "Player";
+        string name = nameInputField.text != "" ? nameInputField.text : "Player";
         player.SetName(name);
         playerBattleNameTxt.text = name;
         statsPlayerNameTxt.text = name;
@@ -3612,6 +3624,9 @@ public class Engine : MonoBehaviour
         }
         yield return new WaitForSecondsRealtime(1f);
 
+        GameObject.Find("Player").transform.position = new Vector3(0, 2.2f, 10f);
+        GameObject.Find("Player").transform.eulerAngles = new Vector3(0, 90f, 0);
+
         messageTxt.text = "Prove your worth to me, " + name + ".";
 
         while (messageTxt.color.a < 1)
@@ -3620,23 +3635,23 @@ public class Engine : MonoBehaviour
             yield return new WaitForSecondsRealtime(0.05f * Time.deltaTime);
         }
         yield return new WaitForSecondsRealtime(1f);
+        UICoverScreen.GetComponent<Image>().raycastTarget = false;
+        var coroutine = StartCoroutine(Battle(smallRat));
         while (messageTxt.color.a > 0)
         {
             messageTxt.color = new Color(messageTxt.color.r, messageTxt.color.g, messageTxt.color.b, messageTxt.color.a - 0.01f);
-            yield return new WaitForSecondsRealtime(0.05f * Time.deltaTime);
+            UICoverScreen.GetComponent<Image>().color = new Color(UICoverScreen.GetComponent<Image>().color.r, UICoverScreen.GetComponent<Image>().color.g, UICoverScreen.GetComponent<Image>().color.b, UICoverScreen.GetComponent<Image>().color.a - (0.01f));
+            yield return new WaitForSecondsRealtime(0.01f * Time.deltaTime);
         }
-        yield return new WaitForSecondsRealtime(1f);
+        yield return coroutine;
+        yield return new WaitForUIButtons(GameObject.Find("PickupExitBtn").GetComponent<Button>());
+        ActivateDialogueScreen(true);
 
         StartCoroutine(OverworldMusic());
         StartCoroutine(DirectionalOutput());
         GameObject.Find("BirdsLoopAudioSource").GetComponent<AudioSource>().Play();
         GameObject.Find("WindAmbianceLoopAudioSource").GetComponent<AudioSource>().Play();
-        while (UICoverScreen.GetComponent<Image>().color.a > 0)
-        {
-            UICoverScreen.GetComponent<Image>().color = new Color(UICoverScreen.GetComponent<Image>().color.r, UICoverScreen.GetComponent<Image>().color.g, UICoverScreen.GetComponent<Image>().color.b, UICoverScreen.GetComponent<Image>().color.a - (0.01f));
-            yield return new WaitForSecondsRealtime(0.05f * Time.deltaTime);
-        }
-        UICoverScreen.GetComponent<Image>().raycastTarget = false;
+        
     }
 
     IEnumerator EnterInn()
@@ -4219,6 +4234,10 @@ public class Engine : MonoBehaviour
         {
             StartCoroutine(OverworldMusic());
             StartCoroutine(DirectionalOutput());
+            UICoverScreen.GetComponent<Image>().color = new Color(0, 0, 0, 0);
+            UICoverScreen.GetComponent<Image>().raycastTarget = false;
+            acceptNameBtn.gameObject.SetActive(false);
+            nameInputField.gameObject.SetActive(false);
         }
         else
             StartCoroutine(StartGame());

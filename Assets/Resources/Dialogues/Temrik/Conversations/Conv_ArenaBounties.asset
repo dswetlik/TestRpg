@@ -12,10 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28257dec9f78a6b4681aa8437391fa82, type: 3}
   m_Name: Conv_ArenaBounties
   m_EditorClassIdentifier: 
-  npcLine: Of course! I will occasionally be handing out bounties to take out some
-    enemies in the arena. Just keep checking in, I'm sure I'll have one ready for
-    you soon!
+  npcLine: You're either going to become the new Arena Grandmaster or you will die
+    trying. I assume the latter will happen. In the cheerful meantime, walk around
+    Buruns and talk to the townsfolk or start honing your skills in the arena.  I
+    will occasionally be handing out bounties to take out some enemies in the arena.
+    Just keep checking in, I'm sure I'll have one ready for you soon!
   dialogueType: 1
-  dialogueOptions: []
-  dialogueAnswers: []
-  dialogueSprites: []
+  dialogueOptions:
+  - Okay, so I'm supposed to fight in this arena?
+  - What even is this place?
+  dialogueAnswers:
+  - {fileID: 11400000, guid: 27c22f7fd4bb67a46891d40beb838b0f, type: 2}
+  - {fileID: 11400000, guid: d30be8c1b3be1c646a6ab98f440945f4, type: 2}
+  dialogueSprites:
+  - {fileID: 0}
+  - {fileID: 0}

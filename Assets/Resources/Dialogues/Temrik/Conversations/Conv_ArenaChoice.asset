@@ -12,10 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28257dec9f78a6b4681aa8437391fa82, type: 3}
   m_Name: Conv_ArenaChoice
   m_EditorClassIdentifier: 
-  npcLine: Just go ahead and walk through the doors. The other Arena Masters will
-    give you a choice between three enemies, and after choosing will send you into
-    the arena. You can leave at any point before choosing your enemy.
+  npcLine: Well, yes, you're a gladiator aren't you? Just go ahead and walk through
+    the doors. The other arena masters will give you a choice between three enemies,
+    and after choosing will send you into the arena. You can leave at any point before
+    confirming your choice of enemy. Any other questions?
   dialogueType: 1
-  dialogueOptions: []
-  dialogueAnswers: []
-  dialogueSprites: []
+  dialogueOptions:
+  - What am I supposed to do now?
+  - What even is this place?
+  dialogueAnswers:
+  - {fileID: 11400000, guid: b862edaf1f2985b458bbb0c64d5e162d, type: 2}
+  - {fileID: 11400000, guid: d30be8c1b3be1c646a6ab98f440945f4, type: 2}
+  dialogueSprites:
+  - {fileID: 0}
+  - {fileID: 0}
