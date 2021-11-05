@@ -2103,7 +2103,7 @@ public class Engine : MonoBehaviour
             }
         }
 
-        playerDefValue /= 2;
+        playerDefValue /= 3;
 
         if (attack == null)
         {
@@ -4238,6 +4238,8 @@ public class Engine : MonoBehaviour
             UICoverScreen.GetComponent<Image>().raycastTarget = false;
             acceptNameBtn.gameObject.SetActive(false);
             nameInputField.gameObject.SetActive(false);
+            GameObject.Find("BirdsLoopAudioSource").GetComponent<AudioSource>().Play();
+            GameObject.Find("WindAmbianceLoopAudioSource").GetComponent<AudioSource>().Play();
         }
         else
             StartCoroutine(StartGame());
@@ -4296,6 +4298,7 @@ public class Engine : MonoBehaviour
 
         StartCoroutine(OverworldMusic());
         StartCoroutine(DirectionalOutput());
+
     }
 
     IEnumerator DirectionalOutput()

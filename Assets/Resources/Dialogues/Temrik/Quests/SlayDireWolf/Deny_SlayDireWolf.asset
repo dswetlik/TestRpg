@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Deny_SlayDireWolf
   m_EditorClassIdentifier: 
   npcLine: Okay, that's fine. The bounty will wait for you to be ready.
-  dialogueType: 0
+  dialogueType: 3
   dialogueOptions: []
   dialogueAnswers: []
   dialogueSprites: []

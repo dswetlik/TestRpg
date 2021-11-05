@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   npcLine: Great, check back in once you've dominated 5 gladiators you'll get your
     reward.
-  dialogueType: 0
+  dialogueType: 3
   dialogueOptions: []
   dialogueAnswers: []
   dialogueSprites: []
