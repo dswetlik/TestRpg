@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Strong Scratch
   description: The {0} slashed at you with its claws, dealing {1} damage.
-  audioClip: {fileID: 0}
+  audioClip: {fileID: 8300000, guid: 7393b77f0facc474b89ed85679450f59, type: 3}
   attackType: 3
   attackAttribute: 1
   damageModifier: 4

@@ -590,6 +590,7 @@ public class Engine : MonoBehaviour
             StartNewGame();
 
         UpdateInventoryAttributes();
+        Advertisements.Instance.ShowBanner(BannerPosition.BOTTOM);
     }
 
     void StartNewGame()
@@ -1517,6 +1518,7 @@ public class Engine : MonoBehaviour
 
     IEnumerator Battle(Enemy eGO)
     {
+        Advertisements.Instance.HideBanner();
         if (GameObject.Find("OverworldMusicAudioSource").GetComponent<AudioSource>().isPlaying)
             GameObject.Find("OverworldMusicAudioSource").GetComponent<AudioSource>().Stop();
         GameObject.Find("BattleMusicAudioSource").GetComponent<AudioSource>().Play();
@@ -1654,6 +1656,7 @@ public class Engine : MonoBehaviour
             enemy.RegenAttributes();
 
             UpdateBattleAttributes(enemy);
+            
             yield return null;
         }
 
@@ -1717,10 +1720,30 @@ public class Engine : MonoBehaviour
             StartCoroutine(HasDied());
         }
 
-        UpdateInventoryAttributes();
-        battleOutputTxt.text = "";
-        isInBattle = false;
         GameObject.Find("BattleMusicAudioSource").GetComponent<AudioSource>().Stop();
+        player.AddBattleCount(1);
+        if(player.GetBattleCount() % 10 == 0)
+        {           
+            Advertisements.Instance.ShowInterstitial(InterstitialClosed);
+        }
+        else
+        {
+            UpdateInventoryAttributes();
+            battleOutputTxt.text = "";
+            isInBattle = false;
+            Advertisements.Instance.ShowBanner(BannerPosition.BOTTOM);
+        }
+    }
+
+    private void InterstitialClosed()
+    {
+        if(isInBattle)
+        {
+            UpdateInventoryAttributes();
+            battleOutputTxt.text = "";
+            isInBattle = false;
+            Advertisements.Instance.ShowBanner(BannerPosition.BOTTOM);
+        }
     }
 
     bool CheckIfStunned(bool isPlayer)

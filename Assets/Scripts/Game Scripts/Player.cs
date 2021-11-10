@@ -18,7 +18,7 @@ public class Player
     Weapon weapon;
     Armor head, chest, legs, feet, hands;
     uint level, exp, totalExp, expToLevel, skillPoints, currentWeight, maxWeight;
-    int health, stamina, mana, maxHealth, maxStamina, maxMana, staminaRegen, manaRegen, defense, gold;
+    int health, stamina, mana, maxHealth, maxStamina, maxMana, staminaRegen, manaRegen, defense, gold, battleCount;
     float speed;
     List<Quest> questList = new List<Quest>();
     List<Quest> completedQuests = new List<Quest>();
@@ -56,6 +56,7 @@ public class Player
         exp = 0;
         totalExp = 0;
         skillPoints = 0;
+        battleCount = 0;
         expToLevel = (level * 10);
     }
 
@@ -103,7 +104,7 @@ public class Player
         return (int)((defenseRating + GetPassiveFlat(PassiveSkill.AttributeType.defense)) * GetPassivePercent(PassiveSkill.AttributeType.defense));
     }
     public float GetSpeed() { return ((speed + GetPassiveFlat(PassiveSkill.AttributeType.speed)) * GetPassivePercent(PassiveSkill.AttributeType.speed)); }
-
+    public int GetBattleCount() { return battleCount; }
     public Weapon GetWeapon() { return weapon; }
 
     public void EquipWeapon(Weapon weapon) { this.weapon = weapon; }
@@ -239,6 +240,8 @@ public class Player
     public void ChangeGold(int gold) { this.gold += gold; if (gold < 0) gold = 0; }
 
     public void SetGold(int gold) { this.gold = gold; }
+
+    public void AddBattleCount(int count) { battleCount += count; }
 
     public void AddExp(uint exp)
     {

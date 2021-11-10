@@ -15,7 +15,7 @@ MonoBehaviour:
   name: Master Slap
   description: The {0} almost concusses you from how hard it slapped, dealing {1}
     damage.
-  audioClip: {fileID: 0}
+  audioClip: {fileID: 8300000, guid: 290a629374ee7ec43b21e75cdcf4b89b, type: 3}
   attackType: 3
   attackAttribute: 1
   damageModifier: 4

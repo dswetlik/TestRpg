@@ -615,7 +615,6 @@ public class IAPManager :MonoBehaviour, IStoreListener
         bool validPurchase = true;
 #if GleyUseValidation
 #if UNITY_ANDROID || UNITY_IOS || UNITY_STANDALONE_OSX
-    
         CrossPlatformValidator validator = new CrossPlatformValidator(GooglePlayTangle.Data(), AppleTangle.Data(), Application.identifier);
 
         try

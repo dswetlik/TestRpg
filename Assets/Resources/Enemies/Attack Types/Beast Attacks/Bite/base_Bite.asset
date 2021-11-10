@@ -14,11 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Weak Bite
   description: The {0} made a weak attempt to bite, dealing {1} damage.
-  audioClip: {fileID: 0}
+  audioClip: {fileID: 8300000, guid: 4dd06484d0420b246a9922ed50badb4c, type: 3}
   attackType: 3
   attackAttribute: 1
   damageModifier: 1
-  staminaCost: 0
-  manaCost: 0
+  attributeCost: 0
   hasStatusEffects: 0
   statusEffects: []

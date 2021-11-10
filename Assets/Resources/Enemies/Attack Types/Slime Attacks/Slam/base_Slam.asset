@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Weak Slam
   description: The {0} weakly body slams into you, dealing {1} damage.
-  audioClip: {fileID: 0}
+  audioClip: {fileID: 8300000, guid: 2e1b0fcb2cfea6e4a87263a0d808439d, type: 3}
   attackType: 3
   attackAttribute: 1
   damageModifier: 2
