@@ -1722,8 +1722,10 @@ public class Engine : MonoBehaviour
 
         GameObject.Find("BattleMusicAudioSource").GetComponent<AudioSource>().Stop();
         player.AddBattleCount(1);
-        if(player.GetBattleCount() % 10 == 0)
-        {           
+        Debug.Log("Battle Count: " + player.GetBattleCount() + " % 6 = " + player.GetBattleCount() % 6);
+        if(player.GetBattleCount() % 6 == 0)
+        {
+            Debug.Log("Should Be Playing Ad");
             Advertisements.Instance.ShowInterstitial(InterstitialClosed);
         }
         else
@@ -3318,7 +3320,9 @@ public class Engine : MonoBehaviour
                 List<Quest> possibleQuests = new List<Quest>();
                 foreach(Quest quest in quests)
                 {
-                    if(!QuestDictionary[quest.GetID()].IsCompleted() && (player.GetLevel() >= QuestDictionary[quest.GetID()].GetLevelRequirement()))
+                    bool level = (player.GetLevel() >= QuestDictionary[quest.GetID()].GetLevelRequirement());
+                    bool prereq = (!QuestDictionary[quest.GetID()].HasPrerequisite()) || (QuestDictionary[quest.GetID()].HasPrerequisite() && QuestDictionary[quest.GetPrerequisite().GetID()].IsCompleted());
+                    if (!QuestDictionary[quest.GetID()].IsCompleted() && level && prereq)
                     {
                         possibleQuests.Add(QuestDictionary[quest.GetID()]);
                     }
