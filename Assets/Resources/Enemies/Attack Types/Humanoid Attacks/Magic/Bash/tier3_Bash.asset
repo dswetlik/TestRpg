@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Strong Bash
   description: The {0} strikes you with their staff, dealing {1} damage.
-  audioClip: {fileID: 0}
+  audioClip: {fileID: 8300000, guid: a684ae4f7af324043bf36d8aa5be0ee1, type: 3}
   attackType: 3
   attackAttribute: 1
   damageModifier: 3

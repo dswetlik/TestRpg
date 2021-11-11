@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Strong Battle Cry
   description: The {0} belts out a strong battle cry.
-  audioClip: {fileID: 0}
+  audioClip: {fileID: 8300000, guid: 0a3ca4f9a66e14d4cb1f9d47d9270175, type: 3}
   attackType: 1
   attackAttribute: 1
   damageModifier: 0

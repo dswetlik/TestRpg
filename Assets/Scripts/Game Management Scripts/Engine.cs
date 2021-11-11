@@ -1723,10 +1723,11 @@ public class Engine : MonoBehaviour
         GameObject.Find("BattleMusicAudioSource").GetComponent<AudioSource>().Stop();
         player.AddBattleCount(1);
         Debug.Log("Battle Count: " + player.GetBattleCount() + " % 6 = " + player.GetBattleCount() % 6);
-        if(player.GetBattleCount() % 6 == 0)
+        if(player.GetBattleCount() % 6 == 0 && Advertisements.Instance.CanShowAds())
         {
             Debug.Log("Should Be Playing Ad");
             Advertisements.Instance.ShowInterstitial(InterstitialClosed);
+
         }
         else
         {
@@ -3262,6 +3263,12 @@ public class Engine : MonoBehaviour
                         TurnInQuest(questDialogue.GetQuest());
                         currentNPC.SetHasGivenQuest(false);
                     }
+                if(questDialogue.GetQuest().GetQuestType() == Quest.QuestType.Talk)
+                    if(((TalkQuest)QuestDictionary[questDialogue.GetQuest().GetID()]).CheckTalkCompletion(currentNPC))
+                    {
+                        TurnInQuest(questDialogue.GetQuest());
+                        NPCDictionary[((TalkQuest)QuestDictionary[questDialogue.GetQuest().GetID()]).GetSourceNPC().GetID()].SetHasGivenQuest(false);
+                    }
             }
             if(questDialogue.GetQuestDialogueType() == QuestDialogue.QuestDialogueType.accept)
             {
@@ -3461,6 +3468,55 @@ public class Engine : MonoBehaviour
                 else if (QuestDictionary[questDialogue.GetQuest().GetID()].GetQuestType() == Quest.QuestType.Slay)
                 {
                     SlayQuest quest = (SlayQuest)QuestDictionary[questDialogue.GetQuest().GetID()];
+                    if (!player.CheckForQuest(quest.GetID()) && !quest.IsCompleted())
+                    {
+                        textType = StartCoroutine(TypeText(questDialogue.GetNotStartedResponse()));
+                        List<Dialogue> dialogues = dialogue.GetDialogueAnswers();
+                        List<string> dialogueStrings = dialogue.GetDialogueOptions();
+                        List<Sprite> sprites = dialogue.GetDialogueSprites();
+                        for (int i = 0; i < dialogues.Count; i++)
+                        {
+                            GameObject dGO = Instantiate(dialogueBtn, responsePanel.transform);
+
+                            dGO.GetComponent<DialogueContainer>().SetDialogue(dialogues[i]);
+                            dGO.transform.GetChild(0).GetComponent<Text>().text = dialogueStrings[i];
+                            if (sprites[i] == null)
+                                dGO.transform.GetChild(1).gameObject.SetActive(false);
+                            else
+                                dGO.transform.GetChild(1).GetComponent<Image>().sprite = sprites[i];
+                            dGO.GetComponent<Button>().onClick.AddListener(() => SelectDialogue(dGO.GetComponent<DialogueContainer>()));
+
+                            dialogueOptionSlots.Add(dGO);
+                        }
+                    }
+                    else if (!quest.IsCompleted())
+                    {
+                        textType = StartCoroutine(TypeText(questDialogue.GetNotCompleteResponse()));
+                        List<Dialogue> dialogues = questDialogue.GetNotCompleteDialogueAnswers();
+                        List<string> dialogueStrings = questDialogue.GetNotCompleteDialogueOptions();
+                        List<Sprite> sprites = questDialogue.GetNotCompleteDialogueSprites();
+                        for (int i = 0; i < dialogues.Count; i++)
+                        {
+                            GameObject dGO = Instantiate(dialogueBtn, responsePanel.transform);
+
+                            dGO.GetComponent<DialogueContainer>().SetDialogue(dialogues[i]);
+                            dGO.transform.GetChild(0).GetComponent<Text>().text = dialogueStrings[i];
+                            if (sprites[i] == null)
+                                dGO.transform.GetChild(1).gameObject.SetActive(false);
+                            else
+                                dGO.transform.GetChild(1).GetComponent<Image>().sprite = sprites[i];
+                            dGO.GetComponent<Button>().onClick.AddListener(() => SelectDialogue(dGO.GetComponent<DialogueContainer>()));
+
+                            dialogueOptionSlots.Add(dGO);
+
+                        }
+                    }
+                    else
+                        textType = StartCoroutine(TypeText(questDialogue.GetCompleteResponse()));
+                }
+                else if (QuestDictionary[questDialogue.GetQuest().GetID()].GetQuestType() == Quest.QuestType.Talk)
+                {
+                    TalkQuest quest = (TalkQuest)QuestDictionary[questDialogue.GetQuest().GetID()];
                     if (!player.CheckForQuest(quest.GetID()) && !quest.IsCompleted())
                     {
                         textType = StartCoroutine(TypeText(questDialogue.GetNotStartedResponse()));

@@ -7,9 +7,11 @@ public class TalkQuest : Quest
 {
 
     [SerializeField] NPC targetNPC;
+    [SerializeField] NPC sourceNPC;
     [SerializeField] QuestDialogue targetNPCDialogue;
 
     public NPC GetTargetNPC() { return targetNPC; }
+    public NPC GetSourceNPC() { return sourceNPC; }
     public QuestDialogue GetTargetNPCDialogue() { return targetNPCDialogue; }
 
     public override bool CheckQuestCompletion(Player player)

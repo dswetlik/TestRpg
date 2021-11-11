@@ -15,7 +15,7 @@ MonoBehaviour:
   name: Restoration
   description: The {0} masterfully casts a healing spell over themselves, healing
     for {1} HP.
-  audioClip: {fileID: 0}
+  audioClip: {fileID: 8300000, guid: 80a0d7cbd75a6544aadd7783bd1d0778, type: 3}
   attackType: 2
   attackAttribute: 2
   damageModifier: 30

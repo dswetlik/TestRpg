@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Health Potion
   description: The {0} drinks a health potion, healing {1} HP.
-  audioClip: {fileID: 0}
+  audioClip: {fileID: 8300000, guid: ca3b39e9f2d99a64480ce9da86e91f39, type: 3}
   attackType: 2
   attackAttribute: 2
   damageModifier: 20

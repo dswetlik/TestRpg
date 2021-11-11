@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Weak Sparks
   description: The {0} launches some weak sparks at you, dealing {1} damage.
-  audioClip: {fileID: 0}
+  audioClip: {fileID: 8300000, guid: 80a0d7cbd75a6544aadd7783bd1d0778, type: 3}
   attackType: 3
   attackAttribute: 2
   damageModifier: 2
