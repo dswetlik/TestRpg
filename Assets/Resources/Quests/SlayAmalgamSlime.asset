@@ -16,6 +16,8 @@ MonoBehaviour:
   name: Amalgam Slime Bounty
   description: You've been given a bounty to slay some amalgam slimes. Get to it!
   levelRequirement: 6
+  hasPrerequisite: 1
+  prerequisite: {fileID: 11400000, guid: fde7ecb308218a049bf5d7f4cc5a202e, type: 2}
   isCompleted: 0
   dialogue: {fileID: 11400000, guid: d35e01dd3e542134c8aa816c7db02661, type: 2}
   hasItemReward: 0

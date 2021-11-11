@@ -17,6 +17,8 @@ MonoBehaviour:
   description: 'Times change quickly here, and now the innkeeper wants to make a
     nice wolf stew. '
   levelRequirement: 10
+  hasPrerequisite: 1
+  prerequisite: {fileID: 11400000, guid: 56ccbad5fbc03804fb664f4697df2e72, type: 2}
   isCompleted: 0
   dialogue: {fileID: 11400000, guid: 52b6b3e489e579442ad7c18fa4519d4b, type: 2}
   hasItemReward: 0

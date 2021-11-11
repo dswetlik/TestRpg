@@ -3360,6 +3360,28 @@ public class Engine : MonoBehaviour
 
                 dialogueOptionSlots.Add(dGO);
             }
+
+            foreach(Quest quest in player.GetQuestList())
+            {
+                if(quest.GetQuestType() == Quest.QuestType.Talk)
+                {
+                    TalkQuest talkQuest = (TalkQuest)QuestDictionary[quest.GetID()];
+                    if(currentNPC.GetID() == talkQuest.GetTargetNPC().GetID())
+                    {
+                        GameObject dGO = Instantiate(dialogueBtn, responsePanel.transform);
+
+                        dGO.GetComponent<DialogueContainer>().SetDialogue(talkQuest.GetTargetNPCDialogue());
+                        dGO.transform.GetChild(0).GetComponent<Text>().text = talkQuest.GetTargetNPCDialogue().GetNPCLine();
+                        if (((QuestDialogue)talkQuest.GetTargetNPCDialogue()).GetOpeningSprite() == null)
+                            dGO.transform.GetChild(1).gameObject.SetActive(false);
+                        else
+                            dGO.transform.GetChild(1).GetComponent<Image>().sprite = talkQuest.GetTargetNPCDialogue().GetOpeningSprite();
+                        dGO.GetComponent<Button>().onClick.AddListener(() => SelectDialogue(dGO.GetComponent<DialogueContainer>()));
+
+                        dialogueOptionSlots.Add(dGO);
+                    }
+                }
+            }
         }
         else if(dialogue.GetDialogueType() == Dialogue.DialogueType.conversation)
         {

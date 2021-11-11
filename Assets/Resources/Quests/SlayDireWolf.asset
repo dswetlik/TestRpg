@@ -17,6 +17,8 @@ MonoBehaviour:
   description: What happened to the rats? Apparently they were eaten by wolves. Now
     you have to take out the wolves.
   levelRequirement: 7
+  hasPrerequisite: 1
+  prerequisite: {fileID: 11400000, guid: 5615383f0edc54e48891ecfb9381249a, type: 2}
   isCompleted: 0
   dialogue: {fileID: 11400000, guid: c1760c9ac2cdf8548a76f80e61ceec29, type: 2}
   hasItemReward: 0

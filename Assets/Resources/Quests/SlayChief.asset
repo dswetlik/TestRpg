@@ -17,6 +17,8 @@ MonoBehaviour:
   description: The final bounty for you to complete, you must defeat the Chief Battlemage,
     Chief Knight, and the War Wolf.
   levelRequirement: 15
+  hasPrerequisite: 1
+  prerequisite: {fileID: 11400000, guid: 003c3827e61c4844095a09c8080837ad, type: 2}
   isCompleted: 0
   dialogue: {fileID: 11400000, guid: 5635752c7ab02264fb5daad32e478373, type: 2}
   hasItemReward: 0

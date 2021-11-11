@@ -14,8 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   questType: 2
   name: Gladiator Bounty
-  description: It is time to slay your fellow gladiator. Get to it!
+  description: It is time to slay your fellow gladiators. Get to it!
   levelRequirement: 11
+  hasPrerequisite: 1
+  prerequisite: {fileID: 11400000, guid: 388b8a4239f309b438f1e8cd065c8511, type: 2}
   isCompleted: 0
   dialogue: {fileID: 11400000, guid: 557c347e154d26641a2040405245befd, type: 2}
   hasItemReward: 0

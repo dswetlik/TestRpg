@@ -26,6 +26,8 @@ MonoBehaviour:
 
     You''ve got this.'
   levelRequirement: 15
+  hasPrerequisite: 1
+  prerequisite: {fileID: 11400000, guid: 1a2e84888078d75469dfce76f4048883, type: 2}
   isCompleted: 0
   dialogue: {fileID: 11400000, guid: c93d4c7bd500f914d8756667959eeb7a, type: 2}
   hasItemReward: 0

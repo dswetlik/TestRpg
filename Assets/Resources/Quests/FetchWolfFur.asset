@@ -17,6 +17,8 @@ MonoBehaviour:
   description: That blacksmith really has a thing for his fireplace. He now needs
     a full wolf pelt to go in front of it.
   levelRequirement: 7
+  hasPrerequisite: 1
+  prerequisite: {fileID: 11400000, guid: d7309c988dacafe4083d907478feb9e7, type: 2}
   isCompleted: 0
   dialogue: {fileID: 11400000, guid: b0184bb85a6e2984580d52d46fa1dd40, type: 2}
   hasItemReward: 0
