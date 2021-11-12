@@ -22,6 +22,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 388b8a4239f309b438f1e8cd065c8511, type: 2}
   - {fileID: 11400000, guid: 003c3827e61c4844095a09c8080837ad, type: 2}
   - {fileID: 11400000, guid: f1c59d9ff1981a84891187fbb14aabc2, type: 2}
+  - {fileID: 11400000, guid: f01fcdbb7cabaca459c99ccdf0e2f5e7, type: 2}
   hasGivenQuest: 0
   givenQuest: {fileID: 0}
   dialogue: {fileID: 11400000, guid: 39d755a2df76c044aaec6acebf528a2a, type: 2}

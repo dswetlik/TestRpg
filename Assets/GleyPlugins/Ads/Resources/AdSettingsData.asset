@@ -248,7 +248,7 @@ MonoBehaviour:
         displayName: Game ID
         notRequired: 0
       idBanner:
-        id: Banner
+        id: Android_Banner
         displayName: Placement ID Banner
         notRequired: 0
       idInterstitial:

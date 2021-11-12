@@ -132,6 +132,7 @@ public class Engine : MonoBehaviour
     Slider enemySpeedSlider;
 
     Button playerBattleInventoryBtn;
+    Button battleLeaveBtn;
 
     GameObject playerCardLocationA;
 
@@ -431,6 +432,8 @@ public class Engine : MonoBehaviour
     SlayQuest slayGladiator;
     SlayQuest slayChief;
 
+    TalkQuest talkTemrikToBlacksmith;
+
     ActiveSkill slash;
     ActiveSkill stab;
     ActiveSkill bash;
@@ -567,6 +570,7 @@ public class Engine : MonoBehaviour
     public GameObject card;
     NPC currentNPC;
     Coroutine textType;
+    Coroutine battleCoroutine;
     public AudioMixer mixer;
 
     public bool isLoadingGame;
@@ -1223,6 +1227,8 @@ public class Engine : MonoBehaviour
         slayGladiator = Instantiate(Resources.Load<SlayQuest>("Quests/SlayGladiator"));
         slayChief = Instantiate(Resources.Load<SlayQuest>("Quests/SlayChief"));
 
+        talkTemrikToBlacksmith = Instantiate(Resources.Load<TalkQuest>("Quests/TalkTemrikToBlacksmith"));
+
         QuestDictionary.Add(fetchRatSkull.GetID(), fetchRatSkull);
         QuestDictionary.Add(fetchSlimeGoo.GetID(), fetchSlimeGoo);
         QuestDictionary.Add(fetchRatFur.GetID(), fetchRatFur);
@@ -1239,6 +1245,8 @@ public class Engine : MonoBehaviour
         QuestDictionary.Add(slayDireWolf.GetID(), slayDireWolf);
         QuestDictionary.Add(slayGladiator.GetID(), slayGladiator);
         QuestDictionary.Add(slayChief.GetID(), slayChief);
+
+        QuestDictionary.Add(talkTemrikToBlacksmith.GetID(), talkTemrikToBlacksmith);
 
     }
 
@@ -1368,6 +1376,7 @@ public class Engine : MonoBehaviour
 
         playerBattleInventoryBtn = GameObject.Find("PlayerBattleInventoryBtn").GetComponent<Button>();
         playerBattleInventoryBtn.interactable = false;
+        battleLeaveBtn = GameObject.Find("BattleLeaveBtn").GetComponent<Button>();
 
         otherPickUpNameTxt = GameObject.Find("OtherPickupNameTxt").GetComponent<Text>();
         playerPickUpNameTxt = GameObject.Find("PlayerPickUpNameTxt").GetComponent<Text>();
@@ -1512,7 +1521,7 @@ public class Engine : MonoBehaviour
 
     public void Battle()
     {
-        StartCoroutine(Battle(selectedEnemy));
+        battleCoroutine = StartCoroutine(Battle(selectedEnemy));
         ActivateArenaScreen(false);
     }
 
@@ -1723,11 +1732,13 @@ public class Engine : MonoBehaviour
         GameObject.Find("BattleMusicAudioSource").GetComponent<AudioSource>().Stop();
         player.AddBattleCount(1);
         Debug.Log("Battle Count: " + player.GetBattleCount() + " % 6 = " + player.GetBattleCount() % 6);
-        if(player.GetBattleCount() % 6 == 0 && Advertisements.Instance.CanShowAds())
+        if(player.GetBattleCount() % 6 == 0)
         {
-            Debug.Log("Should Be Playing Ad");
-            Advertisements.Instance.ShowInterstitial(InterstitialClosed);
-
+            Advertisements.Instance.ShowInterstitial();
+            UpdateInventoryAttributes();
+            battleOutputTxt.text = "";
+            isInBattle = false;
+            Advertisements.Instance.ShowBanner(BannerPosition.BOTTOM);
         }
         else
         {
@@ -1736,17 +1747,52 @@ public class Engine : MonoBehaviour
             isInBattle = false;
             Advertisements.Instance.ShowBanner(BannerPosition.BOTTOM);
         }
+        battleCoroutine = null;
     }
 
-    private void InterstitialClosed()
+    public void RunFromBattle()
     {
-        if(isInBattle)
+        StopCoroutine(battleCoroutine);
+        int lostGold = UnityEngine.Random.Range((int)(player.GetGold() * 0.25f), (int)(player.GetGold() * 0.25f));
+        player.ChangeGold(-lostGold);
+
+        OutputToText("You have ran away from battle!");
+        OutputToText(String.Format("You have lost {0} gold in the attempt.", lostGold));
+
+        GameObject.Find("BattleMusicAudioSource").GetComponent<AudioSource>().Stop();
+
+        foreach (GameObject sGO in enemyStatusEffectSlots.ToList<GameObject>())
+        {
+            GameObject.Destroy(sGO);
+            enemyStatusEffectSlots.Remove(sGO);
+        }
+
+        player.AddBattleCount(1);
+        if (player.GetBattleCount() % 6 == 0)
+        {
+            Advertisements.Instance.ShowInterstitial();
+            UpdateInventoryAttributes();
+            battleOutputTxt.text = "";
+            isInBattle = false;
+            Advertisements.Instance.ShowBanner(BannerPosition.BOTTOM);
+        }
+        else
         {
             UpdateInventoryAttributes();
             battleOutputTxt.text = "";
             isInBattle = false;
             Advertisements.Instance.ShowBanner(BannerPosition.BOTTOM);
         }
+
+        if (GameObject.Find("PlayerCardALocation").transform.childCount > 0)
+            Destroy(GameObject.Find("PlayerCardALocation").transform.GetChild(0).gameObject);
+        if (GameObject.Find("PlayerCardBLocation").transform.childCount > 0)
+            Destroy(GameObject.Find("PlayerCardBLocation").transform.GetChild(0).gameObject);
+        if (GameObject.Find("PlayerCardCsLocation").transform.childCount > 0)
+            Destroy(GameObject.Find("PlayerCardCLocation").transform.GetChild(0).gameObject);
+
+        UIBattleScreen.SetActive(false);
+        battleCoroutine = null;
     }
 
     bool CheckIfStunned(bool isPlayer)
@@ -2669,7 +2715,7 @@ public class Engine : MonoBehaviour
                 Debug.Log((npcContainsItem && (!isInNPC || isInNPC && !currentNPC.HasStore())) ? "True" : "False");
                 Debug.Log(((isInNPC && currentNPC.HasStore() && npcContainsItem && activeItem.GetValue() < player.GetGold())) ? "True" : "False");
 
-                if ((npcContainsItem && (!isInNPC || isInNPC && !currentNPC.HasStore())) || (isInNPC && currentNPC.HasStore() && npcContainsItem && activeItem.GetValue() < player.GetGold()))
+                if ((npcContainsItem && (!isInNPC || isInNPC && !currentNPC.HasStore())) || (isInNPC && currentNPC.HasStore() && npcContainsItem && activeItem.GetValue() <= player.GetGold()))
                     pickupItemBtn.interactable = true;
                 else
                     pickupItemBtn.interactable = false;
@@ -3292,7 +3338,7 @@ public class Engine : MonoBehaviour
             ClearDialogue();
             Enemy enemy = ((BattleDialogue)dialogueContainer.GetDialogue()).GetEnemy();
             SetDialogues(dialogueContainer.GetDialogue());
-            StartCoroutine(EnterBattle(enemy));
+            battleCoroutine = StartCoroutine(EnterBattle(enemy));
         }
 
     }
@@ -3741,14 +3787,16 @@ public class Engine : MonoBehaviour
         }
         yield return new WaitForSecondsRealtime(1f);
         UICoverScreen.GetComponent<Image>().raycastTarget = false;
-        var coroutine = StartCoroutine(Battle(smallRat));
+        battleLeaveBtn.gameObject.SetActive(false);
+        battleCoroutine = StartCoroutine(Battle(smallRat));
         while (messageTxt.color.a > 0)
         {
             messageTxt.color = new Color(messageTxt.color.r, messageTxt.color.g, messageTxt.color.b, messageTxt.color.a - 0.01f);
             UICoverScreen.GetComponent<Image>().color = new Color(UICoverScreen.GetComponent<Image>().color.r, UICoverScreen.GetComponent<Image>().color.g, UICoverScreen.GetComponent<Image>().color.b, UICoverScreen.GetComponent<Image>().color.a - (0.01f));
             yield return new WaitForSecondsRealtime(0.01f * Time.deltaTime);
         }
-        yield return coroutine;
+        yield return battleCoroutine;
+        battleLeaveBtn.gameObject.SetActive(true);
         yield return new WaitForUIButtons(GameObject.Find("PickupExitBtn").GetComponent<Button>());
         ActivateDialogueScreen(true);
 

@@ -74,15 +74,9 @@ public class MainMenu : MonoBehaviour
         GameObject.Find("NewGameBtn").GetComponent<Button>().interactable = false;
         GameObject.Find("LoadBtn").GetComponent<Button>().interactable = false;
         Advertisements.Instance.HideBanner();
-        if (Advertisements.Instance.CanShowAds())
-        {
-            Advertisements.Instance.ShowInterstitial(InterstitialClosed);
-#if UNITY_EDITOR
-            StartCoroutine(LoadStartScene("LoadScene", isLoading));
-# endif
-        }
-        else
-            StartCoroutine(LoadStartScene("LoadScene", isLoading));
+
+        Advertisements.Instance.ShowInterstitial();
+        StartCoroutine(LoadStartScene("LoadScene", isLoading));
 
         UILoadScreen.SetActive(true);
     }
@@ -93,15 +87,10 @@ public class MainMenu : MonoBehaviour
         GameObject.Find("NewGameBtn").GetComponent<Button>().interactable = false;
         GameObject.Find("LoadBtn").GetComponent<Button>().interactable = false;
         Advertisements.Instance.HideBanner();
-        if (Advertisements.Instance.CanShowAds())
-        {
-            Advertisements.Instance.ShowInterstitial(InterstitialClosed);
-#if UNITY_EDITOR
-            StartCoroutine(LoadStartScene("LoadScene", isLoading));
-# endif
-        }
-        else
-            StartCoroutine(LoadStartScene("LoadScene", isLoading));
+
+        Advertisements.Instance.ShowInterstitial();
+        StartCoroutine(LoadStartScene("LoadScene", isLoading));
+
         UILoadScreen.SetActive(true);
     }
 
