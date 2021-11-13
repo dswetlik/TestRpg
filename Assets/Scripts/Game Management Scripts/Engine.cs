@@ -433,6 +433,7 @@ public class Engine : MonoBehaviour
     SlayQuest slayChief;
 
     TalkQuest talkTemrikToBlacksmith;
+    TalkQuest talkTemrikToAlchemist;
 
     ActiveSkill slash;
     ActiveSkill stab;
@@ -1228,6 +1229,7 @@ public class Engine : MonoBehaviour
         slayChief = Instantiate(Resources.Load<SlayQuest>("Quests/SlayChief"));
 
         talkTemrikToBlacksmith = Instantiate(Resources.Load<TalkQuest>("Quests/TalkTemrikToBlacksmith"));
+        talkTemrikToAlchemist = Instantiate(Resources.Load<TalkQuest>("Quests/TalkTemrikToAlchemist"));
 
         QuestDictionary.Add(fetchRatSkull.GetID(), fetchRatSkull);
         QuestDictionary.Add(fetchSlimeGoo.GetID(), fetchSlimeGoo);
@@ -1247,7 +1249,7 @@ public class Engine : MonoBehaviour
         QuestDictionary.Add(slayChief.GetID(), slayChief);
 
         QuestDictionary.Add(talkTemrikToBlacksmith.GetID(), talkTemrikToBlacksmith);
-
+        QuestDictionary.Add(talkTemrikToAlchemist.GetID(), talkTemrikToAlchemist);
     }
 
     void InitializeUI()
@@ -3312,6 +3314,7 @@ public class Engine : MonoBehaviour
                 if(questDialogue.GetQuest().GetQuestType() == Quest.QuestType.Talk)
                     if(((TalkQuest)QuestDictionary[questDialogue.GetQuest().GetID()]).CheckTalkCompletion(currentNPC))
                     {
+                        Debug.Log("Should Be Completed");
                         TurnInQuest(questDialogue.GetQuest());
                         NPCDictionary[((TalkQuest)QuestDictionary[questDialogue.GetQuest().GetID()]).GetSourceNPC().GetID()].SetHasGivenQuest(false);
                     }

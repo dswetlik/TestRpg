@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b96a47f1c0baa2e4983bd7d57a374b7d, type: 3}
+  m_Name: TalkTemrikToAlchemist
+  m_EditorClassIdentifier: 
+  questType: 3
+  name: Meet the Alchemist
+  description: Temrik is sending you out again to meet a different shopkeeper, this
+    time you need to meet Invera the Alchemist.
+  levelRequirement: 0
+  hasPrerequisite: 1
+  prerequisite: {fileID: 11400000, guid: f01fcdbb7cabaca459c99ccdf0e2f5e7, type: 2}
+  isCompleted: 0
+  dialogue: {fileID: 11400000, guid: 4e4d649dee524594aa099e05a9303240, type: 2}
+  hasItemReward: 1
+  itemRewards:
+  - {fileID: 11400000, guid: 0bdbe513d1d77bf4297a682e35e80ea1, type: 2}
+  id: 17
+  expReward: 5
+  goldReward: 0
+  targetNPC: {fileID: 11400000, guid: 04b3b4eb19276a94496e554ba2f0644a, type: 2}
+  sourceNPC: {fileID: 11400000, guid: 630337870d16c2042b2fca3d6954a2b0, type: 2}
+  targetNPCDialogue: {fileID: 11400000, guid: 65cc4b8390cd55d42b52cf141ed32844, type: 2}
