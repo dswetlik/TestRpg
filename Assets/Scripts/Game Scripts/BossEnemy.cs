@@ -7,10 +7,12 @@ public class BossEnemy : Enemy
 {
     [SerializeField] List<Item> unlockedItems;
     [SerializeField] List<int> unlockedItemsCount;
+    [SerializeField] string unlockedTitle;
     [SerializeField] bool hasBeenDefeated;
 
     public List<Item> GetUnlockedItems() { return unlockedItems; }
     public List<int> GetUnlockedItemsCount() { return unlockedItemsCount; }
+    public string GetUnlockedTitle() { return unlockedTitle; }
     public bool HasBeenDefeated() { return hasBeenDefeated; }
 
     public void SetHasBeenDefeated(bool x) { hasBeenDefeated = x; }

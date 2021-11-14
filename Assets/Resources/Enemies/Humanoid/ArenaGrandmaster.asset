@@ -42,4 +42,5 @@ MonoBehaviour:
   statusEffects: []
   unlockedItems: []
   unlockedItemsCount: 
+  unlockedTitle: Grandmaster
   hasBeenDefeated: 0

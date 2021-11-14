@@ -13,6 +13,7 @@ public class Player
     const float DEFAULT_SPEED = 1.0f;
 
     string name;
+    string title;
     Location currentLocation;
     Inventory inventory;
     Weapon weapon;
@@ -31,6 +32,7 @@ public class Player
             uint currentWeight = 0, uint maxWeight = 50)
     {
         this.name = name;
+        title = "Newcomer";
         this.currentLocation = currentLocation;
         this.level = level;
         this.health = health;
@@ -62,6 +64,7 @@ public class Player
 
     // Get Functions
     public string GetName() { return name; }
+    public string GetTitle() { return title; }
 
     public Location GetLocation() { return currentLocation; }
     public Inventory GetInventory() { return inventory; }
@@ -217,6 +220,7 @@ public class Player
 
     // Set Functions
     public void SetName(string name) { this.name = name; }
+    public void SetTitle(string title) { this.title = title; }
     public void SetLocation(Location newLocation) { currentLocation = newLocation; } 
 
     public void SetLevel(uint level) { this.level = level; }

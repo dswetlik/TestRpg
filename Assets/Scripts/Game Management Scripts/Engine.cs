@@ -207,6 +207,7 @@ public class Engine : MonoBehaviour
 
     // UI Stats Variales
     Text statsPlayerNameTxt;
+    Text statsPlayerTitleTxt;
     Text statsHealthTxt;
     Text statsStaminaTxt;
     Text statsManaTxt;
@@ -641,6 +642,10 @@ public class Engine : MonoBehaviour
             playerBattleNameTxt.text = player.GetName();
             statsPlayerNameTxt.text = player.GetName();
             playerPickUpNameTxt.text = player.GetName();
+            statsPlayerTitleTxt.text = player.GetTitle();
+
+            damageValueTxt.text = player.GetWeapon().GetMaxDamage().ToString();
+            armorValueTxt.text = player.GetDefense().ToString();
 
             StartCoroutine(LoadScene(overworld, true));
         }
@@ -1464,6 +1469,7 @@ public class Engine : MonoBehaviour
         skillDamageGO.SetActive(false);
 
         statsPlayerNameTxt = GameObject.Find("StatsNameTxt").GetComponent<Text>();
+        statsPlayerTitleTxt = GameObject.Find("StatsTitleTxt").GetComponent<Text>();
         statsHealthTxt = GameObject.Find("StatsHealthTxt").GetComponent<Text>();
         statsStaminaTxt = GameObject.Find("StatsStaminaTxt").GetComponent<Text>();
         statsManaTxt = GameObject.Find("StatsManaTxt").GetComponent<Text>();
@@ -1499,6 +1505,7 @@ public class Engine : MonoBehaviour
 
         musicSlider = GameObject.Find("MusicVolumeSetting").transform.GetChild(1).GetComponent<Slider>();
         sfxSlider = GameObject.Find("SFXVolumeSetting").transform.GetChild(1).GetComponent<Slider>();
+
         musicSlider.value = PlayerPrefs.GetFloat("MusicAudio", 0.75f);
         sfxSlider.value = PlayerPrefs.GetFloat("SFXAudio", 0.75f);
 
@@ -1684,7 +1691,10 @@ public class Engine : MonoBehaviour
             {
                 BossEnemy boss = (BossEnemy)enemy;
                 ((BossEnemy)EnemyDictionary[boss.GetID()]).SetHasBeenDefeated(true);
-                Debug.Log(((BossEnemy)EnemyDictionary[boss.GetID()]).HasBeenDefeated());
+
+                player.SetTitle(boss.GetUnlockedTitle());
+                statsPlayerTitleTxt.text = player.GetTitle();
+
                 for(int i = 0; i < boss.GetUnlockedItems().Count; i++)
                 {
                     Item item = boss.GetUnlockedItems()[i];
@@ -1790,7 +1800,7 @@ public class Engine : MonoBehaviour
             Destroy(GameObject.Find("PlayerCardALocation").transform.GetChild(0).gameObject);
         if (GameObject.Find("PlayerCardBLocation").transform.childCount > 0)
             Destroy(GameObject.Find("PlayerCardBLocation").transform.GetChild(0).gameObject);
-        if (GameObject.Find("PlayerCardCsLocation").transform.childCount > 0)
+        if (GameObject.Find("PlayerCardCLocation").transform.childCount > 0)
             Destroy(GameObject.Find("PlayerCardCLocation").transform.GetChild(0).gameObject);
 
         UIBattleScreen.SetActive(false);
@@ -3735,6 +3745,7 @@ public class Engine : MonoBehaviour
         player.SetName(name);
         playerBattleNameTxt.text = name;
         statsPlayerNameTxt.text = name;
+        statsPlayerTitleTxt.text = player.GetTitle();
         playerPickUpNameTxt.text = name;
 
         while (acceptNameBtn.GetComponent<Image>().color.a > 0)
@@ -4189,6 +4200,7 @@ public class Engine : MonoBehaviour
         statsGoldTxt.text = player.GetGold().ToString();
         statsDmgTxt.text = player.GetWeapon().GetMaxDamage().ToString();
         statsDefTxt.text = player.GetDefense().ToString();
+        
     }
 
     void UpdateExpSliders()

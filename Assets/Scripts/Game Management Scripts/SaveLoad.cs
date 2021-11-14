@@ -8,6 +8,8 @@ public class SaveLoad
 
     // Player Variables
     public string name;
+    public string title;
+
     public uint currentLocation;
 
     public List<uint> _itemKeys;
@@ -40,6 +42,8 @@ public class SaveLoad
         _unlockedPassiveSkills = new List<uint>();
 
         name = player.GetName();
+        title = player.GetTitle();
+
         currentLocation = player.GetLocation().GetID();
 
         player.GetInventory().OnBeforeSerialize();
@@ -91,6 +95,7 @@ public class SaveLoad
         inventory.OnAfterDeserialize();
 
         Player player = new Player(name, Engine.LocationDictionary[0], inventory);
+        player.SetTitle(title);
 
         foreach (uint id in _currentQuests)
             player.AddQuest(Engine.QuestDictionary[id]);
