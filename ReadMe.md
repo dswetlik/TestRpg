@@ -9,5 +9,3 @@ Some of the more interesting (in my opinion) scripts to look at are Game Managem
 Don't be too surprised if the code (again, especially Engine.cs) is very messy. This idea has gone under several refactorings as my end-goal has changed over the past year or so. I have yet to go through and do some serious clean-up on code that is no longer used.
 
 Right now the current idea is to make this into a "card-game Arena battle" idea, refactoring away from the previous idea of being a dungeon-crawler, which was a refactor of an open-world idea, which was a refactor of a more unique(?) idea. (Think kind of like Knights of Pen and Paper.) As you can probably tell, this is really a stomping ground for implementation and idea testing that might turn into something if I stop changing the idea.
-
-Not all of the art assets used are my own. The textures and the unused creature .png files lurking in the folders are mine, and they are not great textures. I'm not much of a graphic designer or artist. Don't laugh too hard at the Rat.png, I tried my best. The art assets that are not my own are the icons (like the gold icons).
