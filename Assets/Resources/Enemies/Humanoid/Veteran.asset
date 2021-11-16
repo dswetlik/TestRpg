@@ -37,7 +37,7 @@ MonoBehaviour:
   goldReward: 50
   speed: 1
   expReward: 100
-  itemRewards: {fileID: 0}
+  itemRewards: {fileID: 11400000, guid: 519233f1017819842ad6e896da4b784e, type: 2}
   statusEffects: []
   unlockedItems:
   - {fileID: 11400000, guid: bfa568c1b0a651f4aa0e6ce829a0fd35, type: 2}
