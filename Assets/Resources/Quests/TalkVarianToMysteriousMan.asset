@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b96a47f1c0baa2e4983bd7d57a374b7d, type: 3}
+  m_Name: TalkVarianToMysteriousMan
+  m_EditorClassIdentifier: 
+  questType: 3
+  name: A Mysterious Man
+  description: Varian seems to know something about why you ended up in Buruns, but
+    he doesn't say much. He wants you to go find some hooded figure in one of the
+    alleys in Buruns.
+  levelRequirement: 3
+  hasPrerequisite: 1
+  prerequisite: {fileID: 11400000, guid: 0f2087ca2f6b04a4a898369daedcc1d1, type: 2}
+  isCompleted: 0
+  dialogue: {fileID: 11400000, guid: ab1828c7624960544a5fc2256231e542, type: 2}
+  hasItemReward: 0
+  itemRewards: []
+  id: 18
+  expReward: 10
+  goldReward: 0
+  targetNPC: {fileID: 11400000, guid: 64314970aa01532478037941da4869dc, type: 2}
+  sourceNPC: {fileID: 11400000, guid: d916c6e1100a428459da0db3aa1f601a, type: 2}
+  targetNPCDialogue: {fileID: 11400000, guid: e8f780e2ec1a81e4b84b99f9f884eb27, type: 2}

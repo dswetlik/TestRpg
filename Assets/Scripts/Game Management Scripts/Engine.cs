@@ -139,6 +139,7 @@ public class Engine : MonoBehaviour
     // UI Pickup Variables
     Text otherPickUpNameTxt;
     Text playerPickUpNameTxt;
+    Text playerPickupWeightTxt;
     Text pickupGoldTxt;
 
     Text pickUpDescriptionTxt;
@@ -435,6 +436,7 @@ public class Engine : MonoBehaviour
 
     TalkQuest talkTemrikToBlacksmith;
     TalkQuest talkTemrikToAlchemist;
+    TalkQuest talkVarianToMysteriousMan;
 
     ActiveSkill slash;
     ActiveSkill stab;
@@ -1235,6 +1237,7 @@ public class Engine : MonoBehaviour
 
         talkTemrikToBlacksmith = Instantiate(Resources.Load<TalkQuest>("Quests/TalkTemrikToBlacksmith"));
         talkTemrikToAlchemist = Instantiate(Resources.Load<TalkQuest>("Quests/TalkTemrikToAlchemist"));
+        talkVarianToMysteriousMan = Instantiate(Resources.Load<TalkQuest>("Quests/TalkVarianToMysteriousMan"));
 
         QuestDictionary.Add(fetchRatSkull.GetID(), fetchRatSkull);
         QuestDictionary.Add(fetchSlimeGoo.GetID(), fetchSlimeGoo);
@@ -1255,6 +1258,8 @@ public class Engine : MonoBehaviour
 
         QuestDictionary.Add(talkTemrikToBlacksmith.GetID(), talkTemrikToBlacksmith);
         QuestDictionary.Add(talkTemrikToAlchemist.GetID(), talkTemrikToAlchemist);
+        QuestDictionary.Add(talkVarianToMysteriousMan.GetID(), talkVarianToMysteriousMan);
+
     }
 
     void InitializeUI()
@@ -1387,6 +1392,7 @@ public class Engine : MonoBehaviour
 
         otherPickUpNameTxt = GameObject.Find("OtherPickupNameTxt").GetComponent<Text>();
         playerPickUpNameTxt = GameObject.Find("PlayerPickUpNameTxt").GetComponent<Text>();
+        playerPickupWeightTxt = GameObject.Find("PlayerPickupWeightTxt").GetComponent<Text>();
         pickupGoldTxt = GameObject.Find("PickupGoldTxt").GetComponent<Text>();
 
         pickUpDescriptionTxt = GameObject.Find("PickupDescriptionTxt").GetComponent<Text>();
@@ -2732,6 +2738,11 @@ public class Engine : MonoBehaviour
                 else
                     pickupItemBtn.interactable = false;
 
+                if (player.GetCurrentWeight() + itemContainer.GetItem().GetWeight() <= player.GetMaxWeight())
+                    pickupItemBtn.interactable = true;
+                else
+                    pickupItemBtn.interactable = false;
+
                 if (player.GetInventory().CheckForItem(activeItem.GetID()))
                     pickupDropItemBtn.interactable = true;
                 else
@@ -3086,7 +3097,7 @@ public class Engine : MonoBehaviour
                 {
                     Store currentShop = StoreDictionary[currentNPC.GetStore().GetID()];
                     sourceName = currentShop.GetName();
-                    pickupDropItemBtn.gameObject.transform.GetChild(0).GetComponent<Text>().text = "Sell Item";
+                    pickupDropItemBtn.gameObject.transform.GetChild(0).GetComponent<Text>().text = "Sell Item\n(75% Value)";
                     pickupItemBtn.gameObject.transform.GetChild(0).GetComponent<Text>().text = "Buy Item";
 
                     foreach (Item item in currentShop.GetItemList())
@@ -4272,6 +4283,7 @@ public class Engine : MonoBehaviour
 
         totalInvWeightTxt.text = String.Format("{0}/{1}", player.GetCurrentWeight(), player.GetMaxWeight());
         statsWeightTxt.text = player.GetCurrentWeight().ToString();
+        playerPickupWeightTxt.text = String.Format("{0}/{1}", player.GetCurrentWeight(), player.GetMaxWeight());
     }
 
     SaveLoad NewSaveLoadObject()
