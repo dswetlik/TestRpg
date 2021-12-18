@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9eb015a12306faf4ebbd03ed8ba358ce, type: 3}
+  m_Name: CreogCave_Floor4
+  m_EditorClassIdentifier: 
+  name: Hallway
+  description: You leave the large gallery behind, bones crunching underneath your
+    feet. You're starting to hear mumbling and murmuring again, but you can't imagine
+    a bandit is this far back in the cave. Something shuffles up ahead, and a shadow
+    that looks like a handle protrudes from the back. Its head shifts and seemingly
+    looks at you, you can feel its intense glowing eyes burning into your eyes as
+    it starts shuffling down your hallway.
+  choiceAEvent: {fileID: 11400000, guid: bf471e95a71183942ab9f8be36d64561, type: 2}
+  choiceBEvent: {fileID: 11400000, guid: 485a50b74f63532478731da2bea827ac, type: 2}

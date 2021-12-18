@@ -25,7 +25,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 9b0ff9c0bc1422f4180d84408e1bfb8d, type: 3}
   openingSprite: {fileID: 21300000, guid: 5d247f9aa35a77b42a6a1555fbda4e49, type: 3}
   questDialogueType: 0
-  quest: {fileID: 0}
+  quest: {fileID: 11400000, guid: 58cdbf12e4c5ff749876f96785701143, type: 2}
   notStartedResponse: ...actually, you look like you could be useful. Listen, I've
     accidentally misplaced all of my lockpicks in some guard's pocket. I really need
     these lockpicks, so I need you to borrow some from those bandits they keep holed

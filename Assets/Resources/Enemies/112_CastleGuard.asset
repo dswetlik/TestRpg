@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da3ae000e98a71d489bf062b749ae76f, type: 3}
+  m_Name: 112_CastleGuard
+  m_EditorClassIdentifier: 
+  enemyType: 0
+  name: Castle Guard
+  description: If you've fought this guy, you've made a mistake.
+  id: 112
+  minLevel: 0
+  maxLevel: 0
+  baseDamage: 20
+  defense: 20
+  attackTypes:
+  - {fileID: 11400000, guid: dad687f994d69da4d8924715465cbf71, type: 2}
+  - {fileID: 11400000, guid: fade1d9466523f241ba324ee22bec336, type: 2}
+  - {fileID: 11400000, guid: 6997208638df27748aa58f94f8f68b93, type: 2}
+  - {fileID: 11400000, guid: c4ba302d3ff069c41a67e6bc41c661f9, type: 2}
+  - {fileID: 11400000, guid: 33c8ebbb38c394742aab5d150c1ab284, type: 2}
+  health: 100
+  maxHealth: 100
+  stamina: 100
+  maxStamina: 100
+  stamRegen: 10
+  mana: 100
+  maxMana: 100
+  manaRegen: 10
+  goldReward: 100
+  speed: 1
+  expReward: 100
+  itemRewards: {fileID: 11400000, guid: 408537229dffb5d4bb0af40a8d7912dc, type: 2}
+  statusEffects: []

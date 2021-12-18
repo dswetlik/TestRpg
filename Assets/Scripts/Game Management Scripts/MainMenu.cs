@@ -1,10 +1,12 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.Audio;
-using System.IO;
+
 
 public class MainMenu : MonoBehaviour
 {
@@ -14,6 +16,7 @@ public class MainMenu : MonoBehaviour
 
     GameObject UIPauseScreen;
     GameObject UIIAPScreen;
+    GameObject UIComplianceScreen;
     GameObject UICreditsScreen;
     GameObject UILoadScreen;
 
@@ -30,11 +33,13 @@ public class MainMenu : MonoBehaviour
     void Awake()
     {
         Application.targetFrameRate = 60;
+        
         Advertisements.Instance.Initialize();
         IAPManager.Instance.InitializeIAPManager(InitializeResultCallback);
 
         UIPauseScreen = GameObject.Find("UI Main Pause");
         UIIAPScreen = GameObject.Find("UI Main IAP");
+        UIComplianceScreen = GameObject.Find("UI Main Compliance");
         UICreditsScreen = GameObject.Find("UI Main Credits");
         UILoadScreen = GameObject.Find("UI Main Load");
 
@@ -50,20 +55,21 @@ public class MainMenu : MonoBehaviour
         musicSlider = GameObject.Find("MusicVolumeSetting").GetComponentInChildren<Slider>();
         sfxSlider = GameObject.Find("SFXVolumeSetting").GetComponentInChildren<Slider>();
 
-        musicSlider.value = PlayerPrefs.GetFloat("MusicAudio", 0.7f);
-        sfxSlider.value = PlayerPrefs.GetFloat("SFXAudio", 0.7f);
-        mixer.SetFloat("MusicAudio", PlayerPrefs.GetFloat("MusicAudio", 0.7f));
-        mixer.SetFloat("SFXAudio", PlayerPrefs.GetFloat("SFXAudio", 0.7f));
+        UpdateVolume();
 
         if (File.Exists(Application.persistentDataPath + "/save.tpg"))
             GameObject.Find("LoadBtn").GetComponent<Button>().interactable = true;
         else
             GameObject.Find("LoadBtn").GetComponent<Button>().interactable = false;
 
-        Advertisements.Instance.ShowBanner(BannerPosition.BOTTOM);
+        Debug.Log("Main Menu");
 
         UIPauseScreen.SetActive(false);
         UIIAPScreen.SetActive(false);
+
+        if (Advertisements.Instance.UserConsentWasSet() && Advertisements.Instance.CCPAConsentWasSet())
+            UIComplianceScreen.SetActive(false);
+
         UICreditsScreen.SetActive(false);
         UILoadScreen.SetActive(false);
     }
@@ -75,7 +81,6 @@ public class MainMenu : MonoBehaviour
         GameObject.Find("LoadBtn").GetComponent<Button>().interactable = false;
         Advertisements.Instance.HideBanner();
 
-        Advertisements.Instance.ShowInterstitial();
         StartCoroutine(LoadStartScene("LoadScene", isLoading));
 
         UILoadScreen.SetActive(true);
@@ -88,10 +93,18 @@ public class MainMenu : MonoBehaviour
         GameObject.Find("LoadBtn").GetComponent<Button>().interactable = false;
         Advertisements.Instance.HideBanner();
 
-        Advertisements.Instance.ShowInterstitial();
         StartCoroutine(LoadStartScene("LoadScene", isLoading));
 
         UILoadScreen.SetActive(true);
+    }
+
+    void UpdateVolume()
+    {
+        musicSlider.value = PlayerPrefs.GetFloat("MusicAudio", 0.7f);
+        sfxSlider.value = PlayerPrefs.GetFloat("SFXAudio", 0.7f);
+        Debug.Log(String.Format("Updating MainMenu Sliders; Music: {0}; SFX: {1}", PlayerPrefs.GetFloat("MusicAudio"), PlayerPrefs.GetFloat("SFXAudio")));
+        mixer.SetFloat("MusicAudio", PlayerPrefs.GetFloat("MusicAudio", 0.7f));
+        mixer.SetFloat("SFXAudio", PlayerPrefs.GetFloat("SFXAudio", 0.7f));
     }
 
     private void InterstitialClosed()
@@ -178,6 +191,14 @@ public class MainMenu : MonoBehaviour
     public void ToXaericWebsite()
     {
         Application.OpenURL("https://xaericgamestudio.wordpress.com/");
+    }
+
+    public void SubmitCompliance()
+    {
+        Advertisements.Instance.SetUserConsent(GameObject.Find("GDPRToggle").GetComponent<Toggle>().isOn);
+        Advertisements.Instance.SetCCPAConsent(GameObject.Find("CPPAToggle").GetComponent<Toggle>().isOn);
+
+        UIComplianceScreen.SetActive(false);
     }
 
     void PurchaseRemoveAds()

@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d323d6615955574cabe5a27c74438c0, type: 3}
+  m_Name: EnemyFloorTwo
+  m_EditorClassIdentifier: 
+  name: Fight The Bandit
+  id: 0
+  eventType: 0
+  description: You aren't about to lose your hard-earned gold, so you fight the bandit
+    off.
+  enemy: {fileID: 11400000, guid: 296bed87d4734c345a2e8665e84564a1, type: 2}

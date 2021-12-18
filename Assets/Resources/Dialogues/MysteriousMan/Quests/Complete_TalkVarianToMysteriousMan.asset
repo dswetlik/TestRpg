@@ -25,6 +25,6 @@ MonoBehaviour:
   notCompleteDialogueOptions: []
   notCompleteDialogueAnswers: []
   notCompleteDialogueSprites: []
-  completeResponse: You're the new gladiator, huh? You don't look like much of a
-    gladiator, not one that will survive in any case. Anyway, you're in grave danger.
-    Temrik isn't who he says he is, just be careful around him.
+  completeResponse: 'You''re the new gladiator, huh? You don''t look like much of
+    a gladiator, not one that will survive in any case, especially since you were
+    brought in by that murderous fiend, Temrik. '

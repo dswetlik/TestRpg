@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d323d6615955574cabe5a27c74438c0, type: 3}
+  m_Name: WeakenedIronRatEnemyEvent
+  m_EditorClassIdentifier: 
+  name: Rush!
+  id: 0
+  eventType: 0
+  description: You caught the Iron Rat off-guard, getting in a few hits before it
+    realizes it's being attacked.
+  enemy: {fileID: 11400000, guid: 2165762edec83cc4a83b26041d553512, type: 2}

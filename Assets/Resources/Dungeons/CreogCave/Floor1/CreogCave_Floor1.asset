@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9eb015a12306faf4ebbd03ed8ba358ce, type: 3}
+  m_Name: CreogCave_Floor1
+  m_EditorClassIdentifier: 
+  name: Dimly Lit Cavern
+  description: 'You enter into a dimly lit cavern and hear the distinct crackling
+    of a fire and the murmur of voices bouncing off of the walls of the cave. You
+    round a corner of the cavern and see two young bandits crouching at a fire. One
+    jumps up and runs deeper into the cave, the other seems frozen in fear on the
+    ground. '
+  choiceAEvent: {fileID: 11400000, guid: 8c7eabc455438ee47897ce5fb8b3d674, type: 2}
+  choiceBEvent: {fileID: 11400000, guid: c76b52e21525441468934141963577c3, type: 2}

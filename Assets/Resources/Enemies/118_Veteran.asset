@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69dcb926d5dd74c4799c018f51e456e0, type: 3}
+  m_Name: 118_Veteran
+  m_EditorClassIdentifier: 
+  enemyType: 1
+  name: Veteran
+  description: 'A veteran of wars, an expert on battles. '
+  id: 118
+  minLevel: 15
+  maxLevel: 20
+  baseDamage: 15
+  defense: 8
+  attackTypes:
+  - {fileID: 11400000, guid: a3b1d271bf148e5439bf290669feb04e, type: 2}
+  - {fileID: 11400000, guid: 29767f155d120b845b1601a75e893193, type: 2}
+  - {fileID: 11400000, guid: d0826e14eefa20b4ca7d402d8652dcd2, type: 2}
+  - {fileID: 11400000, guid: b1ea87ad6fbce5f4590ba0b1fe3ca084, type: 2}
+  - {fileID: 11400000, guid: 0a32d8434d62f3e40b0232f7e1e38374, type: 2}
+  health: 60
+  maxHealth: 60
+  stamina: 30
+  maxStamina: 30
+  stamRegen: 6
+  mana: 25
+  maxMana: 25
+  manaRegen: 3
+  goldReward: 50
+  speed: 1
+  expReward: 100
+  itemRewards: {fileID: 11400000, guid: 519233f1017819842ad6e896da4b784e, type: 2}
+  statusEffects: []
+  unlockedItems:
+  - {fileID: 11400000, guid: bfa568c1b0a651f4aa0e6ce829a0fd35, type: 2}
+  - {fileID: 11400000, guid: 99aa9e84757c0784aa9fe6ac1120554b, type: 2}
+  - {fileID: 11400000, guid: 3744031ac18ae3f41955d30ac37bc574, type: 2}
+  - {fileID: 11400000, guid: 445a5b2afed027a498bc31e1dc541b34, type: 2}
+  - {fileID: 11400000, guid: dfa3ebc8ce1a4634485f4d9c7837de26, type: 2}
+  - {fileID: 11400000, guid: a1ab775bb99d13a4784c6dc12f0991c8, type: 2}
+  - {fileID: 11400000, guid: 0fda0ccd10676a346a90dfebaf0c8b04, type: 2}
+  - {fileID: 11400000, guid: 10547f1978ed5944eb0f9737a2e81e5f, type: 2}
+  - {fileID: 11400000, guid: 1e622bf2bae32a1468ac4b59189d3e2c, type: 2}
+  - {fileID: 11400000, guid: fb8624f4093d9d742bc768db388b69a1, type: 2}
+  - {fileID: 11400000, guid: f7ebee88e2feb1e47a99e371e8347bd7, type: 2}
+  - {fileID: 11400000, guid: 79b8348c4bf7a834ca9ac3584d2b5e55, type: 2}
+  - {fileID: 11400000, guid: 86e959644caebc5418f43a74829c760f, type: 2}
+  - {fileID: 11400000, guid: 71d12fe2610e4d8478be188faaa1348f, type: 2}
+  - {fileID: 11400000, guid: 95647eadafc8c784fa5e2d7020e23015, type: 2}
+  - {fileID: 11400000, guid: 1c32fc14e4456094da613785e41b1288, type: 2}
+  - {fileID: 11400000, guid: b8e8a50e580905141820cf8dc60b1504, type: 2}
+  - {fileID: 11400000, guid: 391320a886293c94aad1574a397b1641, type: 2}
+  unlockedItemsCount: 010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000050000000500000005000000
+  unlockedTitle: Veteran
+  hasBeenDefeated: 0

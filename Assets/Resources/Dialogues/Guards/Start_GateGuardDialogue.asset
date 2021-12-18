@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28257dec9f78a6b4681aa8437391fa82, type: 3}
   m_Name: Start_GateGuardDialogue
   m_EditorClassIdentifier: 
-  npcLine: You're a gladiator, right? I think my boy has been talking about you!
-    Sorry, but you can't leave Burunsville yet, nothing more I can do for you.
+  npcLine: You're one of the new gladiators, right? Sorry, but you can't leave Buruns
+    yet, nothing more I can do for you.
   dialogueType: 0
   dialogueOptions: []
   dialogueAnswers: []

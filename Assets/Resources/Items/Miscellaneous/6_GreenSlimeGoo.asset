@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3aa9392236713c147a660c83e1823dbb, type: 3}
+  m_Name: 6_GreenSlimeGoo
+  m_EditorClassIdentifier: 
+  itemType: 0
+  sprite: {fileID: 21300000, guid: 87ece886f98a63b428377aaa7044d149, type: 3}
+  id: 6
+  name: Green Slime Goo
+  description: Goo from a blue slime. Just kidding, it was a green one.
+  weight: 1
+  value: 4

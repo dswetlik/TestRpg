@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da3ae000e98a71d489bf062b749ae76f, type: 3}
+  m_Name: 113_GrayWolf
+  m_EditorClassIdentifier: 
+  enemyType: 0
+  name: Gray Wolf
+  description: A regular-looking gray wolf, seemingly plucked from the Lisdend Forest
+    nearby and dropped in the arena.
+  id: 113
+  minLevel: 6
+  maxLevel: 10
+  baseDamage: 4
+  defense: 0
+  attackTypes:
+  - {fileID: 11400000, guid: 02e5573009c448f43a2520f178dc1d26, type: 2}
+  - {fileID: 11400000, guid: 1688c12820d4a244192809c6ed89caa6, type: 2}
+  - {fileID: 11400000, guid: 044675963e5f4ec4c8b26c348ec21c5f, type: 2}
+  health: 25
+  maxHealth: 25
+  stamina: 15
+  maxStamina: 15
+  stamRegen: 2
+  mana: 15
+  maxMana: 15
+  manaRegen: 2
+  goldReward: 10
+  speed: 1.25
+  expReward: 20
+  itemRewards: {fileID: 11400000, guid: e57001a7f0b407e4b977e30a412df8d5, type: 2}
+  statusEffects: []

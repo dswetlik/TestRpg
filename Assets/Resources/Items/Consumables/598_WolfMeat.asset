@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f8f0c6683f822946be0f4ab2364b585, type: 3}
+  m_Name: 598_WolfMeat
+  m_EditorClassIdentifier: 
+  itemType: 3
+  sprite: {fileID: 21300000, guid: 27497a8e122a50f41b11c27b1a26bb51, type: 3}
+  id: 598
+  name: Wolf Meat
+  description: A fresh chunk of meat hacked off of a wolf. It even still has fur
+    stuck to it.
+  weight: 2
+  value: 10
+  consumableType: 3
+  statChange: 15

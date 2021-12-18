@@ -10,16 +10,21 @@ public class EventTable : ScriptableObject
 
     public Event RandomEvent()
     {
-        float key = Random.Range(0, 100.0f);
         bool eventFound = false;
+
+        float key = Random.Range(0, 100.0f);
         int x = 0;
 
         while (!eventFound)
-        {
-            if (key > itemProbability[x]) { x++; }
-            else if (key <= itemProbability[x]) eventFound = true;
+        {   
+            while (x < events.Count)
+            {
+                if (key > itemProbability[x]) { x++; }
+                else if (key <= itemProbability[x]) eventFound = true;
+            }
+            x = 0;
+            key = Random.Range(0, 100.0f);
         }
-
         return events[x];
     }
 

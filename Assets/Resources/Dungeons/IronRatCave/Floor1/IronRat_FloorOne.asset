@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9eb015a12306faf4ebbd03ed8ba358ce, type: 3}
+  m_Name: IronRat_FloorOne
+  m_EditorClassIdentifier: 
+  name: Cave Entrance
+  description: As you walk through the mouth of the cave, you're almost immediately
+    met with a split in the cave. To your left is a short walkway that looks like
+    it drops sharply a few feet in. On your right is a tight crawlspace that goes
+    for some hundred feet.
+  choiceAEvent: {fileID: 11400000, guid: 367364c73cb10e147bb4aa7db6cbe15f, type: 2}
+  choiceBEvent: {fileID: 11400000, guid: 340a8dc26e3535d448cf8fcd2f999346, type: 2}

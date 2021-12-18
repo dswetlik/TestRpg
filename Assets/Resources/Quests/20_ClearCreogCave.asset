@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51310c3859c7fe844970d7bda24c45d0, type: 3}
+  m_Name: 20_ClearCreogCave
+  m_EditorClassIdentifier: 
+  questType: 4
+  name: Necromancers?
+  description: The mysterious man believes that there could be a group of necromancers
+    holed up somewhere around or in the Creog Mountain. Check it out and report back
+    to him.
+  levelRequirement: 5
+  hasPrerequisite: 1
+  prerequisite: {fileID: 11400000, guid: fc8beddc653d1d54fbe8a58f0300788e, type: 2}
+  isCompleted: 0
+  dialogue: {fileID: 11400000, guid: 53d345fe386fe96418ad324b482cdbd3, type: 2}
+  hasItemReward: 0
+  itemRewards: []
+  id: 20
+  expReward: 25
+  goldReward: 25
+  dungeon: {fileID: 11400000, guid: dcbf8a45812299a49965359dcbcc827c, type: 2}

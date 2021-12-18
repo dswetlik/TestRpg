@@ -11,6 +11,7 @@ TagManager:
   - Enemy
   - NodeType
   - Impassable
+  - ScenePortal
   layers:
   - Default
   - TransparentFX

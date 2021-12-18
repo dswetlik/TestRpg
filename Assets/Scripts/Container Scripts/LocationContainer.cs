@@ -4,9 +4,15 @@ using UnityEngine;
 
 public class LocationContainer : MonoBehaviour
 {
-    [SerializeField] Location location;
+    [SerializeField] Location locationA;
+    [SerializeField] Location locationB;
 
-    public Location GetLocation() { return location; }
+    [SerializeField] GameObject locationAObject;
+    [SerializeField] GameObject locationBObject;
 
-    public void SetLocation(Location location) { this.location = location; }
+    public Location GetLocationA() { return locationA; }
+    public Location GetLocationB() { return locationB; }
+
+    public GameObject GetLocationAObject() { return locationAObject; }
+    public GameObject GetLocationBObject() { return locationBObject; }
 }

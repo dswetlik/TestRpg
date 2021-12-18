@@ -46,17 +46,17 @@ MonoBehaviour:
     sdkLink: https://github.com/AdColony/
     platformSettings:
     - platform: 0
-      enabled: 0
+      enabled: 1
       appId:
-        id: 
+        id: appcdf6b599f88941bdb4
         displayName: App ID
         notRequired: 0
       idBanner:
-        id: 
+        id: vz9904ff8817c54f439e
         displayName: Banner Zone ID
         notRequired: 0
       idInterstitial:
-        id: 
+        id: vz0e70ba7956814f4aa0
         displayName: Interstitial Zone ID
         notRequired: 0
       idRewarded:

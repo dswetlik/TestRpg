@@ -12,8 +12,11 @@ EditorBuildSettings:
     path: Assets/Scenes/LoadScene.unity
     guid: 59c66080d8fe911409ee996b9f50a2b5
   - enabled: 1
-    path: Assets/Scenes/Overworld.unity
+    path: Assets/Scenes/Buruns.unity
     guid: f53e64e6c7dabe449934c5d2fd9e748c
+  - enabled: 1
+    path: Assets/Scenes/Arenthia.unity
+    guid: b6651d751e5829b419dc066858b163e1
   - enabled: 0
     path: Assets/Scenes/Level1/Floor1.unity
     guid: 2bb7fa0e69e90c842b7e17d2d17db27e

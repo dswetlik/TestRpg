@@ -2,25 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Base Event", menuName = "Events/Base Event", order = 0)]
+[CreateAssetMenu(fileName = "New Descriptive Event", menuName = "Events/Descriptive Event", order = 0)]
 public class Event : ScriptableObject
 {
 
     public enum EventType
     {
         enemy,
-        loot
+        loot,
+        damage,
+        descriptive
     }
 
     [SerializeField] new string name;
     [SerializeField] uint id;
     [SerializeField] EventType eventType;
+    [TextArea(3,5)][SerializeField] string description;
 
     public string GetName() { return name; }
     public uint GetID() { return id; }
     public EventType GetEventType() { return eventType; }
+    public string GetDescription() { return description; }
 
-    public void SetName(string name) { this.name = name; }
-    public void SetID(uint id) { this.id = id; }
-    public void SetEventType(EventType eventType) { this.eventType = eventType; }
 }

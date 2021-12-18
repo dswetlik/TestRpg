@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da3ae000e98a71d489bf062b749ae76f, type: 3}
+  m_Name: 105_BlueSlime
+  m_EditorClassIdentifier: 
+  enemyType: 0
+  name: Blue Slime
+  description: A 'regular'-looking ball of blue slime.
+  id: 105
+  minLevel: 3
+  maxLevel: 5
+  baseDamage: 3
+  defense: 0
+  attackTypes:
+  - {fileID: 11400000, guid: af88f4ea6619b1343811509b93f6737b, type: 2}
+  - {fileID: 11400000, guid: acfeeb9709cd8b541aae65d2b5edc9a2, type: 2}
+  - {fileID: 11400000, guid: df2f753551c5f7047bd0922260f8dd34, type: 2}
+  health: 15
+  maxHealth: 15
+  stamina: 15
+  maxStamina: 15
+  stamRegen: 3
+  mana: 15
+  maxMana: 15
+  manaRegen: 3
+  goldReward: 6
+  speed: 1
+  expReward: 15
+  itemRewards: {fileID: 11400000, guid: f474172537c56744180e4fdc0278ce4c, type: 2}
+  statusEffects: []

@@ -26,6 +26,7 @@ public class SaveLoad
 
     public uint weapon;
     public uint head, chest, legs, feet, hands;
+    public uint location;
     public uint level, exp, totalExp, expToLevel, skillPoints, currentWeight, maxWeight;
     public int health, stamina, mana, maxHealth, maxStamina, maxMana, staminaRegen, manaRegen, gold;
 
@@ -67,6 +68,8 @@ public class SaveLoad
         feet = player.GetFeet().GetID();
         hands = player.GetHands().GetID();
 
+        location = player.GetLocation().GetID();
+
         level = player.GetLevel();
         exp = player.GetExp();
         totalExp = player.GetTotalExp();
@@ -94,8 +97,11 @@ public class SaveLoad
         inventory.SetCountValues(_countValues);
         inventory.OnAfterDeserialize();
 
-        Player player = new Player(name, Engine.LocationDictionary[0], inventory);
+        Player player = new Player(name, Engine.LocationDictionary[location], inventory);
         player.SetTitle(title);
+
+        player.SetLocation(Engine.LocationDictionary[location]);
+
 
         foreach (uint id in _currentQuests)
             player.AddQuest(Engine.QuestDictionary[id]);
@@ -156,6 +162,9 @@ public class SaveLoad
         return player;
     }
 
+
+    // NPC Variables
+
     public List<uint> _npcIDs;
     public List<bool> _npcHasGivenQuest;
     public List<uint> _npcGivenQuests;
@@ -187,6 +196,9 @@ public class SaveLoad
         }
     }
 
+
+    // Store Variables
+
     public List<uint> _storeIDs;
     public List<uint> _storeItemIDs;
 
@@ -214,6 +226,9 @@ public class SaveLoad
             Engine.StoreDictionary[_storeIDs[i]].AddItem(Engine.ItemDictionary[_storeItemIDs[i]]);
     }
 
+
+    // Boss Variables
+
     public List<uint> _bossEnemyIDs;
     public List<bool> _bossEnemyHasBeenDefeated;
 
@@ -237,6 +252,39 @@ public class SaveLoad
         for(int i = 0; i < _bossEnemyIDs.Count; i++)
         {
             ((BossEnemy)Engine.EnemyDictionary[_bossEnemyIDs[i]]).SetHasBeenDefeated(_bossEnemyHasBeenDefeated[i]);
+        }
+    }
+
+
+    // Dungeon Variables
+
+    public List<uint> _dungeonIDs;
+    public List<int> _dungeonClearedFloorCount;
+    public List<bool> _dungeonIsCleared;
+
+    public void SaveDungeons()
+    {
+        _dungeonIDs = new List<uint>();
+        _dungeonClearedFloorCount = new List<int>();
+        _dungeonIsCleared = new List<bool>();
+
+        foreach(KeyValuePair<uint, Dungeon> kvp in Engine.DungeonDictionary)
+        {
+            _dungeonIDs.Add(kvp.Value.GetID());
+            _dungeonClearedFloorCount.Add(kvp.Value.GetClearedFloorCount());
+            _dungeonIsCleared.Add(kvp.Value.IsCleared());
+        }
+    }
+
+    public void LoadDungeons()
+    {
+        if (_dungeonIDs != null)
+        {
+            for (int i = 0; i < _dungeonIDs.Count; i++)
+            {
+                Engine.DungeonDictionary[_dungeonIDs[i]].SetClearedFloors(_dungeonClearedFloorCount[i]);
+                Engine.DungeonDictionary[_dungeonIDs[i]].SetCleared(_dungeonIsCleared[i]);
+            }
         }
     }
 }

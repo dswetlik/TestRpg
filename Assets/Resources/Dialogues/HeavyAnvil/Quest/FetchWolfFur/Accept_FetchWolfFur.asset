@@ -22,7 +22,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 658edffd73bae1e469903fa2790e34e1, type: 3}
   openingSprite: {fileID: 0}
   questDialogueType: 1
-  quest: {fileID: 11400000, guid: cd02f349a6963f849af602ba1118dad8, type: 2}
+  quest: {fileID: 11400000, guid: 8e297be833cd10f4da91c9059c55fafa, type: 2}
   notStartedResponse: 
   notCompleteResponse: 
   notCompleteDialogueOptions: []

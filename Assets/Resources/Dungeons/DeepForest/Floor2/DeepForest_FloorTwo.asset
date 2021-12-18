@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9eb015a12306faf4ebbd03ed8ba358ce, type: 3}
+  m_Name: DeepForest_FloorTwo
+  m_EditorClassIdentifier: 
+  name: Dirt Path
+  description: You're finally past the clearing and onto a winding dirt path. You
+    walk for some distance on the path before a bush violently shakes and spits out
+    a lone bandit. He looks at you and states gruffly "Your money or your life."
+  choiceAEvent: {fileID: 11400000, guid: 6dd55f4a864625046b0d1eaced859a33, type: 2}
+  choiceBEvent: {fileID: 11400000, guid: afa04e2340bd4f54cb4aea5c58574b0e, type: 2}

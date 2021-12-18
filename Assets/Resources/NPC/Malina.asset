@@ -18,6 +18,7 @@ MonoBehaviour:
   hasQuests: 1
   questList:
   - {fileID: 11400000, guid: dce4508bdd23d1048a626719a27dfa87, type: 2}
+  - {fileID: 11400000, guid: 278d16556a1ca2b40a77b4631834e3b5, type: 2}
   hasGivenQuest: 0
   givenQuest: {fileID: 0}
   dialogue: {fileID: 11400000, guid: c6addd95933fb0d4693752fc847652d2, type: 2}

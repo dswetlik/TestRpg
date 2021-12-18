@@ -29,7 +29,7 @@ public class Player
     List<PassiveSkill> passiveSkills = new List<PassiveSkill>();
 
     public Player(string name, Location currentLocation, Inventory inventory, uint level = 1, int health = 20, int stamina = 10, int mana = 10,
-            uint currentWeight = 0, uint maxWeight = 50)
+            uint currentWeight = 0, uint maxWeight = 75)
     {
         this.name = name;
         title = "Newcomer";
@@ -269,6 +269,8 @@ public class Player
             SetMaxMana((int)(level * 5) + 10);
 
             GameObject.Find("GameManager").GetComponent<Engine>().OutputToText(String.Format("Level Up! New Level: {0}. Exp to Level: {1}.", level, expToLevel));
+            if(level == 3)
+                GameObject.Find("GameManager").GetComponent<Engine>().StartLevelThreeEvent();
         }
     }
 

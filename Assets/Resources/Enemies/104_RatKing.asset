@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69dcb926d5dd74c4799c018f51e456e0, type: 3}
+  m_Name: 104_RatKing
+  m_EditorClassIdentifier: 
+  enemyType: 1
+  name: Rat King
+  description: A large bundle of angry rats tied at the tail.
+  id: 104
+  minLevel: 5
+  maxLevel: 20
+  baseDamage: 6
+  defense: 0
+  attackTypes:
+  - {fileID: 11400000, guid: 02e5573009c448f43a2520f178dc1d26, type: 2}
+  - {fileID: 11400000, guid: 1688c12820d4a244192809c6ed89caa6, type: 2}
+  - {fileID: 11400000, guid: 044675963e5f4ec4c8b26c348ec21c5f, type: 2}
+  health: 30
+  maxHealth: 30
+  stamina: 15
+  maxStamina: 15
+  stamRegen: 1
+  mana: 15
+  maxMana: 15
+  manaRegen: 1
+  goldReward: 20
+  speed: 0.75
+  expReward: 20
+  itemRewards: {fileID: 11400000, guid: 3c6a8e6f94c7a754b86382385dafca5a, type: 2}
+  statusEffects: []
+  unlockedItems:
+  - {fileID: 11400000, guid: a488a6750f7fb154682b49c570235313, type: 2}
+  - {fileID: 11400000, guid: 76538cc43dfb1ba44afe04b693ee2f7d, type: 2}
+  - {fileID: 11400000, guid: 829e8da893e4c5b4181f27571dd45435, type: 2}
+  - {fileID: 11400000, guid: 3d1159b921de97d40a39c750e6acc310, type: 2}
+  - {fileID: 11400000, guid: 558c8d31aded24d40a679071c99792dd, type: 2}
+  - {fileID: 11400000, guid: 6f7811fc538da9a408fe8e79d084c63e, type: 2}
+  - {fileID: 11400000, guid: defd096f798c08a4187b1ac6f7ec9bed, type: 2}
+  - {fileID: 11400000, guid: 356669a229b9b9e43abecaa1edd87468, type: 2}
+  - {fileID: 11400000, guid: 3fc95415edeb9824496900b8129d5108, type: 2}
+  - {fileID: 11400000, guid: e883305b355e88a41b0f01dcaf6ddd62, type: 2}
+  - {fileID: 11400000, guid: 926de0d4b4cd0cc42b6ebddb12efe8b9, type: 2}
+  - {fileID: 11400000, guid: 3e0ccb596e6a66c43a9985eff40be8ea, type: 2}
+  - {fileID: 11400000, guid: 0831310329e58c045853713847ccd204, type: 2}
+  - {fileID: 11400000, guid: 100cc928df44a414984825d10e714366, type: 2}
+  - {fileID: 11400000, guid: 2964d6e670a62de48bf06507d692c11e, type: 2}
+  - {fileID: 11400000, guid: 86d21df1a0076194eb5e2adb9c0e1d0b, type: 2}
+  - {fileID: 11400000, guid: ccc1aac0d39582741ae01ff20499286c, type: 2}
+  - {fileID: 11400000, guid: c5409a057d72b614aa4bd34115c0e89e, type: 2}
+  unlockedItemsCount: 010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000050000000500000005000000
+  unlockedTitle: Rat Slayer
+  hasBeenDefeated: 0

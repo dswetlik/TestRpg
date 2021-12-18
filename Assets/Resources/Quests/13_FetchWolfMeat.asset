@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dd088f7b1c60d247bc4ffa5f456a9d1, type: 3}
+  m_Name: 13_FetchWolfMeat
+  m_EditorClassIdentifier: 
+  questType: 1
+  name: Wolves Too?
+  description: 'Times change quickly here, and now the innkeeper wants to make a
+    nice wolf stew. '
+  levelRequirement: 10
+  hasPrerequisite: 1
+  prerequisite: {fileID: 11400000, guid: 56ccbad5fbc03804fb664f4697df2e72, type: 2}
+  isCompleted: 0
+  dialogue: {fileID: 11400000, guid: 52b6b3e489e579442ad7c18fa4519d4b, type: 2}
+  hasItemReward: 0
+  itemRewards: []
+  id: 13
+  expReward: 50
+  goldReward: 50
+  fetchItems:
+  - {fileID: 11400000, guid: f4be1f0c6906c9b4989a7c743832092e, type: 2}
+  itemCounts: 05000000

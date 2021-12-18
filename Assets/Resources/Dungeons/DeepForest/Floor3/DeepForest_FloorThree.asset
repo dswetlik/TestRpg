@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9eb015a12306faf4ebbd03ed8ba358ce, type: 3}
+  m_Name: DeepForest_FloorThree
+  m_EditorClassIdentifier: 
+  name: You aren't quite sure where...
+  description: It's been some time since you crossed swords with the bandit, and
+    it seems like you've been walking in circles. There's the split rock again, that's
+    the barren tree you saw half an hour ago, there's that person digging something-
+    wait, that's new. He looks up and notices you staring before shouting, "You!
+    Come help me dig this up and I'll give you a cut of the treasure!." He holds
+    a shovel out to you.
+  choiceAEvent: {fileID: 11400000, guid: 0456445f653d21242a65bdab6c650e32, type: 2}
+  choiceBEvent: {fileID: 11400000, guid: 6dcd7a880d0ec9247827528d56445e95, type: 2}

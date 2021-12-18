@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d233d80ea164aa498730d50036b066c, type: 3}
+  m_Name: DeepForest
+  m_EditorClassIdentifier: 
+  name: Deep Forest
+  id: 1
+  description: A dark, unexplored part of the Buruns Forest.
+  isCleared: 0
+  floorCount: 5
+  clearedFloorCount: 0
+  floorEvents:
+  - {fileID: 11400000, guid: 8bf2d6c9f1759ee40b27a474ccf0eb30, type: 2}
+  - {fileID: 11400000, guid: 62ce797576c9bf94b99a0268ec26fe71, type: 2}
+  - {fileID: 11400000, guid: 89cb7d3379c1ab94397151381d4505dc, type: 2}
+  - {fileID: 11400000, guid: df7b9ded06402424da5f87cb87289218, type: 2}
+  - {fileID: 11400000, guid: 147a9cc5f3c086c429b6ccc826c3d028, type: 2}
+  outputLocation: {x: -40, y: 2.2, z: -40}
+  outputRotation: {x: 0, y: 270, z: 0}

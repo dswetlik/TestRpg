@@ -15,7 +15,8 @@ public class Quest : ScriptableObject
         Location,
         Fetch,
         Slay,
-        Talk
+        Talk,
+        Clear
     };
 
     [SerializeField] QuestType questType;

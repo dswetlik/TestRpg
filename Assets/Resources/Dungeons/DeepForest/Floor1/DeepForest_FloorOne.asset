@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9eb015a12306faf4ebbd03ed8ba358ce, type: 3}
+  m_Name: DeepForest_FloorOne
+  m_EditorClassIdentifier: 
+  name: Dense Forest
+  description: You battle your way through the thick brush, thankful for the clearing
+    that you spotted up ahead. That is until you reach the edge of the clearing and
+    spot a bear sleeping on a stump almost perfectly centered in the clearing. You
+    can't imagine that picking a fight with the bear would be a good idea, but their
+    hearts are a prized commodity.
+  choiceAEvent: {fileID: 11400000, guid: 6f89d02a9e00e72429a2b2375e0bfd54, type: 2}
+  choiceBEvent: {fileID: 11400000, guid: 67fe1d6e785d9aa41bdc8c6b80e2c46e, type: 2}

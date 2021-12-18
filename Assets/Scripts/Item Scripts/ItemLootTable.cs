@@ -9,6 +9,9 @@ public class ItemLootTable : ScriptableObject
     [Range(0, 100.0f)] [SerializeField] List<float> itemProbability = new List<float>();
     [SerializeField] List<int> itemCount = new List<int>();
 
+    [SerializeField] int minGold;
+    [SerializeField] int maxGold;
+
     public void ItemDrop(ref List<Item> items, ref List<int> counts)
     {
         items.Clear();
@@ -29,9 +32,14 @@ public class ItemLootTable : ScriptableObject
         }
     }
 
+    public int GetGold() { return Random.Range(minGold, maxGold + 1); }
+
     public List<Item> GetItems() { return items; }
     public Item GetItem(int itemElement) { return items[itemElement]; }
     public float GetItemProbability(int floatElement) { return itemProbability[floatElement]; }
     public int GetItemCount(int countElement) { return Random.Range(1, itemCount[countElement] + 1); }
+
+    public int GetMinGold() { return minGold; }
+    public int GetMaxGold() { return maxGold; }
 
 }

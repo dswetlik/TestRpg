@@ -9,6 +9,7 @@ public class EnemyTable : ScriptableObject
     [SerializeField] List<Enemy> enemies = new List<Enemy>();
     [Range(0, 100.0f)] [SerializeField] List<float> enemyProbability = new List<float>();
 
+    /*
     public List<Enemy> EnemySpawn(Location location)
     {
         List<Enemy> enemySpawn = new List<Enemy>();
@@ -31,7 +32,7 @@ public class EnemyTable : ScriptableObject
 
         return enemySpawn;
     }
-
+    */
     public List<Enemy> GetEnemies() { return enemies; }
     public Enemy GetEnemy(int enemyElement) { return enemies[enemyElement]; }
     public float GetEnemyProbability(int floatElement) { return enemyProbability[floatElement]; }

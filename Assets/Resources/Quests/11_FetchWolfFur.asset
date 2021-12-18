@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dd088f7b1c60d247bc4ffa5f456a9d1, type: 3}
+  m_Name: 11_FetchWolfFur
+  m_EditorClassIdentifier: 
+  questType: 1
+  name: Improving the Fireplace
+  description: That blacksmith really has a thing for his fireplace. He now needs
+    a full wolf pelt to go in front of it.
+  levelRequirement: 7
+  hasPrerequisite: 1
+  prerequisite: {fileID: 11400000, guid: d7309c988dacafe4083d907478feb9e7, type: 2}
+  isCompleted: 0
+  dialogue: {fileID: 11400000, guid: b0184bb85a6e2984580d52d46fa1dd40, type: 2}
+  hasItemReward: 0
+  itemRewards: []
+  id: 11
+  expReward: 25
+  goldReward: 25
+  fetchItems:
+  - {fileID: 11400000, guid: 83d9e732e16e1144086700a77d4d2de0, type: 2}
+  itemCounts: 01000000

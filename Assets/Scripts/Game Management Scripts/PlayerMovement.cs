@@ -1,6 +1,7 @@
 ﻿ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float movementSpeed;
     [SerializeField] float rotationSpeed;
 
+    bool shouldMove = false;
 
     private void Start()
     {
@@ -114,32 +116,6 @@ public class PlayerMovement : MonoBehaviour
         transform.position = new Vector3(Mathf.Round(transform.position.x / 10) * 10, transform.position.y, Mathf.Round(transform.position.z / 10) * 10);
 
         isMoving = false;
-
-        /*
-        isMoving = true;
-        float totalMovement = 0;
-        while (totalMovement < 10)
-        {
-            totalMovement += 1f * movementSpeed * Time.fixedDeltaTime;
-            GetComponent<CharacterController>().Move(-transform.forward * movementSpeed * Time.deltaTime);
-            yield return new WaitForFixedUpdate();
-        }
-
-
-        if (transform.position.x < 0)
-            transform.position = new Vector3((((int)transform.position.x - 5) / 10) * 10, transform.position.y, transform.position.z);
-        else
-            transform.position = new Vector3((((int)transform.position.x + 5) / 10) * 10, transform.position.y, transform.position.z);
-
-        if (transform.position.z < 0)
-            transform.position = new Vector3(transform.position.x, transform.position.y, (((int)transform.position.z - 5) / 10) * 10);
-        else
-            transform.position = new Vector3(transform.position.x, transform.position.y, (((int)transform.position.z + 5) / 10) * 10);
-
-        //GameObject.Find("GameManager").GetComponent<Engine>().EnemyMove();
-
-        isMoving = false;
-        */
     }
 
     IEnumerator TurnRight()
@@ -158,11 +134,6 @@ public class PlayerMovement : MonoBehaviour
             yield return null;
         }
 
-        /*
-        Vector3 rotation = transform.eulerAngles;
-        rotation.y = Mathf.Round(rotation.y / 90) * 90;
-        transform.eulerAngles = rotation;
-        */
         isMoving = false;
     }
 
@@ -182,48 +153,38 @@ public class PlayerMovement : MonoBehaviour
             yield return null;
         }
 
-        /*
-        Vector3 rotation = transform.eulerAngles;
-        rotation.y = Mathf.Round(rotation.y / 90) * 90;
-        transform.eulerAngles = rotation;
-        */
         isMoving = false;
-        /*
-        isMoving = true;
-        float totalRotation = 0;
-        while (totalRotation < 90)
-        {
-            totalRotation += 1 * rotationSpeed * Time.fixedDeltaTime;
-            transform.Rotate(Vector3.up, -1 * rotationSpeed * Time.fixedDeltaTime);
-            yield return new WaitForFixedUpdate();
-        }
-
-        Vector3 rotation = transform.eulerAngles;
-        rotation.y = Mathf.Round(rotation.y / 90) * 90;
-        transform.eulerAngles = rotation;
-
-        isMoving = false;
-        */
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.tag == "Impassable")
         {
-            if (currentMovement != null) StopCoroutine(currentMovement);
+            if (currentMovement != null) { StopCoroutine(currentMovement); isMoving = false; }
             transform.position = new Vector3(Mathf.Round(transform.position.x / 10) * 10, 2.2f, Mathf.Round(transform.position.z / 10) * 10);
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.transform.tag == "Enemy")
+        if(other.tag == "LocationPortal")
         {
-            //GameObject.Find("GameManager").GetComponent<Engine>().StartBattle(other.gameObject);
+            Vector3 dir = other.transform.position - transform.position;
+            Debug.Log(System.String.Format("X: {0}; Y: {1}; Z: {2}", dir.x, dir.y, dir.z));
+
+            if(other.name == "BurunsOverworld")
+            {
+                if (dir.z < 0)
+                    GameObject.Find("GameManager").GetComponent<Engine>().OutputToText("You have entered the city of Buruns.");
+                else
+                    GameObject.Find("GameManager").GetComponent<Engine>().OutputToText("You have entered Arenthia.");
+            }
         }
-        else if (other.transform.parent.tag == "Chest")
+        if(other.tag == "ScenePortal")
         {
-           // GameObject.Find("GameManager").GetComponent<Engine>().OpenChest(other.GetComponentInParent<ChestInventory>());
+            if (currentMovement != null) { StopCoroutine(currentMovement); isMoving = false; }
+            transform.position = new Vector3(Mathf.Round(transform.position.x / 10) * 10, 2.2f, Mathf.Round(transform.position.z / 10) * 10);
+            GameObject.Find("GameManager").GetComponent<Engine>().ChangeScene(other.gameObject.GetComponent<SceneContainer>().GetLocation());
         }
     }
 
@@ -235,12 +196,11 @@ public class PlayerMovement : MonoBehaviour
             {
                 GameObject.Find("GameManager").GetComponent<Engine>().ActivateArenaScreen(true);
             }
-            else
+            else if (other.name == "DungeonPortal")
             {
-                Location location = other.GetComponent<LocationContainer>().GetLocation();
-                transform.position = location.GetSpawnLocation();
-                GameObject.Find("GameManager").GetComponent<Engine>().EnterLocation(location);
+                GameObject.Find("GameManager").GetComponent<Engine>().ActivateDungeonScreen(true, other.gameObject.GetComponent<DungeonContainer>().GetDungeon());
             }
+
         }
         else if (other.transform.parent.tag == "Chest")
         {
