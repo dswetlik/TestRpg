@@ -8169,7 +8169,7 @@ GameObject:
   - component: {fileID: 2041815121}
   - component: {fileID: 2041815120}
   m_Layer: 5
-  m_Name: Text (6)
+  m_Name: VersionTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8230,7 +8230,7 @@ MonoBehaviour:
 
     Unity 2019.4.16f1
 
-    Version  1.2.3f'
+    Version  2.1f'
 --- !u!222 &2041815121
 CanvasRenderer:
   m_ObjectHideFlags: 0

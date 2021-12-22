@@ -4370,8 +4370,9 @@ public class Engine : MonoBehaviour
             yield return new WaitForSecondsRealtime(0.01f * Time.deltaTime);
         }
 
-        GameObject.Find("BurunsOutsideBlock").GetComponent<BoxCollider>().isTrigger = false;
-        
+        GameObject.Find("BurunsOutsideBlock").GetComponent<BoxCollider>().isTrigger = true;
+        GameObject.Find("GateGuardCollider").SetActive(false);
+
         GameObject.Find("OverworldMusicAudioSource").GetComponent<AudioSource>().Play();
         GameObject.Find("BirdsLoopAudioSource").GetComponent<AudioSource>().Play();
         GameObject.Find("WindAmbianceLoopAudioSource").GetComponent<AudioSource>().Play();
@@ -4720,7 +4721,10 @@ public class Engine : MonoBehaviour
             SceneManager.SetActiveScene(thisScene);
 
             if (player.GetLevel() >= 3 && thisScene.buildIndex == 2)
+            {
                 GameObject.Find("BurunsOutsideBlock").GetComponent<BoxCollider>().isTrigger = true;
+                GameObject.Find("GateGuardCollider").SetActive(false);
+            }
         }
 
         AsyncOperation closeScene = SceneManager.UnloadSceneAsync(currentScene);
