@@ -8,14 +8,16 @@ public class StatusEffect : ScriptableObject
     public enum StatusEffectType
     {
         heal,
+        defence,
+        speed,
+        strength,
+        agility,
+        intelligence,
         bleed,
         burn,
         freeze,
         shock,
-        poison,
-        stun,
-        defence,
-        speed
+        stun
     }
 
     [SerializeField] StatusEffectType statusEffectType;

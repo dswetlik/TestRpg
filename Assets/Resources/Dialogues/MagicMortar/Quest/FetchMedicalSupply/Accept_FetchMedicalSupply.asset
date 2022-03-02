@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   npcLine: Great! I can't wait for my stockroom to be full again!
   dialogueType: 3
-  dialogueOptions:
-  - Okay, can I see what you have in stock now?
-  dialogueAnswers:
+  dialogueTexts:
+  - Shop...
+  dialogueObjects:
   - {fileID: 11400000, guid: b510db67d66e3b0438ce14af9afa448b, type: 2}
   dialogueSprites:
   - {fileID: 21300000, guid: 658edffd73bae1e469903fa2790e34e1, type: 3}

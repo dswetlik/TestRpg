@@ -9,10 +9,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28257dec9f78a6b4681aa8437391fa82, type: 3}
+  m_Script: {fileID: 11500000, guid: ee1fa1a52a47c0b4589e581772f510e9, type: 3}
   m_Name: RustyTankardInnAccept
   m_EditorClassIdentifier: 
-  npcLine: Perfect, follow me!
+  npcLine: 
   dialogueType: 4
-  dialogueOptions: []
-  dialogueAnswers: []
+  dialogueTexts: []
+  dialogueObjects: []
+  dialogueSprites: []
+  cost: 10
+  attributeRegen: 20
+  insufficientFundsResponse: You're gonna need more gold, this isn't a shelter!
+  insufficientFundsDialogueTexts: []
+  insufficientFundsDialogueObjects: []
+  insufficientFundsDialogueSprites: []
+  sufficientFundsResponse: Perfect! Let me show you to your room.

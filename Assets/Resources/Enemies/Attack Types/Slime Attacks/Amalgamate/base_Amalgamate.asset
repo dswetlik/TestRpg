@@ -18,7 +18,7 @@ MonoBehaviour:
   attackType: 2
   attackAttribute: 2
   damageModifier: 10
-  attributeCost: 10
+  attributeCost: 5
   hasStatusEffects: 1
   statusEffects:
-  - {fileID: 11400000, guid: 44d77c23e493d3e4db561638263721df, type: 2}
+  - {fileID: 11400000, guid: 1bf89c2a8e5fe014f98a6dc3f3cd0a2b, type: 2}

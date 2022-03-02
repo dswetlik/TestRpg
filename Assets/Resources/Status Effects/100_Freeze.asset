@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 737ebae1e8923d9498e5ab27a3d4e42e, type: 3}
+  m_Name: 100_Freeze
+  m_EditorClassIdentifier: 
+  statusEffectType: 8
+  name: Freeze
+  description: Decreases your stamina by 20% each turn.
+  hitChance: 1
+  turnAmount: 1
+  isNegative: 1
+  isPercentage: 1
+  statChange: 0.2
+  sprite: {fileID: 21300000, guid: cb27cf1f8f47c5e4d8f6f8611fda3a49, type: 3}

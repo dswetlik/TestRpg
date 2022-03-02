@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   npcLine: I'm warning you.
   dialogueType: 1
-  dialogueOptions:
-  - I don't care.
-  dialogueAnswers:
+  dialogueTexts:
+  - What?
+  dialogueObjects:
   - {fileID: 11400000, guid: 4dae436fe0692f74482e18ed9ddca720, type: 2}
   dialogueSprites:
   - {fileID: 0}

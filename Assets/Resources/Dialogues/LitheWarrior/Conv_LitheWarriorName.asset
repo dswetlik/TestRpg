@@ -17,9 +17,9 @@ MonoBehaviour:
     in wanting to be light and lithe, I still can see him running circles around
     his enemies. So I moved into this city and opened a light armor store!
   dialogueType: 1
-  dialogueOptions:
-  - What a story. Can I see your goods now?
-  dialogueAnswers:
+  dialogueTexts:
+  - Shop...
+  dialogueObjects:
   - {fileID: 11400000, guid: b510db67d66e3b0438ce14af9afa448b, type: 2}
   dialogueSprites:
   - {fileID: 21300000, guid: 658edffd73bae1e469903fa2790e34e1, type: 3}

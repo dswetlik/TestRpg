@@ -12,12 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28257dec9f78a6b4681aa8437391fa82, type: 3}
   m_Name: Start_BulwarkWelcomeDialogue
   m_EditorClassIdentifier: 
-  npcLine: Welcome to the Bulwark! You've come to the right place if you're not looking
-    to die in a single swing as a gladiator.
+  npcLine: Welcome to the Bulwark! Are you sure you're strong enough for armor?
   dialogueType: 0
-  dialogueOptions:
-  - Can I see your armors?
-  dialogueAnswers:
+  dialogueTexts:
+  - Shop...
+  dialogueObjects:
   - {fileID: 11400000, guid: b510db67d66e3b0438ce14af9afa448b, type: 2}
   dialogueSprites:
   - {fileID: 21300000, guid: 658edffd73bae1e469903fa2790e34e1, type: 3}

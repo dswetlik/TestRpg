@@ -16,6 +16,6 @@ MonoBehaviour:
   id: 0
   eventType: 1
   description: You attempt checking the circle to see if you can find any clues about
-    how the person disappeared or who exactly she was. YOu check the circle and find
+    how the person disappeared or who exactly she was. You check the circle and find
     nothing, but you decide to grab some of the rune stones.
   lootTable: {fileID: 11400000, guid: 43c6aed4a8604f449b4c2706ceab30b3, type: 2}

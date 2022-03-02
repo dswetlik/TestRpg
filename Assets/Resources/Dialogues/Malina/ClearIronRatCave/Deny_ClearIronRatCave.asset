@@ -14,9 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   npcLine: Well, you aren't much of a hero then, are you?!
   dialogueType: 3
-  dialogueOptions: []
-  dialogueAnswers: []
-  dialogueSprites: []
+  dialogueTexts:
+  - Outside rats...
+  dialogueObjects:
+  - {fileID: 11400000, guid: 464275865990f4d42ae8f5ffc7bc90fd, type: 2}
+  dialogueSprites:
+  - {fileID: 21300000, guid: 5d247f9aa35a77b42a6a1555fbda4e49, type: 3}
   openingSprite: {fileID: 0}
   questDialogueType: 2
   quest: {fileID: 11400000, guid: 278d16556a1ca2b40a77b4631834e3b5, type: 2}

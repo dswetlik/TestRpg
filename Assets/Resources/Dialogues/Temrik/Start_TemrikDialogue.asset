@@ -14,15 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   npcLine: Welcome to the arena, gladiator! How can I help you today?
   dialogueType: 0
-  dialogueOptions:
-  - Where am I?
-  - Am I supposed to fight in this arena?
-  - What am I supposed to do now?
-  dialogueAnswers:
+  dialogueTexts:
+  - Where am I...
+  dialogueObjects:
   - {fileID: 11400000, guid: d30be8c1b3be1c646a6ab98f440945f4, type: 2}
-  - {fileID: 11400000, guid: 27c22f7fd4bb67a46891d40beb838b0f, type: 2}
-  - {fileID: 11400000, guid: b862edaf1f2985b458bbb0c64d5e162d, type: 2}
   dialogueSprites:
-  - {fileID: 0}
-  - {fileID: 0}
   - {fileID: 0}

@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   npcLine: ...but-
   dialogueType: 3
-  dialogueOptions:
-  - Sounds easy enough, I can do that.
-  - Sounds illegal, I'll pass.
-  dialogueAnswers:
+  dialogueTexts:
+  - Accept Quest
+  - Deny Quest
+  dialogueObjects:
   - {fileID: 11400000, guid: 5f588246197e7f94783520d52972d645, type: 2}
   - {fileID: 11400000, guid: be2f4523ef8d72e448e08f2d26360106, type: 2}
   dialogueSprites:

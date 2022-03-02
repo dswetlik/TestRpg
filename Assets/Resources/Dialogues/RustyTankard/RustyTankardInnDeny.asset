@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   npcLine: 'Well, let me know if you change your mind. '
   dialogueType: 1
-  dialogueOptions:
-  - On second thought, I would actually like that room.
-  dialogueAnswers:
-  - {fileID: 11400000, guid: 403266053f739df46af567d50c5631fa, type: 2}
+  dialogueTexts:
+  - About a room...
+  dialogueObjects:
+  - {fileID: 11400000, guid: b929ce106cacbcb4f855fb4bde17cd0c, type: 2}
   dialogueSprites:
   - {fileID: 0}

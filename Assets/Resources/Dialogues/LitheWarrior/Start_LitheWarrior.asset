@@ -15,10 +15,10 @@ MonoBehaviour:
   npcLine: So you want to become the best gladiator around? You've come to the right
     store, the Lithe Warrior!
   dialogueType: 0
-  dialogueOptions:
-  - Let me see what you have for sale.
-  - Why is this place called the Lithe Warrior?
-  dialogueAnswers:
+  dialogueTexts:
+  - Shop...
+  - About the shop...
+  dialogueObjects:
   - {fileID: 11400000, guid: b510db67d66e3b0438ce14af9afa448b, type: 2}
   - {fileID: 11400000, guid: c954e347291c4a04fb022feb1b06b68f, type: 2}
   dialogueSprites:

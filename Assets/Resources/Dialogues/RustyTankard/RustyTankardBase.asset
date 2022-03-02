@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   npcLine: Welcome to the Rusty Tankard! What's your poison today?
   dialogueType: 0
-  dialogueOptions:
-  - I'd actually like to rent a room, please.
-  dialogueAnswers:
+  dialogueTexts:
+  - About a room...
+  dialogueObjects:
   - {fileID: 11400000, guid: b929ce106cacbcb4f855fb4bde17cd0c, type: 2}
   dialogueSprites:
   - {fileID: 0}

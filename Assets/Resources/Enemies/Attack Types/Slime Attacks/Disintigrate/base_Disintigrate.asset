@@ -17,8 +17,8 @@ MonoBehaviour:
   audioClip: {fileID: 8300000, guid: 80a0d7cbd75a6544aadd7783bd1d0778, type: 3}
   attackType: 3
   attackAttribute: 1
-  damageModifier: 3
-  attributeCost: 15
+  damageModifier: 1
+  attributeCost: 10
   hasStatusEffects: 1
   statusEffects:
-  - {fileID: 11400000, guid: 4132efdcd59d6c14ca652e06540d8d89, type: 2}
+  - {fileID: 11400000, guid: 56ec0ca22180890448022666d007f9bf, type: 2}

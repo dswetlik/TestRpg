@@ -23,7 +23,7 @@ MonoBehaviour:
   dialogue: {fileID: 11400000, guid: 4e4d649dee524594aa099e05a9303240, type: 2}
   hasItemReward: 1
   itemRewards:
-  - {fileID: 11400000, guid: 0bdbe513d1d77bf4297a682e35e80ea1, type: 2}
+  - {fileID: 11400000, guid: b3f4c6cad8b210740a62d6395fb968bd, type: 2}
   id: 17
   expReward: 5
   goldReward: 0

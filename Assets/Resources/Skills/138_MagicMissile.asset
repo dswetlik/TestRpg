@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57dc3cbc6fb4e124cb0789980f9021c2, type: 3}
+  m_Name: 138_MagicMissile
+  m_EditorClassIdentifier: 
+  ID: 138
+  skillType: 4
+  sprite: {fileID: 21300000, guid: c8fcc53846914cd4d9b123e3ca23bf0f, type: 3}
+  name: Magic Missile
+  description: Hurl a massive missile of pure mana at the enemy, inficting a large
+    amount of damage.
+  cardDescription: Damage-Dealing
+  actionMessage: You slam the enemy with a magic missile, dealing {0} damage!
+  isActive: 0
+  attributeCost: 55
+  minDamage: 15
+  maxDamage: 20
+  hasStatusEffects: 0
+  statusEffects: []
+  magicType: 1

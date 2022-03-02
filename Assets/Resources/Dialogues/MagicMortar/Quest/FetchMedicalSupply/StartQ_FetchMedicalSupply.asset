@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   npcLine: How are your stockpiles looking now?
   dialogueType: 3
-  dialogueOptions:
-  - That doesn't sound like much trouble, sure.
-  - No, I don't really want to.
-  dialogueAnswers:
+  dialogueTexts:
+  - Accept Quest
+  - Deny Quest
+  dialogueObjects:
   - {fileID: 11400000, guid: a1be5ce9f6be67f46a5a814193d177ad, type: 2}
   - {fileID: 11400000, guid: e3676ac4ebbf45f4ca13b35b01b41c02, type: 2}
   dialogueSprites:
@@ -33,7 +33,7 @@ MonoBehaviour:
   notCompleteResponse: They'll look a lot nicer once you get those supplies I asked
     for. Would you mind doing that for me?
   notCompleteDialogueOptions:
-  - Well, I'll get too it after looking at some potions.
+  - Shop...
   notCompleteDialogueAnswers:
   - {fileID: 11400000, guid: b510db67d66e3b0438ce14af9afa448b, type: 2}
   notCompleteDialogueSprites:

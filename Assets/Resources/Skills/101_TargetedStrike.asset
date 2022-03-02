@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44df368efc1e0a94e96ce3fb99cb9251, type: 3}
+  m_Name: 101_TargetedStrike
+  m_EditorClassIdentifier: 
+  ID: 101
+  skillType: 3
+  sprite: {fileID: 21300000, guid: 281942f00160d6d46bf223abd6435053, type: 3}
+  name: Targeted Strike
+  description: Target the enemy's weak spot, dealing additional damage with your
+    weapon.
+  cardDescription: 'Damage-Dealing
+
+    Weapon Modifier'
+  actionMessage: You strike the enemy in their weak spot, dealing {0} damage!
+  isActive: 0
+  attributeCost: 20
+  minDamage: 2
+  maxDamage: 5
+  hasStatusEffects: 0
+  statusEffects: []
+  isWeaponModifier: 1

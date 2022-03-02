@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65a18b26719fe2648aed386f4dd52f3a, type: 3}
   m_Name: StartQ_SlayDireWolf
   m_EditorClassIdentifier: 
-  npcLine: Do you have any bounties for me?
+  npcLine: Dire bounty...
   dialogueType: 3
-  dialogueOptions:
-  - Of course, I'll take the bounty.
-  - Actually, now isn't a good time for me to take that.
-  dialogueAnswers:
+  dialogueTexts:
+  - Accept Quest
+  - Deny Quest
+  dialogueObjects:
   - {fileID: 11400000, guid: 8e97bdbfa0fcf6d48acbca4e63d7d52d, type: 2}
   - {fileID: 11400000, guid: 5ff8443783514fc4fa799d3ab11345a1, type: 2}
   dialogueSprites:

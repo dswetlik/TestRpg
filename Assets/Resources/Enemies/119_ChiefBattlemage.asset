@@ -16,25 +16,20 @@ MonoBehaviour:
   name: Chief Battlemage
   description: The chief battlemage of the city, fought to knock-out instead of death,
     as a method of testing their skills against the best of the best.
-  id: 119
-  minLevel: 15
+  id: 11900
+  minLevel: 18
   maxLevel: 20
-  baseDamage: 10
   defense: 6
+  strength: 20
+  agility: 20
+  intelligence: 50
+  luck: 0
   attackTypes:
   - {fileID: 11400000, guid: dccb8159ba0f72d459c4015859e97bdd, type: 2}
   - {fileID: 11400000, guid: 0a32d8434d62f3e40b0232f7e1e38374, type: 2}
   - {fileID: 11400000, guid: c0122e081b3ef4b4db85d37b65c17d5e, type: 2}
   - {fileID: 11400000, guid: 411c641f0f1c75a4fa5043b0cbe5cbaf, type: 2}
   - {fileID: 11400000, guid: a8f71ddbfa15536488144b2a6d9b5ecc, type: 2}
-  health: 50
-  maxHealth: 50
-  stamina: 25
-  maxStamina: 25
-  stamRegen: 3
-  mana: 50
-  maxMana: 50
-  manaRegen: 7
   goldReward: 75
   speed: 1
   expReward: 100

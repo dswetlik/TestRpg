@@ -14,9 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   npcLine: You'll have to take part in this at some point. I'll be waiting here.
   dialogueType: 3
-  dialogueOptions: []
-  dialogueAnswers: []
-  dialogueSprites: []
+  dialogueTexts:
+  - Murderous Temrik...
+  dialogueObjects:
+  - {fileID: 11400000, guid: 53d345fe386fe96418ad324b482cdbd3, type: 2}
+  dialogueSprites:
+  - {fileID: 21300000, guid: 5d247f9aa35a77b42a6a1555fbda4e49, type: 3}
   openingSprite: {fileID: 0}
   questDialogueType: 2
   quest: {fileID: 11400000, guid: 8c5e26ecc4b79264faa1d7181c432aa5, type: 2}

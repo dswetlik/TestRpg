@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebe832ef0b3855348b377c74e480d076, type: 3}
+  m_Name: 113_SteelAxe
+  m_EditorClassIdentifier: 
+  itemType: 1
+  sprite: {fileID: 21300000, guid: 9f60226602b39de49925d75e7abd3120, type: 3}
+  id: 113
+  name: Steel Axe
+  description: A sharp steel axe, almost could be described as a battleaxe.
+  weight: 3
+  value: 47
+  weaponType: 0
+  weaponSkills:
+  - {fileID: 11400000, guid: 52bf3d98ee57e0e4fb1b7e52e6efdc36, type: 2}
+  - {fileID: 11400000, guid: 2d6217da7fdb00f4e9ba09d0c7e01f83, type: 2}
+  minDamage: 8
+  maxDamage: 13

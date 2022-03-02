@@ -16,23 +16,18 @@ MonoBehaviour:
   name: War Wolf
   description: A trained dire wolf armed to the teeth, trained to serve as a battle
     companion to the Chief Knight, showing its battle prowess in the arena.
-  id: 121
-  minLevel: 15
+  id: 12100
+  minLevel: 16
   maxLevel: 20
-  baseDamage: 15
   defense: 4
+  strength: 30
+  agility: 25
+  intelligence: 25
+  luck: 0
   attackTypes:
   - {fileID: 11400000, guid: 09753e220f553ec4f91a2622f3a01e8c, type: 2}
   - {fileID: 11400000, guid: ff6aa40ba31dccc49bb6acf2bb8fa1ce, type: 2}
   - {fileID: 11400000, guid: fa0e00ec5aa45ae4598932b72f7b0276, type: 2}
-  health: 50
-  maxHealth: 50
-  stamina: 50
-  maxStamina: 50
-  stamRegen: 10
-  mana: 30
-  maxMana: 30
-  manaRegen: 6
   goldReward: 75
   speed: 1.2
   expReward: 100

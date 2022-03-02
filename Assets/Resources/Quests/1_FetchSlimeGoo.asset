@@ -22,9 +22,9 @@ MonoBehaviour:
   dialogue: {fileID: 11400000, guid: 2b396160aa6ae4a4a94e1e58cdb90e90, type: 2}
   hasItemReward: 1
   itemRewards:
-  - {fileID: 11400000, guid: 0bdbe513d1d77bf4297a682e35e80ea1, type: 2}
-  - {fileID: 11400000, guid: 9e35b3473e37f3c4b8edbdb7957b62c8, type: 2}
-  - {fileID: 11400000, guid: 47672e4e92f03b845a131afa02c57556, type: 2}
+  - {fileID: 11400000, guid: b3f4c6cad8b210740a62d6395fb968bd, type: 2}
+  - {fileID: 11400000, guid: ec0bf1e85ab76c84d9f87f947840780d, type: 2}
+  - {fileID: 11400000, guid: 942ecaf464ca35a449477870ff8ed467, type: 2}
   id: 1
   expReward: 20
   goldReward: 20

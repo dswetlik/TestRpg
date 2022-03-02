@@ -16,25 +16,20 @@ MonoBehaviour:
   name: Bandit Chief
   description: A captured bandit chieftan, forced to fight for entertainment in the
     arena.
-  id: 111
+  id: 11100
   minLevel: 10
   maxLevel: 20
-  baseDamage: 8
   defense: 4
+  strength: 20
+  agility: 15
+  intelligence: 15
+  luck: 0
   attackTypes:
   - {fileID: 11400000, guid: 34e14bff51fdafb4a8c5f032bdba52ee, type: 2}
   - {fileID: 11400000, guid: 915a55cf5c255ec4eada0991636fe0df, type: 2}
-  - {fileID: 11400000, guid: 09077531e0ea6b14bb6289c1004da0d1, type: 2}
-  - {fileID: 11400000, guid: ee51f4ddc06cfc84aa561289cab9ad2c, type: 2}
+  - {fileID: 11400000, guid: 47739673bf1eb6e4c878de8b0cdfad0d, type: 2}
+  - {fileID: 11400000, guid: 830f54a0a6b695c4da967795ffbba32a, type: 2}
   - {fileID: 11400000, guid: db0aff5712bb05f4cb6587cd0f6edd1b, type: 2}
-  health: 40
-  maxHealth: 40
-  stamina: 20
-  maxStamina: 20
-  stamRegen: 2
-  mana: 20
-  maxMana: 20
-  manaRegen: 2
   goldReward: 50
   speed: 1
   expReward: 100
@@ -56,9 +51,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 869896a2cfaecc242b09fce00ca77493, type: 2}
   - {fileID: 11400000, guid: dd98253da2ea9da43b3635a80a50e7f0, type: 2}
   - {fileID: 11400000, guid: 21407eb84d5e5ec4d970bd89b962728b, type: 2}
-  - {fileID: 11400000, guid: 60c7b01e1f94bf74e854490a7e263857, type: 2}
-  - {fileID: 11400000, guid: 810f3cf1afb41a146b3981da49b78364, type: 2}
-  - {fileID: 11400000, guid: f361daaad544f734f9b3c88738dfea1e, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   unlockedItemsCount: 010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000050000000500000005000000
   unlockedTitle: Gladiator
   hasBeenDefeated: 0

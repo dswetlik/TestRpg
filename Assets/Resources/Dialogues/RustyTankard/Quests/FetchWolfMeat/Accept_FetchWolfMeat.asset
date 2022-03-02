@@ -15,9 +15,12 @@ MonoBehaviour:
   npcLine: Great, I think I'll only need about 10 pieces of meat to be able to make
     enough stew for my next food shipment.
   dialogueType: 3
-  dialogueOptions: []
-  dialogueAnswers: []
-  dialogueSprites: []
+  dialogueTexts:
+  - About a room...
+  dialogueObjects:
+  - {fileID: 11400000, guid: b929ce106cacbcb4f855fb4bde17cd0c, type: 2}
+  dialogueSprites:
+  - {fileID: 0}
   openingSprite: {fileID: 0}
   questDialogueType: 1
   quest: {fileID: 11400000, guid: cd02f349a6963f849af602ba1118dad8, type: 2}

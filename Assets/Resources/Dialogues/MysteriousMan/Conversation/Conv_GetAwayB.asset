@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   npcLine: You're going to regret this.
   dialogueType: 1
-  dialogueOptions:
-  - No, I don't think I will.
-  dialogueAnswers:
+  dialogueTexts:
+  - What?
+  dialogueObjects:
   - {fileID: 11400000, guid: f8fd2e7f53faed4429fa2fabdd0f2e27, type: 2}
   dialogueSprites:
   - {fileID: 0}

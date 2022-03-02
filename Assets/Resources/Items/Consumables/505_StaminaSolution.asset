@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a256efbfa0ca0554b9279f6ef8958e90, type: 3}
+  m_Name: 505_StaminaSolution
+  m_EditorClassIdentifier: 
+  itemType: 3
+  sprite: {fileID: 21300000, guid: aa55df2dc1de54d4882a853c2cb35a67, type: 3}
+  id: 505
+  name: Stamina Solution
+  description: A jar containing a dull green liquid.
+  weight: 1
+  value: 25
+  consumableType: 0
+  effects: 02000000
+  effectChanges: 19000000

@@ -15,25 +15,20 @@ MonoBehaviour:
   enemyType: 1
   name: Veteran
   description: 'A veteran of wars, an expert on battles. '
-  id: 118
+  id: 11800
   minLevel: 15
   maxLevel: 20
-  baseDamage: 15
   defense: 8
+  strength: 30
+  agility: 25
+  intelligence: 20
+  luck: 0
   attackTypes:
   - {fileID: 11400000, guid: a3b1d271bf148e5439bf290669feb04e, type: 2}
   - {fileID: 11400000, guid: 29767f155d120b845b1601a75e893193, type: 2}
   - {fileID: 11400000, guid: d0826e14eefa20b4ca7d402d8652dcd2, type: 2}
   - {fileID: 11400000, guid: b1ea87ad6fbce5f4590ba0b1fe3ca084, type: 2}
   - {fileID: 11400000, guid: 0a32d8434d62f3e40b0232f7e1e38374, type: 2}
-  health: 60
-  maxHealth: 60
-  stamina: 30
-  maxStamina: 30
-  stamRegen: 6
-  mana: 25
-  maxMana: 25
-  manaRegen: 3
   goldReward: 50
   speed: 1
   expReward: 100
@@ -55,9 +50,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 86e959644caebc5418f43a74829c760f, type: 2}
   - {fileID: 11400000, guid: 71d12fe2610e4d8478be188faaa1348f, type: 2}
   - {fileID: 11400000, guid: 95647eadafc8c784fa5e2d7020e23015, type: 2}
-  - {fileID: 11400000, guid: 1c32fc14e4456094da613785e41b1288, type: 2}
-  - {fileID: 11400000, guid: b8e8a50e580905141820cf8dc60b1504, type: 2}
-  - {fileID: 11400000, guid: 391320a886293c94aad1574a397b1641, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   unlockedItemsCount: 010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000050000000500000005000000
   unlockedTitle: Veteran
   hasBeenDefeated: 0

@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   npcLine: This is your last warning.
   dialogueType: 1
-  dialogueOptions:
-  - Come at me.
-  dialogueAnswers:
+  dialogueTexts:
+  - What?
+  dialogueObjects:
   - {fileID: 11400000, guid: 0b4bffe48c34b9443992908ad11f6db6, type: 2}
   dialogueSprites:
   - {fileID: 0}

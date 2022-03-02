@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a256efbfa0ca0554b9279f6ef8958e90, type: 3}
+  m_Name: 506_HealthPotion
+  m_EditorClassIdentifier: 
+  itemType: 3
+  sprite: {fileID: 21300000, guid: a3cf77ce86df95f4a93da91009f219e7, type: 3}
+  id: 506
+  name: Health Potion
+  description: A bottle holding a bright, clear, red liquid.
+  weight: 1
+  value: 50
+  consumableType: 0
+  effects: 01000000
+  effectChanges: 32000000

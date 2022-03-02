@@ -5,10 +5,10 @@ using UnityEngine;
 public class AttackContainer : MonoBehaviour
 {
     [SerializeField] bool isEnemy;
-    [SerializeField] ActiveSkill playerSkill;
+    [SerializeField] Skill playerSkill;
     [SerializeField] EnemyAttackType enemySkill;
 
-    public ActiveSkill GetPlayerSkill()
+    public Skill GetPlayerSkill()
     {
         return playerSkill;
     }
@@ -18,7 +18,7 @@ public class AttackContainer : MonoBehaviour
         return enemySkill;
     }
 
-    public void SetPlayerSkill(ActiveSkill playerSkill)
+    public void SetPlayerSkill(Skill playerSkill)
     {
         this.playerSkill = playerSkill;
     }

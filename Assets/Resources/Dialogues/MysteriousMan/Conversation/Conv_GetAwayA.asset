@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   npcLine: Seriously, go away.
   dialogueType: 1
-  dialogueOptions:
-  - I don't really want to.
-  dialogueAnswers:
+  dialogueTexts:
+  - What?
+  dialogueObjects:
   - {fileID: 11400000, guid: 36a28fe92f483704294721d1c4241f0f, type: 2}
   dialogueSprites:
   - {fileID: 0}

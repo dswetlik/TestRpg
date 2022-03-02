@@ -15,9 +15,9 @@ MonoBehaviour:
   npcLine: Sorry, no one is beyond this point. There have been threats of assassination
     to the king. Let us know if you've heard anything of note with this.
   dialogueType: 0
-  dialogueOptions:
-  - I've heard some news with those threats.
-  dialogueAnswers:
+  dialogueTexts:
+  - Assassination plot...
+  dialogueObjects:
   - {fileID: 11400000, guid: 1c050eca7d77f18478689bfbd774c0c5, type: 2}
   dialogueSprites:
   - {fileID: 0}

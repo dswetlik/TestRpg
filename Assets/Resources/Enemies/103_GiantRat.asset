@@ -15,23 +15,18 @@ MonoBehaviour:
   enemyType: 0
   name: Giant Rat
   description: A massive rat, seriously, I've never seen one this size before!
-  id: 103
+  id: 10300
   minLevel: 0
   maxLevel: 0
-  baseDamage: 3
   defense: 0
+  strength: 25
+  agility: 15
+  intelligence: 10
+  luck: 0
   attackTypes:
   - {fileID: 11400000, guid: 02e5573009c448f43a2520f178dc1d26, type: 2}
   - {fileID: 11400000, guid: 1688c12820d4a244192809c6ed89caa6, type: 2}
   - {fileID: 11400000, guid: 99222a98a8574d049baced0886e6589d, type: 2}
-  health: 30
-  maxHealth: 30
-  stamina: 15
-  maxStamina: 15
-  stamRegen: 1
-  mana: 15
-  maxMana: 15
-  manaRegen: 1
   goldReward: 10
   speed: 0.75
   expReward: 15

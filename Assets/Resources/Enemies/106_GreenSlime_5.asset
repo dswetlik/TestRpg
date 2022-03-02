@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da3ae000e98a71d489bf062b749ae76f, type: 3}
+  m_Name: 106_GreenSlime_5
+  m_EditorClassIdentifier: 
+  enemyType: 0
+  name: Green Slime
+  description: A speedy-looking ball of green slime
+  id: 10605
+  minLevel: 5
+  maxLevel: 5
+  defense: 0
+  strength: 10
+  agility: 10
+  intelligence: 5
+  luck: 0
+  attackTypes:
+  - {fileID: 11400000, guid: af88f4ea6619b1343811509b93f6737b, type: 2}
+  - {fileID: 11400000, guid: acfeeb9709cd8b541aae65d2b5edc9a2, type: 2}
+  - {fileID: 11400000, guid: 49ff0e15634d18b4cbd12bea6a4b5cef, type: 2}
+  goldReward: 6
+  speed: 1.4
+  expReward: 15
+  itemRewards: {fileID: 11400000, guid: 5831117a999096b4f9dfaab812d0b6d7, type: 2}
+  statusEffects: []

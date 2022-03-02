@@ -221,7 +221,7 @@ public class Inventory //: ISerializationCallbackReceiver
             }
             catch (KeyNotFoundException e)
             {
-            
+                Debug.LogError(String.Format("ID at element {0} not found in ItemDictionary!", i));
             }
         }
     }

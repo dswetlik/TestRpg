@@ -15,9 +15,9 @@ MonoBehaviour:
   npcLine: Unethical? It isn't my fault Arenthia was invaded, I'm just doing what
     I can to keep my business alive with lower prices.
   dialogueType: 3
-  dialogueOptions:
-  - Can I at least see your armor?
-  dialogueAnswers:
+  dialogueTexts:
+  - Shop...
+  dialogueObjects:
   - {fileID: 11400000, guid: b510db67d66e3b0438ce14af9afa448b, type: 2}
   dialogueSprites:
   - {fileID: 21300000, guid: 658edffd73bae1e469903fa2790e34e1, type: 3}

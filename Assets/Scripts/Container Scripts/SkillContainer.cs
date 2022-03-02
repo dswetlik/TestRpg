@@ -12,4 +12,5 @@ public class SkillContainer : MonoBehaviour
         return skill;
     }
 
+    public void SetSkill(Skill skill) { this.skill = skill; }
 }

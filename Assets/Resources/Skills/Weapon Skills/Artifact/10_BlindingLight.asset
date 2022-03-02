@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb989ea5180034c4f8aeda3f60979eb6, type: 3}
+  m_Name: Blinding Light
+  m_EditorClassIdentifier: 
+  ID: 10
+  skillType: 1
+  sprite: {fileID: 0}
+  name: Blinding Light
+  description: 
+  cardDescription: 'Weapon (Artifact)
+
+    Damage-Dealing
+
+    50% Burn Chance
+
+    25%
+    Quicken Chance'
+  actionMessage: You blind the enemy with the {0}, dealing {1} damage!
+  isActive: 0
+  attributeCost: 0
+  minDamage: 0
+  maxDamage: 0
+  hasStatusEffects: 1
+  statusEffects:
+  - {fileID: 11400000, guid: 2c99e94f861430f459bdb06e44b18e8f, type: 2}
+  - {fileID: 11400000, guid: 8306aa23185e94549916ab7b88d8910c, type: 2}

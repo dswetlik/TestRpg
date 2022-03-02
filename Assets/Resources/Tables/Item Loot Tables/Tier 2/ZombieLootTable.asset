@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ZombieLootTable
   m_EditorClassIdentifier: 
   items:
-  - {fileID: 11400000, guid: 41a28c0374c36394d9fdcd93864f800c, type: 2}
+  - {fileID: 11400000, guid: 5c1d8907365ee274ca4d04a7f08c6903, type: 2}
   - {fileID: 11400000, guid: 7ab05d3a163351e41b1e092be27e965a, type: 2}
   - {fileID: 11400000, guid: aacfe313b2af39241bd9e5b0e39b6dc5, type: 2}
   - {fileID: 11400000, guid: 449409460f05abe4bb82904f75f21c08, type: 2}

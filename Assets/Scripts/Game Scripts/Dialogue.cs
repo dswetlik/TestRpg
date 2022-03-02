@@ -20,13 +20,13 @@ public class Dialogue : ScriptableObject
     [TextArea(3,5)][SerializeField] string npcLine;
     [SerializeField] DialogueType dialogueType;
 
-    [SerializeField] List<string> dialogueOptions;
-    [SerializeField] List<Dialogue> dialogueAnswers;
+    [SerializeField] List<string> dialogueTexts;
+    [SerializeField] List<Dialogue> dialogueObjects;
     [SerializeField] List<Sprite> dialogueSprites;
     
     public string GetNPCLine() { return npcLine; }
-    public List<string> GetDialogueOptions() { return dialogueOptions; }
-    public List<Dialogue> GetDialogueAnswers() { return dialogueAnswers; }
+    public List<string> GetDialogueOptions() { return dialogueTexts; }
+    public List<Dialogue> GetDialogueAnswers() { return dialogueObjects; }
     public List<Sprite> GetDialogueSprites() { return dialogueSprites; }
     public DialogueType GetDialogueType() { return dialogueType; }
 

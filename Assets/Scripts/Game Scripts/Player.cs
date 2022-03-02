@@ -18,34 +18,35 @@ public class Player
     Inventory inventory;
     Weapon weapon;
     Armor head, chest, legs, feet, hands;
-    uint level, exp, totalExp, expToLevel, skillPoints, currentWeight, maxWeight;
-    int health, stamina, mana, maxHealth, maxStamina, maxMana, staminaRegen, manaRegen, defense, gold, battleCount;
+    uint level, exp, totalExp, skillPoints, currentWeight, maxWeight;
+    int health, stamina, mana, defense, gold, battleCount;
+    int strength, agility, intelligence, luck;
     float speed;
+
     List<Quest> questList = new List<Quest>();
     List<Quest> completedQuests = new List<Quest>();
     List<StatusEffect> statusEffects = new List<StatusEffect>();
-    List<ActiveSkill> activeStaminaSkills = new List<ActiveSkill>();
-    List<ActiveSkill> activeManaSkills = new List<ActiveSkill>();
-    List<PassiveSkill> passiveSkills = new List<PassiveSkill>();
+    List<Skill> unlockedSkills = new List<Skill>();
 
-    public Player(string name, Location currentLocation, Inventory inventory, uint level = 1, int health = 20, int stamina = 10, int mana = 10,
-            uint currentWeight = 0, uint maxWeight = 75)
+    public Player(string name, Location currentLocation, Inventory inventory, uint level = 1, int strength = 5, int agility = 5, int intelligence = 5, int luck = 0, uint currentWeight = 0)
     {
         this.name = name;
         title = "Newcomer";
         this.currentLocation = currentLocation;
-        this.level = level;
-        this.health = health;
-        this.stamina = stamina;
-        this.mana = mana;
-        this.maxWeight = maxWeight;
         this.inventory = inventory;
 
-        maxHealth = 20;
-        maxStamina = 10;
-        maxMana = 10;
-        staminaRegen = 2;
-        manaRegen = 2;
+        this.level = level;
+
+        this.strength = strength;
+        this.agility = agility;
+        this.intelligence = intelligence;
+        this.luck = luck;
+
+        maxWeight = (uint)(strength * 25);
+
+        health = GetMaxHealth();
+        stamina = GetMaxStamina();
+        mana = GetMaxMana();
 
         speed = DEFAULT_SPEED;
         weapon = Engine.NULL_WEAPON;
@@ -59,38 +60,149 @@ public class Player
         totalExp = 0;
         skillPoints = 0;
         battleCount = 0;
-        expToLevel = (level * 10);
     }
 
-    // Get Functions
+    // Player Information
+
     public string GetName() { return name; }
     public string GetTitle() { return title; }
-
     public Location GetLocation() { return currentLocation; }
+
     public Inventory GetInventory() { return inventory; }
     public uint GetCurrentWeight() { return currentWeight; }
-    public uint GetMaxWeight() { return (uint)((maxWeight + GetPassiveFlat(PassiveSkill.AttributeType.carryWeight)) * GetPassivePercent(PassiveSkill.AttributeType.carryWeight)); }
+    public uint GetMaxWeight() { return (uint)(strength * 2); }
     public int GetGold() { return gold; }
 
     public uint GetLevel() { return level; }
     public uint GetExp() { return exp; }
     public uint GetTotalExp() { return totalExp; }
-    public uint GetToLevelExp() { return expToLevel; }
+    public uint GetToLevelExp() { return level * 10; }
     public uint GetSkillPoints() { return skillPoints; }
+
+    public int GetBattleCount() { return battleCount; }
+
+    public void SetName(string name) { this.name = name; }
+    public void SetTitle(string title) { this.title = title; }
+    public void SetLocation(Location newLocation) { currentLocation = newLocation; }
+
+    public void SetCurrentWeight(uint currentWeight) { this.currentWeight = currentWeight; }
+    public void ChangeGold(int gold) { this.gold += gold; if (gold < 0) gold = 0; }
+    public void SetGold(int gold) { this.gold = gold; }
+
+    public void SetLevel(uint level) { this.level = level; }
+    public void SetExp(uint exp) { this.exp = exp; }
+    public void SetTotalExp(uint totalExp) { this.totalExp = totalExp; }
+    public void SetSkillPoints(uint skillPoints) { this.skillPoints = skillPoints; }
+
+    public void AddExp(uint exp)
+    {
+        this.exp += exp;
+        totalExp += exp;
+        CheckForLevelUp();
+    }
+
+    public void CheckForLevelUp()
+    {
+        if (exp >= (level * 10))
+        {
+            exp -= (level * 10);
+            level++;
+            skillPoints += 5;
+
+            GameObject.Find("GameManager").GetComponent<Engine>().OutputToText(String.Format("You have achieved level {0}!", level));
+            if (level == 3)
+                GameObject.Find("GameManager").GetComponent<Engine>().StartLevelThreeEvent();
+        }
+    }
+
+    public void AddBattleCount(int count) { battleCount += count; }
+
+    //**
+
+    // Stats and Attributes
+
+    public int GetStrength(bool modified = true) { return modified ? strength + (int)GetTotalEffect(StatusEffect.StatusEffectType.strength) : strength; }
+    public int GetAgility(bool modified = true) { return modified ? agility + (int)GetTotalEffect(StatusEffect.StatusEffectType.agility) : agility; }
+    public int GetIntelligence(bool modified = true) { return modified ? intelligence + (int)GetTotalEffect(StatusEffect.StatusEffectType.intelligence) : intelligence; }
+    public int GetLuck() { return luck; }
+
+    public void SetStrength(int strength) { this.strength = strength; }
+    public void SetAgility(int agility) { this.agility = agility; }
+    public void SetIntelligence(int intelligence) { this.intelligence = intelligence; }
+    public void SetLuck(int luck) { this.luck = luck; }
 
     public int GetHealth() { return health; }
     public int GetStamina() { return stamina; }
     public int GetMana() { return mana; }
-    public int GetBaseMaxHealth() { return maxHealth; }
-    public int GetBaseMaxStamina() { return maxStamina; }
-    public int GetBaseMaxMana() { return maxMana; }
-    public int GetMaxHealth() { return (int)((maxHealth + GetPassiveFlat(PassiveSkill.AttributeType.maxHealth)) * GetPassivePercent(PassiveSkill.AttributeType.maxHealth)); }
-    public int GetMaxStamina() { return (int)((maxStamina + GetPassiveFlat(PassiveSkill.AttributeType.maxStamina)) * GetPassivePercent(PassiveSkill.AttributeType.maxStamina)); }
-    public int GetMaxMana() { return (int)((maxMana + GetPassiveFlat(PassiveSkill.AttributeType.maxMana)) * GetPassivePercent(PassiveSkill.AttributeType.maxMana)); }
-    public int GetBaseStaminaRegen() { return staminaRegen; }
-    public int GetBaseManaRegen() { return manaRegen; }
-    public int GetStaminaRegen() { return (int)((staminaRegen + GetPassiveFlat(PassiveSkill.AttributeType.staminaRegen)) * GetPassivePercent(PassiveSkill.AttributeType.staminaRegen)); }
-    public int GetManaRegen() { return (int)((manaRegen + GetPassiveFlat(PassiveSkill.AttributeType.manaRegen)) * GetPassivePercent(PassiveSkill.AttributeType.manaRegen)); }
+    public int GetMaxHealth() { return GetStrength(); }
+    public int GetMaxStamina() { return GetAgility(); }
+    public int GetMaxMana() { return GetIntelligence(); }
+    public int GetStaminaRegen() { return (GetAgility() / 5); }
+    public int GetManaRegen() { return (GetIntelligence() / 5); }
+
+    public void SetHealth(int health) { this.health = health; }
+    public void SetStamina(int stamina) { this.stamina = stamina; }
+    public void SetMana(int mana) { this.mana = mana; }
+
+    public void ChangeHealth(int healthChange)
+    {
+        health += healthChange;
+        if (health < 0)
+            health = 0;
+        if (health > GetMaxHealth())
+            health = GetMaxHealth();
+
+        if (health < GetMaxHealth() * 0.1f)
+        {
+            Debug.Log("Playing Fast Heartbeat");
+            GameObject.Find("HeartbeatSlowLoopAudioSource").GetComponent<AudioSource>().Stop();
+            if (!GameObject.Find("HeartbeatFastLoopAudioSource").GetComponent<AudioSource>().isPlaying)
+                GameObject.Find("HeartbeatFastLoopAudioSource").GetComponent<AudioSource>().Play();
+        }
+        else if (health < GetMaxHealth() * 0.25f)
+        {
+            Debug.Log("Playing Slow Heartbeat");
+            GameObject.Find("HeartbeatFastLoopAudioSource").GetComponent<AudioSource>().Stop();
+            if (!GameObject.Find("HeartbeatSlowLoopAudioSource").GetComponent<AudioSource>().isPlaying)
+                GameObject.Find("HeartbeatSlowLoopAudioSource").GetComponent<AudioSource>().Play();
+        }
+        else
+        {
+            Debug.Log("Not Playing Heartbeat");
+            GameObject.Find("HeartbeatFastLoopAudioSource").GetComponent<AudioSource>().Stop();
+            GameObject.Find("HeartbeatSlowLoopAudioSource").GetComponent<AudioSource>().Stop();
+        }
+    }
+    public void ChangeStamina(int staminaChange)
+    {
+        stamina += staminaChange;
+        if (stamina < 0)
+            stamina = 0;
+        if (stamina > GetMaxStamina())
+            stamina = GetMaxStamina();
+    }
+    public void ChangeMana(int manaChange)
+    {
+        mana += manaChange;
+        if (mana < 0)
+            mana = 0;
+        if (mana > GetMaxMana())
+            mana = GetMaxMana();
+    }
+
+    public void RegenAttributes()
+    {
+        stamina += GetStaminaRegen();
+        mana += GetManaRegen();
+
+        if (stamina > GetMaxStamina())
+            stamina = GetMaxStamina();
+        if (mana > GetMaxMana())
+            mana = GetMaxMana();
+    }
+
+    //**
+
     public int GetDefense() {
         int defenseRating = 0;
         if (GetHead() != Engine.NULL_ARMOR)
@@ -104,10 +216,54 @@ public class Player
         if (GetHands() != Engine.NULL_ARMOR)
             defenseRating += (int)GetHands().GetRating();
 
-        return (int)((defenseRating + GetPassiveFlat(PassiveSkill.AttributeType.defense)) * GetPassivePercent(PassiveSkill.AttributeType.defense));
+        return defenseRating;
     }
-    public float GetSpeed() { return ((speed + GetPassiveFlat(PassiveSkill.AttributeType.speed)) * GetPassivePercent(PassiveSkill.AttributeType.speed)); }
-    public int GetBattleCount() { return battleCount; }
+    public float GetSpeed()
+    {
+        float baseSpeed = DEFAULT_SPEED;
+
+        if (head != Engine.NULL_ARMOR)
+        {
+            if (head.GetArmorClass() == Armor.ArmorClass.heavy)
+                baseSpeed -= 0.1f - (strength * 0.001f);
+            else if (head.GetArmorClass() == Armor.ArmorClass.light)
+                baseSpeed -= 0.05f - (agility * 0.0005f);
+        }
+        if (chest != Engine.NULL_ARMOR)
+        {
+            if (chest.GetArmorClass() == Armor.ArmorClass.heavy)
+                baseSpeed -= 0.1f - (strength * 0.001f);
+            else if (chest.GetArmorClass() == Armor.ArmorClass.light)
+                baseSpeed -= 0.05f - (agility * 0.0005f);
+        }
+        if (legs != Engine.NULL_ARMOR)
+        {
+            if (legs.GetArmorClass() == Armor.ArmorClass.heavy)
+                baseSpeed -= 0.1f - (strength * 0.001f);
+            else if (legs.GetArmorClass() == Armor.ArmorClass.light)
+                baseSpeed -= 0.05f - (agility * 0.0005f);
+        }
+        if (feet != Engine.NULL_ARMOR)
+        {
+            if (feet.GetArmorClass() == Armor.ArmorClass.heavy)
+                baseSpeed -= 0.1f - (strength * 0.001f);
+            else if (feet.GetArmorClass() == Armor.ArmorClass.light)
+                baseSpeed -= 0.05f - (agility * 0.0005f);
+        }
+        if (hands != Engine.NULL_ARMOR)
+        {
+            if (hands.GetArmorClass() == Armor.ArmorClass.heavy)
+                baseSpeed -= 0.1f - (strength * 0.001f);
+            else if (hands.GetArmorClass() == Armor.ArmorClass.light)
+                baseSpeed -= 0.05f - (agility * 0.0005f);
+        }
+
+        return baseSpeed;
+    }
+
+
+    // Player Equipment
+
     public Weapon GetWeapon() { return weapon; }
 
     public void EquipWeapon(Weapon weapon) { this.weapon = weapon; }
@@ -139,7 +295,6 @@ public class Player
                 hands = armor;
                 break;
         }
-        CheckSpeed();
     }
     public void UnequipArmor(Armor armor)
     {
@@ -161,121 +316,13 @@ public class Player
                 hands = Engine.NULL_ARMOR;
                 break;
         }
-        CheckSpeed();
     }
 
-    public void SetSpeed(float speed) { this.speed = speed; }
+    //**
 
-    public void CheckSpeed()
-    {
-        speed = DEFAULT_SPEED;
-
-        if(head != Engine.NULL_ARMOR)
-        {
-            if (head.GetArmorClass() == Armor.ArmorClass.heavy)
-                speed -= 0.1f;
-            else if (head.GetArmorClass() == Armor.ArmorClass.light)
-                speed -= 0.05f;
-        }
-        if(chest != Engine.NULL_ARMOR)
-        {
-            if (chest.GetArmorClass() == Armor.ArmorClass.heavy)
-                speed -= 0.1f;
-            else if (chest.GetArmorClass() == Armor.ArmorClass.light)
-                speed -= 0.05f;
-        }
-        if (legs != Engine.NULL_ARMOR)
-        {
-            if (legs.GetArmorClass() == Armor.ArmorClass.heavy)
-                speed -= 0.1f;
-            else if (legs.GetArmorClass() == Armor.ArmorClass.light)
-                speed -= 0.05f;
-        }
-        if (feet != Engine.NULL_ARMOR)
-        {
-            if (feet.GetArmorClass() == Armor.ArmorClass.heavy)
-                speed -= 0.1f;
-            else if (feet.GetArmorClass() == Armor.ArmorClass.light)
-                speed -= 0.05f;
-        }
-        if (hands != Engine.NULL_ARMOR)
-        {
-            if (hands.GetArmorClass() == Armor.ArmorClass.heavy)
-                speed -= 0.1f;
-            else if (hands.GetArmorClass() == Armor.ArmorClass.light)
-                speed -= 0.05f;
-        }
-    }
-
-    public void RegenAttributes()
-    {
-        stamina += GetStaminaRegen();
-        mana += GetManaRegen();
-
-        if (stamina > GetMaxStamina())
-            stamina = GetMaxStamina();
-        if (mana > GetMaxMana())
-            mana = GetMaxMana();
-    }
-
-    // Set Functions
-    public void SetName(string name) { this.name = name; }
-    public void SetTitle(string title) { this.title = title; }
-    public void SetLocation(Location newLocation) { currentLocation = newLocation; } 
-
-    public void SetLevel(uint level) { this.level = level; }
-    public void SetExp(uint exp) { this.exp = exp; }
-    public void SetTotalExp(uint totalExp) { this.totalExp = totalExp; }
-    public void SetExpToLevel(uint expToLevel) { this.expToLevel = expToLevel; }
-    public void SetSkillPoints(uint skillPoints) { this.skillPoints = skillPoints; }
-
-    public void SetHealth(int health) { this.health = health; }
-    public void SetStamina(int stamina) { this.stamina = stamina; }
-    public void SetMana(int mana) { this.mana = mana; }
-    public void SetMaxHealth(int maxHealth) { this.maxHealth = maxHealth; }
-    public void SetMaxStamina(int maxStamina) { this.maxStamina = maxStamina; }
-    public void SetMaxMana(int maxMana) { this.maxMana = maxMana; }
-    public void SetStaminaRegen(int staminaRegen) { this.staminaRegen = staminaRegen; }
-    public void SetManaRegen(int manaRegen) { this.manaRegen = manaRegen; }
-
-    public void SetCurrentWeight(uint currentWeight) { this.currentWeight = currentWeight; }
-    public void SetMaxWeight(uint maxWeight) { this.maxWeight = maxWeight; }
-
-    public void ChangeGold(int gold) { this.gold += gold; if (gold < 0) gold = 0; }
-
-    public void SetGold(int gold) { this.gold = gold; }
-
-    public void AddBattleCount(int count) { battleCount += count; }
-
-    public void AddExp(uint exp)
-    {
-        this.exp += exp;
-        totalExp += exp;
-        //("\nEarned Exp: {0}\nCurrent Exp: {1}\n", exp, this.exp);
-        CheckForLevelUp();
-    }
-
-    public void CheckForLevelUp()
-    {
-        if (exp >= expToLevel)
-        {
-            exp -= expToLevel;
-            level++;
-            expToLevel += (level * 10);
-            skillPoints++;
-
-            SetMaxHealth((int)(level * 5) + 20);
-            SetMaxStamina((int)(level * 5) + 10);
-            SetMaxMana((int)(level * 5) + 10);
-
-            GameObject.Find("GameManager").GetComponent<Engine>().OutputToText(String.Format("Level Up! New Level: {0}. Exp to Level: {1}.", level, expToLevel));
-            if(level == 3)
-                GameObject.Find("GameManager").GetComponent<Engine>().StartLevelThreeEvent();
-        }
-    }
+    // Status Effects
 
     public List<StatusEffect> GetStatusEffects() { return statusEffects; }
-
     public void AddStatusEffect(StatusEffect statusEffect) { statusEffects.Add(statusEffect); }
 
     public void DecrementStatusEffectTurn()
@@ -286,62 +333,71 @@ public class Player
                 statusEffect.DecrementTurnCount();
                 if (statusEffect.GetTurnAmount() < 1)
                     RemoveStatusEffect(statusEffect);
-            }              
+            }
     }
-
     public void RemoveStatusEffect(StatusEffect statusEffect) { statusEffects.Remove(statusEffect); }
-
     public void ClearStatusEffects() { statusEffects.Clear(); }
 
-    public void AddActiveStaminaSkill(ActiveSkill skill) { activeStaminaSkills.Add(skill); }
-
-    public void AddActiveManaSkill(ActiveSkill skill) { activeManaSkills.Add(skill); }
-
-    public List<ActiveSkill> GetActiveStaminaSkills() { return activeStaminaSkills; }
-
-    public List<ActiveSkill> GetActiveManaSkills() { return activeManaSkills; }
-
-    public ActiveSkill GetRandomStaminaSkill()
+    float GetTotalEffect(StatusEffect.StatusEffectType statusEffectType)
     {
+        float effectTotal = 0;
+        foreach (StatusEffect status in statusEffects)
+        {
+            if (statusEffectType == status.GetStatusEffectType())
+                effectTotal += status.GetStatChange();
+        }
+        return effectTotal;
+    }
+
+    //**
+
+    // Skills
+
+    public List<Skill> GetSkills() { return unlockedSkills; }
+
+    List<StaminaSkill> GetStaminaSkills()
+    {
+        List<StaminaSkill> sSkills = new List<StaminaSkill>();
+        foreach (Skill skill in unlockedSkills)
+            if (skill.GetSkillType() == Skill.SkillType.stamina)
+                sSkills.Add((StaminaSkill)skill);
+        return sSkills;
+    }
+
+    List<ManaSkill> GetManaSkills()
+    {
+        List<ManaSkill> mSkills = new List<ManaSkill>();
+        foreach (Skill skill in unlockedSkills)
+            if (skill.GetSkillType() == Skill.SkillType.mana)
+                mSkills.Add((ManaSkill)skill);
+        return mSkills;
+    }
+
+    public void AddSkill(Skill skill) { unlockedSkills.Add(skill); }
+
+    List<StaminaSkill> GetActiveStaminaSkills() { return GetStaminaSkills().FindAll(x => x.IsActive()); }
+    List<ManaSkill> GetActiveManaSkills() { return GetManaSkills().FindAll(x => x.IsActive()); }
+
+    public StaminaSkill GetRandomStaminaSkill()
+    {
+        List<StaminaSkill> activeStaminaSkills = GetActiveStaminaSkills();
         if (activeStaminaSkills.Count == 0)
             return null;
         else
             return (activeStaminaSkills.Count > 1) ? activeStaminaSkills[UnityEngine.Random.Range(0, activeStaminaSkills.Count)] : activeStaminaSkills[0];
     }
-
-    public ActiveSkill GetRandomManaSkill()
+    public ManaSkill GetRandomManaSkill()
     {
+        List<ManaSkill> activeManaSkills = GetActiveManaSkills();
         if (activeManaSkills.Count == 0)
             return null;
         else
             return (activeManaSkills.Count > 1) ? activeManaSkills[UnityEngine.Random.Range(0, activeManaSkills.Count)] : activeManaSkills[0];
     }
 
-    public void AddPassiveSkill(PassiveSkill passiveSkill) { passiveSkills.Add(passiveSkill); }
+    //**
 
-    public List<PassiveSkill> GetPassiveSkills() { return passiveSkills; }
-
-    public float GetPassivePercent(PassiveSkill.AttributeType attributeType)
-    {
-        float percentage = 1.0f;
-        foreach(PassiveSkill skill in passiveSkills)
-        {
-            if (skill.GetAttributeType() == attributeType && skill.IsPercentage())
-                percentage += skill.GetAttributeChange();
-        }
-        return percentage;
-    }
-
-    public int GetPassiveFlat(PassiveSkill.AttributeType attributeType)
-    {
-        int flat = 0;
-        foreach(PassiveSkill skill in passiveSkills)
-        {
-            if (skill.GetAttributeType() == attributeType && !skill.IsPercentage())
-                flat += (int)skill.GetAttributeChange();
-        }
-        return flat;
-    }
+    // Quests
 
     public bool CheckForQuest(uint id)
     {
@@ -350,6 +406,13 @@ public class Player
                 return true;
         return false;
     }
+    public Quest GetQuest(uint id)
+    {
+        return questList.Find(x => x.GetID() == id);
+    }
+
+    public List<Quest> GetQuestList() { return questList; }
+    public List<Quest> GetCompletedQuests() { return completedQuests; }
 
     public void AddQuest(Quest quest)
     {
@@ -362,69 +425,14 @@ public class Player
 
         }
     }
-
     public void RemoveQuest(Quest quest)
     {
         questList.Remove(quest);
     }
 
-    public Quest GetQuest(uint id)
-    {
-        return questList.Find(x => x.GetID() == id);
-    }
-
-    public List<Quest> GetQuestList() { return questList; }
-
     public void AddCompletedQuest(Quest quest) { completedQuests.Add(quest); }
     public void RemoveCompletedQuest(Quest quest) { completedQuests.Remove(quest); }
-    public List<Quest> GetCompletedQuests() { return completedQuests; }
 
-    public void ChangeHealth(int healthChange)
-    {
-        health += healthChange;
-        if (health < 0)
-            health = 0;
-        if (health > GetMaxHealth())
-            health = GetMaxHealth();
-
-        if(health < GetMaxHealth() * 0.1f)
-        {
-            Debug.Log("Playing Fast Heartbeat");
-            GameObject.Find("HeartbeatSlowLoopAudioSource").GetComponent<AudioSource>().Stop();
-            if(!GameObject.Find("HeartbeatFastLoopAudioSource").GetComponent<AudioSource>().isPlaying)
-                GameObject.Find("HeartbeatFastLoopAudioSource").GetComponent<AudioSource>().Play();
-        }
-        else if(health < GetMaxHealth() * 0.25f)
-        {
-            Debug.Log("Playing Slow Heartbeat");
-            GameObject.Find("HeartbeatFastLoopAudioSource").GetComponent<AudioSource>().Stop();
-            if (!GameObject.Find("HeartbeatSlowLoopAudioSource").GetComponent<AudioSource>().isPlaying)
-                GameObject.Find("HeartbeatSlowLoopAudioSource").GetComponent<AudioSource>().Play();
-        }
-        else
-        {
-            Debug.Log("Not Playing Heartbeat");
-            GameObject.Find("HeartbeatFastLoopAudioSource").GetComponent<AudioSource>().Stop();
-            GameObject.Find("HeartbeatSlowLoopAudioSource").GetComponent<AudioSource>().Stop();
-        }
-    }
-
-    public void ChangeStamina(int staminaChange)
-    {
-        stamina += staminaChange;
-        if (stamina < 0)
-            stamina = 0;
-        if (stamina > GetMaxStamina())
-            stamina = GetMaxStamina();
-    }
-
-    public void ChangeMana(int manaChange)
-    {
-        mana += manaChange;
-        if (mana < 0)
-            mana = 0;
-        if (mana > GetMaxMana())
-            mana = GetMaxMana();
-    }
+    //**
 
 }

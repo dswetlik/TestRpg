@@ -18,6 +18,6 @@ MonoBehaviour:
   attackType: 3
   attackAttribute: 1
   damageModifier: 4
-  attributeCost: 20
+  attributeCost: 15
   hasStatusEffects: 0
   statusEffects: []

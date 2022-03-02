@@ -12,16 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28257dec9f78a6b4681aa8437391fa82, type: 3}
   m_Name: Conv_ArenaOwner
   m_EditorClassIdentifier: 
-  npcLine: Either you walked in here and signed up extremely drunk, or your sponsor
-    really knocked your senses out of you. I imagine it is extremely hard not to
-    remember being dragged to your first fight. Any other questions?
+  npcLine: Considering the state you're in, I imagine you're some sort of criminal.
+    That's how most end up in our arena. How could someone not know how they got
+    to this place?
   dialogueType: 1
-  dialogueOptions:
-  - Well, what am I supposed to do now?
-  - So I'm supposed to keep fighting in this arena?
-  dialogueAnswers:
-  - {fileID: 11400000, guid: b862edaf1f2985b458bbb0c64d5e162d, type: 2}
+  dialogueTexts:
+  - Now what...
+  dialogueObjects:
   - {fileID: 11400000, guid: 27c22f7fd4bb67a46891d40beb838b0f, type: 2}
   dialogueSprites:
-  - {fileID: 0}
   - {fileID: 0}

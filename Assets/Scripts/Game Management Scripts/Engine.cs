@@ -199,23 +199,23 @@ public class Engine : MonoBehaviour
     GameObject arenaBossImg;
 
     // UI Skill Variables
+    public GameObject uiSkillSlot;
+    SortedDictionary<uint, GameObject> uiSkillSlots = new SortedDictionary<uint, GameObject>();
     GameObject skillScrollView;
-    GameObject magicScrollView;
-    GameObject passiveScrollView;
+    GameObject skillPanel;
 
     Skill selectedSkill;
 
     GameObject skillCostGO;
     GameObject skillDamageGO;
 
+    Image skillImg;
     Text skillNameTxt;
     Text skillDescriptionTxt;
     Text skillCostTxt;
     Text skillDamageTxt;
-    Text unlockedTxt;
-    Text skillSkillPointsTxt;
 
-    Button unlockSkillBtn;
+    Button activateSkillBtn;
 
     // UI Stats Variales
     Text statsPlayerNameTxt;
@@ -227,22 +227,27 @@ public class Engine : MonoBehaviour
     Text statsLvlTxt;
     Text statsTotalExpTxt;
     Text statsSkillPointsTxt;
+
     Text statsWeightTxt;
     Text statsGoldTxt;
     Text statsDmgTxt;
     Text statsDefTxt;
+    Text statsSpeedTxt;
+
+    Text playerStrengthTxt;
+    Text playerAgilityTxt;
+    Text playerIntelligenceTxt;
+    Text playerLuckTxt;
+
+    GameObject playerStrengthBtn;
+    GameObject playerAgilityBtn;
+    GameObject playerIntelligenceBtn;
+    GameObject playerLuckBtn;
 
     Slider statsHealthSlider;
     Slider statsStaminaSlider;
     Slider statsManaSlider;
     Slider statsExpSlider;
-
-    Text maxHealthBuffTxt;
-    Text maxStaminaBuffTxt;
-    Text maxManaBuffTxt;
-    Text maxWeaponDmgBuffTxt;
-    Text maxSkillDmgBuffTxt;
-    Text maxMagicDmgBuffTxt;
 
     // UI Dialogue Variables
     public GameObject dialogueBtn;
@@ -416,22 +421,63 @@ public class Engine : MonoBehaviour
     Armor demonicHelmet;
     Armor demonicChest;
 
-    Consumable smallHealthPotion;
-    Consumable smallStaminaPotion;
-    Consumable smallManaPotion;
-    Consumable healthPotion;
-    Consumable staminaPotion;
-    Consumable manaPotion;
-    Consumable largeHealthPotion;
-    Consumable largeStaminaPotion;
-    Consumable largeManaPotion;
-    Consumable giantHealthPotion;
-    Consumable giantStaminaPotion;
-    Consumable giantManaPotion;
-    Consumable rottenFlesh;
-    Consumable bearHeart;
-    Consumable wolfMeat;
-    Consumable ratMeat;
+    Potion smallHealthPotion;
+    Potion smallStaminaPotion;
+    Potion smallManaPotion;
+    Potion healthPotion;
+    Potion staminaPotion;
+    Potion manaPotion;
+    Potion largeHealthPotion;
+    Potion largeStaminaPotion;
+    Potion largeManaPotion;
+    Potion giantHealthPotion;
+    Potion giantStaminaPotion;
+    Potion giantManaPotion;
+
+    Edible rottenMeat;
+    Edible bearHeart;
+    Edible meatChunk;
+    Edible smallMeatChunk;
+
+    SkillBook heavySwingBook;
+    SkillBook targetedStrikeBook;
+    SkillBook masterfulStabBook;
+    SkillBook kickBook;
+    SkillBook slamBook;
+    SkillBook suplexBook;
+    SkillBook backhandBook;
+    SkillBook pommelThrowBook;
+    SkillBook concussiveStrikeBook;
+    SkillBook rushBook;
+    SkillBook sprintBook;
+    SkillBook litheGraceBook;
+    SkillBook temperBook;
+    SkillBook rageBook;
+    SkillBook frenzyBook;
+    SkillBook redoubtBook;
+    SkillBook bulwarkBook;
+    SkillBook bastionBook;
+    SkillBook seepBook;
+    SkillBook bleedBook;
+    SkillBook hemorrhageBook;
+    SkillBook fireballBook;
+    SkillBook infernoBook;
+    SkillBook immolationBook;
+    SkillBook frostbiteBook;
+    SkillBook iceSpikeBook;
+    SkillBook glaciateBook;
+    SkillBook sparksBook;
+    SkillBook lightningBoltBook;
+    SkillBook smiteBook;
+    SkillBook mendBook;
+    SkillBook healBook;
+    SkillBook rejuvenateBook;
+    SkillBook abateBook;
+    SkillBook allayBook;
+    SkillBook dispelBook;
+    SkillBook magicArrowBook;
+    SkillBook magicBoltBook;
+    SkillBook magicMissileBook;
 
     Location buruns;
     Location arenthiaBuruns;
@@ -461,102 +507,115 @@ public class Engine : MonoBehaviour
     ClearQuest clearIronRatCave;
     ClearQuest clearCreogCave;
 
-    ActiveSkill slash;
-    ActiveSkill stab;
-    ActiveSkill bash;
-    ActiveSkill cleave;
-    ActiveSkill hamstring;
-    ActiveSkill jab;
-    ActiveSkill pierce;
-    ActiveSkill punch;
+    Skill slash;
+    Skill stab;
+    Skill bash;
+    Skill cleave;
+    Skill cut;
+    Skill jab;
+    Skill pierce;
+    Skill punch;
 
-    ActiveSkill blindingLight;
-    ActiveSkill holyStrike;
+    Skill blindingLight;
+    Skill holyStrike;
 
-    ActiveSkill heavySwing;
-    ActiveSkill lightSpectralArrow;
-    ActiveSkill shortMeditation;
-    ActiveSkill slightAmpUp;
-    ActiveSkill slightIntimidation;
-    ActiveSkill stunningStrike;
-    ActiveSkill weakBleedingEdge;
-    ActiveSkill weakDefensiveStance;
-    ActiveSkill weakVenomStrike;
-    ActiveSkill ampUp;
-    ActiveSkill defensiveStance;
-    ActiveSkill intimidate;
-    ActiveSkill jarringStrike;
-    ActiveSkill meditation;
-    ActiveSkill smite;
-    ActiveSkill spectralArrow;
-    ActiveSkill toxicStrike;
-    ActiveSkill weepingEdge;
+    StaminaSkill heavySwing;
+    StaminaSkill targetedStrike;
+    StaminaSkill masterfulStab;
+    StaminaSkill kick;
+    StaminaSkill slam;
+    StaminaSkill suplex;
+    StaminaSkill backhand;
+    StaminaSkill pommelThrow;
+    StaminaSkill concussiveStrike;
+    StaminaSkill rush;
+    StaminaSkill sprint;
+    StaminaSkill litheGrace;
+    StaminaSkill temper;
+    StaminaSkill rage;
+    StaminaSkill frenzy;
+    StaminaSkill redoubt;
+    StaminaSkill bulwark;
+    StaminaSkill bastion;
+    StaminaSkill seep;
+    StaminaSkill bleed;
+    StaminaSkill hemorrhage;
 
-    ActiveSkill flames;
-    ActiveSkill lightHeal;
-    ActiveSkill frostBite;
-    ActiveSkill sparks;
-    ActiveSkill weakSpecShield;
-    ActiveSkill lightDispel;
-    ActiveSkill dispel;
-    ActiveSkill fireBolt;
-    ActiveSkill heal;
-    ActiveSkill iceSpike;
-    ActiveSkill lightning;
-    ActiveSkill spectralShield;
-
-    PassiveSkill weaponDamageA;
-    PassiveSkill weaponDamageB;
-    PassiveSkill weaponDamageC;
-    PassiveSkill weaponDamageD;
-
-    PassiveSkill skillDamageA;
-    PassiveSkill skillDamageB;
-    PassiveSkill skillDamageC;
-    PassiveSkill skillDamageD;
-
-    PassiveSkill manaDamageA;
-    PassiveSkill manaDamageB;
-    PassiveSkill manaDamageC;
-    PassiveSkill manaDamageD;
-
-    PassiveSkill maxHealthA;
-    PassiveSkill maxHealthB;
-    PassiveSkill maxHealthC;
-    PassiveSkill maxHealthD;
-
-    PassiveSkill maxStaminaA;
-    PassiveSkill maxStaminaB;
-    PassiveSkill maxStaminaC;
-    PassiveSkill maxStaminaD;
-
-    PassiveSkill maxManaA;
-    PassiveSkill maxManaB;
-    PassiveSkill maxManaC;
-    PassiveSkill maxManaD;
+    ManaSkill fireball;
+    ManaSkill inferno;
+    ManaSkill immolation;
+    ManaSkill frostbite;
+    ManaSkill iceSpike;
+    ManaSkill glaciate;
+    ManaSkill sparks;
+    ManaSkill lightningBolt;
+    ManaSkill smite;
+    ManaSkill mend;
+    ManaSkill heal;
+    ManaSkill rejuvenate;
+    ManaSkill abate;
+    ManaSkill allay;
+    ManaSkill dispel;
+    ManaSkill magicArrow;
+    ManaSkill magicBolt;
+    ManaSkill magicMissile;
 
     Enemy smallRat;
+
+    Enemy rat_01;
+    Enemy rat_03;
+    Enemy rat_05;
+
+    Enemy ratPack_03;
+    Enemy ratPack_07;
+    Enemy ratPack_10;
+
     Enemy giantRat;
-    Enemy ratPack;
-    Enemy rat;
-    Enemy redSlime;
-    Enemy greenSlime;
-    Enemy blueSlime;
 
     BossEnemy ratKing;
 
-    Enemy amalgamSlime;
-    Enemy goblinShaman;
-    Enemy capturedBandit;
+    Enemy blueSlime_03;
+    Enemy blueSlime_05;
+
+    Enemy greenSlime_03;
+    Enemy greenSlime_05;
+
+    Enemy redSlime_03;
+    Enemy redSlime_05;
+
+    Enemy amalgamSlime_06;
+    Enemy amalgamSlime_10;
+    Enemy amalgamSlime_14;
+    Enemy amalgamSlime_18;
+
+    Enemy goblinShaman_06;
+    Enemy goblinShaman_09;
+
+    Enemy capturedBandit_06;
+    Enemy capturedBandit_10;
+    Enemy capturedBandit_14;
+    Enemy capturedBandit_18;
+
     Enemy castleGuard;
-    Enemy grayWolf;
-    Enemy direWolf;
+
+    Enemy grayWolf_06;
+    Enemy grayWolf_09;
+
+    Enemy direWolf_08;
+    Enemy direWolf_12;
+    Enemy direWolf_16;
 
     BossEnemy banditChief;
 
-    Enemy gladiator;
-    Enemy warlock;
-    Enemy witch;
+    Enemy gladiator_11;
+    Enemy gladiator_14;
+    Enemy gladiator_17;
+
+    Enemy warlock_11;
+    Enemy warlock_14;
+
+    Enemy witch_11;
+    Enemy witch_14;
 
     BossEnemy veteran;
 
@@ -587,11 +646,13 @@ public class Engine : MonoBehaviour
     NPC temrik;
     NPC mysteriousMan;
     NPC talkingGroup;
+    NPC telyrid;
 
     Store heavyAnvil;
     Store litheWarrior;
     Store magicMortar;
     Store theBulwark;
+    Store telyridsTomes;
 
     Dungeon ironRatCave;
     Dungeon deepForest;
@@ -753,87 +814,7 @@ public class Engine : MonoBehaviour
         LocationDictionary.Add(arenthiaBuruns.GetID(), arenthiaBuruns);
         LocationDictionary.Add(burunsArenthia.GetID(), burunsArenthia);
 
-        rat = Instantiate(Resources.Load<Enemy>("Enemies/101_Rat"));
-        giantRat = Instantiate(Resources.Load<Enemy>("Enemies/103_GiantRat"));
-        smallRat = Instantiate(Resources.Load<Enemy>("Enemies/100_Small Rat"));
-        ratPack = Instantiate(Resources.Load<Enemy>("Enemies/102_RatPack"));
-        redSlime = Instantiate(Resources.Load<Enemy>("Enemies/107_RedSlime"));
-        greenSlime = Instantiate(Resources.Load<Enemy>("Enemies/106_GreenSlime"));
-        blueSlime = Instantiate(Resources.Load<Enemy>("Enemies/105_BlueSlime"));
-
-        ratKing = Instantiate(Resources.Load<BossEnemy>("Enemies/104_RatKing"));
-
-        amalgamSlime = Instantiate(Resources.Load<Enemy>("Enemies/108_AmalgamSlime"));
-        goblinShaman = Instantiate(Resources.Load<Enemy>("Enemies/109_GoblinShaman"));
-        capturedBandit = Instantiate(Resources.Load<Enemy>("Enemies/110_CapturedBandit"));
-        castleGuard = Instantiate(Resources.Load<Enemy>("Enemies/112_CastleGuard"));
-        grayWolf = Instantiate(Resources.Load<Enemy>("Enemies/113_GrayWolf"));
-        direWolf = Instantiate(Resources.Load<Enemy>("Enemies/114_DireWolf"));
-
-        banditChief = Instantiate(Resources.Load<BossEnemy>("Enemies/111_BanditChief"));
-
-        gladiator = Instantiate(Resources.Load<Enemy>("Enemies/115_Gladiator"));
-        warlock = Instantiate(Resources.Load<Enemy>("Enemies/116_Warlock"));
-        witch = Instantiate(Resources.Load<Enemy>("Enemies/117_Witch"));
-
-        veteran = Instantiate(Resources.Load<BossEnemy>("Enemies/118_Veteran"));
-
-        chiefBattlemage = Instantiate(Resources.Load<Enemy>("Enemies/119_ChiefBattlemage"));
-        chiefKnight = Instantiate(Resources.Load<Enemy>("Enemies/120_ChiefKnight"));
-        warWolf = Instantiate(Resources.Load<Enemy>("Enemies/121_WarWolf"));
-
-        arenaGrandmaster = Instantiate(Resources.Load<BossEnemy>("Enemies/122_ArenaGrandmaster"));
-
-        ironRat = Instantiate(Resources.Load<Enemy>("Enemies/123_IronRat"));
-        weakenedIronRat = Instantiate(Resources.Load<Enemy>("Enemies/124_WeakenedIronRat"));
-        brownBear = Instantiate(Resources.Load<Enemy>("Enemies/125_BrownBear"));
-        forestBandit = Instantiate(Resources.Load<Enemy>("Enemies/126_ForestBandit"));
-        errantKnight = Instantiate(Resources.Load<Enemy>("Enemies/127_ErrantKnight"));
-        stunnedErrantKnight = Instantiate(Resources.Load<Enemy>("Enemies/128_StunnedErrantKnight"));
-        skeleton = Instantiate(Resources.Load<Enemy>("Enemies/129_Skeleton"));
-        weakenedSkeleton = Instantiate(Resources.Load<Enemy>("Enemies/130_WeakenedSkeleton"));
-        zombie = Instantiate(Resources.Load<Enemy>("Enemies/131_Zombie"));
-
-        EnemyDictionary.Add(rat.GetID(), rat);
-        EnemyDictionary.Add(smallRat.GetID(), smallRat);
-        EnemyDictionary.Add(ratPack.GetID(), ratPack);
-        EnemyDictionary.Add(giantRat.GetID(), giantRat);
-        EnemyDictionary.Add(redSlime.GetID(), redSlime);
-        EnemyDictionary.Add(greenSlime.GetID(), greenSlime);
-        EnemyDictionary.Add(blueSlime.GetID(), blueSlime);
-
-        EnemyDictionary.Add(ratKing.GetID(), ratKing);
-
-        EnemyDictionary.Add(amalgamSlime.GetID(), amalgamSlime);
-        EnemyDictionary.Add(goblinShaman.GetID(), goblinShaman);
-        EnemyDictionary.Add(capturedBandit.GetID(), capturedBandit);
-        EnemyDictionary.Add(castleGuard.GetID(), castleGuard);
-        EnemyDictionary.Add(grayWolf.GetID(), grayWolf);
-        EnemyDictionary.Add(direWolf.GetID(), direWolf);
-
-        EnemyDictionary.Add(banditChief.GetID(), banditChief);
-
-        EnemyDictionary.Add(gladiator.GetID(), gladiator);
-        EnemyDictionary.Add(warlock.GetID(), warlock);
-        EnemyDictionary.Add(witch.GetID(), witch);
-
-        EnemyDictionary.Add(veteran.GetID(), veteran);
-
-        EnemyDictionary.Add(chiefBattlemage.GetID(), chiefBattlemage);
-        EnemyDictionary.Add(chiefKnight.GetID(), chiefKnight);
-        EnemyDictionary.Add(warWolf.GetID(), warWolf);
-
-        EnemyDictionary.Add(arenaGrandmaster.GetID(), arenaGrandmaster);
-
-        EnemyDictionary.Add(ironRat.GetID(), ironRat);
-        EnemyDictionary.Add(weakenedIronRat.GetID(), weakenedIronRat);
-        EnemyDictionary.Add(brownBear.GetID(), brownBear);
-        EnemyDictionary.Add(forestBandit.GetID(), forestBandit);
-        EnemyDictionary.Add(errantKnight.GetID(), errantKnight);
-        EnemyDictionary.Add(stunnedErrantKnight.GetID(), stunnedErrantKnight);
-        EnemyDictionary.Add(skeleton.GetID(), skeleton);
-        EnemyDictionary.Add(weakenedSkeleton.GetID(), weakenedSkeleton);
-        EnemyDictionary.Add(zombie.GetID(), zombie);
+        InitializeEnemies();
 
         hirgirdBlacksmith = Instantiate(Resources.Load<NPC>("NPC/Hirgird"));
         inveraAlchemist = Instantiate(Resources.Load<NPC>("NPC/Invera"));
@@ -846,6 +827,7 @@ public class Engine : MonoBehaviour
         temrik = Instantiate(Resources.Load<NPC>("NPC/Temrik"));
         mysteriousMan = Instantiate(Resources.Load<NPC>("NPC/MysteriousMan"));
         talkingGroup = Instantiate(Resources.Load<NPC>("NPC/TalkingGroup"));
+        telyrid = Instantiate(Resources.Load<NPC>("NPC/Telyrid"));
 
         NPCDictionary.Add(hirgirdBlacksmith.GetID(), hirgirdBlacksmith);
         NPCDictionary.Add(inveraAlchemist.GetID(), inveraAlchemist);
@@ -858,16 +840,19 @@ public class Engine : MonoBehaviour
         NPCDictionary.Add(temrik.GetID(), temrik);
         NPCDictionary.Add(mysteriousMan.GetID(), mysteriousMan);
         NPCDictionary.Add(talkingGroup.GetID(), talkingGroup);
+        NPCDictionary.Add(telyrid.GetID(), telyrid);
 
         heavyAnvil = Instantiate(Resources.Load<Store>("Stores/HeavyAnvil"));
         litheWarrior = Instantiate(Resources.Load<Store>("Stores/LitheWarrior"));
         magicMortar = Instantiate(Resources.Load<Store>("Stores/MagicMortar"));
         theBulwark = Instantiate(Resources.Load<Store>("Stores/TheBulwark"));
+        telyridsTomes = Instantiate(Resources.Load<Store>("Stores/TelyridsTomes"));
 
         StoreDictionary.Add(heavyAnvil.GetID(), heavyAnvil);
         StoreDictionary.Add(litheWarrior.GetID(), litheWarrior);
         StoreDictionary.Add(magicMortar.GetID(), magicMortar);
         StoreDictionary.Add(theBulwark.GetID(), theBulwark);
+        StoreDictionary.Add(telyridsTomes.GetID(), telyridsTomes);
 
         ironRatCave = Instantiate(Resources.Load<Dungeon>("Dungeons/IronRatCave/IronRatCave"));
         deepForest = Instantiate(Resources.Load<Dungeon>("Dungeons/DeepForest/DeepForest"));
@@ -958,39 +943,39 @@ public class Engine : MonoBehaviour
 
         // Weapons
 
-        crookedDagger = Resources.Load<Weapon>("Items/Weapons/Crooked Dagger");
+        crookedDagger = Resources.Load<Weapon>("Items/Weapons/100_CrookedDagger");
 
-        copperDagger = Resources.Load<Weapon>("Items/Weapons/Copper/Copper Dagger");
-        copperSword = Resources.Load<Weapon>("Items/Weapons/Copper/Copper Sword");
-        copperAxe = Resources.Load<Weapon>("Items/Weapons/Copper/Copper Axe");
-        copperSpear = Resources.Load<Weapon>("Items/Weapons/Copper/Copper Spear");
-        copperMace = Resources.Load<Weapon>("Items/Weapons/Copper/Copper Mace");
+        copperDagger = Resources.Load<Weapon>("Items/Weapons/101_CopperDagger");
+        copperSword = Resources.Load<Weapon>("Items/Weapons/102_CopperSword");
+        copperAxe = Resources.Load<Weapon>("Items/Weapons/103_CopperAxe");
+        copperSpear = Resources.Load<Weapon>("Items/Weapons/104_CopperSpear");
+        copperMace = Resources.Load<Weapon>("Items/Weapons/105_CopperMace");
 
-        ironDagger = Resources.Load<Weapon>("Items/Weapons/Iron/Iron Dagger");
-        ironSword = Resources.Load<Weapon>("Items/Weapons/Iron/Iron Sword");
-        ironAxe = Resources.Load<Weapon>("Items/Weapons/Iron/Iron Axe");
-        ironSpear = Resources.Load<Weapon>("Items/Weapons/Iron/Iron Spear");
-        ironMace = Resources.Load<Weapon>("Items/Weapons/Iron/Iron Mace");
+        ironDagger = Resources.Load<Weapon>("Items/Weapons/106_IronDagger");
+        ironSword = Resources.Load<Weapon>("Items/Weapons/107_IronSword");
+        ironAxe = Resources.Load<Weapon>("Items/Weapons/108_IronAxe");
+        ironSpear = Resources.Load<Weapon>("Items/Weapons/109_IronSpear");
+        ironMace = Resources.Load<Weapon>("Items/Weapons/110_IronMace");
 
-        steelDagger = Resources.Load<Weapon>("Items/Weapons/Steel/Steel Dagger");
-        steelSword = Resources.Load<Weapon>("Items/Weapons/Steel/Steel Sword");
-        steelAxe = Resources.Load<Weapon>("Items/Weapons/Steel/Steel Axe");
-        steelSpear = Resources.Load<Weapon>("Items/Weapons/Steel/Steel Spear");
-        steelMace = Resources.Load<Weapon>("Items/Weapons/Steel/Steel Mace");
+        steelDagger = Resources.Load<Weapon>("Items/Weapons/111_SteelDagger");
+        steelSword = Resources.Load<Weapon>("Items/Weapons/112_SteelSword");
+        steelAxe = Resources.Load<Weapon>("Items/Weapons/113_SteelAxe");
+        steelSpear = Resources.Load<Weapon>("Items/Weapons/114_SteelSpear");
+        steelMace = Resources.Load<Weapon>("Items/Weapons/115_SteelMace");
 
-        electrumDagger = Resources.Load<Weapon>("Items/Weapons/Electrum/Electrum Dagger");
-        electrumSword = Resources.Load<Weapon>("Items/Weapons/Electrum/Electrum Sword");
-        electrumAxe = Resources.Load<Weapon>("Items/Weapons/Electrum/Electrum Axe");
-        electrumSpear = Resources.Load<Weapon>("Items/Weapons/Electrum/Electrum Spear");
-        electrumMace = Resources.Load<Weapon>("Items/Weapons/Electrum/Electrum Mace");
+        electrumDagger = Resources.Load<Weapon>("Items/Weapons/116_ElectrumDagger");
+        electrumSword = Resources.Load<Weapon>("Items/Weapons/117_ElectrumSword");
+        electrumAxe = Resources.Load<Weapon>("Items/Weapons/118_ElectrumAxe");
+        electrumSpear = Resources.Load<Weapon>("Items/Weapons/119_ElectrumSpear");
+        electrumMace = Resources.Load<Weapon>("Items/Weapons/120_ElectrumMace");
 
-        royalDagger = Resources.Load<Weapon>("Items/Weapons/Royal/Royal Dagger");
-        royalSword = Resources.Load<Weapon>("Items/Weapons/Royal/Royal Sword");
-        royalAxe = Resources.Load<Weapon>("Items/Weapons/Royal/Royal Axe");
-        royalSpear = Resources.Load<Weapon>("Items/Weapons/Royal/Royal Spear");
-        royalMace = Resources.Load<Weapon>("Items/Weapons/Royal/Royal Mace");
+        royalDagger = Resources.Load<Weapon>("Items/Weapons/121_RoyalDagger");
+        royalSword = Resources.Load<Weapon>("Items/Weapons/122_RoyalSword");
+        royalAxe = Resources.Load<Weapon>("Items/Weapons/123_RoyalAxe");
+        royalSpear = Resources.Load<Weapon>("Items/Weapons/124_RoyalSpear");
+        royalMace = Resources.Load<Weapon>("Items/Weapons/125_RoyalMace");
 
-        swordOfLight = Resources.Load<Weapon>("Items/Weapons/Artifacts/SwordOfLight");
+        swordOfLight = Resources.Load<Weapon>("Items/Weapons/126_SwordOfLight");
 
         ItemDictionary.Add(crookedDagger.GetID(), crookedDagger);
 
@@ -1155,23 +1140,64 @@ public class Engine : MonoBehaviour
 
         // Consumables
 
-        smallHealthPotion = Resources.Load<Consumable>("Items/Consumables/500_SmallHealthPotion");
-        smallManaPotion = Resources.Load<Consumable>("Items/Consumables/501_SmallManaPotion");
-        smallStaminaPotion = Resources.Load<Consumable>("Items/Consumables/502_SmallStaminaPotion");
-        healthPotion = Resources.Load<Consumable>("Items/Consumables/503_HealthPotion");
-        manaPotion = Resources.Load<Consumable>("Items/Consumables/504_ManaPotion");
-        staminaPotion = Resources.Load<Consumable>("Items/Consumables/505_StaminaPotion");
-        largeHealthPotion = Resources.Load<Consumable>("Items/Consumables/506_LargeHealthPotion");
-        largeManaPotion = Resources.Load<Consumable>("Items/Consumables/507_LargeManaPotion");
-        largeStaminaPotion = Resources.Load<Consumable>("Items/Consumables/508_LargeStaminaPotion");
-        giantHealthPotion = Resources.Load<Consumable>("Items/Consumables/509_GiantHealthPotion");
-        giantManaPotion = Resources.Load<Consumable>("Items/Consumables/510_GiantManaPotion");
-        giantStaminaPotion = Resources.Load<Consumable>("Items/Consumables/511_GiantStaminaPotion");
-        rottenFlesh = Resources.Load<Consumable>("Items/Consumables/596_RottenFlesh");
-        bearHeart = Resources.Load<Consumable>("Items/Consumables/597_BearHeart");
-        wolfMeat = Resources.Load<Consumable>("Items/Consumables/598_WolfMeat");
-        ratMeat = Resources.Load<Consumable>("Items/Consumables/599_RatMeat");
+        smallHealthPotion = Resources.Load<Potion>("Items/Consumables/500_HealthTincture");
+        smallManaPotion = Resources.Load<Potion>("Items/Consumables/501_ManaTincture");
+        smallStaminaPotion = Resources.Load<Potion>("Items/Consumables/502_StaminaTincture");
+        healthPotion = Resources.Load<Potion>("Items/Consumables/503_HealthSolution");
+        manaPotion = Resources.Load<Potion>("Items/Consumables/504_ManaSolution");
+        staminaPotion = Resources.Load<Potion>("Items/Consumables/505_StaminaSolution");
+        largeHealthPotion = Resources.Load<Potion>("Items/Consumables/506_HealthPotion");
+        largeManaPotion = Resources.Load<Potion>("Items/Consumables/507_ManaPotion");
+        largeStaminaPotion = Resources.Load<Potion>("Items/Consumables/508_StaminaPotion");
+        giantHealthPotion = Resources.Load<Potion>("Items/Consumables/509_HealthElixir");
+        giantManaPotion = Resources.Load<Potion>("Items/Consumables/510_ManaElixir");
+        giantStaminaPotion = Resources.Load<Potion>("Items/Consumables/511_StaminaElixir");
 
+        rottenMeat = Resources.Load<Edible>("Items/Consumables/596_RottenMeat");
+        bearHeart = Resources.Load<Edible>("Items/Consumables/597_BearHeart");
+        meatChunk = Resources.Load<Edible>("Items/Consumables/598_MeatChunk");
+        smallMeatChunk = Resources.Load<Edible>("Items/Consumables/599_SmallMeatChunk");
+
+        heavySwingBook = Resources.Load<SkillBook>("Items/Consumables/600_HeavySwing");
+        targetedStrikeBook = Resources.Load<SkillBook>("Items/Consumables/601_TargetedStrike");
+        masterfulStabBook = Resources.Load<SkillBook>("Items/Consumables/602_MasterfulStab");
+        kickBook = Resources.Load<SkillBook>("Items/Consumables/603_Kick");
+        slamBook = Resources.Load<SkillBook>("Items/Consumables/604_Slam");
+        suplexBook = Resources.Load<SkillBook>("Items/Consumables/605_Suplex");
+        backhandBook = Resources.Load<SkillBook>("Items/Consumables/606_Backhand");
+        pommelThrowBook = Resources.Load<SkillBook>("Items/Consumables/607_PommelThrow");
+        concussiveStrikeBook = Resources.Load<SkillBook>("Items/Consumables/608_ConcussiveStrike");
+        rushBook = Resources.Load<SkillBook>("Items/Consumables/609_Rush");
+        sprintBook = Resources.Load<SkillBook>("Items/Consumables/610_Sprint");
+        litheGraceBook = Resources.Load<SkillBook>("Items/Consumables/611_LitheGrace");
+        temperBook = Resources.Load<SkillBook>("Items/Consumables/612_Temper");
+        rageBook = Resources.Load<SkillBook>("Items/Consumables/613_Rage");
+        frenzyBook = Resources.Load<SkillBook>("Items/Consumables/614_Frenzy");
+        redoubtBook = Resources.Load<SkillBook>("Items/Consumables/615_Redoubt");
+        bulwarkBook = Resources.Load<SkillBook>("Items/Consumables/616_Bulwark");
+        bastionBook = Resources.Load<SkillBook>("Items/Consumables/617_Bastion");
+        seepBook = Resources.Load<SkillBook>("Items/Consumables/618_Seep");
+        bleedBook = Resources.Load<SkillBook>("Items/Consumables/619_Bleed");
+        hemorrhageBook = Resources.Load<SkillBook>("Items/Consumables/620_Hemorrhage");
+
+        fireballBook = Resources.Load<SkillBook>("Items/Consumables/621_Fireball");
+        infernoBook = Resources.Load<SkillBook>("Items/Consumables/622_Inferno");
+        immolationBook = Resources.Load<SkillBook>("Items/Consumables/623_Immolation");
+        frostbiteBook = Resources.Load<SkillBook>("Items/Consumables/624_Frostbite");
+        iceSpikeBook = Resources.Load<SkillBook>("Items/Consumables/625_IceSpike");
+        glaciateBook = Resources.Load<SkillBook>("Items/Consumables/626_Glaciate");
+        sparksBook = Resources.Load<SkillBook>("Items/Consumables/627_Sparks");
+        lightningBoltBook = Resources.Load<SkillBook>("Items/Consumables/628_LightningBolt");
+        smiteBook = Resources.Load<SkillBook>("Items/Consumables/629_Smite");
+        mendBook = Resources.Load<SkillBook>("Items/Consumables/630_Mend");
+        healBook = Resources.Load<SkillBook>("Items/Consumables/631_Heal");
+        rejuvenateBook = Resources.Load<SkillBook>("Items/Consumables/632_Rejuvenate");
+        abateBook = Resources.Load<SkillBook>("Items/Consumables/633_Abate");
+        allayBook = Resources.Load<SkillBook>("Items/Consumables/634_Allay");
+        dispelBook = Resources.Load<SkillBook>("Items/Consumables/635_Dispel");
+        magicArrowBook = Resources.Load<SkillBook>("Items/Consumables/636_MagicArrow");
+        magicBoltBook = Resources.Load<SkillBook>("Items/Consumables/637_MagicBolt");
+        magicMissileBook = Resources.Load<SkillBook>("Items/Consumables/638_MagicMissile");
 
         ItemDictionary.Add(smallHealthPotion.GetID(), smallHealthPotion);
         ItemDictionary.Add(smallStaminaPotion.GetID(), smallStaminaPotion);
@@ -1185,164 +1211,317 @@ public class Engine : MonoBehaviour
         ItemDictionary.Add(giantHealthPotion.GetID(), giantHealthPotion);
         ItemDictionary.Add(giantStaminaPotion.GetID(), giantStaminaPotion);
         ItemDictionary.Add(giantManaPotion.GetID(), giantManaPotion);
-        ItemDictionary.Add(rottenFlesh.GetID(), rottenFlesh);
+        ItemDictionary.Add(rottenMeat.GetID(), rottenMeat);
         ItemDictionary.Add(bearHeart.GetID(), bearHeart);
-        ItemDictionary.Add(wolfMeat.GetID(), wolfMeat);
-        ItemDictionary.Add(ratMeat.GetID(), ratMeat);
-        
+        ItemDictionary.Add(meatChunk.GetID(), meatChunk);
+        ItemDictionary.Add(smallMeatChunk.GetID(), smallMeatChunk);
+
+        ItemDictionary.Add(heavySwingBook.GetID(), heavySwingBook);
+        ItemDictionary.Add(targetedStrikeBook.GetID(), targetedStrikeBook);
+        ItemDictionary.Add(masterfulStabBook.GetID(), masterfulStabBook);
+        ItemDictionary.Add(kickBook.GetID(), kickBook);
+        ItemDictionary.Add(slamBook.GetID(), slamBook);
+        ItemDictionary.Add(suplexBook.GetID(), suplexBook);
+        ItemDictionary.Add(backhandBook.GetID(), backhandBook);
+        ItemDictionary.Add(pommelThrowBook.GetID(), pommelThrowBook);
+        ItemDictionary.Add(concussiveStrikeBook.GetID(), concussiveStrikeBook);
+        ItemDictionary.Add(rushBook.GetID(), rushBook);
+        ItemDictionary.Add(sprintBook.GetID(), sprintBook);
+        ItemDictionary.Add(litheGraceBook.GetID(), litheGraceBook);
+        ItemDictionary.Add(temperBook.GetID(), temperBook);
+        ItemDictionary.Add(rageBook.GetID(), rageBook);
+        ItemDictionary.Add(frenzyBook.GetID(), frenzyBook);
+        ItemDictionary.Add(redoubtBook.GetID(), redoubtBook);
+        ItemDictionary.Add(bulwarkBook.GetID(), bulwarkBook);
+        ItemDictionary.Add(bastionBook.GetID(), bastionBook);
+        ItemDictionary.Add(seepBook.GetID(), seepBook);
+        ItemDictionary.Add(bleedBook.GetID(), bleedBook);
+        ItemDictionary.Add(hemorrhageBook.GetID(), hemorrhageBook);
+
+        ItemDictionary.Add(fireballBook.GetID(), fireballBook);
+        ItemDictionary.Add(infernoBook.GetID(), infernoBook);
+        ItemDictionary.Add(immolationBook.GetID(), immolationBook);
+        ItemDictionary.Add(frostbiteBook.GetID(), frostbiteBook);
+        ItemDictionary.Add(iceSpikeBook.GetID(), iceSpikeBook);
+        ItemDictionary.Add(glaciateBook.GetID(), glaciateBook);
+        ItemDictionary.Add(sparksBook.GetID(), sparksBook);
+        ItemDictionary.Add(lightningBoltBook.GetID(), lightningBoltBook);
+        ItemDictionary.Add(smiteBook.GetID(), smiteBook);
+        ItemDictionary.Add(mendBook.GetID(), mendBook);
+        ItemDictionary.Add(healBook.GetID(), healBook);
+        ItemDictionary.Add(rejuvenateBook.GetID(), rejuvenateBook);
+        ItemDictionary.Add(abateBook.GetID(), abateBook);
+        ItemDictionary.Add(allayBook.GetID(), allayBook);
+        ItemDictionary.Add(dispelBook.GetID(), dispelBook);
+        ItemDictionary.Add(magicArrowBook.GetID(), magicArrowBook);
+        ItemDictionary.Add(magicBoltBook.GetID(), magicBoltBook);
+        ItemDictionary.Add(magicMissileBook.GetID(), magicMissileBook);
+
+    }
+
+    void InitializeEnemies()
+    {
+        smallRat = Instantiate(Resources.Load<Enemy>("Enemies/100_SmallRat"));
+
+        rat_01 = Instantiate(Resources.Load<Enemy>("Enemies/101_Rat_1"));
+        rat_03 = Instantiate(Resources.Load<Enemy>("Enemies/101_Rat_3"));
+        rat_05 = Instantiate(Resources.Load<Enemy>("Enemies/101_Rat_5"));
+
+        ratPack_03 = Instantiate(Resources.Load<Enemy>("Enemies/102_RatPack_3"));
+        ratPack_07 = Instantiate(Resources.Load<Enemy>("Enemies/102_RatPack_7"));
+        ratPack_10 = Instantiate(Resources.Load<Enemy>("Enemies/102_RatPack_10"));
+
+        giantRat = Instantiate(Resources.Load<Enemy>("Enemies/103_GiantRat"));
+
+        ratKing = Instantiate(Resources.Load<BossEnemy>("Enemies/104_RatKing"));
+
+        blueSlime_03 = Instantiate(Resources.Load<Enemy>("Enemies/105_BlueSlime_3"));
+        blueSlime_05 = Instantiate(Resources.Load<Enemy>("Enemies/105_BlueSlime_5"));
+
+        greenSlime_03 = Instantiate(Resources.Load<Enemy>("Enemies/106_GreenSlime_3"));
+        greenSlime_05 = Instantiate(Resources.Load<Enemy>("Enemies/106_GreenSlime_5"));
+
+        redSlime_03 = Instantiate(Resources.Load<Enemy>("Enemies/107_RedSlime_3"));
+        redSlime_05 = Instantiate(Resources.Load<Enemy>("Enemies/107_RedSlime_5"));
+
+        amalgamSlime_06 = Instantiate(Resources.Load<Enemy>("Enemies/108_AmalgamSlime_6"));
+        amalgamSlime_10 = Instantiate(Resources.Load<Enemy>("Enemies/108_AmalgamSlime_10"));
+        amalgamSlime_14 = Instantiate(Resources.Load<Enemy>("Enemies/108_AmalgamSlime_14"));
+        amalgamSlime_18 = Instantiate(Resources.Load<Enemy>("Enemies/108_AmalgamSlime_18"));
+
+        goblinShaman_06 = Instantiate(Resources.Load<Enemy>("Enemies/109_GoblinShaman_6"));
+        goblinShaman_09 = Instantiate(Resources.Load<Enemy>("Enemies/109_GoblinShaman_9"));
+
+        capturedBandit_06 = Instantiate(Resources.Load<Enemy>("Enemies/110_CapturedBandit_6"));
+        capturedBandit_10 = Instantiate(Resources.Load<Enemy>("Enemies/110_CapturedBandit_10"));
+        capturedBandit_14 = Instantiate(Resources.Load<Enemy>("Enemies/110_CapturedBandit_14"));
+        capturedBandit_18 = Instantiate(Resources.Load<Enemy>("Enemies/110_CapturedBandit_18"));
+
+        castleGuard = Instantiate(Resources.Load<Enemy>("Enemies/112_CastleGuard"));
+
+        grayWolf_06 = Instantiate(Resources.Load<Enemy>("Enemies/113_GrayWolf_6"));
+        grayWolf_09 = Instantiate(Resources.Load<Enemy>("Enemies/113_GrayWolf_9"));
+
+        direWolf_08 = Instantiate(Resources.Load<Enemy>("Enemies/114_DireWolf_8"));
+        direWolf_12 = Instantiate(Resources.Load<Enemy>("Enemies/114_DireWolf_12"));
+        direWolf_16 = Instantiate(Resources.Load<Enemy>("Enemies/114_DireWolf_16"));
+
+        banditChief = Instantiate(Resources.Load<BossEnemy>("Enemies/111_BanditChief"));
+
+        gladiator_11 = Instantiate(Resources.Load<Enemy>("Enemies/115_Gladiator_11"));
+        gladiator_14 = Instantiate(Resources.Load<Enemy>("Enemies/115_Gladiator_14"));
+        gladiator_17 = Instantiate(Resources.Load<Enemy>("Enemies/115_Gladiator_17"));
+
+        warlock_11 = Instantiate(Resources.Load<Enemy>("Enemies/116_Warlock_11"));
+        warlock_14 = Instantiate(Resources.Load<Enemy>("Enemies/116_Warlock_14"));
+
+        witch_11 = Instantiate(Resources.Load<Enemy>("Enemies/117_Witch_11"));
+        witch_14 = Instantiate(Resources.Load<Enemy>("Enemies/117_Witch_14"));
+
+        veteran = Instantiate(Resources.Load<BossEnemy>("Enemies/118_Veteran"));
+
+        chiefBattlemage = Instantiate(Resources.Load<Enemy>("Enemies/119_ChiefBattlemage"));
+        chiefKnight = Instantiate(Resources.Load<Enemy>("Enemies/120_ChiefKnight"));
+        warWolf = Instantiate(Resources.Load<Enemy>("Enemies/121_WarWolf"));
+
+        arenaGrandmaster = Instantiate(Resources.Load<BossEnemy>("Enemies/122_ArenaGrandmaster"));
+
+        ironRat = Instantiate(Resources.Load<Enemy>("Enemies/123_IronRat"));
+        weakenedIronRat = Instantiate(Resources.Load<Enemy>("Enemies/123_WeakenedIronRat"));
+        brownBear = Instantiate(Resources.Load<Enemy>("Enemies/124_BrownBear"));
+        forestBandit = Instantiate(Resources.Load<Enemy>("Enemies/125_ForestBandit"));
+        errantKnight = Instantiate(Resources.Load<Enemy>("Enemies/126_ErrantKnight"));
+        stunnedErrantKnight = Instantiate(Resources.Load<Enemy>("Enemies/126_StunnedErrantKnight"));
+        skeleton = Instantiate(Resources.Load<Enemy>("Enemies/127_Skeleton"));
+        weakenedSkeleton = Instantiate(Resources.Load<Enemy>("Enemies/127_WeakenedSkeleton"));
+        zombie = Instantiate(Resources.Load<Enemy>("Enemies/128_Zombie"));
+
+        EnemyDictionary.Add(smallRat.GetID(), smallRat);
+
+        EnemyDictionary.Add(rat_01.GetID(), rat_01);
+        EnemyDictionary.Add(rat_03.GetID(), rat_03);
+        EnemyDictionary.Add(rat_05.GetID(), rat_05);
+
+        EnemyDictionary.Add(ratPack_03.GetID(), ratPack_03);
+        EnemyDictionary.Add(ratPack_07.GetID(), ratPack_07);
+        EnemyDictionary.Add(ratPack_10.GetID(), ratPack_10);
+
+        EnemyDictionary.Add(giantRat.GetID(), giantRat);
+
+        EnemyDictionary.Add(blueSlime_03.GetID(), blueSlime_03);
+        EnemyDictionary.Add(blueSlime_05.GetID(), blueSlime_05);
+
+        EnemyDictionary.Add(greenSlime_03.GetID(), greenSlime_03);
+        EnemyDictionary.Add(greenSlime_05.GetID(), greenSlime_05);
+
+        EnemyDictionary.Add(redSlime_03.GetID(), redSlime_03);
+        EnemyDictionary.Add(redSlime_05.GetID(), redSlime_05);
+
+        EnemyDictionary.Add(ratKing.GetID(), ratKing);
+
+        EnemyDictionary.Add(amalgamSlime_06.GetID(), amalgamSlime_06);
+        EnemyDictionary.Add(amalgamSlime_10.GetID(), amalgamSlime_10);
+        EnemyDictionary.Add(amalgamSlime_14.GetID(), amalgamSlime_14);
+        EnemyDictionary.Add(amalgamSlime_18.GetID(), amalgamSlime_18);
+
+        EnemyDictionary.Add(goblinShaman_06.GetID(), goblinShaman_06);
+        EnemyDictionary.Add(goblinShaman_09.GetID(), goblinShaman_09);
+
+        EnemyDictionary.Add(capturedBandit_06.GetID(), capturedBandit_06);
+        EnemyDictionary.Add(capturedBandit_10.GetID(), capturedBandit_10);
+        EnemyDictionary.Add(capturedBandit_14.GetID(), capturedBandit_14);
+        EnemyDictionary.Add(capturedBandit_18.GetID(), capturedBandit_18);
+
+        EnemyDictionary.Add(castleGuard.GetID(), castleGuard);
+
+        EnemyDictionary.Add(grayWolf_06.GetID(), grayWolf_06);
+        EnemyDictionary.Add(grayWolf_09.GetID(), grayWolf_09);
+
+        EnemyDictionary.Add(direWolf_08.GetID(), direWolf_08);
+        EnemyDictionary.Add(direWolf_12.GetID(), direWolf_12);
+        EnemyDictionary.Add(direWolf_16.GetID(), direWolf_16);
+
+        EnemyDictionary.Add(banditChief.GetID(), banditChief);
+
+        EnemyDictionary.Add(gladiator_11.GetID(), gladiator_11);
+        EnemyDictionary.Add(gladiator_14.GetID(), gladiator_14);
+        EnemyDictionary.Add(gladiator_17.GetID(), gladiator_17);
+
+        EnemyDictionary.Add(warlock_11.GetID(), warlock_11);
+        EnemyDictionary.Add(warlock_14.GetID(), warlock_14);
+
+        EnemyDictionary.Add(witch_11.GetID(), witch_11);
+        EnemyDictionary.Add(witch_14.GetID(), witch_14);
+
+        EnemyDictionary.Add(veteran.GetID(), veteran);
+
+        EnemyDictionary.Add(chiefBattlemage.GetID(), chiefBattlemage);
+        EnemyDictionary.Add(chiefKnight.GetID(), chiefKnight);
+        EnemyDictionary.Add(warWolf.GetID(), warWolf);
+
+        EnemyDictionary.Add(arenaGrandmaster.GetID(), arenaGrandmaster);
+
+        EnemyDictionary.Add(ironRat.GetID(), ironRat);
+        EnemyDictionary.Add(weakenedIronRat.GetID(), weakenedIronRat);
+        EnemyDictionary.Add(brownBear.GetID(), brownBear);
+        EnemyDictionary.Add(forestBandit.GetID(), forestBandit);
+        EnemyDictionary.Add(errantKnight.GetID(), errantKnight);
+        EnemyDictionary.Add(stunnedErrantKnight.GetID(), stunnedErrantKnight);
+        EnemyDictionary.Add(skeleton.GetID(), skeleton);
+        EnemyDictionary.Add(weakenedSkeleton.GetID(), weakenedSkeleton);
+        EnemyDictionary.Add(zombie.GetID(), zombie);
     }
 
     void InitializeSkills()
     {
         SkillDictionary = new SortedDictionary<uint, Skill>();
 
-        slash = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Weapon Skills/Slash"));
-        stab = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Weapon Skills/Stab"));
-        bash = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Weapon Skills/Bash"));
-        cleave = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Weapon Skills/Cleave"));
-        hamstring = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Weapon Skills/Hamstring"));
-        jab = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Weapon Skills/Jab"));
-        pierce = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Weapon Skills/Pierce"));
-        punch = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Weapon Skills/Punch"));
+        bash = Instantiate(Resources.Load<Skill>("Skills/Weapon Skills/1_Bash"));
+        cleave = Instantiate(Resources.Load<Skill>("Skills/Weapon Skills/2_Cleave"));
+        cut = Instantiate(Resources.Load<Skill>("Skills/Weapon Skills/3_Cut"));
+        jab = Instantiate(Resources.Load<Skill>("Skills/Weapon Skills/4_Jab"));
+        pierce = Instantiate(Resources.Load<Skill>("Skills/Weapon Skills/5_Pierce"));
+        punch = Instantiate(Resources.Load<Skill>("Skills/Weapon Skills/6_Punch"));
+        slash = Instantiate(Resources.Load<Skill>("Skills/Weapon Skills/7_Slash"));
+        stab = Instantiate(Resources.Load<Skill>("Skills/Weapon Skills/8_Stab"));
 
-        blindingLight = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Weapon Skills/Artifact/Blinding Light"));
-        holyStrike = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Weapon Skills/Artifact/Holy Strike"));
+        blindingLight = Instantiate(Resources.Load<Skill>("Skills/Weapon Skills/Artifact/10_BlindingLight"));
+        holyStrike = Instantiate(Resources.Load<Skill>("Skills/Weapon Skills/Artifact/11_HolyStrike"));
 
-        heavySwing = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Stamina Skills/Tier 1/Heavy Swing"));
-        lightSpectralArrow = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Stamina Skills/Tier 1/Light Spectral Arrow"));
-        shortMeditation = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Stamina Skills/Tier 1/Short Meditation"));
-        slightAmpUp = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Stamina Skills/Tier 1/Slight Amp Up"));
-        slightIntimidation = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Stamina Skills/Tier 1/Slight Intimidation"));
-        stunningStrike = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Stamina Skills/Tier 1/Stunning Strike"));
-        weakBleedingEdge = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Stamina Skills/Tier 1/Weak Bleeding Edge"));
-        weakDefensiveStance = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Stamina Skills/Tier 1/Weak Defensive Stance"));
-        weakVenomStrike = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Stamina Skills/Tier 1/Weak Venom Strike"));
-        ampUp = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Stamina Skills/Tier 2/Amp Up"));
-        defensiveStance = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Stamina Skills/Tier 2/Defensive Stance"));
-        intimidate = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Stamina Skills/Tier 2/Intimidate"));
-        jarringStrike = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Stamina Skills/Tier 2/Jarring Strike"));
-        meditation = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Stamina Skills/Tier 2/Meditation"));
-        smite = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Stamina Skills/Tier 2/Smite"));
-        spectralArrow = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Stamina Skills/Tier 2/Spectral Arrow"));
-        toxicStrike = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Stamina Skills/Tier 2/Toxic Strike"));
-        weepingEdge = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Stamina Skills/Tier 2/Weeping Edge"));
-
-        flames = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Mana Skills/Tier 1/Flames"));
-        lightHeal = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Mana Skills/Tier 1/Light Heal"));
-        frostBite = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Mana Skills/Tier 1/Frostbite"));
-        sparks = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Mana Skills/Tier 1/Sparks"));
-        weakSpecShield = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Mana Skills/Tier 1/Weak Spectral Shield"));
-        lightDispel = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Mana Skills/Tier 1/Light Dispel"));
-        dispel = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Mana Skills/Tier 2/Dispel"));
-        fireBolt = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Mana Skills/Tier 2/Firebolt"));
-        heal = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Mana Skills/Tier 2/Heal"));
-        iceSpike = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Mana Skills/Tier 2/Ice Spike"));
-        lightning = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Mana Skills/Tier 2/Lightning"));
-        spectralShield = Instantiate(Resources.Load<ActiveSkill>("Player Moves/Mana Skills/Tier 2/Spectral Shield"));
-
-        SkillDictionary.Add(slash.GetID(), slash);
-        SkillDictionary.Add(stab.GetID(), stab);
         SkillDictionary.Add(bash.GetID(), bash);
         SkillDictionary.Add(cleave.GetID(), cleave);
-        SkillDictionary.Add(hamstring.GetID(), hamstring);
+        SkillDictionary.Add(cut.GetID(), cut);
         SkillDictionary.Add(jab.GetID(), jab);
         SkillDictionary.Add(pierce.GetID(), pierce);
         SkillDictionary.Add(punch.GetID(), punch);
+        SkillDictionary.Add(slash.GetID(), slash);
+        SkillDictionary.Add(stab.GetID(), stab);
 
         SkillDictionary.Add(blindingLight.GetID(), blindingLight);
         SkillDictionary.Add(holyStrike.GetID(), holyStrike);
 
+        heavySwing = Instantiate(Resources.Load<StaminaSkill>("Skills/100_HeavySwing"));
+        targetedStrike = Instantiate(Resources.Load<StaminaSkill>("Skills/101_TargetedStrike"));
+        masterfulStab = Instantiate(Resources.Load<StaminaSkill>("Skills/102_MasterfulStab"));
+        kick = Instantiate(Resources.Load<StaminaSkill>("Skills/103_Kick"));
+        slam = Instantiate(Resources.Load<StaminaSkill>("Skills/104_Slam"));
+        suplex = Instantiate(Resources.Load<StaminaSkill>("Skills/105_Suplex"));
+        backhand = Instantiate(Resources.Load<StaminaSkill>("Skills/106_Backhand"));
+        pommelThrow = Instantiate(Resources.Load<StaminaSkill>("Skills/107_PommelThrow"));
+        concussiveStrike = Instantiate(Resources.Load<StaminaSkill>("Skills/108_ConcussiveStrike"));
+        rush = Instantiate(Resources.Load<StaminaSkill>("Skills/109_Rush"));
+        sprint = Instantiate(Resources.Load<StaminaSkill>("Skills/110_Sprint"));
+        litheGrace = Instantiate(Resources.Load<StaminaSkill>("Skills/111_LitheGrace"));
+        temper = Instantiate(Resources.Load<StaminaSkill>("Skills/112_Temper"));
+        rage = Instantiate(Resources.Load<StaminaSkill>("Skills/113_Rage"));
+        frenzy = Instantiate(Resources.Load<StaminaSkill>("Skills/114_Frenzy"));
+        redoubt = Instantiate(Resources.Load<StaminaSkill>("Skills/115_Redoubt"));
+        bulwark = Instantiate(Resources.Load<StaminaSkill>("Skills/116_Bulwark"));
+        bastion = Instantiate(Resources.Load<StaminaSkill>("Skills/117_Bastion"));
+        seep = Instantiate(Resources.Load<StaminaSkill>("Skills/118_Seep"));
+        bleed = Instantiate(Resources.Load<StaminaSkill>("Skills/119_Bleed"));
+        hemorrhage = Instantiate(Resources.Load<StaminaSkill>("Skills/120_Hemorrhage"));
+
         SkillDictionary.Add(heavySwing.GetID(), heavySwing);
-        SkillDictionary.Add(lightSpectralArrow.GetID(), lightSpectralArrow);
-        SkillDictionary.Add(shortMeditation.GetID(), shortMeditation);
-        SkillDictionary.Add(slightAmpUp.GetID(), slightAmpUp);
-        SkillDictionary.Add(slightIntimidation.GetID(), slightIntimidation);
-        SkillDictionary.Add(stunningStrike.GetID(), stunningStrike);
-        SkillDictionary.Add(weakBleedingEdge.GetID(), weakBleedingEdge);
-        SkillDictionary.Add(weakDefensiveStance.GetID(), weakDefensiveStance);
-        SkillDictionary.Add(weakVenomStrike.GetID(), weakVenomStrike);
-        SkillDictionary.Add(ampUp.GetID(), ampUp);
-        SkillDictionary.Add(defensiveStance.GetID(), defensiveStance);
-        SkillDictionary.Add(intimidate.GetID(), intimidate);
-        SkillDictionary.Add(jarringStrike.GetID(), jarringStrike);
-        SkillDictionary.Add(meditation.GetID(), meditation);
-        SkillDictionary.Add(smite.GetID(), smite);
-        SkillDictionary.Add(spectralArrow.GetID(), spectralArrow);
-        SkillDictionary.Add(toxicStrike.GetID(), toxicStrike);
-        SkillDictionary.Add(weepingEdge.GetID(), weepingEdge);
+        SkillDictionary.Add(targetedStrike.GetID(), targetedStrike);
+        SkillDictionary.Add(masterfulStab.GetID(), masterfulStab);
+        SkillDictionary.Add(kick.GetID(), kick);
+        SkillDictionary.Add(slam.GetID(), slam);
+        SkillDictionary.Add(suplex.GetID(), suplex);
+        SkillDictionary.Add(backhand.GetID(), backhand);
+        SkillDictionary.Add(pommelThrow.GetID(), pommelThrow);
+        SkillDictionary.Add(concussiveStrike.GetID(), concussiveStrike);
+        SkillDictionary.Add(rush.GetID(), rush);
+        SkillDictionary.Add(sprint.GetID(), sprint);
+        SkillDictionary.Add(litheGrace.GetID(), litheGrace);
+        SkillDictionary.Add(temper.GetID(), temper);
+        SkillDictionary.Add(rage.GetID(), rage);
+        SkillDictionary.Add(frenzy.GetID(), frenzy);
+        SkillDictionary.Add(redoubt.GetID(), redoubt);
+        SkillDictionary.Add(bulwark.GetID(), bulwark);
+        SkillDictionary.Add(bastion.GetID(), bastion);
+        SkillDictionary.Add(seep.GetID(), seep);
+        SkillDictionary.Add(bleed.GetID(), bleed);
+        SkillDictionary.Add(hemorrhage.GetID(), hemorrhage);
 
-        SkillDictionary.Add(flames.GetID(), flames);
-        SkillDictionary.Add(lightHeal.GetID(), lightHeal);
-        SkillDictionary.Add(frostBite.GetID(), frostBite);
-        SkillDictionary.Add(sparks.GetID(), sparks);
-        SkillDictionary.Add(weakSpecShield.GetID(), weakSpecShield);
-        SkillDictionary.Add(lightDispel.GetID(), lightDispel);
-        SkillDictionary.Add(dispel.GetID(), dispel);
-        SkillDictionary.Add(fireBolt.GetID(), fireBolt);
-        SkillDictionary.Add(heal.GetID(), heal);
+        fireball = Instantiate(Resources.Load<ManaSkill>("Skills/121_Fireball"));
+        inferno = Instantiate(Resources.Load<ManaSkill>("Skills/122_Inferno"));
+        immolation = Instantiate(Resources.Load<ManaSkill>("Skills/123_Immolation"));
+        frostbite = Instantiate(Resources.Load<ManaSkill>("Skills/124_Frostbite"));
+        iceSpike = Instantiate(Resources.Load<ManaSkill>("Skills/125_IceSpike"));
+        glaciate = Instantiate(Resources.Load<ManaSkill>("Skills/126_Glaciate"));
+        sparks = Instantiate(Resources.Load<ManaSkill>("Skills/127_Sparks"));
+        lightningBolt = Instantiate(Resources.Load<ManaSkill>("Skills/128_LightningBolt"));
+        smite = Instantiate(Resources.Load<ManaSkill>("Skills/129_Smite"));
+        mend = Instantiate(Resources.Load<ManaSkill>("Skills/130_Mend"));
+        heal = Instantiate(Resources.Load<ManaSkill>("Skills/131_Heal"));
+        rejuvenate = Instantiate(Resources.Load<ManaSkill>("Skills/132_Rejuvenate"));
+        abate = Instantiate(Resources.Load<ManaSkill>("Skills/133_Abate"));
+        allay = Instantiate(Resources.Load<ManaSkill>("Skills/134_Allay"));
+        dispel = Instantiate(Resources.Load<ManaSkill>("Skills/135_Dispel"));
+        magicArrow = Instantiate(Resources.Load<ManaSkill>("Skills/136_MagicArrow"));
+        magicBolt = Instantiate(Resources.Load<ManaSkill>("Skills/137_MagicBolt"));
+        magicMissile = Instantiate(Resources.Load<ManaSkill>("Skills/138_MagicMissile"));
+
+        SkillDictionary.Add(fireball.GetID(), fireball);
+        SkillDictionary.Add(inferno.GetID(), inferno);
+        SkillDictionary.Add(immolation.GetID(), immolation);
+        SkillDictionary.Add(frostbite.GetID(), frostbite);
         SkillDictionary.Add(iceSpike.GetID(), iceSpike);
-        SkillDictionary.Add(lightning.GetID(), lightning);
-        SkillDictionary.Add(spectralShield.GetID(), spectralShield);
+        SkillDictionary.Add(glaciate.GetID(), glaciate);
+        SkillDictionary.Add(sparks.GetID(), sparks);
+        SkillDictionary.Add(lightningBolt.GetID(), lightningBolt);
+        SkillDictionary.Add(smite.GetID(), smite);
+        SkillDictionary.Add(mend.GetID(), mend);
+        SkillDictionary.Add(heal.GetID(), heal);
+        SkillDictionary.Add(rejuvenate.GetID(), rejuvenate);
+        SkillDictionary.Add(abate.GetID(), abate);
+        SkillDictionary.Add(allay.GetID(), allay);
+        SkillDictionary.Add(dispel.GetID(), dispel);
+        SkillDictionary.Add(magicArrow.GetID(), magicArrow);
+        SkillDictionary.Add(magicBolt.GetID(), magicBolt);
+        SkillDictionary.Add(magicMissile.GetID(), magicMissile);
 
-        weaponDamageA = Instantiate(Resources.Load<PassiveSkill>("Player Moves/Passive Skills/WeaponDamage/WeaponDamageA"));
-        weaponDamageB = Instantiate(Resources.Load<PassiveSkill>("Player Moves/Passive Skills/WeaponDamage/WeaponDamageB"));
-        weaponDamageC = Instantiate(Resources.Load<PassiveSkill>("Player Moves/Passive Skills/WeaponDamage/WeaponDamageC"));
-        weaponDamageD = Instantiate(Resources.Load<PassiveSkill>("Player Moves/Passive Skills/WeaponDamage/WeaponDamageD"));
-
-        skillDamageA = Instantiate(Resources.Load<PassiveSkill>("Player Moves/Passive Skills/SkillDamage/SkillDamageA"));
-        skillDamageB = Instantiate(Resources.Load<PassiveSkill>("Player Moves/Passive Skills/SkillDamage/SkillDamageB"));
-        skillDamageC = Instantiate(Resources.Load<PassiveSkill>("Player Moves/Passive Skills/SkillDamage/SkillDamageC"));
-        skillDamageD = Instantiate(Resources.Load<PassiveSkill>("Player Moves/Passive Skills/SkillDamage/SkillDamageD"));
-
-        manaDamageA = Instantiate(Resources.Load<PassiveSkill>("Player Moves/Passive Skills/ManaDamage/ManaDamageA"));
-        manaDamageB = Instantiate(Resources.Load<PassiveSkill>("Player Moves/Passive Skills/ManaDamage/ManaDamageB"));
-        manaDamageC = Instantiate(Resources.Load<PassiveSkill>("Player Moves/Passive Skills/ManaDamage/ManaDamageC"));
-        manaDamageD = Instantiate(Resources.Load<PassiveSkill>("Player Moves/Passive Skills/ManaDamage/ManaDamageD"));
-
-        maxHealthA = Instantiate(Resources.Load<PassiveSkill>("Player Moves/Passive Skills/MaxHealth/MaxHealthA"));
-        maxHealthB = Instantiate(Resources.Load<PassiveSkill>("Player Moves/Passive Skills/MaxHealth/MaxHealthB"));
-        maxHealthC = Instantiate(Resources.Load<PassiveSkill>("Player Moves/Passive Skills/MaxHealth/MaxHealthC"));
-        maxHealthD = Instantiate(Resources.Load<PassiveSkill>("Player Moves/Passive Skills/MaxHealth/MaxHealthD"));
-
-        maxStaminaA = Instantiate(Resources.Load<PassiveSkill>("Player Moves/Passive Skills/MaxStamina/MaxStaminaA"));
-        maxStaminaB = Instantiate(Resources.Load<PassiveSkill>("Player Moves/Passive Skills/MaxStamina/MaxStaminaB"));
-        maxStaminaC = Instantiate(Resources.Load<PassiveSkill>("Player Moves/Passive Skills/MaxStamina/MaxStaminaC"));
-        maxStaminaD = Instantiate(Resources.Load<PassiveSkill>("Player Moves/Passive Skills/MaxStamina/MaxStaminaD"));
-
-        maxManaA = Instantiate(Resources.Load<PassiveSkill>("Player Moves/Passive Skills/MaxMana/MaxManaA"));
-        maxManaB = Instantiate(Resources.Load<PassiveSkill>("Player Moves/Passive Skills/MaxMana/MaxManaB"));
-        maxManaC = Instantiate(Resources.Load<PassiveSkill>("Player Moves/Passive Skills/MaxMana/MaxManaC"));
-        maxManaD = Instantiate(Resources.Load<PassiveSkill>("Player Moves/Passive Skills/MaxMana/MaxManaD"));
-
-        SkillDictionary.Add(weaponDamageA.GetID(), weaponDamageA);
-        SkillDictionary.Add(weaponDamageB.GetID(), weaponDamageB);
-        SkillDictionary.Add(weaponDamageC.GetID(), weaponDamageC);
-        SkillDictionary.Add(weaponDamageD.GetID(), weaponDamageD);
-
-        SkillDictionary.Add(skillDamageA.GetID(), skillDamageA);
-        SkillDictionary.Add(skillDamageB.GetID(), skillDamageB);
-        SkillDictionary.Add(skillDamageC.GetID(), skillDamageC);
-        SkillDictionary.Add(skillDamageD.GetID(), skillDamageD);
-
-        SkillDictionary.Add(manaDamageA.GetID(), manaDamageA);
-        SkillDictionary.Add(manaDamageB.GetID(), manaDamageB);
-        SkillDictionary.Add(manaDamageC.GetID(), manaDamageC);
-        SkillDictionary.Add(manaDamageD.GetID(), manaDamageD);
-
-        SkillDictionary.Add(maxHealthA.GetID(), maxHealthA);
-        SkillDictionary.Add(maxHealthB.GetID(), maxHealthB);
-        SkillDictionary.Add(maxHealthC.GetID(), maxHealthC);
-        SkillDictionary.Add(maxHealthD.GetID(), maxHealthD);
-
-        SkillDictionary.Add(maxStaminaA.GetID(), maxStaminaA);
-        SkillDictionary.Add(maxStaminaB.GetID(), maxStaminaB);
-        SkillDictionary.Add(maxStaminaC.GetID(), maxStaminaC);
-        SkillDictionary.Add(maxStaminaD.GetID(), maxStaminaD);
-
-        SkillDictionary.Add(maxManaA.GetID(), maxManaA);
-        SkillDictionary.Add(maxManaB.GetID(), maxManaB);
-        SkillDictionary.Add(maxManaC.GetID(), maxManaC);
-        SkillDictionary.Add(maxManaD.GetID(), maxManaD);
     }
 
     void InitializeQuests()
@@ -1597,20 +1776,18 @@ public class Engine : MonoBehaviour
         arenaBossImg.SetActive(false);
 
         skillScrollView = GameObject.Find("SkillScrollView");
-        magicScrollView = GameObject.Find("MagicScrollView");
-        passiveScrollView = GameObject.Find("PassiveScrollView");
-        magicScrollView.SetActive(false);
-        passiveScrollView.SetActive(false);
+        skillPanel = GameObject.Find("SkillPanel");
 
         skillCostGO = GameObject.Find("SkillCost");
         skillDamageGO = GameObject.Find("SkillDamage");
 
+        skillImg = GameObject.Find("SkillImg").GetComponent<Image>();
         skillNameTxt = GameObject.Find("SkillNameTxt").GetComponent<Text>();
         skillDescriptionTxt = GameObject.Find("SkillDescriptionTxt").GetComponent<Text>();
         skillCostTxt = GameObject.Find("SkillCostTxt").GetComponent<Text>();
         skillDamageTxt = GameObject.Find("SkillDamageTxt").GetComponent<Text>();
-        skillSkillPointsTxt = GameObject.Find("SkillSkillPointsTxt").GetComponent<Text>();
-        unlockedTxt = GameObject.Find("UnlockedTxt").GetComponent<Text>();
+
+        activateSkillBtn = GameObject.Find("ActivateSkillBtn").GetComponent<Button>();
 
         skillCostGO.SetActive(false);
         skillDamageGO.SetActive(false);
@@ -1624,24 +1801,27 @@ public class Engine : MonoBehaviour
         statsLvlTxt = GameObject.Find("StatsLvlTxt").GetComponent<Text>();
         statsTotalExpTxt = GameObject.Find("StatsTotalExpTxt").GetComponent<Text>();
         statsSkillPointsTxt = GameObject.Find("StatsSkillPointsTxt").GetComponent<Text>();
+
         statsWeightTxt = GameObject.Find("StatsWeightTxt").GetComponent<Text>();
         statsGoldTxt = GameObject.Find("StatsGoldTxt").GetComponent<Text>();
         statsDmgTxt = GameObject.Find("StatsDmgTxt").GetComponent<Text>();
         statsDefTxt = GameObject.Find("StatsDefTxt").GetComponent<Text>();
+        statsSpeedTxt = GameObject.Find("StatsSpeedTxt").GetComponent<Text>();
 
-        maxHealthBuffTxt = GameObject.Find("MaxHealthBuffTxt").GetComponent<Text>();
-        maxStaminaBuffTxt = GameObject.Find("MaxStaminaBuffTxt").GetComponent<Text>();
-        maxManaBuffTxt = GameObject.Find("MaxManaBuffTxt").GetComponent<Text>();
-        maxWeaponDmgBuffTxt = GameObject.Find("MaxWeaponDmgBuffTxt").GetComponent<Text>();
-        maxSkillDmgBuffTxt = GameObject.Find("MaxSkillDmgBuffTxt").GetComponent<Text>();
-        maxMagicDmgBuffTxt = GameObject.Find("MaxMagicDmgBuffTxt").GetComponent<Text>();
+        playerStrengthTxt = GameObject.Find("PlayerStrengthTxt").GetComponent<Text>();
+        playerAgilityTxt = GameObject.Find("PlayerAgilityTxt").GetComponent<Text>();
+        playerIntelligenceTxt = GameObject.Find("PlayerIntelligenceTxt").GetComponent<Text>();
+        playerLuckTxt = GameObject.Find("PlayerLuckTxt").GetComponent<Text>();
+
+        playerStrengthBtn = GameObject.Find("PlayerStrengthBtn");
+        playerAgilityBtn = GameObject.Find("PlayerAgilityBtn");
+        playerIntelligenceBtn = GameObject.Find("PlayerIntelligenceBtn");
+        playerLuckBtn = GameObject.Find("PlayerLuckBtn");
 
         statsHealthSlider = GameObject.Find("StatsHealthSlider").GetComponent<Slider>();
         statsStaminaSlider = GameObject.Find("StatsStaminaSlider").GetComponent<Slider>();
         statsManaSlider = GameObject.Find("StatsManaSlider").GetComponent<Slider>();
         statsExpSlider = GameObject.Find("StatsExpSlider").GetComponent<Slider>();
-
-        unlockSkillBtn = GameObject.Find("UnlockSkillBtn").GetComponent<Button>();
 
         diagNPCNameTxt = GameObject.Find("DiagNPCNameTxt").GetComponent<Text>();
         npcLineTxt = GameObject.Find("NPCLineTxt").GetComponent<TextMeshProUGUI>();
@@ -1706,13 +1886,14 @@ public class Engine : MonoBehaviour
 
         Enemy enemy = Instantiate(eGO);
         activeEnemy = enemy;
-        enemyNameTxt.text = enemy.GetName();
+        enemyNameTxt.text = activeEnemy.GetName();
+        activeEnemy.Initialize();
 
         UIBattleScreen.SetActive(true);
 
         UpdateBattleAttributes(enemy);
 
-        float playerSpeed = player.GetSpeed(), enemySpeed = enemy.GetSpeed();
+        float playerSpeed = player.GetSpeed(), enemySpeed = activeEnemy.GetSpeed();
         playerSpeedSlider.value = playerSpeed;
         enemySpeedSlider.value = enemySpeed;
 
@@ -1721,32 +1902,34 @@ public class Engine : MonoBehaviour
 
             while (playerSpeed < 100 && enemySpeed < 100)
             {
+
                 int extraPlayerSpeedFlat = 0, extraEnemySpeedFlat = 0;
                 float extraPlayerSpeedPer = 1.0f, extraEnemySpeedPer = 1.0f;
+
                 foreach (StatusEffect statusEffect in player.GetStatusEffects())
                     if (statusEffect.GetStatusEffectType() == StatusEffect.StatusEffectType.speed)
                         if (statusEffect.IsPercentage())
                             extraPlayerSpeedPer += statusEffect.GetStatChange();
                         else
                             extraPlayerSpeedFlat += (int)statusEffect.GetStatChange();
-                foreach (StatusEffect statusEffect in enemy.GetStatusEffects())
+
+                foreach (StatusEffect statusEffect in activeEnemy.GetStatusEffects())
                     if (statusEffect.GetStatusEffectType() == StatusEffect.StatusEffectType.speed)
-                        if (statusEffect.GetStatusEffectType() == StatusEffect.StatusEffectType.speed)
-                            if (statusEffect.IsPercentage())
-                                extraEnemySpeedPer += statusEffect.GetStatChange();
-                            else
-                                extraEnemySpeedFlat += (int)statusEffect.GetStatChange();
+                        if (statusEffect.IsPercentage())
+                            extraEnemySpeedPer += statusEffect.GetStatChange();
+                        else
+                            extraEnemySpeedFlat += (int)statusEffect.GetStatChange();
+
+                Debug.Log(String.Format("Player Flat: {0}; Player %: {1};", extraPlayerSpeedFlat, extraPlayerSpeedPer));
+                Debug.Log(String.Format("Enemy Flat: {0}; Enemy %: {1};", extraEnemySpeedFlat, extraEnemySpeedPer));
 
                 playerSpeed += (int)extraPlayerSpeedPer * (player.GetSpeed() + extraPlayerSpeedFlat);
-                enemySpeed += (int)extraEnemySpeedPer * (enemy.GetSpeed() + extraEnemySpeedFlat);
+                enemySpeed += (int)extraEnemySpeedPer * (activeEnemy.GetSpeed() + extraEnemySpeedFlat);
 
                 playerSpeedSlider.value = playerSpeed;
                 enemySpeedSlider.value = enemySpeed;
 
-                //player.RegenAttributes();
-                //enemy.RegenAttributes();
-
-                UpdateBattleAttributes(enemy);
+                UpdateBattleAttributes(activeEnemy);
                 yield return new WaitForSecondsRealtime(0.01f);
             }
 
@@ -1756,8 +1939,8 @@ public class Engine : MonoBehaviour
                     yield return StartCoroutine("PlayerMove");
                 playerSpeed -= 100;
 
-                enemy.ChangeHealth(-playerDamageOutput);
-                UpdateBattleAttributes(enemy);
+                activeEnemy.ChangeHealth(-playerDamageOutput);
+                UpdateBattleAttributes(activeEnemy);
 
                 playerSpeedSlider.value = playerSpeed;
 
@@ -1765,46 +1948,46 @@ public class Engine : MonoBehaviour
 
                 EndOfTurnStatusEffect(true);
 
-                UpdateBattleAttributes(enemy);
+                UpdateBattleAttributes(activeEnemy);
 
-                if (enemySpeed >= 100 && enemy.GetHealth() > 0)
+                if (enemySpeed >= 100 && activeEnemy.GetHealth() > 0)
                 {
                     if (!CheckIfStunned(false))
-                        EnemyAttack(enemy);
+                        EnemyAttack(activeEnemy);
                     enemySpeed -= 100;
 
                     player.ChangeHealth(-enemyDamageOutput);
-                    UpdateBattleAttributes(enemy);
+                    UpdateBattleAttributes(activeEnemy);
 
                     enemySpeedSlider.value = enemySpeed;
 
-                    enemy.DecrementStatusEffectTurn();
+                    activeEnemy.DecrementStatusEffectTurn();
 
                     EndOfTurnStatusEffect(false);
 
-                    UpdateBattleAttributes(enemy);
+                    UpdateBattleAttributes(activeEnemy);
                 }
 
                 playerDamageOutput = 0;
                 enemyDamageOutput = 0;
 
             }
-            if (enemySpeed >= 100 && enemySpeed >= playerSpeed && enemy.GetHealth() > 0)
+            if (enemySpeed >= 100 && enemySpeed >= playerSpeed && activeEnemy.GetHealth() > 0)
             {
                 if (!CheckIfStunned(false))
-                    EnemyAttack(enemy);
+                    EnemyAttack(activeEnemy);
                 enemySpeed -= 100;
 
                 player.ChangeHealth(-enemyDamageOutput);
-                UpdateBattleAttributes(enemy);
+                UpdateBattleAttributes(activeEnemy);
 
                 enemySpeedSlider.value = enemySpeed;
 
-                enemy.DecrementStatusEffectTurn();
+                activeEnemy.DecrementStatusEffectTurn();
 
                 EndOfTurnStatusEffect(false);
 
-                UpdateBattleAttributes(enemy);
+                UpdateBattleAttributes(activeEnemy);
 
                 if (playerSpeed >= 100 && player.GetHealth() > 0)
                 {
@@ -1812,8 +1995,8 @@ public class Engine : MonoBehaviour
                         yield return StartCoroutine("PlayerMove");
                     playerSpeed -= 100;
 
-                    enemy.ChangeHealth(-playerDamageOutput);
-                    UpdateBattleAttributes(enemy);
+                    activeEnemy.ChangeHealth(-playerDamageOutput);
+                    UpdateBattleAttributes(activeEnemy);
 
                     playerSpeedSlider.value = playerSpeed;
 
@@ -1821,7 +2004,7 @@ public class Engine : MonoBehaviour
 
                     EndOfTurnStatusEffect(true);
 
-                    UpdateBattleAttributes(enemy);
+                    UpdateBattleAttributes(activeEnemy);
                 }
 
                 playerDamageOutput = 0;
@@ -1830,25 +2013,25 @@ public class Engine : MonoBehaviour
             }
 
             player.RegenAttributes();
-            enemy.RegenAttributes();
+            activeEnemy.RegenAttributes();
 
-            UpdateBattleAttributes(enemy);
+            UpdateBattleAttributes(activeEnemy);
             
             yield return null;
         }
 
-        if (enemy.GetHealth() <= 0)
+        if (activeEnemy.GetHealth() <= 0)
         {
             GameObject.Find("BattleWinMusicAudioSource").GetComponent<AudioSource>().Play();
             ActivatePickupScreen(true);
             GenerateItemPickup(enemy.GetItemRewards());
-            OutputToText(String.Format("You have killed {0}, gaining {1} exp and {2} gold.", enemy.GetName(), enemy.GetExpReward(), enemy.GetGoldReward()));
-            player.AddExp(enemy.GetExpReward());
-            player.ChangeGold(enemy.GetGoldReward());
+            OutputToText(String.Format("You have killed {0}, gaining {1} exp and {2} gold.", activeEnemy.GetName(), activeEnemy.GetExpReward(), activeEnemy.GetGoldReward()));
+            player.AddExp(activeEnemy.GetExpReward());
+            player.ChangeGold(activeEnemy.GetGoldReward());
 
-            if(enemy.GetEnemyType() == Enemy.EnemyType.boss)
+            if(activeEnemy.GetEnemyType() == Enemy.EnemyType.boss)
             {
-                BossEnemy boss = (BossEnemy)enemy;
+                BossEnemy boss = (BossEnemy)activeEnemy;
                 ((BossEnemy)EnemyDictionary[boss.GetID()]).SetHasBeenDefeated(true);
 
                 player.SetTitle(boss.GetUnlockedTitle());
@@ -1928,7 +2111,7 @@ public class Engine : MonoBehaviour
     public void RunFromBattle()
     {
         StopCoroutine(battleCoroutine);
-        int lostGold = UnityEngine.Random.Range((int)(player.GetGold() * 0.25f), (int)(player.GetGold() * 0.25f));
+        int lostGold = UnityEngine.Random.Range((int)(player.GetGold() * 0.25f), (int)(player.GetGold() * 0.5f));
         player.ChangeGold(-lostGold);
 
         OutputToText("You have ran away from battle!");
@@ -1995,19 +2178,19 @@ public class Engine : MonoBehaviour
         }
     }
 
-    bool CheckIfPoisoned(bool isPlayer)
+    bool CheckIfBleeding(bool isPlayer)
     {
         if (isPlayer)
         {
             foreach (StatusEffect statusEffect in player.GetStatusEffects())
-                if (statusEffect.GetStatusEffectType() == StatusEffect.StatusEffectType.poison)
+                if (statusEffect.GetStatusEffectType() == StatusEffect.StatusEffectType.bleed)
                     return true;
             return false;
         }
         else
         {
             foreach (StatusEffect statusEffect in activeEnemy.GetStatusEffects())
-                if (statusEffect.GetStatusEffectType() == StatusEffect.StatusEffectType.poison)
+                if (statusEffect.GetStatusEffectType() == StatusEffect.StatusEffectType.bleed)
                     return true;
             return false;
         }
@@ -2021,25 +2204,15 @@ public class Engine : MonoBehaviour
             {
                 if (sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatusEffectType() == StatusEffect.StatusEffectType.heal)
                 {
-                    if (!CheckIfPoisoned(true))
-                        player.ChangeHealth((int)(sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatChange() + player.GetPassiveFlat(PassiveSkill.AttributeType.healthRegen) * player.GetPassivePercent(PassiveSkill.AttributeType.healthRegen)));
+                    if (!CheckIfBleeding(true))
+                        player.ChangeHealth((int)(player.GetMaxHealth() * sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatChange()));
                 }
-                else if (sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatusEffectType() == StatusEffect.StatusEffectType.bleed)
-                    player.ChangeHealth(-(int)(player.GetHealth() * sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatChange()));
                 else if (sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatusEffectType() == StatusEffect.StatusEffectType.burn)
-                    player.ChangeHealth(-(int)sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatChange());
+                    player.ChangeHealth(-(int)(player.GetHealth() * sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatChange()));
                 else if (sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatusEffectType() == StatusEffect.StatusEffectType.freeze)
-                {
-                    player.ChangeHealth(-(int)sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatChange() / 2);
-                    player.ChangeStamina(-(int)sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatChange());
-                }                  
+                    player.ChangeStamina(-(int)(player.GetStamina() * sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatChange()));
                 else if(sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatusEffectType() == StatusEffect.StatusEffectType.shock)
-                {
-                    player.ChangeHealth(-(int)sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatChange() / 2);
-                    player.ChangeMana(-(int)sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatChange());
-                }
-                else if (sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatusEffectType() == StatusEffect.StatusEffectType.poison)
-                    player.ChangeHealth(-(int)sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatChange());
+                    player.ChangeMana(-(int)(player.GetMana() * sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatChange()));
 
                 sGO.GetComponent<StatusContainer>().DecrementStatusEffect();
                 if (sGO.GetComponent<StatusContainer>().GetTurnAmount() < 1)
@@ -2055,25 +2228,16 @@ public class Engine : MonoBehaviour
             {
                 if (sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatusEffectType() == StatusEffect.StatusEffectType.heal)
                 {
-                    if (!CheckIfPoisoned(false))
-                        activeEnemy.ChangeHealth((int)sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatChange());
+                    if (!CheckIfBleeding(false))
+                        activeEnemy.ChangeHealth((int)(activeEnemy.GetMaxHealth() * sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatChange()));
                 }
-                else if (sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatusEffectType() == StatusEffect.StatusEffectType.bleed)
-                    activeEnemy.ChangeHealth(-(int)(activeEnemy.GetHealth() * sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatChange()));
                 else if (sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatusEffectType() == StatusEffect.StatusEffectType.burn)
-                    activeEnemy.ChangeHealth(-(int)sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatChange());
+                    activeEnemy.ChangeHealth(-(int)(activeEnemy.GetHealth() * sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatChange()));
                 else if (sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatusEffectType() == StatusEffect.StatusEffectType.freeze)
-                {
-                    activeEnemy.ChangeHealth(-(int)sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatChange() / 2);
-                    activeEnemy.ChangeStamina(-(int)sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatChange());
-                }
+                    activeEnemy.ChangeStamina(-(int)(activeEnemy.GetStamina() * sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatChange()));
                 else if (sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatusEffectType() == StatusEffect.StatusEffectType.shock)
-                {
-                    activeEnemy.ChangeHealth(-(int)sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatChange() / 2);
-                    activeEnemy.ChangeMana(-(int)sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatChange());
-                }
-                else if (sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatusEffectType() == StatusEffect.StatusEffectType.poison)
-                    activeEnemy.ChangeHealth(-(int)sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatChange());
+                    activeEnemy.ChangeMana(-(int)(activeEnemy.GetMana() * sGO.GetComponent<StatusContainer>().GetStatusEffect().GetStatChange()));
+
 
                 sGO.GetComponent<StatusContainer>().DecrementStatusEffect();
                 if (sGO.GetComponent<StatusContainer>().GetTurnAmount() < 1)
@@ -2117,9 +2281,9 @@ public class Engine : MonoBehaviour
         playerHasMoved = false;
         playerBattleInventoryBtn.interactable = true;
 
-        ActiveSkill cardASkill = player.GetWeapon().GetRandomSkill();
-        ActiveSkill cardBSkill = player.GetRandomStaminaSkill();
-        ActiveSkill cardCSkill = player.GetRandomManaSkill();
+        Skill cardASkill = player.GetWeapon().GetRandomSkill();
+        StaminaSkill cardBSkill = player.GetRandomStaminaSkill();
+        ManaSkill cardCSkill = player.GetRandomManaSkill();
 
         Instantiate(card, GameObject.Find("PlayerCardALocation").transform).transform.position = GameObject.Find("PlayerCardALocation").transform.position;
         if(cardBSkill != null)
@@ -2148,9 +2312,9 @@ public class Engine : MonoBehaviour
         if(cardCSkill != null)
             SetCard(GameObject.Find("PlayerCardCLocation").transform.GetChild(0).gameObject, cardCSkill);
 
-        if (cardBSkill != null && cardBSkill.GetAttributeChange() > player.GetStamina())
+        if (cardBSkill != null && cardBSkill.GetAttributeCost() > player.GetStamina())
             GameObject.Find("PlayerCardBLocation").transform.GetChild(0).GetComponent<Button>().interactable = false;
-        if (cardCSkill != null && cardCSkill.GetAttributeChange() > player.GetMana())
+        if (cardCSkill != null && cardCSkill.GetAttributeCost() > player.GetMana())
             GameObject.Find("PlayerCardCLocation").transform.GetChild(0).GetComponent<Button>().interactable = false;
 
         while (!playerHasMoved)
@@ -2170,19 +2334,17 @@ public class Engine : MonoBehaviour
 
     }
 
-    void SetCard(GameObject card, ActiveSkill skill)
+    void SetCard(GameObject card, Skill skill)
     {
 
         card.GetComponent<AttackContainer>().SetPlayerSkill(skill);
     
         /* GameObject cardSkillName */ card.transform.GetChild(1).GetComponent<Text>().text = skill.GetName();
-        /* GameObject cardDescription */ card.transform.GetChild(2).GetComponent<Text>().text = skill.GetDescription();
-        /* GameObject cardDamage */ card.transform.GetChild(3).GetComponent<Text>().text = skill.GetMinDamageModifier() + " - " + skill.GetMaxDamageModifier();
-        /* GameObject cardCost */ card.transform.GetChild(5).GetComponent<Text>().text = skill.GetAttributeChange().ToString();
+        /* GameObject cardDescription */ card.transform.GetChild(2).GetComponent<Text>().text = skill.GetCardDescription();
 
-       switch (skill.GetAttributeType())
+       switch (skill.GetSkillType())
        {
-            case ActiveSkill.AttributeType.weapon:
+            case Skill.SkillType.weapon:
                 /* GameObject cardType */ card.transform.GetChild(7).GetComponent<Text>().text = "Weapon";
                 /* GameObject cardDamage */ card.transform.GetChild(3).GetComponent<Text>().text = player.GetWeapon().GetMinDamage() + " - " + player.GetWeapon().GetMaxDamage();
 
@@ -2190,31 +2352,41 @@ public class Engine : MonoBehaviour
                 /* GameObject cardCost */ card.transform.GetChild(5).GetComponent<Text>().text = "";
 
                 break;
-            case ActiveSkill.AttributeType.health:
+            case Skill.SkillType.health:
                 /* GameObject cardType */ card.transform.GetChild(7).GetComponent<Text>().text = "Health";               
                 /* GameObject cardTypeImg */ card.transform.GetChild(6).GetComponent<Image>().sprite = healthDrop;
 
                 /* GameObject cardTypeImg */ card.transform.GetChild(6).GetComponent<Image>().gameObject.SetActive(true);
-               break;
-            case ActiveSkill.AttributeType.stamina:
-               /* GameObject cardType */ card.transform.GetChild(7).GetComponent<Text>().text = "Stamina";
-               /* GameObject cardTypeImg */ card.transform.GetChild(6).GetComponent<Image>().sprite = staminaDrop;
+                break;
+            case Skill.SkillType.stamina:
+                StaminaSkill sSkill = ((StaminaSkill)skill);
+
+                /* GameObject cardDamage */ card.transform.GetChild(3).GetComponent<Text>().text = sSkill.GetMinDamage() + " - " + sSkill.GetMaxDamage();
+                /* GameObject cardCost */ card.transform.GetChild(5).GetComponent<Text>().text = sSkill.GetAttributeCost().ToString();
+
+                /* GameObject cardType */ card.transform.GetChild(7).GetComponent<Text>().text = "Stamina";
+                /* GameObject cardTypeImg */ card.transform.GetChild(6).GetComponent<Image>().sprite = staminaDrop;
 
                 /* GameObject cardTypeImg */ card.transform.GetChild(6).GetComponent<Image>().gameObject.SetActive(true);
-               break;
-            case ActiveSkill.AttributeType.mana:
-               /* GameObject cardType */ card.transform.GetChild(7).GetComponent<Text>().text = "Mana";
-               /* GameObject cardTypeImg */ card.transform.GetChild(6).GetComponent<Image>().sprite = manaDrop;
+                break;
+            case Skill.SkillType.mana:
+                ManaSkill mSkill = ((ManaSkill)skill);
+
+                /* GameObject cardDamage */ card.transform.GetChild(3).GetComponent<Text>().text = mSkill.GetMinDamage() + " - " + mSkill.GetMaxDamage();
+                /* GameObject cardCost */ card.transform.GetChild(5).GetComponent<Text>().text = mSkill.GetAttributeCost().ToString();
+
+                /* GameObject cardType */ card.transform.GetChild(7).GetComponent<Text>().text = "Mana";
+                /* GameObject cardTypeImg */ card.transform.GetChild(6).GetComponent<Image>().sprite = manaDrop;
 
                 /* GameObject cardTypeImg */ card.transform.GetChild(6).GetComponent<Image>().gameObject.SetActive(true);
-               break;
+                break;
        }
         
         //card.transform.GetChild(13).gameObject.SetActive(true);
 
     }
 
-    public void PlayerAttack(ActiveSkill skill)
+    public void PlayerAttack(Skill skill)
     {
         playerHasMoved = true;
 
@@ -2233,40 +2405,44 @@ public class Engine : MonoBehaviour
 
         enemyDefValue /= 2;
 
-        switch (skill.GetAttributeType())
+        switch (skill.GetSkillType())
         {
-            case ActiveSkill.AttributeType.weapon:
-                playerDamageOutput = ((int)(player.GetWeapon().Attack() + player.GetPassiveFlat(PassiveSkill.AttributeType.weaponDamage) * player.GetPassivePercent(PassiveSkill.AttributeType.weaponDamage)) - enemyDefValue);
+            case Skill.SkillType.weapon:
+                playerDamageOutput = ((int)(player.GetWeapon().Attack() - enemyDefValue));
                 if (playerDamageOutput < 0)
                     playerDamageOutput = 0;
                 OutputToBattle(String.Format(skill.GetActionMessage(), player.GetWeapon().GetName(), playerDamageOutput));
                 break;
-            case ActiveSkill.AttributeType.health:
+            case Skill.SkillType.health:
                 break;
-            case ActiveSkill.AttributeType.stamina:
-                playerDamageOutput = ((int)((skill.GetDamageModifier() + player.GetPassiveFlat(PassiveSkill.AttributeType.skillDamage)) * player.GetPassivePercent(PassiveSkill.AttributeType.skillDamage)) - enemyDefValue);
+            case Skill.SkillType.stamina:               
+                StaminaSkill sSkill = ((StaminaSkill)skill);
+                playerDamageOutput = ((int)(sSkill.GetDamageModifier() - enemyDefValue));
+                if (sSkill.IsWeaponModifier())
+                    playerDamageOutput += player.GetWeapon().Attack();
                 if (playerDamageOutput < 0)
                     playerDamageOutput = 0;
                 OutputToBattle(String.Format(skill.GetActionMessage(), playerDamageOutput));
-                player.ChangeStamina(-skill.GetAttributeChange());
+                player.ChangeStamina(-sSkill.GetAttributeCost());
                 break;
-            case ActiveSkill.AttributeType.mana:
-                if(skill.GetMagicType() == ActiveSkill.MagicType.heal)
+            case Skill.SkillType.mana:
+                ManaSkill mSkill = ((ManaSkill)skill);
+                if(mSkill.GetMagicType() == ManaSkill.MagicType.heal)
                 {
                     playerDamageOutput = 0;
-                    if (!CheckIfPoisoned(true))
+                    if (!CheckIfBleeding(true))
                     {
-                        int temp = (int)((skill.GetDamageModifier() + player.GetPassiveFlat(PassiveSkill.AttributeType.healthRegen)) * player.GetPassivePercent(PassiveSkill.AttributeType.healthRegen));
+                        int temp = (int)((mSkill.GetDamageModifier()));
                         player.ChangeHealth(temp);
                         OutputToBattle(String.Format(skill.GetActionMessage(), temp));
                     }
                     else
-                        OutputToBattle(String.Format("{0} attempted to heal, but they are poisoned!", player.GetName()));
+                        OutputToBattle(String.Format("{0} attempted to heal, but they are bleeding!", player.GetName()));
                 }
-                if(skill.GetMagicType() == ActiveSkill.MagicType.dispel)
+                if(mSkill.GetMagicType() == ManaSkill.MagicType.dispel)
                 {
                     playerDamageOutput = 0;
-                    int x = skill.GetDamageModifier();
+                    int x = mSkill.GetDamageModifier();
                     for(int i = 0; i < x; i++)
                     {
                         player.DecrementStatusEffectTurn();
@@ -2281,14 +2457,14 @@ public class Engine : MonoBehaviour
                         }
                     }
                 }
-                if(skill.GetMagicType() == ActiveSkill.MagicType.damage)
+                if(mSkill.GetMagicType() == ManaSkill.MagicType.damage)
                 {
-                    playerDamageOutput = (int)((skill.GetDamageModifier() + player.GetPassiveFlat(PassiveSkill.AttributeType.manaDamage) * player.GetPassivePercent(PassiveSkill.AttributeType.manaDamage)) - enemyDefValue);
+                    playerDamageOutput = (int)((mSkill.GetDamageModifier() - enemyDefValue));
                     if (playerDamageOutput < 0)
                         playerDamageOutput = 0;
                     OutputToBattle(String.Format(skill.GetActionMessage(), playerDamageOutput));
                 }
-                player.ChangeMana(-skill.GetAttributeChange());
+                player.ChangeMana(-mSkill.GetAttributeCost());
                 break;
         }
         
@@ -2299,7 +2475,7 @@ public class Engine : MonoBehaviour
             {
                 float hitChance = UnityEngine.Random.Range(0, 1.0f);
 
-                if (hitChance > statusEffect.GetHitChance())
+                if (hitChance <= statusEffect.GetHitChance())
                 {
                     if (statusEffect.IsNegative())
                         AddStatusEffect(Instantiate(statusEffect), false, activeEnemy);
@@ -2374,14 +2550,14 @@ public class Engine : MonoBehaviour
                 {
                     enemyDamageOutput = 0;
 
-                    if (!CheckIfPoisoned(false))
+                    if (!CheckIfBleeding(false))
                     {
                         int enemyHealRate = attack.GetDamageModifier();
                         enemy.ChangeHealth(enemyHealRate);
                         OutputToBattle(String.Format(attack.GetDescription(), enemy.GetName(), enemyHealRate));
                     }
                     else
-                        OutputToBattle(String.Format("{0} attempted to heal, but is poisoned!", enemy.GetName()));
+                        OutputToBattle(String.Format("{0} attempted to heal, but is bleeding!", enemy.GetName()));
                     enemy.ChangeMana(-attack.GetAttributeCost());
                 }
                 else if(attack.GetAttackType() == EnemyAttackType.AttackType.effect)
@@ -2404,7 +2580,7 @@ public class Engine : MonoBehaviour
                 {
                     enemyDamageOutput = 0;
 
-                    if(!CheckIfPoisoned(false))
+                    if(!CheckIfBleeding(false))
                     {
                         int enemyHealRate = attack.GetDamageModifier();
                         enemy.ChangeHealth(enemyHealRate);
@@ -2435,15 +2611,20 @@ public class Engine : MonoBehaviour
             List<StatusEffect> statusEffects = attack.GetStatusEffects();
             foreach (StatusEffect statusEffect in statusEffects)
             {
-                float hitChance = UnityEngine.Random.Range(0, 1.0f);
-
-                if (hitChance > statusEffect.GetHitChance())
+                if (statusEffect != null)
                 {
-                    if (statusEffect.IsNegative())
-                        AddStatusEffect(Instantiate(statusEffect), true, null);
-                    else
-                        AddStatusEffect(Instantiate(statusEffect), false, enemy);                  
+                    float hitChance = UnityEngine.Random.Range(0, 1.0f);
+
+                    if (hitChance > statusEffect.GetHitChance())
+                    {
+                        if (statusEffect.IsNegative())
+                            AddStatusEffect(Instantiate(statusEffect), true, null);
+                        else
+                            AddStatusEffect(Instantiate(statusEffect), false, enemy);
+                    }
                 }
+                else
+                    Debug.LogError(String.Format("Null Status Effect in Enemy Attack {0}", attack.GetName()));
             }
         }
 
@@ -2486,6 +2667,39 @@ public class Engine : MonoBehaviour
         }       
     }
 
+
+
+    void LoadQuestSlots()
+    {
+        for(int i = 0; i < player.GetQuestList().Count; i++)
+        {
+            GameObject questSlot = Instantiate(uiQuestSlot, questPanel.transform);
+            questSlot.GetComponent<QuestContainer>().SetQuest(QuestDictionary[player.GetQuestList()[i].GetID()]);
+            questSlot.GetComponent<Button>().onClick.AddListener(() => DisplayQuest(questSlot.GetComponent<QuestContainer>()));
+            questSlot.GetComponent<Button>().onClick.AddListener(() => GameObject.Find("ButtonAudioSource").GetComponent<AudioSource>().Play());
+            uiQuestSlots.Add(QuestDictionary[player.GetQuestList()[i].GetID()].GetID(), questSlot);
+        }
+    }
+
+    void LoadEquipmentSlots()
+    {
+        if (player.GetWeapon() != NULL_WEAPON)
+            weaponBtn.GetComponent<ItemContainer>().SetItem(player.GetWeapon());
+        if (player.GetHead() != NULL_ARMOR)
+            headBtn.GetComponent<ItemContainer>().SetItem(player.GetHead());
+        if (player.GetChest() != NULL_ARMOR)
+            chestBtn.GetComponent<ItemContainer>().SetItem(player.GetChest());
+        if (player.GetLegs() != NULL_ARMOR)
+            legsBtn.GetComponent<ItemContainer>().SetItem(player.GetLegs());
+        if (player.GetFeet() != NULL_ARMOR)
+            feetBtn.GetComponent<ItemContainer>().SetItem(player.GetFeet());
+        if (player.GetHands() != NULL_ARMOR)
+            handsBtn.GetComponent<ItemContainer>().SetItem(player.GetHands());
+    }
+
+
+    // Inventory Methods
+
     /// <summary>
     /// Adds Item to uiInvSlots.
     /// </summary>
@@ -2523,37 +2737,6 @@ public class Engine : MonoBehaviour
         }
         invScroll.verticalNormalizedPosition = 1;
     }
-
-    void LoadQuestSlots()
-    {
-        for(int i = 0; i < player.GetQuestList().Count; i++)
-        {
-            GameObject questSlot = Instantiate(uiQuestSlot, questPanel.transform);
-            questSlot.GetComponent<QuestContainer>().SetQuest(QuestDictionary[player.GetQuestList()[i].GetID()]);
-            questSlot.GetComponent<Button>().onClick.AddListener(() => DisplayQuest(questSlot.GetComponent<QuestContainer>()));
-            questSlot.GetComponent<Button>().onClick.AddListener(() => GameObject.Find("ButtonAudioSource").GetComponent<AudioSource>().Play());
-            uiQuestSlots.Add(QuestDictionary[player.GetQuestList()[i].GetID()].GetID(), questSlot);
-        }
-    }
-
-    void LoadEquipmentSlots()
-    {
-        if (player.GetWeapon() != NULL_WEAPON)
-            weaponBtn.GetComponent<ItemContainer>().SetItem(player.GetWeapon());
-        if (player.GetHead() != NULL_ARMOR)
-            headBtn.GetComponent<ItemContainer>().SetItem(player.GetHead());
-        if (player.GetChest() != NULL_ARMOR)
-            chestBtn.GetComponent<ItemContainer>().SetItem(player.GetChest());
-        if (player.GetLegs() != NULL_ARMOR)
-            legsBtn.GetComponent<ItemContainer>().SetItem(player.GetLegs());
-        if (player.GetFeet() != NULL_ARMOR)
-            feetBtn.GetComponent<ItemContainer>().SetItem(player.GetFeet());
-        if (player.GetHands() != NULL_ARMOR)
-            handsBtn.GetComponent<ItemContainer>().SetItem(player.GetHands());
-    }
-
-
-    // Inventory Methods
 
     public void LoadInventorySlot(Item item, uint count)
     {
@@ -2673,16 +2856,20 @@ public class Engine : MonoBehaviour
         {
             GameObject invSlot = uiInvSlots[item.GetID()];
 
+            if ((UIInventoryScreen.activeInHierarchy && !isInBattle) || isInPickup)
+                DeactivateInvSelection();
+            else
+                DeactivateInvSelection(false);
+
             uiInvSlots.Remove(item.GetID());
             GameObject.Destroy(invSlot);
-
-            DeactivateInvSelection();
+          
             OrderDictionary(uiInvSlots);
         }
 
         SetCurrentWeight();
         
-        invScroll.verticalNormalizedPosition = 1;
+        //invScroll.verticalNormalizedPosition = 1;
     }
 
     public void RemoveFromPickup(Item item)
@@ -2695,7 +2882,7 @@ public class Engine : MonoBehaviour
             uiPickupSlots.Remove(item.GetID());
             GameObject.Destroy(pickupSlot);
 
-            DeactivateInvSelection();
+            DeactivateInvSelection(false);
             OrderDictionary(uiPickupSlots);
         }
 
@@ -2772,7 +2959,16 @@ public class Engine : MonoBehaviour
                     useItemBtn.gameObject.SetActive(true);
                     equipItemBtn.gameObject.SetActive(false);
                     Consumable c = (Consumable)itemContainer.GetItem();
-                    itemConsumableObj.GetComponentInChildren<Text>().text = c.GetStatChange().ToString();
+                    if (c.GetConsumableType() == Consumable.ConsumableType.potion)
+                        itemConsumableObj.GetComponentInChildren<Text>().text = ((Potion)c).GetEffectChanges()[0].ToString();
+                    else if (c.GetConsumableType() == Consumable.ConsumableType.edible)
+                        itemConsumableObj.GetComponentInChildren<Text>().text = ((Edible)c).GetEffectChange().ToString();
+                    else
+                    {
+                        if (isInBattle)
+                            useItemBtn.gameObject.SetActive(false);
+                        itemConsumableObj.SetActive(false);
+                    }
                 }
                 else
                 {
@@ -2853,13 +3049,18 @@ public class Engine : MonoBehaviour
                     pickUpConsumableObj.SetActive(true);
 
                     Consumable c = (Consumable)itemContainer.GetItem();
-                    pickUpConsumableObj.GetComponentInChildren<Text>().text = c.GetStatChange().ToString();
+                    if (c.GetConsumableType() == Consumable.ConsumableType.potion)
+                        pickUpConsumableObj.GetComponentInChildren<Text>().text = ((Potion)c).GetEffectChanges()[0].ToString();
+                    else if (c.GetConsumableType() == Consumable.ConsumableType.edible)
+                        pickUpConsumableObj.GetComponentInChildren<Text>().text = ((Edible)c).GetEffectChange().ToString();
+                    else
+                        pickUpConsumableObj.SetActive(false);
                 }
                 else
                 {
-                    itemDamageObj.SetActive(false);
-                    itemArmorObj.SetActive(false);
-                    itemConsumableObj.SetActive(false);
+                    pickUpDamageObj.SetActive(false);
+                    pickUpArmorObj.SetActive(false);
+                    pickUpConsumableObj.SetActive(false);
                 }
             }
         }
@@ -2868,39 +3069,61 @@ public class Engine : MonoBehaviour
     public void UseItem()
     {
         Consumable c = (Consumable)activeItem;
-        c.UseItem(player);
         RemoveFromInventory(c);
 
         switch (c.GetConsumableType())
         {
-            case Consumable.ConsumableType.healthPotion:
+            case Consumable.ConsumableType.potion:
                 GameObject.Find("FoodDrinkAudioSource").GetComponent<AudioSource>().Play();
-                UpdateHealthSliders();
+                ((Potion)c).UseItem(player);
+                UpdateInventoryAttributes();
                 break;
-            case Consumable.ConsumableType.staminaPotion:
+            case Consumable.ConsumableType.edible:
                 GameObject.Find("FoodDrinkAudioSource").GetComponent<AudioSource>().Play();
-                UpdateStaminaSliders();
+                ((Edible)c).UseItem(player);
+                UpdateInventoryAttributes();
                 break;
-            case Consumable.ConsumableType.manaPotion:
+            case Consumable.ConsumableType.skillBook:
                 GameObject.Find("FoodDrinkAudioSource").GetComponent<AudioSource>().Play();
-                UpdateManaSliders();
-                break;
-            case Consumable.ConsumableType.food:
-                GameObject.Find("FoodEatAudioSource").GetComponent<AudioSource>().Play();
-                UpdateHealthSliders();
-                break;
-            case Consumable.ConsumableType.drink:
-                GameObject.Find("FoodDrinkAudioSource").GetComponent<AudioSource>().Play();
+                ((SkillBook)c).UseItem(player);
                 break;
         }
 
         if (isInBattle)
         {
-            DeactivateInvSelection();
+            //DeactivateInvSelection(false);
             OutputToBattle(String.Format("Player has consumed {0}.", c.GetName()));
             UIInventoryScreen.SetActive(false);
             playerHasMoved = true;
         }
+    }
+
+    public void AddSkill(Skill skill)
+    {
+        if(!uiSkillSlots.ContainsKey(skill.GetID()))
+        {
+            GameObject skillSlot = GameObject.Instantiate(uiSkillSlot, skillPanel.transform);
+
+            skillSlot.GetComponent<SkillContainer>().SetSkill(skill);
+
+            skillSlot.GetComponent<Button>().onClick.AddListener(() => DisplaySkill(skillSlot.GetComponent<SkillContainer>()));
+            skillSlot.GetComponent<Button>().onClick.AddListener(() => GameObject.Find("ButtonAudioSource").GetComponent<AudioSource>().Play());
+            if (skill.GetSkillType() == Skill.SkillType.stamina)
+                skillSlot.transform.GetChild(0).GetComponent<Image>().sprite = staminaDrop;
+            else if (skill.GetSkillType() == Skill.SkillType.mana)
+                skillSlot.transform.GetChild(0).GetComponent<Image>().sprite = manaDrop;
+            if (skill.GetSprite() != null)
+                skillSlot.transform.GetChild(1).GetComponent<Image>().sprite = skill.GetSprite();
+            else
+                skillSlot.transform.GetChild(1).gameObject.SetActive(false);
+            skillSlot.transform.GetChild(2).GetComponent<Text>().text = skill.GetName();
+            skillSlot.transform.GetChild(3).GetComponent<Toggle>().isOn = skill.IsActive();
+
+            uiSkillSlots.Add(skill.GetID(), skillSlot);
+            OrderDictionary(uiSkillSlots, true);
+        }
+
+        skillScrollView.GetComponent<ScrollRect>().verticalNormalizedPosition = 1;
     }
 
     public void EquipItem()
@@ -3012,7 +3235,7 @@ public class Engine : MonoBehaviour
             }
         }
         armorValueTxt.text = player.GetDefense().ToString();
-        DeactivateInvSelection();
+        DeactivateInvSelection(false);
     }
 
     public void UnequipItem()
@@ -3049,10 +3272,10 @@ public class Engine : MonoBehaviour
             }
             AddToInventory(a);
         }
-        DeactivateInvSelection();
+        DeactivateInvSelection(false);
     }
 
-    void DeactivateInvSelection()
+    void DeactivateInvSelection(bool selectNext = true)
     {
         nameTxt.text = "";
         descriptionTxt.text = "";
@@ -3085,12 +3308,146 @@ public class Engine : MonoBehaviour
         pickupItemBtn.interactable = false;
 
         activeItem = null;
+
+        /*
+        if(!selectNext)
+            activeItem = null;
+        else
+        {
+            List<uint> keyList = uiInvSlots.Keys.ToList();
+            int currentIDIndex = keyList.IndexOf(activeItem.GetID());
+            if (keyList.Count > currentIDIndex)
+                DisplayItem(uiInvSlots[keyList[currentIDIndex + 1]].GetComponent<ItemContainer>());
+            else if (keyList.Count <= 1)
+                activeItem = null;
+            else
+                DisplayItem(uiInvSlots[keyList[currentIDIndex - 1]].GetComponent<ItemContainer>());            
+        }
+        */
+    }
+
+    //**
+
+    // Stats Methods
+
+    public void LevelAttribute(int attr)
+    {
+        switch(attr)
+        {
+            case 0:
+                player.SetStrength(player.GetStrength() + 1);
+                break;
+            case 1:
+                player.SetAgility(player.GetAgility() + 1);
+                break;
+            case 2:
+                player.SetIntelligence(player.GetIntelligence() + 1);
+                break;
+            case 3:
+                player.SetLuck(player.GetLuck() + 1);
+                break;
+        }
+        player.SetSkillPoints(player.GetSkillPoints() - 1);
+        UpdateInventoryAttributes();
+    }
+
+    void UpdateInventoryAttributes()
+    {
+        UpdateHealthSliders();
+        UpdateStaminaSliders();
+        UpdateManaSliders();
+
+        UpdateExpSliders();
+
+        SetCurrentWeight();
+        goldTxt.text = player.GetGold().ToString();
+        pickupGoldTxt.text = player.GetGold().ToString();
+        statsGoldTxt.text = player.GetGold().ToString();
+        statsDmgTxt.text = player.GetWeapon().GetMaxDamage().ToString();
+        statsDefTxt.text = player.GetDefense().ToString();
+        statsSpeedTxt.text = player.GetSpeed().ToString();
+
+    }
+
+    void UpdateExpSliders()
+    {
+        statsExpSlider.maxValue = player.GetToLevelExp();
+        statsExpSlider.value = player.GetExp();
+        statsTotalExpTxt.text = player.GetTotalExp().ToString();
+        statsSkillPointsTxt.text = player.GetSkillPoints().ToString();
+        statsLvlTxt.text = player.GetLevel().ToString();
+        statsExpTxt.text = player.GetExp() + "/" + player.GetToLevelExp();
+
+        playerStrengthTxt.text = player.GetStrength().ToString();
+        playerAgilityTxt.text = player.GetAgility().ToString();
+        playerIntelligenceTxt.text = player.GetIntelligence().ToString();
+        playerLuckTxt.text = player.GetLuck().ToString();
+
+        if (player.GetSkillPoints() > 0)
+        {
+            playerStrengthBtn.SetActive(true);
+            playerAgilityBtn.SetActive(true);
+            playerIntelligenceBtn.SetActive(true);
+            playerLuckBtn.SetActive(true);
+        }
+        else
+        {
+            playerStrengthBtn.SetActive(false);
+            playerAgilityBtn.SetActive(false);
+            playerIntelligenceBtn.SetActive(false);
+            playerLuckBtn.SetActive(false);
+        }
+    }
+
+    void UpdateHealthSliders()
+    {
+        statsHealthSlider.maxValue = player.GetMaxHealth();
+        statsHealthSlider.value = player.GetHealth();
+        statsHealthTxt.text = player.GetHealth() + "/" + player.GetMaxHealth();
+    }
+
+    void UpdateStaminaSliders()
+    {
+        statsStaminaSlider.maxValue = player.GetMaxStamina();
+        statsStaminaSlider.value = player.GetStamina();
+        statsStaminaTxt.text = player.GetStamina() + "/" + player.GetMaxStamina();
+    }
+
+    void UpdateManaSliders()
+    {
+        statsManaSlider.maxValue = player.GetMaxMana();
+        statsManaSlider.value = player.GetMana();
+        statsManaTxt.text = player.GetMana() + "/" + player.GetMaxMana();
+    }
+
+    void SetCurrentWeight()
+    {
+        uint weight = player.GetInventory().GetTotalWeight();
+
+        if (player.GetWeapon() != NULL_WEAPON)
+            weight += player.GetWeapon().GetWeight();
+        if (player.GetHead() != NULL_ARMOR)
+            weight += player.GetHead().GetWeight();
+        if (player.GetChest() != NULL_ARMOR)
+            weight += player.GetChest().GetWeight();
+        if (player.GetLegs() != NULL_ARMOR)
+            weight += player.GetLegs().GetWeight();
+        if (player.GetFeet() != NULL_ARMOR)
+            weight += player.GetFeet().GetWeight();
+        if (player.GetHands() != NULL_ARMOR)
+            weight += player.GetHands().GetWeight();
+
+        player.SetCurrentWeight(weight);
+
+        totalInvWeightTxt.text = String.Format("{0}/{1}", player.GetCurrentWeight(), player.GetMaxWeight());
+        statsWeightTxt.text = String.Format("{0}/{1}", player.GetCurrentWeight(), player.GetMaxWeight());
+        playerPickupWeightTxt.text = String.Format("{0}/{1}", player.GetCurrentWeight(), player.GetMaxWeight());
     }
 
     //**
 
 
-    void OrderDictionary(SortedDictionary<uint, GameObject> dictionary)
+    void OrderDictionary(SortedDictionary<uint, GameObject> dictionary, bool orderSkills = false)
     {
         List<GameObject> gameObjects = new List<GameObject>();
 
@@ -3099,7 +3456,10 @@ public class Engine : MonoBehaviour
             gameObjects.Add(kvp.Value);
         }
 
-        gameObjects.Sort((x, y) => String.Compare(x.GetComponent<ItemContainer>().GetItem().GetName(), y.GetComponent<ItemContainer>().GetItem().GetName()));
+        if(orderSkills)
+            gameObjects.Sort((x, y) => x.GetComponent<SkillContainer>().GetSkill().GetID().CompareTo(y.GetComponent<SkillContainer>().GetSkill().GetID()));
+        else
+            gameObjects.Sort((x, y) => String.Compare(x.GetComponent<ItemContainer>().GetItem().GetName(), y.GetComponent<ItemContainer>().GetItem().GetName()));
 
         for (int i = 0; i < gameObjects.Count; i++)
         {
@@ -3132,84 +3492,30 @@ public class Engine : MonoBehaviour
 
     public void DisplaySkill(SkillContainer skillContainer)
     {
+        selectedSkill = SkillDictionary[skillContainer.GetSkill().GetID()];
+
+        skillImg.sprite = skillContainer.GetSkill().GetSprite();
+        skillImg.color = new Color(255, 255, 255, 1f);
+        skillNameTxt.text = skillContainer.GetSkill().GetName();
+        skillDescriptionTxt.text = skillContainer.GetSkill().GetDescription();
+        skillCostTxt.text = skillContainer.GetSkill().GetAttributeCost().ToString();
+        skillDamageTxt.text = (skillContainer.GetSkill()).GetMaxDamage().ToString();
+
         skillCostGO.SetActive(true);
         skillDamageGO.SetActive(true);
 
-        selectedSkill = SkillDictionary[skillContainer.GetSkill().GetID()];
-
-        skillNameTxt.text = selectedSkill.GetName();
-        skillDescriptionTxt.text = selectedSkill.GetDescription();
-
-        if(selectedSkill.GetSkillType() == Skill.SkillType.active)
-        {
-            skillCostTxt.text = ((ActiveSkill)selectedSkill).GetAttributeChange().ToString();
-            skillDamageTxt.text = ((ActiveSkill)selectedSkill).GetMinDamageModifier().ToString() + " - " + ((ActiveSkill)selectedSkill).GetMaxDamageModifier().ToString();
-
-            if (((ActiveSkill)selectedSkill).GetAttributeType() == ActiveSkill.AttributeType.stamina)
-            {
-                skillCostGO.transform.GetChild(2).GetComponent<Image>().sprite = staminaDrop;
-                skillDamageGO.transform.GetChild(2).GetComponent<Image>().sprite = physicalDmgSprite;
-            }
-            else if (((ActiveSkill)selectedSkill).GetAttributeType() == ActiveSkill.AttributeType.mana)
-            {
-                skillCostGO.transform.GetChild(2).GetComponent<Image>().sprite = manaDrop;
-                skillDamageGO.transform.GetChild(2).GetComponent<Image>().sprite = manaDmgSprite;
-            }
-            if (((ActiveSkill)selectedSkill).GetMaxDamageModifier() == 0)
-                skillDamageGO.SetActive(false);
-        }
+        activateSkillBtn.gameObject.SetActive(true);
+        if (selectedSkill.IsActive())
+            activateSkillBtn.transform.GetChild(0).GetComponent<Text>().text = "Deactivate";
         else
-        {
-            skillCostGO.SetActive(false);
-            skillDamageGO.SetActive(false);
-        }
+            activateSkillBtn.transform.GetChild(0).GetComponent<Text>().text = "Activate";
 
-        if (player.GetSkillPoints() > 0 && !selectedSkill.IsUnlocked() && selectedSkill.IsUnlockable() && (player.GetLevel() >= selectedSkill.GetLevelRequirement()))
-        {
-            unlockSkillBtn.gameObject.SetActive(true);
-            unlockedTxt.gameObject.SetActive(false);
-        }
-        else if (selectedSkill.IsUnlocked())
-        {
-            unlockSkillBtn.gameObject.SetActive(false);
-            unlockedTxt.gameObject.SetActive(true);
-            unlockedTxt.text = "Skill Unlocked";
-        }
-        else if (!selectedSkill.IsUnlockable())
-        {
-            unlockSkillBtn.gameObject.SetActive(false);
-            unlockedTxt.gameObject.SetActive(true);
-            unlockedTxt.text = "Skill Not Yet Unlockable";
-        }
-        else if(player.GetLevel() < selectedSkill.GetLevelRequirement())
-        {
-            unlockSkillBtn.gameObject.SetActive(false);
-            unlockedTxt.gameObject.SetActive(true);
-            unlockedTxt.text = "Level Requirement Not Reached";
-        }
-        else if (player.GetSkillPoints() < 1)
-        {
-            unlockSkillBtn.gameObject.SetActive(false);
-            unlockedTxt.gameObject.SetActive(true);
-            unlockedTxt.text = "Not Enough Skill Points";
-        }
     }
 
-    public void UnlockSkill()
+    public void ActivateSkill()
     {
-        player.SetSkillPoints(player.GetSkillPoints() - 1);
-        if (selectedSkill.GetSkillType() == Skill.SkillType.active)
-        {
-            if (((ActiveSkill)selectedSkill).GetAttributeType() == ActiveSkill.AttributeType.stamina)
-                player.AddActiveStaminaSkill((ActiveSkill)selectedSkill);
-            else if (((ActiveSkill)selectedSkill).GetAttributeType() == ActiveSkill.AttributeType.mana)
-                player.AddActiveManaSkill((ActiveSkill)selectedSkill);
-        }
-        else
-            player.AddPassiveSkill((PassiveSkill)selectedSkill);
-
-        selectedSkill.SetUnlocked();
-        selectedSkill.UnlockNextSkills();
+        (SkillDictionary[selectedSkill.GetID()]).SetActive(!SkillDictionary[selectedSkill.GetID()].IsActive());
+        uiSkillSlots[selectedSkill.GetID()].transform.GetChild(3).GetComponent<Toggle>().isOn = SkillDictionary[selectedSkill.GetID()].IsActive();
 
         UpdateInventoryAttributes();
         UpdateExpSliders();
@@ -3336,7 +3642,7 @@ public class Engine : MonoBehaviour
         UIInventoryScreen.SetActive(x);
         UIStatsScreen.SetActive(false);
 
-        DeactivateInvSelection();
+        DeactivateInvSelection(false);
     }
 
     public void ActivateQuestScreen(bool x)
@@ -3512,50 +3818,17 @@ public class Engine : MonoBehaviour
 
     public void ActivateSkillScreen(bool x)
     {
-        DeactivateInvSelection();
+        DeactivateInvSelection(false);
         DeactivateSkillSelection();
-
-        skillScrollView.SetActive(true);
-        magicScrollView.SetActive(false);
 
         UIInventoryScreen.SetActive(!x);
         UIStatsScreen.SetActive(false);
         UISkillScreen.SetActive(x);
     }
 
-    public void ActivateSkillScrollView()
-    {
-        skillScrollView.SetActive(true);
-        magicScrollView.SetActive(false);
-        passiveScrollView.SetActive(false);
-
-        skillScrollView.GetComponent<ScrollRect>().verticalNormalizedPosition = 1;
-        skillScrollView.GetComponent<ScrollRect>().horizontalNormalizedPosition = 0;
-    }
-
-    public void ActivateMagicScrollView()
-    {
-        skillScrollView.SetActive(false);
-        magicScrollView.SetActive(true);
-        passiveScrollView.SetActive(false);
-
-        magicScrollView.GetComponent<ScrollRect>().verticalNormalizedPosition = 1;
-        magicScrollView.GetComponent<ScrollRect>().horizontalNormalizedPosition = 0;
-    }
-
-    public void ActivatePassiveScrollView()
-    {
-        skillScrollView.SetActive(false);
-        magicScrollView.SetActive(false);
-        passiveScrollView.SetActive(true);
-
-        passiveScrollView.GetComponent<ScrollRect>().verticalNormalizedPosition = 1;
-        passiveScrollView.GetComponent<ScrollRect>().horizontalNormalizedPosition = 0;
-    }
-
     public void ActivateStatsScreen(bool x)
     {
-        DeactivateInvSelection();
+        DeactivateInvSelection(false);
 
         UpdateInventoryAttributes();
 
@@ -3621,39 +3894,6 @@ public class Engine : MonoBehaviour
     }
 
     //**
-
-
-    public void CheckSkillArrows(Vector2 position)
-    {
-        GameObject scrollView;
-        if (skillScrollView.activeSelf)
-            scrollView = skillScrollView;
-        else if (magicScrollView.activeSelf)
-            scrollView = magicScrollView;
-        else
-            scrollView = passiveScrollView;
-
-        if (position.x > 0.9)
-            scrollView.transform.GetChild(1).gameObject.SetActive(false);
-        else
-            scrollView.transform.GetChild(1).gameObject.SetActive(true);
-
-        if (position.y > 0.1)
-            scrollView.transform.GetChild(2).gameObject.SetActive(true);
-        else
-            scrollView.transform.GetChild(2).gameObject.SetActive(false);
-    }
-
-    public void SetIsInNPC(bool x, GameObject NPC)
-    {
-        isInNPC = x;
-        if (x)
-            currentNPC = NPCDictionary[NPC.GetComponent<NPCContainer>().GetNPC().GetID()];
-        else
-            currentNPC = null;
-
-        enterDialogueBtn.gameObject.SetActive(x);
-    }
 
 
     // Dungeon Methods
@@ -3748,24 +3988,35 @@ public class Engine : MonoBehaviour
 
     // Dialogue Methods
 
+    public void SetIsInNPC(bool x, GameObject NPC)
+    {
+        isInNPC = x;
+        if (x)
+            currentNPC = NPCDictionary[NPC.GetComponent<NPCContainer>().GetNPC().GetID()];
+        else
+            currentNPC = null;
+
+        enterDialogueBtn.gameObject.SetActive(x);
+    }
+
     public void SelectDialogue(DialogueContainer dialogueContainer)
     {
         if (textType != null)
             StopCoroutine(textType);
+
+        ClearDialogue();
+
         if(dialogueContainer.GetDialogue().GetDialogueType() == Dialogue.DialogueType.merchant)
         {
-            ClearDialogue();
             ActivateDialogueScreen(false);
             ActivatePickupScreen(true);
         }
         else if(dialogueContainer.GetDialogue().GetDialogueType() == Dialogue.DialogueType.conversation)
         {
-            ClearDialogue();
             SetDialogues(dialogueContainer.GetDialogue());
         }
         else if(dialogueContainer.GetDialogue().GetDialogueType() == Dialogue.DialogueType.quest)
         {
-            ClearDialogue();
             QuestDialogue questDialogue = (QuestDialogue)dialogueContainer.GetDialogue();
             if(questDialogue.GetQuestDialogueType() == QuestDialogue.QuestDialogueType.start)
             {
@@ -3807,13 +4058,10 @@ public class Engine : MonoBehaviour
         }
         else if(dialogueContainer.GetDialogue().GetDialogueType() == Dialogue.DialogueType.inn)
         {
-            ClearDialogue();
             SetDialogues(dialogueContainer.GetDialogue());
-            StartCoroutine(EnterInn());
         }
         else if(dialogueContainer.GetDialogue().GetDialogueType() == Dialogue.DialogueType.battle)
         {
-            ClearDialogue();
             Enemy enemy = ((BattleDialogue)dialogueContainer.GetDialogue()).GetEnemy();
             SetDialogues(dialogueContainer.GetDialogue());
             battleCoroutine = StartCoroutine(EnterBattle(enemy));
@@ -4161,6 +4409,38 @@ public class Engine : MonoBehaviour
                 }
             }
         }
+        else if(dialogue.GetDialogueType() == Dialogue.DialogueType.inn)
+        {
+            InnDialogue innDialogue = (InnDialogue)dialogue;
+
+            if(player.GetGold() >= innDialogue.GetCost())
+            {
+                textType = StartCoroutine(TypeText(innDialogue.GetSufficientFundsResponse()));
+                StartCoroutine(EnterInn(innDialogue.GetCost(), innDialogue.GetAttributeRegen()));
+            }
+            else
+            {
+                textType = StartCoroutine(TypeText(innDialogue.GetInsufficientFundsResponse()));
+
+                List<string> dialogueStrings = innDialogue.GetInsufficientFundsDialogueTexts();
+                List<Dialogue> dialogues = innDialogue.GetInsufficientFundsDialogueObjects();
+                List<Sprite> sprites = innDialogue.GetInsufficientFundsDialogueSprites();
+                for(int i = 0; i < dialogues.Count; i++)
+                {
+                    GameObject dGO = Instantiate(dialogueBtn, responsePanel.transform);
+
+                    dGO.GetComponent<DialogueContainer>().SetDialogue(dialogues[i]);
+                    dGO.transform.GetChild(0).GetComponent<Text>().text = dialogueStrings[i];
+                    if (sprites[i] == null)
+                        dGO.transform.GetChild(1).gameObject.SetActive(false);
+                    else
+                        dGO.transform.GetChild(1).GetComponent<Image>().sprite = sprites[i];
+                    dGO.GetComponent<Button>().onClick.AddListener(() => SelectDialogue(dGO.GetComponent<DialogueContainer>()));
+
+                    dialogueOptionSlots.Add(dGO);
+                }
+            }
+        }
         else
         {
             textType = StartCoroutine(TypeText(dialogue.GetNPCLine()));
@@ -4187,14 +4467,17 @@ public class Engine : MonoBehaviour
 
     IEnumerator TypeText(string text)
     {
-        var waitTimer = new WaitForSeconds(0.025f);
+        var waitTimer = new WaitForSeconds(0.005f);
         npcLineTxt.text = text;
         npcLineTxt.maxVisibleCharacters = 0;
         for(int i = 1; i < text.Length + 1; i++)
         {
             npcLineTxt.maxVisibleCharacters = i;
+
+            /*
             if(i%2 == 0)
                 GameObject.Find("TextAudioSource").GetComponent<AudioSource>().Play();
+            */
             yield return waitTimer;
         }
     }
@@ -4218,35 +4501,8 @@ public class Engine : MonoBehaviour
         UICoverScreen.GetComponent<Image>().color = new Color(0, 0, 0, 1);
         messageTxt.color = new Color(255, 255, 255, 0);
 
-        messageTxt.text = "Wake up.";
-
-        while(messageTxt.color.a < 1)
-        {
-            messageTxt.color = new Color(messageTxt.color.r, messageTxt.color.g, messageTxt.color.b, messageTxt.color.a + 0.01f);
-            yield return new WaitForSecondsRealtime(0.05f * Time.deltaTime);
-        }
-        yield return new WaitForSecondsRealtime(1f);
-        while (messageTxt.color.a > 0)
-        {
-            messageTxt.color = new Color(messageTxt.color.r, messageTxt.color.g, messageTxt.color.b, messageTxt.color.a - 0.01f);
-            yield return new WaitForSecondsRealtime(0.05f * Time.deltaTime);
-        }
-        yield return new WaitForSecondsRealtime(1f);
-
-        messageTxt.text = "What is your name, gladiator?";
-
-        while (messageTxt.color.a < 1)
-        {
-            messageTxt.color = new Color(messageTxt.color.r, messageTxt.color.g, messageTxt.color.b, messageTxt.color.a + 0.01f);
-            yield return new WaitForSecondsRealtime(0.05f * Time.deltaTime);
-        }
-        yield return new WaitForSecondsRealtime(1f);
-        while (messageTxt.color.a > 0)
-        {
-            messageTxt.color = new Color(messageTxt.color.r, messageTxt.color.g, messageTxt.color.b, messageTxt.color.a - 0.01f);
-            yield return new WaitForSecondsRealtime(0.05f * Time.deltaTime);
-        }
-        yield return new WaitForSecondsRealtime(1f);
+        yield return StartCoroutine(FadeText("Wake up."));
+        yield return StartCoroutine(FadeText("What is your name, gladiator?"));
 
         while (acceptNameBtn.GetComponent<Image>().color.a < 1)
         {
@@ -4278,59 +4534,34 @@ public class Engine : MonoBehaviour
         nameInputField.gameObject.SetActive(false);
         yield return new WaitForSecondsRealtime(1f);
 
-        messageTxt.text = "I've given you a crooked dagger and a tattered shirt.";
-        while (messageTxt.color.a < 1)
-        {
-            messageTxt.color = new Color(messageTxt.color.r, messageTxt.color.g, messageTxt.color.b, messageTxt.color.a + 0.01f);
-            yield return new WaitForSecondsRealtime(0.05f * Time.deltaTime);
-        }
-        yield return new WaitForSecondsRealtime(1f);
-        while (messageTxt.color.a > 0)
-        {
-            messageTxt.color = new Color(messageTxt.color.r, messageTxt.color.g, messageTxt.color.b, messageTxt.color.a - 0.01f);
-            yield return new WaitForSecondsRealtime(0.05f * Time.deltaTime);
-        }
-        yield return new WaitForSecondsRealtime(1f);
-
-        messageTxt.text = "It should be all you need for now.";
-
-        while (messageTxt.color.a < 1)
-        {
-            messageTxt.color = new Color(messageTxt.color.r, messageTxt.color.g, messageTxt.color.b, messageTxt.color.a + 0.01f);
-            yield return new WaitForSecondsRealtime(0.05f * Time.deltaTime);
-        }
-        yield return new WaitForSecondsRealtime(1f);
-        while (messageTxt.color.a > 0)
-        {
-            messageTxt.color = new Color(messageTxt.color.r, messageTxt.color.g, messageTxt.color.b, messageTxt.color.a - 0.01f);
-            yield return new WaitForSecondsRealtime(0.05f * Time.deltaTime);
-        }
-        yield return new WaitForSecondsRealtime(1f);
-
+        yield return StartCoroutine(FadeText("I've given you a crooked dagger and a tattered shirt."));
+        yield return StartCoroutine(FadeText("It should be all you need for now."));
+        
         GameObject.Find("Player").transform.position = new Vector3(0, 2.2f, 10f);
         GameObject.Find("Player").transform.eulerAngles = new Vector3(0, 90f, 0);
 
-        messageTxt.text = "Prove your worth to me, " + name + ".";
+        yield return StartCoroutine(FadeText("Prove your worth to me, " + name + "."));
 
-        while (messageTxt.color.a < 1)
-        {
-            messageTxt.color = new Color(messageTxt.color.r, messageTxt.color.g, messageTxt.color.b, messageTxt.color.a + 0.01f);
-            yield return new WaitForSecondsRealtime(0.05f * Time.deltaTime);
-        }
-        yield return new WaitForSecondsRealtime(1f);
         UICoverScreen.GetComponent<Image>().raycastTarget = false;
+
         battleLeaveBtn.gameObject.SetActive(false);
         battleCoroutine = StartCoroutine(Battle(smallRat));
-        while (messageTxt.color.a > 0)
+
+        while (UICoverScreen.GetComponent<Image>().color.a > 0)
         {
-            messageTxt.color = new Color(messageTxt.color.r, messageTxt.color.g, messageTxt.color.b, messageTxt.color.a - 0.01f);
             UICoverScreen.GetComponent<Image>().color = new Color(UICoverScreen.GetComponent<Image>().color.r, UICoverScreen.GetComponent<Image>().color.g, UICoverScreen.GetComponent<Image>().color.b, UICoverScreen.GetComponent<Image>().color.a - (0.01f));
             yield return new WaitForSecondsRealtime(0.01f * Time.deltaTime);
         }
+
         yield return battleCoroutine;
+
         battleLeaveBtn.gameObject.SetActive(true);
         yield return new WaitForUIButtons(GameObject.Find("PickupExitBtn").GetComponent<Button>());
         ActivateDialogueScreen(true);
+
+        // PLAYER DEBUGGING AREA
+
+        //
 
         StartCoroutine(OverworldMusic());
         StartCoroutine(DirectionalOutput());
@@ -4380,10 +4611,10 @@ public class Engine : MonoBehaviour
         UICoverScreen.GetComponent<Image>().raycastTarget = false;
     }
 
-    IEnumerator EnterInn()
+    IEnumerator EnterInn(int cost, int attributeRegen)
     {
         messageTxt.text = "You rest, healing and rejuvenating you.";
-
+        
         UICoverScreen.GetComponent<Image>().raycastTarget = true;
         messageTxt.raycastTarget = true;
         while (UICoverScreen.GetComponent<Image>().color.a < 1)
@@ -4394,11 +4625,11 @@ public class Engine : MonoBehaviour
         }
 
         ActivateDialogueScreen(false);
-        player.ChangeGold(-10);
+        player.ChangeGold(-cost);
 
-        player.SetHealth(player.GetMaxHealth());
-        player.SetStamina(player.GetMaxStamina());
-        player.SetMana(player.GetMaxMana());
+        player.ChangeHealth(attributeRegen);
+        player.ChangeStamina(attributeRegen);
+        player.ChangeMana(attributeRegen);
         player.ClearStatusEffects();
 
         yield return new WaitForSecondsRealtime(0.5f);
@@ -4518,6 +4749,7 @@ public class Engine : MonoBehaviour
     {
         selectedSkill = null;
 
+        skillImg.color = new Color(255, 255, 255, 0);
         skillNameTxt.text = "";
         skillDescriptionTxt.text = "";
         skillCostTxt.text = "";
@@ -4526,8 +4758,7 @@ public class Engine : MonoBehaviour
         skillCostGO.SetActive(false);
         skillDamageGO.SetActive(false);
 
-        unlockSkillBtn.gameObject.SetActive(false);
-        unlockedTxt.gameObject.SetActive(false);
+        activateSkillBtn.gameObject.SetActive(false);
     }
 
     public void OutputToText(string output)
@@ -4541,95 +4772,6 @@ public class Engine : MonoBehaviour
         battleOutputTxt.text += "--------------------\n";
     }
 
-    void UpdateInventoryAttributes()
-    {
-        UpdateHealthSliders();
-        UpdateStaminaSliders();
-        UpdateManaSliders();
-
-        UpdateExpSliders();
-        UpdateExtraStats();
-
-        SetCurrentWeight();
-        goldTxt.text = player.GetGold().ToString();
-        pickupGoldTxt.text = player.GetGold().ToString();
-        statsGoldTxt.text = player.GetGold().ToString();
-        statsDmgTxt.text = player.GetWeapon().GetMaxDamage().ToString();
-        statsDefTxt.text = player.GetDefense().ToString();
-        
-    }
-
-    void UpdateExpSliders()
-    {
-        statsExpSlider.maxValue = player.GetToLevelExp();
-        statsExpSlider.value = player.GetExp();
-        statsTotalExpTxt.text = player.GetTotalExp().ToString();
-        statsSkillPointsTxt.text = player.GetSkillPoints().ToString();
-        skillSkillPointsTxt.text = player.GetSkillPoints().ToString();
-        statsLvlTxt.text = player.GetLevel().ToString();
-        statsExpTxt.text = player.GetExp() + "/" + player.GetToLevelExp();
-    }
-
-    void UpdateHealthSliders()
-    {
-        statsHealthSlider.maxValue = player.GetMaxHealth();
-        statsHealthSlider.value = player.GetHealth();
-        statsHealthTxt.text = player.GetHealth() + "/" + player.GetMaxHealth();
-    }
-    
-    void UpdateStaminaSliders()
-    {
-        statsStaminaSlider.maxValue = player.GetMaxStamina();
-        statsStaminaSlider.value = player.GetStamina();
-        statsStaminaTxt.text = player.GetStamina() + "/" + player.GetMaxStamina();
-    }
-
-    void UpdateManaSliders()
-    {
-        statsManaSlider.maxValue = player.GetMaxMana();
-        statsManaSlider.value = player.GetMana();
-        statsManaTxt.text = player.GetMana() + "/" + player.GetMaxMana();
-    }
-
-    void UpdateExtraStats()
-    {
-        maxHealthBuffTxt.text = String.Format("{0}; {1}%", player.GetPassiveFlat(PassiveSkill.AttributeType.maxHealth),
-            player.GetPassivePercent(PassiveSkill.AttributeType.maxHealth) * 100);
-        maxStaminaBuffTxt.text = String.Format("{0}; {1}%", player.GetPassiveFlat(PassiveSkill.AttributeType.maxStamina),
-            player.GetPassivePercent(PassiveSkill.AttributeType.maxStamina) * 100);
-        maxManaBuffTxt.text = String.Format("{0}; {1}%", player.GetPassiveFlat(PassiveSkill.AttributeType.maxMana),
-            player.GetPassivePercent(PassiveSkill.AttributeType.maxMana) * 100);
-        maxWeaponDmgBuffTxt.text = String.Format("{0}; {1}%", player.GetPassiveFlat(PassiveSkill.AttributeType.weaponDamage),
-            player.GetPassivePercent(PassiveSkill.AttributeType.weaponDamage) * 100);
-        maxSkillDmgBuffTxt.text = String.Format("{0}; {1}%", player.GetPassiveFlat(PassiveSkill.AttributeType.skillDamage),
-            player.GetPassivePercent(PassiveSkill.AttributeType.skillDamage) * 100);
-        maxMagicDmgBuffTxt.text = String.Format("{0}; {1}%", player.GetPassiveFlat(PassiveSkill.AttributeType.manaDamage),
-            player.GetPassivePercent(PassiveSkill.AttributeType.manaDamage) * 100);
-    }
-
-    void SetCurrentWeight()
-    {
-        uint weight = player.GetInventory().GetTotalWeight();
-
-        if(player.GetWeapon() != NULL_WEAPON)
-            weight += player.GetWeapon().GetWeight();
-        if (player.GetHead() != NULL_ARMOR)
-            weight += player.GetHead().GetWeight();
-        if (player.GetChest() != NULL_ARMOR)
-            weight += player.GetChest().GetWeight();
-        if (player.GetLegs() != NULL_ARMOR)
-            weight += player.GetLegs().GetWeight();
-        if (player.GetFeet() != NULL_ARMOR)
-            weight += player.GetFeet().GetWeight();
-        if (player.GetHands() != NULL_ARMOR)
-            weight += player.GetHands().GetWeight();
-
-        player.SetCurrentWeight(weight);
-
-        totalInvWeightTxt.text = String.Format("{0}/{1}", player.GetCurrentWeight(), player.GetMaxWeight());
-        statsWeightTxt.text = player.GetCurrentWeight().ToString();
-        playerPickupWeightTxt.text = String.Format("{0}/{1}", player.GetCurrentWeight(), player.GetMaxWeight());
-    }
 
     public void ToMain()
     {

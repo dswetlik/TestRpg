@@ -15,7 +15,7 @@ MonoBehaviour:
   items:
   - {fileID: 11400000, guid: aad6187c22e2a8749b0c9a9521158bc9, type: 2}
   - {fileID: 11400000, guid: 6d04b838730c5414c8b802d425ce77fc, type: 2}
-  - {fileID: 11400000, guid: 8c214fd13434947498ed9e293061b797, type: 2}
+  - {fileID: 11400000, guid: b59bff2862573d04f888af45442c6122, type: 2}
   - {fileID: 11400000, guid: 99c5fa186f8070441b63d021f055cdf4, type: 2}
   - {fileID: 11400000, guid: 8ef08f6ed3df4f6419126eccb92f3262, type: 2}
   itemProbability:
@@ -25,3 +25,5 @@ MonoBehaviour:
   - 100
   - 10
   itemCount: 0200000001000000030000000100000001000000
+  minGold: 0
+  maxGold: 0

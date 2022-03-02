@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   npcLine: Perfect, come back and talk when you've got that pelt.
   dialogueType: 3
-  dialogueOptions:
-  - Alright, can I see your wares now?
-  dialogueAnswers:
+  dialogueTexts:
+  - Shop...
+  dialogueObjects:
   - {fileID: 11400000, guid: b510db67d66e3b0438ce14af9afa448b, type: 2}
   dialogueSprites:
   - {fileID: 21300000, guid: 658edffd73bae1e469903fa2790e34e1, type: 3}

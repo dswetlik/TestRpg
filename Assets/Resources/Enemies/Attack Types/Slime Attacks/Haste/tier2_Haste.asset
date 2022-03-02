@@ -21,4 +21,4 @@ MonoBehaviour:
   attributeCost: 15
   hasStatusEffects: 1
   statusEffects:
-  - {fileID: 11400000, guid: 928d33e5e7998f3489951e222fd27cec, type: 2}
+  - {fileID: 11400000, guid: 8a9a0f425531cc5458f5064bbb2415be, type: 2}

@@ -16,25 +16,20 @@ MonoBehaviour:
   name: Arena Grandmaster
   description: The current grandmaster of the arena, who fought his way up the chain
     just like you. Can you best him to become the new grandmaster?
-  id: 122
+  id: 12200
   minLevel: 20
   maxLevel: 20
-  baseDamage: 20
   defense: 12
+  strength: 40
+  agility: 30
+  intelligence: 30
+  luck: 0
   attackTypes:
   - {fileID: 11400000, guid: 2a1996c471169814c84f1f92d1997f84, type: 2}
   - {fileID: 11400000, guid: 33c8ebbb38c394742aab5d150c1ab284, type: 2}
   - {fileID: 11400000, guid: 28d6c95f2da987548a83524cacabf07a, type: 2}
-  - {fileID: 11400000, guid: 3e4524b99f9f9b34ca333fdc5635a540, type: 2}
+  - {fileID: 11400000, guid: 30c62d13c3e0e3c42a8ac1e67b849580, type: 2}
   - {fileID: 11400000, guid: 6c53c77c037e22645a2b759dfe19974a, type: 2}
-  health: 80
-  maxHealth: 80
-  stamina: 60
-  maxStamina: 60
-  stamRegen: 12
-  mana: 50
-  maxMana: 50
-  manaRegen: 10
   goldReward: 200
   speed: 1
   expReward: 400

@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   npcLine: Well go on already, get down there and kill that rat!
   dialogueType: 3
-  dialogueOptions:
-  - Okay, send me down there.
-  - Actually, I'm not ready.
-  dialogueAnswers:
+  dialogueTexts:
+  - Ready
+  - Not Ready
+  dialogueObjects:
   - {fileID: 11400000, guid: 455b2a6416f5df440b7cc41d7dfc0d91, type: 2}
   - {fileID: 11400000, guid: 923ae83920199ae40bdaa82f23ee889a, type: 2}
   dialogueSprites:

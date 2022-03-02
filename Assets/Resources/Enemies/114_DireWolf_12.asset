@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da3ae000e98a71d489bf062b749ae76f, type: 3}
+  m_Name: 114_DireWolf_12
+  m_EditorClassIdentifier: 
+  enemyType: 0
+  name: Dire Wolf
+  description: A larger, slightly more pissed off version of the gray wolf.
+  id: 11412
+  minLevel: 12
+  maxLevel: 15
+  defense: 0
+  strength: 20
+  agility: 20
+  intelligence: 20
+  luck: 0
+  attackTypes:
+  - {fileID: 11400000, guid: e81edec0f238bbd47b72d0f4cbe012ad, type: 2}
+  - {fileID: 11400000, guid: 744dc3ee48ebecf439199a16215a68f0, type: 2}
+  - {fileID: 11400000, guid: 044675963e5f4ec4c8b26c348ec21c5f, type: 2}
+  goldReward: 25
+  speed: 1
+  expReward: 35
+  itemRewards: {fileID: 11400000, guid: e57001a7f0b407e4b977e30a412df8d5, type: 2}
+  statusEffects: []

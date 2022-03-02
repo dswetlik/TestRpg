@@ -15,9 +15,12 @@ MonoBehaviour:
   npcLine: It does sound like a messy job, but it has to be done at some point. Come
     back when you're ready.
   dialogueType: 3
-  dialogueOptions: []
-  dialogueAnswers: []
-  dialogueSprites: []
+  dialogueTexts:
+  - About a room...
+  dialogueObjects:
+  - {fileID: 11400000, guid: b929ce106cacbcb4f855fb4bde17cd0c, type: 2}
+  dialogueSprites:
+  - {fileID: 0}
   openingSprite: {fileID: 0}
   questDialogueType: 2
   quest: {fileID: 11400000, guid: 56ccbad5fbc03804fb664f4697df2e72, type: 2}

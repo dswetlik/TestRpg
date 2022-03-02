@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44df368efc1e0a94e96ce3fb99cb9251, type: 3}
+  m_Name: 106_Backhand
+  m_EditorClassIdentifier: 
+  ID: 106
+  skillType: 3
+  sprite: {fileID: 21300000, guid: c20ddee8ca64ac44a853ef0bda51150b, type: 3}
+  name: Backhand
+  description: 'Disrespect your enemy by slapping them across the face with a 50%
+    chance to stun. '
+  cardDescription: 'Damage-Dealing
+
+    50% Stun Chance'
+  actionMessage: You slap the enemy, dealing {0} damage.
+  isActive: 0
+  attributeCost: 6
+  minDamage: 1
+  maxDamage: 3
+  hasStatusEffects: 1
+  statusEffects:
+  - {fileID: 11400000, guid: 2627a8f350c5a244c8dd6e92ecc76423, type: 2}
+  isWeaponModifier: 0

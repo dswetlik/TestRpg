@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   npcLine: Really? What do you know about the assassination plot?
   dialogueType: 1
-  dialogueOptions:
-  - I'm the leader of the plot!
-  - Actually, nevermind.
-  dialogueAnswers:
+  dialogueTexts:
+  - Know it? I started it!
+  - I actually know nothing.
+  dialogueObjects:
   - {fileID: 11400000, guid: 69cb3cdddd8392543859868f4744e417, type: 2}
   - {fileID: 11400000, guid: e153bf60ccae4c14eaf9d4a51f9b989a, type: 2}
   dialogueSprites:

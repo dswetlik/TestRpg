@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   npcLine: These damn rats. This city is full of rats. Nothing but rats. I hate rats.
   dialogueType: 0
-  dialogueOptions:
-  - What's so wrong with rats?
-  dialogueAnswers:
+  dialogueTexts:
+  - Rats...
+  dialogueObjects:
   - {fileID: 11400000, guid: 4921e297db58131479ca4f110f9a0d18, type: 2}
   dialogueSprites:
   - {fileID: 0}

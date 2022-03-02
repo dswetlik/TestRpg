@@ -14,6 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   npcLine: Well then leave and don't come back until you're ready to kill it!
   dialogueType: 1
-  dialogueOptions: []
-  dialogueAnswers: []
-  dialogueSprites: []
+  dialogueTexts:
+  - Basement rats...
+  dialogueObjects:
+  - {fileID: 11400000, guid: 4ba26370abd166348b2789ecee20e1ef, type: 2}
+  dialogueSprites:
+  - {fileID: 21300000, guid: 5d247f9aa35a77b42a6a1555fbda4e49, type: 3}

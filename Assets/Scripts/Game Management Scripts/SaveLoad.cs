@@ -20,15 +20,15 @@ public class SaveLoad
     public List<uint> _currentQuests;
     public List<uint> _completedQuests;
 
-    public List<uint> _unlockedStaminaSkills;
-    public List<uint> _unlockedManaSkills;
-    public List<uint> _unlockedPassiveSkills;
+    public List<uint> _unlockedSkills;
+    public List<bool> _skillActive;
 
     public uint weapon;
     public uint head, chest, legs, feet, hands;
     public uint location;
     public uint level, exp, totalExp, expToLevel, skillPoints, currentWeight, maxWeight;
-    public int health, stamina, mana, maxHealth, maxStamina, maxMana, staminaRegen, manaRegen, gold;
+    public int health, stamina, mana, gold;
+    public int strength, agility, intelligence, luck;
 
     public void SavePlayer(Player player)
     {
@@ -38,9 +38,8 @@ public class SaveLoad
         _countValues = new List<uint>();
         _currentQuests = new List<uint>();
         _completedQuests = new List<uint>();
-        _unlockedStaminaSkills = new List<uint>();
-        _unlockedManaSkills = new List<uint>();
-        _unlockedPassiveSkills = new List<uint>();
+        _unlockedSkills = new List<uint>();
+        _skillActive = new List<bool>();
 
         name = player.GetName();
         title = player.GetTitle();
@@ -57,9 +56,11 @@ public class SaveLoad
         player.GetQuestList().ForEach(x => _currentQuests.Add(x.GetID()));
         player.GetCompletedQuests().ForEach(x => _completedQuests.Add(x.GetID()));
 
-        player.GetActiveStaminaSkills().ForEach(x => _unlockedStaminaSkills.Add(x.GetID()));
-        player.GetActiveManaSkills().ForEach(x => _unlockedManaSkills.Add(x.GetID()));
-        player.GetPassiveSkills().ForEach(x => _unlockedPassiveSkills.Add(x.GetID()));
+        foreach (Skill skill in player.GetSkills())
+        {
+            _unlockedSkills.Add(skill.GetID());
+            _skillActive.Add(skill.IsActive());
+        }
 
         weapon = player.GetWeapon().GetID();
         head = player.GetHead().GetID();
@@ -80,11 +81,12 @@ public class SaveLoad
         health = player.GetHealth();
         stamina = player.GetStamina();
         mana = player.GetMana();
-        maxHealth = player.GetBaseMaxHealth();
-        maxStamina = player.GetBaseMaxStamina();
-        maxMana = player.GetBaseMaxMana();
-        staminaRegen = player.GetBaseStaminaRegen();
-        manaRegen = player.GetBaseManaRegen();
+
+        strength = player.GetStrength(false);
+        agility = player.GetAgility(false);
+        intelligence = player.GetIntelligence(false);
+        luck = player.GetLuck();
+
         gold = player.GetGold();
     }
 
@@ -102,7 +104,6 @@ public class SaveLoad
 
         player.SetLocation(Engine.LocationDictionary[location]);
 
-
         foreach (uint id in _currentQuests)
             player.AddQuest(Engine.QuestDictionary[id]);
         foreach(uint id in _completedQuests)
@@ -110,23 +111,11 @@ public class SaveLoad
             player.AddCompletedQuest(Engine.QuestDictionary[id]);
             Engine.QuestDictionary[id].SetCompletion(true);
         }
-        foreach(uint id in _unlockedStaminaSkills)
+        for(int i = 0; i < Mathf.Min(_skillActive.Count, _unlockedSkills.Count); i++)
         {
-            player.AddActiveStaminaSkill((ActiveSkill)Engine.SkillDictionary[id]);
-            Engine.SkillDictionary[id].SetUnlocked();
-            Engine.SkillDictionary[id].UnlockNextSkills();
-        }
-        foreach (uint id in _unlockedManaSkills)
-        {
-            player.AddActiveManaSkill((ActiveSkill)Engine.SkillDictionary[id]);
-            Engine.SkillDictionary[id].SetUnlocked();
-            Engine.SkillDictionary[id].UnlockNextSkills();
-        }
-        foreach (uint id in _unlockedPassiveSkills)
-        {
-            player.AddPassiveSkill((PassiveSkill)Engine.SkillDictionary[id]);
-            Engine.SkillDictionary[id].SetUnlocked();
-            Engine.SkillDictionary[id].UnlockNextSkills();
+            Engine.SkillDictionary[_unlockedSkills[i]].SetActive(_skillActive[i]);
+            player.AddSkill(Engine.SkillDictionary[_unlockedSkills[i]]);
+            GameObject.Find("GameManager").GetComponent<Engine>().AddSkill(Engine.SkillDictionary[_unlockedSkills[i]]);
         }
 
         if (weapon != Engine.NULL_WEAPON.GetID())
@@ -145,18 +134,17 @@ public class SaveLoad
         player.SetLevel(level);
         player.SetExp(exp);
         player.SetTotalExp(totalExp);
-        player.SetExpToLevel(expToLevel);
         player.SetSkillPoints(skillPoints);
-        player.SetMaxWeight(maxWeight);
 
         player.SetHealth(health);
         player.SetStamina(stamina);
         player.SetMana(mana);
-        player.SetMaxHealth(maxHealth);
-        player.SetMaxStamina(maxStamina);
-        player.SetMaxMana(maxMana);
-        player.SetStaminaRegen(staminaRegen);
-        player.SetManaRegen(manaRegen);
+
+        player.SetStrength(strength);
+        player.SetAgility(agility);
+        player.SetIntelligence(intelligence);
+        player.SetLuck(luck);
+
         player.SetGold(gold);
 
         return player;

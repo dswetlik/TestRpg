@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da3ae000e98a71d489bf062b749ae76f, type: 3}
+  m_Name: 110_CapturedBandit_6
+  m_EditorClassIdentifier: 
+  enemyType: 0
+  name: Captured Bandit
+  description: A bandit weakened by months of imprisonment, now fighting for his
+    freedom.
+  id: 11006
+  minLevel: 6
+  maxLevel: 9
+  defense: 2
+  strength: 20
+  agility: 10
+  intelligence: 0
+  luck: 0
+  attackTypes:
+  - {fileID: 11400000, guid: d7dc92176be427149bb0a3255ecc63c0, type: 2}
+  - {fileID: 11400000, guid: 27c7b9405f48ba444806d1684fde35c0, type: 2}
+  goldReward: 20
+  speed: 0.75
+  expReward: 20
+  itemRewards: {fileID: 11400000, guid: 3b12251138c04904a996de43e7d7c658, type: 2}
+  statusEffects: []

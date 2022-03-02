@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BearLootTable
   m_EditorClassIdentifier: 
   items:
-  - {fileID: 11400000, guid: 589b34a84b37f5745af205e612bcd273, type: 2}
+  - {fileID: 11400000, guid: 7dc1f377bfc55b64e94406fe8410c2e8, type: 2}
   - {fileID: 11400000, guid: c21034f3152791e4ba2446aa04388abd, type: 2}
   - {fileID: 11400000, guid: 7caa54f397366d24dbcfc5ed290d1bf1, type: 2}
   itemProbability:

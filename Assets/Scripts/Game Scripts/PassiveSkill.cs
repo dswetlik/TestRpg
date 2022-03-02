@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Passive Skill", menuName = "Skill/Passive Skill", order = 1)]
+[CreateAssetMenu(fileName = "New Passive Skill", menuName = "Skills/Passive Skill")]
 public class PassiveSkill : Skill
 { 
 
