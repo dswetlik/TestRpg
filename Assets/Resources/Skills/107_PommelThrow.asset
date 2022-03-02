@@ -22,11 +22,8 @@ MonoBehaviour:
 
     75% Stun Chance'
   actionMessage: You throw your pommel at the enemy's head, dealing {0} damage!
-  isActive: 0
   attributeCost: 20
-  minDamage: 4
-  maxDamage: 7
-  hasStatusEffects: 1
+  damageRange: {x: 6, y: 10}
   statusEffects:
   - {fileID: 11400000, guid: 30cd893ae4e2d3b419db73f8fa253db2, type: 2}
   isWeaponModifier: 0

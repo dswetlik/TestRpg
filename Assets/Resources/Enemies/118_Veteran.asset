@@ -12,12 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69dcb926d5dd74c4799c018f51e456e0, type: 3}
   m_Name: 118_Veteran
   m_EditorClassIdentifier: 
+  id: 11800
   enemyType: 1
   name: Veteran
   description: 'A veteran of wars, an expert on battles. '
-  id: 11800
-  minLevel: 15
-  maxLevel: 20
+  levelRange: {x: 15, y: 20}
   defense: 8
   strength: 30
   agility: 25
@@ -33,7 +32,6 @@ MonoBehaviour:
   speed: 1
   expReward: 100
   itemRewards: {fileID: 11400000, guid: 519233f1017819842ad6e896da4b784e, type: 2}
-  statusEffects: []
   unlockedItems:
   - {fileID: 11400000, guid: bfa568c1b0a651f4aa0e6ce829a0fd35, type: 2}
   - {fileID: 11400000, guid: 99aa9e84757c0784aa9fe6ac1120554b, type: 2}
@@ -55,4 +53,3 @@ MonoBehaviour:
   - {fileID: 0}
   unlockedItemsCount: 010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000050000000500000005000000
   unlockedTitle: Veteran
-  hasBeenDefeated: 0

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class MovementButtonHandler : MonoBehaviour, IUpdateSelectedHandler, IPointerDownHandler, IPointerUpHandler
@@ -11,7 +9,6 @@ public class MovementButtonHandler : MonoBehaviour, IUpdateSelectedHandler, IPoi
     {
         if (isPressed)
         {
-            Debug.Log("Updated Object");
             GameObject btn = data.selectedObject;
             if (btn.name == "NorthBtn")
                 GameObject.Find("Player").GetComponent<PlayerMovement>().w_MoveForward();
@@ -26,13 +23,11 @@ public class MovementButtonHandler : MonoBehaviour, IUpdateSelectedHandler, IPoi
 
     public void OnPointerDown(PointerEventData data)
     {
-        Debug.Log("Pointer Down");
         isPressed = true;
     }
 
     public void OnPointerUp(PointerEventData data)
     {
-        Debug.Log("Pointer Up");
         isPressed = false;
     }
 

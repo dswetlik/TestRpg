@@ -22,10 +22,7 @@ MonoBehaviour:
 
     Weapon Modifier'
   actionMessage: You strike the enemy in their weak spot, dealing {0} damage!
-  isActive: 0
   attributeCost: 20
-  minDamage: 2
-  maxDamage: 5
-  hasStatusEffects: 0
+  damageRange: {x: 7, y: 12}
   statusEffects: []
   isWeaponModifier: 1

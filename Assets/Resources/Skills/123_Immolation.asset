@@ -22,11 +22,8 @@ MonoBehaviour:
 
     100% Burn Chance'
   actionMessage: You immolate the enemy in hellfire, dealing {0} damage!
-  isActive: 0
   attributeCost: 55
-  minDamage: 12
-  maxDamage: 16
-  hasStatusEffects: 1
+  damageRange: {x: 14, y: 20}
   statusEffects:
   - {fileID: 11400000, guid: f1411c9c1b5362a4691454abae5c16fc, type: 2}
   magicType: 1

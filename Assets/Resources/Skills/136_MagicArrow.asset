@@ -19,10 +19,7 @@ MonoBehaviour:
   description: Launch an arrow of pure mana, inflicting minor damage.
   cardDescription: Damage-Dealing
   actionMessage: You launch a magic arrow at the enemy, dealing {0} damage!
-  isActive: 0
   attributeCost: 10
-  minDamage: 3
-  maxDamage: 7
-  hasStatusEffects: 0
+  damageRange: {x: 3, y: 7}
   statusEffects: []
   magicType: 1

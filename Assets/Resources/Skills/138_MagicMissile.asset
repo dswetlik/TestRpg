@@ -20,10 +20,7 @@ MonoBehaviour:
     amount of damage.
   cardDescription: Damage-Dealing
   actionMessage: You slam the enemy with a magic missile, dealing {0} damage!
-  isActive: 0
   attributeCost: 55
-  minDamage: 15
-  maxDamage: 20
-  hasStatusEffects: 0
+  damageRange: {x: 18, y: 25}
   statusEffects: []
   magicType: 1

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-[CreateAssetMenu(fileName = "New Enemy", menuName = "Enemy/Normal Enemy", order = 0)]
+[CreateAssetMenu(fileName = "New Enemy", menuName = "Enemies/Normal Enemy", order = 0)]
 public class Enemy : ScriptableObject
 {
 
@@ -16,20 +16,27 @@ public class Enemy : ScriptableObject
         boss
     }
 
+    [Header("Base Information")]
+    [SerializeField] uint id;
     [SerializeField] EnemyType enemyType;
     [SerializeField] new string name;
     [TextArea(3, 5)] [SerializeField] string description;
-    [SerializeField] uint id;
-    [SerializeField] int minLevel, maxLevel;
+    
+
+    [Header("Attributes")]
+    [SerializeField][Tooltip("Must be an integer.\nX = Min; Y = Max")] Vector2 levelRange;
     [SerializeField] int defense;
     [SerializeField] int strength, agility, intelligence, luck;
-    [SerializeField] List<EnemyAttackType> attackTypes;
     int health, stamina, mana;
-    [SerializeField] int goldReward;
+
+    [SerializeField] List<EnemyAttackType> attackTypes;
+    
+    [Header("Rewards")]
     [SerializeField] float speed;
     [SerializeField] uint expReward;
     [SerializeField] ItemLootTable itemRewards;
-    [SerializeField] List<StatusEffect> statusEffects = new List<StatusEffect>();
+
+    List<StatusEffect> statusEffects = new List<StatusEffect>();
 
     public void Initialize()
     {
@@ -42,8 +49,8 @@ public class Enemy : ScriptableObject
     public string GetName() { return name; }
     public string GetDescription() { return description; }
     public uint GetID() { return id; }
-    public int GetMinLevel() { return minLevel; }
-    public int GetMaxLevel() { return maxLevel; }
+    public int GetMinLevel() { return (int)levelRange.x; }
+    public int GetMaxLevel() { return (int)levelRange.y; }
 
     public int GetDefense() { return defense; }
 
@@ -68,10 +75,10 @@ public class Enemy : ScriptableObject
     public float GetSpeed() { return speed; }
 
     public uint GetExpReward() { return expReward; }
-    public int GetGoldReward() { return goldReward; }
 
     public List<EnemyAttackType> GetEnemyAttackTypes() { return attackTypes; }
     public ItemLootTable GetItemRewards() { return itemRewards; }
+    public int GetGoldReward() { return itemRewards.GetGold(); }
 
     public int GetMaxDamage()
     {
@@ -210,7 +217,11 @@ public class Enemy : ScriptableObject
             }
     }
 
-    public void RemoveStatusEffect(StatusEffect statusEffect) { statusEffects.Remove(statusEffect); }
+    public void RemoveStatusEffect(StatusEffect statusEffect)
+    {
+        if(statusEffects.Contains(statusEffect))
+            statusEffects.Remove(statusEffect);
+    }
 
     float GetTotalEffect(StatusEffect.StatusEffectType statusEffectType)
     {

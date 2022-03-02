@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dde8fca492cd0f4d9c041e465b88ad5, type: 3}
+  m_Name: GladiatorLootTable
+  m_EditorClassIdentifier: 
+  items:
+  - {fileID: 11400000, guid: 09ca3282b02e41f4ab72724fdc880ae6, type: 2}
+  - {fileID: 11400000, guid: 21af122c1e8a36d48b83c77bbda57952, type: 2}
+  - {fileID: 11400000, guid: 1ddd209038f6c5d47b9c6910d6240cb6, type: 2}
+  - {fileID: 11400000, guid: 1edf873fd81389a4292e34c31b00feee, type: 2}
+  itemProbability:
+  - 0.5
+  - 0.25
+  - 0.1
+  - 0.5
+  itemCount:
+  - {x: 1, y: 1}
+  - {x: 1, y: 4}
+  - {x: 1, y: 1}
+  - {x: 1, y: 2}
+  goldRewardRange: {x: 30, y: 50}

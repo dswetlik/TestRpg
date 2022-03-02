@@ -22,10 +22,7 @@ MonoBehaviour:
 
     Weapon Modifier'
   actionMessage: You masterfully stab the enemy, dealing {0} damage!
-  isActive: 0
   attributeCost: 45
-  minDamage: 6
-  maxDamage: 12
-  hasStatusEffects: 0
+  damageRange: {x: 12, y: 20}
   statusEffects: []
   isWeaponModifier: 1

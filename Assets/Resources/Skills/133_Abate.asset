@@ -20,10 +20,7 @@ MonoBehaviour:
     from all negative effects.
   cardDescription: Dispel (1 Turn)
   actionMessage: You abate some of your negative feelings.
-  isActive: 0
   attributeCost: 5
-  minDamage: 1
-  maxDamage: 1
-  hasStatusEffects: 0
+  damageRange: {x: 1, y: 1}
   statusEffects: []
   magicType: 4

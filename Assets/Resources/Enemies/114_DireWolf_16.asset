@@ -12,12 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da3ae000e98a71d489bf062b749ae76f, type: 3}
   m_Name: 114_DireWolf_16
   m_EditorClassIdentifier: 
+  id: 11416
   enemyType: 0
   name: Dire Wolf
   description: A larger, slightly more pissed off version of the gray wolf.
-  id: 11416
-  minLevel: 16
-  maxLevel: 20
+  levelRange: {x: 16, y: 20}
   defense: 0
   strength: 20
   agility: 20
@@ -31,4 +30,3 @@ MonoBehaviour:
   speed: 1
   expReward: 35
   itemRewards: {fileID: 11400000, guid: e57001a7f0b407e4b977e30a412df8d5, type: 2}
-  statusEffects: []

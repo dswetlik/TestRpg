@@ -10,16 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3dde8fca492cd0f4d9c041e465b88ad5, type: 3}
-  m_Name: GladiatorLootTable
+  m_Name: BlueSlimeLootTable
   m_EditorClassIdentifier: 
   items:
-  - {fileID: 11400000, guid: 09ca3282b02e41f4ab72724fdc880ae6, type: 2}
-  - {fileID: 11400000, guid: 21af122c1e8a36d48b83c77bbda57952, type: 2}
-  - {fileID: 11400000, guid: 1ddd209038f6c5d47b9c6910d6240cb6, type: 2}
-  - {fileID: 11400000, guid: 1edf873fd81389a4292e34c31b00feee, type: 2}
+  - {fileID: 11400000, guid: a19c02e67cca50e4185336df95943d13, type: 2}
+  - {fileID: 11400000, guid: 9314d764a64bfa545aa800cd12118009, type: 2}
   itemProbability:
-  - 50
-  - 25
-  - 10
-  - 5
-  itemCount: 01000000030000000100000001000000
+  - 0.95
+  - 0.2
+  itemCount:
+  - {x: 1, y: 3}
+  - {x: 1, y: 1}
+  goldRewardRange: {x: 10, y: 20}

@@ -12,12 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da3ae000e98a71d489bf062b749ae76f, type: 3}
   m_Name: 105_BlueSlime_5
   m_EditorClassIdentifier: 
+  id: 10505
   enemyType: 0
   name: Blue Slime
   description: A 'regular'-looking ball of blue slime.
-  id: 10505
-  minLevel: 5
-  maxLevel: 5
+  levelRange: {x: 5, y: 5}
   defense: 0
   strength: 10
   agility: 5
@@ -31,4 +30,3 @@ MonoBehaviour:
   speed: 1
   expReward: 15
   itemRewards: {fileID: 11400000, guid: f474172537c56744180e4fdc0278ce4c, type: 2}
-  statusEffects: []

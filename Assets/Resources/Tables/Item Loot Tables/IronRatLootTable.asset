@@ -10,18 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3dde8fca492cd0f4d9c041e465b88ad5, type: 3}
-  m_Name: RatLootTable
+  m_Name: IronRatLootTable
   m_EditorClassIdentifier: 
   items:
   - {fileID: 11400000, guid: aad6187c22e2a8749b0c9a9521158bc9, type: 2}
   - {fileID: 11400000, guid: 6d04b838730c5414c8b802d425ce77fc, type: 2}
   - {fileID: 11400000, guid: b59bff2862573d04f888af45442c6122, type: 2}
   - {fileID: 11400000, guid: 8ef08f6ed3df4f6419126eccb92f3262, type: 2}
+  - {fileID: 11400000, guid: 4a2a46f822e532a449b7065766aea263, type: 2}
   itemProbability:
-  - 100
-  - 25
-  - 50
-  - 10
-  itemCount: 02000000010000000300000001000000
-  minGold: 0
-  maxGold: 0
+  - 1
+  - 0.25
+  - 0.5
+  - 0.1
+  - 1
+  itemCount:
+  - {x: 1, y: 3}
+  - {x: 1, y: 1}
+  - {x: 1, y: 2}
+  - {x: 1, y: 2}
+  - {x: 1, y: 3}
+  goldRewardRange: {x: 25, y: 50}

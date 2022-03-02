@@ -22,11 +22,8 @@ MonoBehaviour:
 
     75% Burn Chance'
   actionMessage: You surround the enemy in a blazing inferno, dealing {0} damage!
-  isActive: 0
   attributeCost: 25
-  minDamage: 6
-  maxDamage: 11
-  hasStatusEffects: 1
+  damageRange: {x: 8, y: 13}
   statusEffects:
   - {fileID: 11400000, guid: 601b0ce5c56c6e342a04ce5322da7704, type: 2}
   magicType: 1

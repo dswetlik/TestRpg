@@ -12,12 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da3ae000e98a71d489bf062b749ae76f, type: 3}
   m_Name: 107_RedSlime_5
   m_EditorClassIdentifier: 
+  id: 10705
   enemyType: 0
   name: Red Slime
   description: A ball of angry-looking red slime.
-  id: 10705
-  minLevel: 5
-  maxLevel: 5
+  levelRange: {x: 5, y: 5}
   defense: 0
   strength: 15
   agility: 5
@@ -31,4 +30,3 @@ MonoBehaviour:
   speed: 0.6
   expReward: 15
   itemRewards: {fileID: 11400000, guid: e260beb7a9342524c8a983f58357d75e, type: 2}
-  statusEffects: []

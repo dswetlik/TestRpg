@@ -19,10 +19,7 @@ MonoBehaviour:
   description: Throw a bolt of pure mana at the enemy, inflicting damage.
   cardDescription: Damage-Dealing
   actionMessage: You strike the enemy with the magic bolt, dealing {0} damage.
-  isActive: 0
   attributeCost: 25
-  minDamage: 8
-  maxDamage: 14
-  hasStatusEffects: 0
+  damageRange: {x: 10, y: 15}
   statusEffects: []
   magicType: 1

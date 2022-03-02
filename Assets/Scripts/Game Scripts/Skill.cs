@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Base Skill", menuName = "Skills/Base Skill", order = 0)]
@@ -15,6 +16,7 @@ public class Skill : ScriptableObject
         mana
     }
 
+    [Header("Basic Information")]
     [SerializeField] uint ID;
     [SerializeField] SkillType skillType;
     [SerializeField] Sprite sprite;
@@ -25,11 +27,13 @@ public class Skill : ScriptableObject
     [SerializeField] string cardDescription;
     [TextArea(3,5)]
     [SerializeField] string actionMessage;
-    [SerializeField] bool isActive;
+
+    [Header("Attributes")]    
     [SerializeField] int attributeCost;
-    [SerializeField] int minDamage, maxDamage;
-    [SerializeField] bool hasStatusEffects;
+    [SerializeField] Vector2Int damageRange;
     [SerializeField] List<StatusEffect> statusEffects = new List<StatusEffect>();
+
+    bool isActive;
 
     public uint GetID() { return ID; }
     public SkillType GetSkillType() { return skillType; }
@@ -40,13 +44,17 @@ public class Skill : ScriptableObject
     public string GetActionMessage() { return actionMessage; }
     public bool IsActive() { return isActive; }
     public int GetAttributeCost() { return attributeCost; }
-    public int GetMinDamage() { return minDamage; }
-    public int GetMaxDamage() { return maxDamage; }
+    public int GetMinDamage() { return damageRange.x; }
+    public int GetMaxDamage() { return damageRange.y; }
 
-    public int GetDamageModifier() { return Random.Range(minDamage, maxDamage + 1); }
+    /// <summary>
+    /// Returns a random integer between damageRange.x [inclusive] and damageRange.y [inclusive]
+    /// </summary>
+    /// <returns> Return random integer between damageRange.x and damageRange.y [inclusive] </returns>
+    public int GetDamageModifier() { return Random.Range(damageRange.x, damageRange.y + 1); }
 
     public List<StatusEffect> GetStatusEffects() { return statusEffects; }
-    public bool HasStatusEffects() { return hasStatusEffects; }
+    public bool HasStatusEffects() { return statusEffects != null && statusEffects.Count > 0 && !statusEffects.Contains(null); }
   
     public void SetActive(bool x) { isActive = x; }
 
