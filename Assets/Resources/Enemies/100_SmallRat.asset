@@ -16,7 +16,7 @@ MonoBehaviour:
   enemyType: 0
   name: Small Rat
   description: A small rat, an insult to fight as a gladiator.
-  levelRange: {x: 1, y: 1}
+  levelRange: {x: 1, y: 2}
   defense: 0
   strength: 5
   agility: 0
@@ -24,7 +24,6 @@ MonoBehaviour:
   luck: 0
   attackTypes:
   - {fileID: 11400000, guid: 3f49f6476a0dc0f478a121285a78e077, type: 2}
-  goldReward: 2
   speed: 1.5
   expReward: 3
   itemRewards: {fileID: 11400000, guid: 6fd21c7884f09494082df16c550bff14, type: 2}

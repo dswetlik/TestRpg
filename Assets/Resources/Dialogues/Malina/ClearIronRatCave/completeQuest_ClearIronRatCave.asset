@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77deace13b735624ebd35dc15085b84e, type: 3}
+  m_Name: completeQuest_ClearIronRatCave
+  m_EditorClassIdentifier: 
+  dialogueType: 3
+  questDialogueType: 3
+  _quest: {fileID: 11400000, guid: 278d16556a1ca2b40a77b4631834e3b5, type: 2}
+  _questStatusType: 2
+  _playerLineObjectText: Cleared cave...
+  _playerLineResponseText: The cave of rats is now empty, and once again, there was
+    a massive rat in there.
+  _npcLine: I never said what kind of rats were in there, so don't blame me! Thank
+    you for making the town safer from those...vermin...
+  _playerResponses: []

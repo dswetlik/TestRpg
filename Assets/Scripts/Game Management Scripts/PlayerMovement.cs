@@ -22,13 +22,31 @@ public class PlayerMovement : MonoBehaviour
 
     public void w_MoveForward()
     {
-        if(!isMoving)
+        if (!isMoving)
             currentMovement = StartCoroutine("MoveForward");
+    }
+
+    public void w_MoveBackward()
+    {
+        if (!isMoving)
+            currentMovement = StartCoroutine("MoveBackward");
+    }
+
+    public void w_StrafeRight()
+    {
+        if (!isMoving)
+            currentMovement = StartCoroutine("StrafeRight");
+    }
+
+    public void w_StrafeLeft()
+    {
+        if (!isMoving)
+            currentMovement = StartCoroutine("StrafeLeft");
     }
 
     public void w_TurnRight()
     {
-        if(!isMoving)
+        if (!isMoving)
             currentMovement = StartCoroutine("TurnRight");
     }
 
@@ -36,12 +54,6 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!isMoving)
             currentMovement = StartCoroutine("TurnLeft");
-    }
-
-    public void w_MoveBackward()
-    {
-        if (!isMoving)
-            currentMovement = StartCoroutine("MoveBackward");
     }
 
     IEnumerator MoveForward()
@@ -86,6 +98,80 @@ public class PlayerMovement : MonoBehaviour
         isMoving = true;
 
         Vector3 target = transform.position + (-transform.forward * 10);
+        Vector3 offset = target - transform.position;
+        CollisionFlags collisionFlags = CollisionFlags.None;
+        AudioSource walk = GameObject.Find("FootstepAudioSource").GetComponent<AudioSource>();
+
+        while (true)
+        {
+            offset = target - transform.position;
+
+            if (!walk.isPlaying)
+                walk.Play();
+
+            if (offset.magnitude > 0.1f)
+            {
+                offset = offset.normalized * movementSpeed;
+                collisionFlags = characterController.Move(offset * Time.fixedDeltaTime);
+            }
+            else
+                break;
+
+            if ((collisionFlags & CollisionFlags.Sides) != 0)
+            {
+                break;
+            }
+
+            yield return new WaitForFixedUpdate();
+        }
+
+        transform.position = new Vector3(Mathf.Round(transform.position.x / 10) * 10, transform.position.y, Mathf.Round(transform.position.z / 10) * 10);
+
+        isMoving = false;
+    }
+
+    IEnumerator StrafeRight()
+    {
+        isMoving = true;
+
+        Vector3 target = transform.position + (transform.right * 10);
+        Vector3 offset = target - transform.position;
+        CollisionFlags collisionFlags = CollisionFlags.None;
+        AudioSource walk = GameObject.Find("FootstepAudioSource").GetComponent<AudioSource>();
+
+        while (true)
+        {
+            offset = target - transform.position;
+
+            if (!walk.isPlaying)
+                walk.Play();
+
+            if (offset.magnitude > 0.1f)
+            {
+                offset = offset.normalized * movementSpeed;
+                collisionFlags = characterController.Move(offset * Time.fixedDeltaTime);
+            }
+            else
+                break;
+
+            if ((collisionFlags & CollisionFlags.Sides) != 0)
+            {
+                break;
+            }
+
+            yield return new WaitForFixedUpdate();
+        }
+
+        transform.position = new Vector3(Mathf.Round(transform.position.x / 10) * 10, transform.position.y, Mathf.Round(transform.position.z / 10) * 10);
+
+        isMoving = false;
+    }
+
+    IEnumerator StrafeLeft()
+    {
+        isMoving = true;
+
+        Vector3 target = transform.position + (-transform.right * 10);
         Vector3 offset = target - transform.position;
         CollisionFlags collisionFlags = CollisionFlags.None;
         AudioSource walk = GameObject.Find("FootstepAudioSource").GetComponent<AudioSource>();

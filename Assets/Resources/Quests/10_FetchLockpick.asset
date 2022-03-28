@@ -13,17 +13,16 @@ MonoBehaviour:
   m_Name: 10_FetchLockpick
   m_EditorClassIdentifier: 
   questType: 1
+  id: 10
   name: He Picked You
   description: You've been tasked by that mysterious fellow to go get some lockpicks
     from bandits.
   levelRequirement: 6
-  hasPrerequisite: 0
   prerequisite: {fileID: 0}
   isCompleted: 0
-  dialogue: {fileID: 11400000, guid: 06a504194ce01184b9629bc6ab708084, type: 2}
+  dialogue: {fileID: 11400000, guid: c1faeffd92f49fa4a8010266fba22086, type: 2}
   hasItemReward: 0
   itemRewards: []
-  id: 10
   expReward: 50
   goldReward: 25
   fetchItems:

@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f50c47e3fd4bdc45ad8804fa1ead0ca, type: 3}
+  m_Name: incompleteQuest_FetchWolfMeat
+  m_EditorClassIdentifier: 
+  dialogueType: 3
+  questDialogueType: 3
+  _quest: {fileID: 11400000, guid: cd02f349a6963f849af602ba1118dad8, type: 2}
+  _questStatusType: 1
+  _playerLineObjectText: Meat quality...
+  _playerLineResponseText: Do you still not care about the quality of the meat?
+  _npcLine: It didn't seem to matter last time, so no, I still don't care.
+  _playerResponses:
+  - {fileID: 11400000, guid: 04b910f252f3b144c94ff5d65fb9f6c6, type: 2}

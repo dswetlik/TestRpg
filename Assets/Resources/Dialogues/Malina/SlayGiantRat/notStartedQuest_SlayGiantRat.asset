@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49ff08ec39c51f5449ac8aef919a7c4d, type: 3}
+  m_Name: notStartedQuest_SlayGiantRat
+  m_EditorClassIdentifier: 
+  dialogueType: 3
+  questDialogueType: 3
+  _quest: {fileID: 11400000, guid: dce4508bdd23d1048a626719a27dfa87, type: 2}
+  _questStatusType: 0
+  _playerLineObjectText: Rats...
+  _playerLineResponseText: What's that about rats?
+  _npcLine: RATS! They're everywhere, infesting everything! There's even one in my
+    basement...you! You look like someone who can take care of a rat, can you do
+    that for me?
+  _playerResponses:
+  - {fileID: 11400000, guid: f7d3e62105b973e44b343980d6fc60f0, type: 2}
+  - {fileID: 11400000, guid: 26cd27e4a5ff050439637b27c5ee1db5, type: 2}

@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77deace13b735624ebd35dc15085b84e, type: 3}
+  m_Name: completeQuest_FetchWolfFur
+  m_EditorClassIdentifier: 
+  dialogueType: 3
+  questDialogueType: 3
+  _quest: {fileID: 11400000, guid: 8e297be833cd10f4da91c9059c55fafa, type: 2}
+  _questStatusType: 2
+  _playerLineObjectText: Wolf pelt...
+  _playerLineResponseText: I have that wolf pelt for you.
+  _npcLine: You do? That's great! I still won't tell you what I'm doing with it,
+    but thank you.
+  _playerResponses:
+  - {fileID: 11400000, guid: 72eab240100da5f46ad84a122bce353d, type: 2}

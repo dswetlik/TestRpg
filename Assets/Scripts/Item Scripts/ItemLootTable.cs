@@ -31,7 +31,9 @@ public class ItemLootTable : ScriptableObject
         }
     }
 
-    public int GetGold() { return Random.Range(goldRewardRange.x, goldRewardRange.y + 1); }
+    public int GetRandomGold() { return Random.Range(goldRewardRange.x, goldRewardRange.y + 1); }
+    public int GetMinGold() { return goldRewardRange.x; }
+    public int GetMaxGold() { return goldRewardRange.y; }
 
     public List<Item> GetItems() { return items; }
     public Item GetItem(int itemElement) { return items[itemElement]; }

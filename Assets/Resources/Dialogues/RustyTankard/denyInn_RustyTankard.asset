@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29e770b62b8003f46aaf6492e628313e, type: 3}
+  m_Name: denyInn_RustyTankard
+  m_EditorClassIdentifier: 
+  dialogueType: 1
+  _playerLineObjectText: Deny
+  _playerLineResponseText: I'll pass for right now.
+  _npcLine: Well, come back anytime you need the room!
+  _playerResponses:
+  - {fileID: 11400000, guid: 04b910f252f3b144c94ff5d65fb9f6c6, type: 2}

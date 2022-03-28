@@ -13,7 +13,7 @@ public class NPCContainer : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            GameObject.Find("GameManager").GetComponent<Engine>().SetIsInNPC(true, gameObject);
+            GameObject.Find("GameManager").GetComponent<DialogueManager>().SetIsInNPC(true, npc);
         }
     }
 
@@ -21,7 +21,7 @@ public class NPCContainer : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            GameObject.Find("GameManager").GetComponent<Engine>().SetIsInNPC(false, gameObject);
+            GameObject.Find("GameManager").GetComponent<DialogueManager>().SetIsInNPC(false, npc);
         }
     }
 }

@@ -15,11 +15,13 @@ MonoBehaviour:
   items:
   - {fileID: 11400000, guid: 6d04b838730c5414c8b802d425ce77fc, type: 2}
   - {fileID: 11400000, guid: 4a2a46f822e532a449b7065766aea263, type: 2}
-  - {fileID: 11400000, guid: 0bdbe513d1d77bf4297a682e35e80ea1, type: 2}
+  - {fileID: 11400000, guid: 7f8b8c67328663a4a8ee9909e60da381, type: 2}
   itemProbability:
-  - 90
-  - 50
-  - 10
-  itemCount: 010000000200000003000000
-  minGold: 0
-  maxGold: 25
+  - 0.9
+  - 0.5
+  - 0.1
+  itemCount:
+  - {x: 1, y: 2}
+  - {x: 1, y: 1}
+  - {x: 1, y: 4}
+  goldRewardRange: {x: 20, y: 50}

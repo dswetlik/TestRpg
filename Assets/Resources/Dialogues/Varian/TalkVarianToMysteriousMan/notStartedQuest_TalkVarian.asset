@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49ff08ec39c51f5449ac8aef919a7c4d, type: 3}
+  m_Name: notStartedQuest_TalkVarian
+  m_EditorClassIdentifier: 
+  dialogueType: 3
+  questDialogueType: 3
+  _quest: {fileID: 11400000, guid: fc8beddc653d1d54fbe8a58f0300788e, type: 2}
+  _questStatusType: 0
+  _playerLineObjectText: Assassination rumors...
+  _playerLineResponseText: I've heard something about people trying to assassinate
+    the mayor. Do you know anything about that?
+  _npcLine: You've heard the some part of the rumors then. Supposedly, there is a
+    group in Buruns plotting to assassinate the govenor. I've seen someone lurking
+    in the shadows of the city recently, they might have something to do with this!
+    Can you track them down and maybe 'extract' some information?
+  _playerResponses:
+  - {fileID: 11400000, guid: 32995571c0f77c74dbdcfdb46676f75b, type: 2}
+  - {fileID: 11400000, guid: f9cbc79b92b9b8f4aa739649e67d34cf, type: 2}

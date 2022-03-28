@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75bf969278d946b4182f5cea525ee654, type: 3}
+  m_Name: startQuest_TalkTemrikToBlacksmith
+  m_EditorClassIdentifier: 
+  dialogueType: 3
+  questDialogueType: 0
+  _quest: {fileID: 11400000, guid: f01fcdbb7cabaca459c99ccdf0e2f5e7, type: 2}
+  _notStartedDialogue: {fileID: 11400000, guid: b7367b9adf72e464c9ee1f6c9c211fac,
+    type: 2}
+  _incompleteDialogue: {fileID: 11400000, guid: 3a20310de191cf34c80b46a74f23a823,
+    type: 2}
+  _completeDialogue: {fileID: 11400000, guid: 1deda8098327a104e9cb3508ddc3eb22, type: 2}

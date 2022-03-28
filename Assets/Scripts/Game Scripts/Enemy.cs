@@ -78,7 +78,10 @@ public class Enemy : ScriptableObject
 
     public List<EnemyAttackType> GetEnemyAttackTypes() { return attackTypes; }
     public ItemLootTable GetItemRewards() { return itemRewards; }
-    public int GetGoldReward() { return itemRewards.GetGold(); }
+
+    public int GetRandomGoldReward() { return itemRewards.GetRandomGold(); }
+    public int GetMinGoldReward() { return itemRewards.GetMinGold(); }
+    public int GetMaxGoldReward() { return itemRewards.GetMaxGold(); }
 
     public int GetMaxDamage()
     {

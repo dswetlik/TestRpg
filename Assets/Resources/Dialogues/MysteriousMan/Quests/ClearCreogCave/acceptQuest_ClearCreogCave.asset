@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6368106e33955d4fa5248f5e5a85dd7, type: 3}
+  m_Name: acceptQuest_ClearCreogCave
+  m_EditorClassIdentifier: 
+  dialogueType: 3
+  questDialogueType: 1
+  _quest: {fileID: 11400000, guid: 8c5e26ecc4b79264faa1d7181c432aa5, type: 2}
+  _playerLineObjectText: Accept Quest
+  _playerLineResponseText: I'll go find Creog Cave and see if I can find anything
+    nefarious.
+  _npcLine: Okay, go and report back anything that you find. I'll be checking some
+    things out in town to see if I can dig anything else up.
+  _playerResponses: []

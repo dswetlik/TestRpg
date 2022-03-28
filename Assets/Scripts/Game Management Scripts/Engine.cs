@@ -15,6 +15,9 @@ using TMPro;
 
 public class Engine : MonoBehaviour
 {
+
+    DialogueManager dialogueManager;
+
     // UI Variables
     public GameObject UIRoot;
     GameObject UIInventoryScreen;
@@ -25,7 +28,7 @@ public class Engine : MonoBehaviour
     GameObject UIArenaScreen;
     GameObject UISkillScreen;
     GameObject UIStatsScreen;
-    GameObject UIDialogueScreen;
+
     GameObject UILoadScreen;
     GameObject UIPauseScreen;
     GameObject UICoverScreen;
@@ -34,12 +37,10 @@ public class Engine : MonoBehaviour
     GameObject UIEventScreen;
 
     // Directional UI Variables
-    Button northBtn;
-    Button eastBtn;
-    Button southBtn;
-    Button westBtn;
 
-    Button enterDialogueBtn;
+    Slider directionalHealthSlider;
+    Slider directionalStaminaSlider;
+    Slider directionalManaSlider;
 
     Queue<string> outputQueue;
 
@@ -92,7 +93,7 @@ public class Engine : MonoBehaviour
     public GameObject uiQuestSlot;
     public GameObject uiFetchQuestObject;
     List<GameObject> uiFetchQuestObjects = new List<GameObject>();
-    SortedDictionary<uint, GameObject> uiQuestSlots = new SortedDictionary<uint, GameObject>();
+    public SortedDictionary<uint, GameObject> uiQuestSlots = new SortedDictionary<uint, GameObject>();
     ScrollRect activeQuestScroll;
 
     Quest activeQuest;
@@ -100,14 +101,11 @@ public class Engine : MonoBehaviour
 
     Text questName;
     Text questDescription;
-    Text selQuestName;
-    Text selQuestDescription;
 
     Button makeActiveBtn;
     Button turnInQuestBtn;
 
     GameObject noActiveQuestTxt;
-    GameObject noSelectedQuestTxt;
 
     public ScrollRect questScroll;
     public GameObject questPanel;
@@ -125,7 +123,7 @@ public class Engine : MonoBehaviour
     Text enemyHealthTxt;
     Text enemyStaminaTxt;
     Text enemyManaTxt;
-    Text playerBattleNameTxt;
+
     Text playerBattleHealthTxt;
     Text playerBattleStaminaTxt;
     Text playerBattleManaTxt;
@@ -174,16 +172,18 @@ public class Engine : MonoBehaviour
     // UI Arena Variables
     Enemy selectedEnemy;
 
-    GameObject enemyA;
-    GameObject enemyB;
-    GameObject enemyC;
+    GameObject enemyABtn;
+    GameObject enemyBBtn;
+    GameObject enemyCBtn;
 
     Text enemyANameTxt;
     Text enemyBNameTxt;
     Text enemyCNameTxt;
 
-    Text arenaEnemyNameTxt;
-    Text arenaEnemyDescriptionTxt;
+    Text enemyARewardTxt;
+    Text enemyBRewardTxt;
+    Text enemyCRewardTxt;
+
     Text arenaEnemyHealthTxt;
     Text arenaEnemyStaminaTxt;
     Text arenaEnemyManaTxt;
@@ -195,8 +195,6 @@ public class Engine : MonoBehaviour
     GameObject arenaEnemyManaObj;
     GameObject arenaEnemyDamageObj;
     GameObject arenaEnemySpeedObj;
-
-    GameObject arenaBossImg;
 
     // UI Skill Variables
     public GameObject uiSkillSlot;
@@ -249,14 +247,7 @@ public class Engine : MonoBehaviour
     Slider statsManaSlider;
     Slider statsExpSlider;
 
-    // UI Dialogue Variables
-    public GameObject dialogueBtn;
-    List<GameObject> dialogueOptionSlots = new List<GameObject>();
 
-    GameObject responsePanel;
-
-    Text diagNPCNameTxt;
-    TextMeshProUGUI npcLineTxt;
 
     // UI Load Variables
     Slider loadingSlider;
@@ -289,7 +280,7 @@ public class Engine : MonoBehaviour
     public static SortedDictionary<uint, Store> StoreDictionary;
     public static SortedDictionary<uint, Dungeon> DungeonDictionary;
 
-    Player player;
+    public static Player player;
 
     public static Item NULL_ITEM;
     public static Weapon NULL_WEAPON;
@@ -484,21 +475,15 @@ public class Engine : MonoBehaviour
     Location burunsArenthia;
 
     FetchQuest fetchRatSkull;
-    FetchQuest fetchSlimeGoo;
+    FetchQuest fetchSlimeEssense;
     FetchQuest fetchRatFur;
     FetchQuest fetchLockpick;
     FetchQuest fetchRatMeat;
     FetchQuest fetchWolfFur;
     FetchQuest fetchWolfMeat;
     FetchQuest fetchArmorPiece;
-    FetchQuest fetchMedicalSupply;
 
     SlayQuest slayGiantRat;
-    SlayQuest slayRatPack;
-    SlayQuest slayAmalgamSlime;
-    SlayQuest slayDireWolf;
-    SlayQuest slayGladiator;
-    SlayQuest slayChief;
 
     TalkQuest talkTemrikToBlacksmith;
     TalkQuest talkTemrikToAlchemist;
@@ -665,7 +650,7 @@ public class Engine : MonoBehaviour
     Sprite manaDmgSprite;
 
     // Local Use Variables
-    bool playerHasMoved, isInPickup = false, isInBattle = false, isInChest = false, isInNPC = false, isInDialogue = false, isInDungeon = false;
+    bool playerHasMoved, isInPickup = false, isInBattle = false, isInChest = false, isInDungeon = false;
     List<Enemy> leveledEnemies = new List<Enemy>();
     int playerDamageOutput, enemyDamageOutput;
 
@@ -673,7 +658,7 @@ public class Engine : MonoBehaviour
     public GameObject gameManager;
     public GameObject card;
     Dungeon currentDungeon;
-    NPC currentNPC;
+
     Coroutine textType;
     Coroutine battleCoroutine;
     public AudioMixer mixer;
@@ -727,7 +712,7 @@ public class Engine : MonoBehaviour
 
     void LoadGame()
     {
-        if(File.Exists(Application.persistentDataPath + "/save.tpg"))
+        if (File.Exists(Application.persistentDataPath + "/save.tpg"))
         {
             Debug.Log(Application.persistentDataPath);
             BinaryFormatter bf = new BinaryFormatter();
@@ -746,7 +731,6 @@ public class Engine : MonoBehaviour
             LoadQuestSlots();
             SetCurrentWeight();
 
-            playerBattleNameTxt.text = player.GetName();
             statsPlayerNameTxt.text = player.GetName();
             playerPickUpNameTxt.text = player.GetName();
             statsPlayerTitleTxt.text = player.GetTitle();
@@ -1529,19 +1513,15 @@ public class Engine : MonoBehaviour
         QuestDictionary = new SortedDictionary<uint, Quest>();
 
         fetchRatSkull = Instantiate(Resources.Load<FetchQuest>("Quests/0_FetchRatSkull"));
-        fetchSlimeGoo = Instantiate(Resources.Load<FetchQuest>("Quests/1_FetchSlimeGoo"));
+        fetchSlimeEssense = Instantiate(Resources.Load<FetchQuest>("Quests/1_FetchSlimeEssense"));
         fetchRatFur = Instantiate(Resources.Load<FetchQuest>("Quests/2_FetchRatFur"));
         slayGiantRat = Instantiate(Resources.Load<SlayQuest>("Quests/4_SlayGiantRat"));
-        slayRatPack = Instantiate(Resources.Load<SlayQuest>("Quests/5_SlayRatPack"));
-        slayAmalgamSlime = Instantiate(Resources.Load<SlayQuest>("Quests/6_SlayAmalgamSlime"));
-        slayDireWolf = Instantiate(Resources.Load<SlayQuest>("Quests/7_SlayDireWolf"));
-        slayGladiator = Instantiate(Resources.Load<SlayQuest>("Quests/8_SlayGladiator"));
-        slayChief = Instantiate(Resources.Load<SlayQuest>("Quests/9_SlayChief"));
+
         fetchLockpick = Instantiate(Resources.Load<FetchQuest>("Quests/10_FetchLockpick"));
         fetchWolfFur = Instantiate(Resources.Load<FetchQuest>("Quests/11_FetchWolfFur"));
         fetchRatMeat = Instantiate(Resources.Load<FetchQuest>("Quests/12_FetchRatMeat"));
         fetchWolfMeat = Instantiate(Resources.Load<FetchQuest>("Quests/13_FetchWolfMeat"));
-        fetchMedicalSupply = Instantiate(Resources.Load<FetchQuest>("Quests/14_FetchMedicalSupply"));
+
         fetchArmorPiece = Instantiate(Resources.Load<FetchQuest>("Quests/15_FetchArmorPiece"));
         talkTemrikToBlacksmith = Instantiate(Resources.Load<TalkQuest>("Quests/16_TalkTemrikToBlacksmith"));
         talkTemrikToAlchemist = Instantiate(Resources.Load<TalkQuest>("Quests/17_TalkTemrikToAlchemist"));
@@ -1550,19 +1530,14 @@ public class Engine : MonoBehaviour
         clearCreogCave = Instantiate(Resources.Load<ClearQuest>("Quests/20_ClearCreogCave"));
 
         QuestDictionary.Add(fetchRatSkull.GetID(), fetchRatSkull);
-        QuestDictionary.Add(fetchSlimeGoo.GetID(), fetchSlimeGoo);
+        QuestDictionary.Add(fetchSlimeEssense.GetID(), fetchSlimeEssense);
         QuestDictionary.Add(fetchRatFur.GetID(), fetchRatFur);
         QuestDictionary.Add(slayGiantRat.GetID(), slayGiantRat);
-        QuestDictionary.Add(slayRatPack.GetID(), slayRatPack);
-        QuestDictionary.Add(slayAmalgamSlime.GetID(), slayAmalgamSlime);
-        QuestDictionary.Add(slayDireWolf.GetID(), slayDireWolf);
-        QuestDictionary.Add(slayGladiator.GetID(), slayGladiator);
-        QuestDictionary.Add(slayChief.GetID(), slayChief);
+
         QuestDictionary.Add(fetchLockpick.GetID(), fetchLockpick);
         QuestDictionary.Add(fetchWolfFur.GetID(), fetchWolfFur);
         QuestDictionary.Add(fetchRatMeat.GetID(), fetchRatMeat);
         QuestDictionary.Add(fetchWolfMeat.GetID(), fetchWolfMeat);
-        QuestDictionary.Add(fetchMedicalSupply.GetID(), fetchMedicalSupply);
         QuestDictionary.Add(fetchArmorPiece.GetID(), fetchArmorPiece);
         QuestDictionary.Add(talkTemrikToBlacksmith.GetID(), talkTemrikToBlacksmith);
         QuestDictionary.Add(talkTemrikToAlchemist.GetID(), talkTemrikToAlchemist);
@@ -1574,6 +1549,8 @@ public class Engine : MonoBehaviour
 
     void InitializeUI()
     {
+        dialogueManager = gameObject.GetComponent<DialogueManager>();
+
         UIInventoryScreen = GameObject.Find("UI Inventory");
         UIDirectionScreen = GameObject.Find("UI Directional");
         UIQuestScreen = GameObject.Find("UI Quest");
@@ -1582,7 +1559,7 @@ public class Engine : MonoBehaviour
         UIArenaScreen = GameObject.Find("UI Arena");
         UISkillScreen = GameObject.Find("UI Skill");
         UIStatsScreen = GameObject.Find("UI Stats");
-        UIDialogueScreen = GameObject.Find("UI Dialogue");
+
         UILoadScreen = GameObject.Find("UI Load");
         UIPauseScreen = GameObject.Find("UI Pause");
         UICoverScreen = GameObject.Find("UI Cover");
@@ -1590,13 +1567,9 @@ public class Engine : MonoBehaviour
         UIDungeonScreen = GameObject.Find("UI Dungeon");
         UIEventScreen = GameObject.Find("UI Event");
 
-        northBtn = GameObject.Find("NorthBtn").GetComponent<Button>();
-        eastBtn = GameObject.Find("EastBtn").GetComponent<Button>();
-        southBtn = GameObject.Find("SouthBtn").GetComponent<Button>();
-        westBtn = GameObject.Find("WestBtn").GetComponent<Button>();
-        enterDialogueBtn = GameObject.Find("EnterDialogueBtn").GetComponent<Button>();
-
-        enterDialogueBtn.gameObject.SetActive(false);
+        directionalHealthSlider = GameObject.Find("DirectionalHealthSlider").GetComponent<Slider>();
+        directionalStaminaSlider = GameObject.Find("DirectionalStaminaSlider").GetComponent<Slider>();
+        directionalManaSlider = GameObject.Find("DirectionalManaSlider").GetComponent<Slider>();
 
         dungeonNameTxt = GameObject.Find("DungeonNameTxt").GetComponent<Text>();
         floorCountTxt = GameObject.Find("FloorCountTxt").GetComponent<Text>();
@@ -1672,15 +1645,10 @@ public class Engine : MonoBehaviour
 
         questName = GameObject.Find("ActiveQuestNameTxt").GetComponent<Text>();
         questDescription = GameObject.Find("ActiveQuestDescriptionTxt").GetComponent<Text>();
-        selQuestName = GameObject.Find("SelectQuestNameTxt").GetComponent<Text>();
-        selQuestDescription = GameObject.Find("SelectQuestDescriptionTxt").GetComponent<Text>();
         noActiveQuestTxt = GameObject.Find("NoActiveQuestTxt");
-        noSelectedQuestTxt = GameObject.Find("NoSelectedQuestTxt");
 
         questName.text = "";
         questDescription.text = "";
-        selQuestName.text = "";
-        selQuestDescription.text = "";
 
         playerStatusEffectGO = GameObject.Find("PlayerStatusEffects");
         enemyStatusEffectGO = GameObject.Find("EnemyStatusEffects");
@@ -1693,7 +1661,6 @@ public class Engine : MonoBehaviour
         enemyStaminaSlider = GameObject.Find("EnemyStaminaSlider").GetComponent<Slider>();
         enemyManaSlider = GameObject.Find("EnemyManaSlider").GetComponent<Slider>();
 
-        playerBattleNameTxt = GameObject.Find("PlayerBattleName").GetComponent<Text>();
         playerBattleHealthTxt = GameObject.Find("PlayerBattleHealthTxt").GetComponent<Text>();
         playerBattleStaminaTxt = GameObject.Find("PlayerBattleStaminaTxt").GetComponent<Text>();
         playerBattleManaTxt = GameObject.Find("PlayerBattleManaTxt").GetComponent<Text>();
@@ -1702,7 +1669,7 @@ public class Engine : MonoBehaviour
         playerBattleManaSlider = GameObject.Find("PlayerBattleManaSlider").GetComponent<Slider>();
 
         battleOutputTxt = GameObject.Find("BattleOutputTxt").GetComponent<Text>();
-        
+
         enemySpeedSlider = GameObject.Find("EnemySpeedSlider").GetComponent<Slider>();
         playerSpeedSlider = GameObject.Find("PlayerSpeedSlider").GetComponent<Slider>();
 
@@ -1743,16 +1710,18 @@ public class Engine : MonoBehaviour
         pickUpArmorObj.SetActive(false);
         pickUpConsumableObj.SetActive(false);
 
-        enemyA = GameObject.Find("EnemyA");
-        enemyB = GameObject.Find("EnemyB");
-        enemyC = GameObject.Find("EnemyC");
+        enemyABtn = GameObject.Find("EnemyABtn");
+        enemyBBtn = GameObject.Find("EnemyBBtn");
+        enemyCBtn = GameObject.Find("EnemyCBtn");
 
-        enemyANameTxt = GameObject.Find("EnemyAName").GetComponent<Text>();
-        enemyBNameTxt = GameObject.Find("EnemyBName").GetComponent<Text>();
-        enemyCNameTxt = GameObject.Find("EnemyCName").GetComponent<Text>();
+        enemyANameTxt = GameObject.Find("EnemyANameTxt").GetComponent<Text>();
+        enemyBNameTxt = GameObject.Find("EnemyBNameTxt").GetComponent<Text>();
+        enemyCNameTxt = GameObject.Find("EnemyCNameTxt").GetComponent<Text>();
 
-        arenaEnemyNameTxt = GameObject.Find("ArenaNameTxt").GetComponent<Text>();
-        arenaEnemyDescriptionTxt = GameObject.Find("ArenaDescriptionTxt").GetComponent<Text>();
+        enemyARewardTxt = GameObject.Find("EnemyARewardTxt").GetComponent<Text>();
+        enemyBRewardTxt = GameObject.Find("EnemyBRewardTxt").GetComponent<Text>();
+        enemyCRewardTxt = GameObject.Find("EnemyCRewardTxt").GetComponent<Text>();
+
         arenaEnemyDamageTxt = GameObject.Find("ArenaDamageTxt").GetComponent<Text>();
         arenaEnemySpeedTxt = GameObject.Find("ArenaSpeedTxt").GetComponent<Text>();
         arenaEnemyHealthTxt = GameObject.Find("ArenaHealthTxt").GetComponent<Text>();
@@ -1765,15 +1734,11 @@ public class Engine : MonoBehaviour
         arenaEnemySpeedObj = GameObject.Find("ArenaEnemySpeed");
         arenaEnemyDamageObj = GameObject.Find("ArenaEnemyDamage");
 
-        arenaBossImg = GameObject.Find("ArenaBossImg");
-
         arenaEnemyHealthObj.SetActive(false);
         arenaEnemyStaminaObj.SetActive(false);
         arenaEnemyManaObj.SetActive(false);
         arenaEnemySpeedObj.SetActive(false);
         arenaEnemyDamageObj.SetActive(false);
-
-        arenaBossImg.SetActive(false);
 
         skillScrollView = GameObject.Find("SkillScrollView");
         skillPanel = GameObject.Find("SkillPanel");
@@ -1823,10 +1788,6 @@ public class Engine : MonoBehaviour
         statsManaSlider = GameObject.Find("StatsManaSlider").GetComponent<Slider>();
         statsExpSlider = GameObject.Find("StatsExpSlider").GetComponent<Slider>();
 
-        diagNPCNameTxt = GameObject.Find("DiagNPCNameTxt").GetComponent<Text>();
-        npcLineTxt = GameObject.Find("NPCLineTxt").GetComponent<TextMeshProUGUI>();
-        responsePanel = GameObject.Find("ResponsePanel");
-
         choiceABtn = GameObject.Find("ChoiceABtn").GetComponent<Button>();
         choiceBBtn = GameObject.Find("ChoiceBBtn").GetComponent<Button>();
         eventTxt = GameObject.Find("EventTxt").GetComponent<Text>();
@@ -1852,7 +1813,7 @@ public class Engine : MonoBehaviour
         UIArenaScreen.SetActive(false);
         UISkillScreen.SetActive(false);
         UIStatsScreen.SetActive(false);
-        UIDialogueScreen.SetActive(false);
+
         UIPauseScreen.SetActive(false);
         UILoadScreen.SetActive(false);
         UIRatingScreen.SetActive(false);
@@ -1869,11 +1830,16 @@ public class Engine : MonoBehaviour
 
     public void Battle()
     {
-        battleCoroutine = StartCoroutine(Battle(selectedEnemy));
+        battleCoroutine = StartCoroutine(r_Battle(selectedEnemy));
         ActivateArenaScreen(false);
     }
 
-    IEnumerator Battle(Enemy eGO)
+    public void BattleFromDialogue(Enemy enemy)
+    {
+        StartCoroutine(EnterBattle(enemy));
+    }
+
+    IEnumerator r_Battle(Enemy eGO)
     {
         Advertisements.Instance.HideBanner();
         if (GameObject.Find("OverworldMusicAudioSource").GetComponent<AudioSource>().isPlaying)
@@ -2022,12 +1988,14 @@ public class Engine : MonoBehaviour
 
         if (activeEnemy.GetHealth() <= 0)
         {
+            int goldReward = activeEnemy.GetRandomGoldReward();
+
             GameObject.Find("BattleWinMusicAudioSource").GetComponent<AudioSource>().Play();
             ActivatePickupScreen(true);
             GenerateItemPickup(enemy.GetItemRewards());
-            OutputToText(String.Format("You have killed {0}, gaining {1} exp and {2} gold.", activeEnemy.GetName(), activeEnemy.GetExpReward(), activeEnemy.GetGoldReward()));
+            OutputToText(String.Format("You have killed {0}, gaining {1} exp and {2} gold.", activeEnemy.GetName(), activeEnemy.GetExpReward(), goldReward));
             player.AddExp(activeEnemy.GetExpReward());
-            player.ChangeGold(activeEnemy.GetGoldReward());
+            player.ChangeGold(goldReward);
 
             if(activeEnemy.GetEnemyType() == Enemy.EnemyType.boss)
             {
@@ -2667,8 +2635,6 @@ public class Engine : MonoBehaviour
         }       
     }
 
-
-
     void LoadQuestSlots()
     {
         for(int i = 0; i < player.GetQuestList().Count; i++)
@@ -2738,11 +2704,11 @@ public class Engine : MonoBehaviour
         invScroll.verticalNormalizedPosition = 1;
     }
 
-    public void LoadInventorySlot(Item item, uint count)
+    public void LoadInventorySlot(Item item, uint count = 1)
     {
         while (count > 0)
         {
-
+            // Creates a new slot if Inventory Slots does not contain item
             if (!uiInvSlots.ContainsKey(item.GetID()))
             {
                 // Creates a new invSlot clone.
@@ -2751,6 +2717,7 @@ public class Engine : MonoBehaviour
                 invSlot.GetComponent<ItemContainer>().SetItem(item);
                 // Adds new onClick command to invSlot's button component
                 invSlot.GetComponent<Button>().onClick.AddListener(() => DisplayItem(invSlot.GetComponent<ItemContainer>()));
+                invSlot.GetComponent<Button>().onClick.AddListener(() => GameObject.Find("ButtonAudioSource").GetComponent<AudioSource>().Play());
                 // adds invSlot to invSlots
                 uiInvSlots.Add(item.GetID(), invSlot);
                 // adds item to player's inventory
@@ -2832,7 +2799,7 @@ public class Engine : MonoBehaviour
         else
         {
             AddToPickup(activeItem);
-            if(isInNPC)
+            if(dialogueManager.isInNPC)
             {
                 //currentShop.AddItem(activeItem);
                 player.ChangeGold((int)(activeItem.GetValue() * 0.75f));
@@ -2889,9 +2856,9 @@ public class Engine : MonoBehaviour
         if (isInPickup)
         {
             AddToInventory(item);
-            if (isInNPC && !isInBattle && currentNPC.HasStore())
+            if (dialogueManager.isInNPC && !isInBattle && dialogueManager.currentNPC.HasStore())
             {
-                StoreDictionary[currentNPC.GetStore().GetID()].RemoveItem(item);
+                StoreDictionary[dialogueManager.currentNPC.GetStore().GetID()].RemoveItem(item);
                 player.ChangeGold(-(int)(item.GetValue()));
                 if (player.GetGold() < item.GetValue())
                     pickupItemBtn.interactable = false;
@@ -3001,10 +2968,7 @@ public class Engine : MonoBehaviour
                     }
                 }
 
-                Debug.Log((npcContainsItem && (!isInNPC || isInNPC && !currentNPC.HasStore())) ? "True" : "False");
-                Debug.Log(((isInNPC && currentNPC.HasStore() && npcContainsItem && activeItem.GetValue() < player.GetGold())) ? "True" : "False");
-
-                if ((npcContainsItem && (!isInNPC || isInNPC && !currentNPC.HasStore())) || (isInNPC && currentNPC.HasStore() && npcContainsItem && activeItem.GetValue() <= player.GetGold()))
+                if ((npcContainsItem && (!dialogueManager.isInNPC || dialogueManager.isInNPC && !dialogueManager.currentNPC.HasStore())) || (dialogueManager.isInNPC && dialogueManager.currentNPC.HasStore() && npcContainsItem && activeItem.GetValue() <= player.GetGold()))
                 {
                     if (player.GetCurrentWeight() + itemContainer.GetItem().GetWeight() <= player.GetMaxWeight())
                         pickupItemBtn.interactable = true;
@@ -3021,7 +2985,12 @@ public class Engine : MonoBehaviour
                 
                 pickUpNameTxt.text = activeItem.GetName();
                 pickUpDescriptionTxt.text = activeItem.GetDescription();
-                pickUpValueTxt.text = activeItem.GetValue().ToString();
+
+                if(invScroll.gameObject.activeInHierarchy && (dialogueManager.isInNPC && dialogueManager.currentNPC.HasStore()))
+                    pickUpValueTxt.text = ((int)(activeItem.GetValue() * 0.75f)).ToString();
+                else
+                    pickUpValueTxt.text = activeItem.GetValue().ToString();
+
                 pickUpWeightTxt.text = activeItem.GetWeight().ToString();
 
                 if (itemContainer.GetItem().IsWeapon())
@@ -3108,16 +3077,12 @@ public class Engine : MonoBehaviour
 
             skillSlot.GetComponent<Button>().onClick.AddListener(() => DisplaySkill(skillSlot.GetComponent<SkillContainer>()));
             skillSlot.GetComponent<Button>().onClick.AddListener(() => GameObject.Find("ButtonAudioSource").GetComponent<AudioSource>().Play());
-            if (skill.GetSkillType() == Skill.SkillType.stamina)
-                skillSlot.transform.GetChild(0).GetComponent<Image>().sprite = staminaDrop;
-            else if (skill.GetSkillType() == Skill.SkillType.mana)
-                skillSlot.transform.GetChild(0).GetComponent<Image>().sprite = manaDrop;
+
             if (skill.GetSprite() != null)
-                skillSlot.transform.GetChild(1).GetComponent<Image>().sprite = skill.GetSprite();
+                skillSlot.transform.GetChild(0).GetComponent<Image>().sprite = skill.GetSprite();
             else
-                skillSlot.transform.GetChild(1).gameObject.SetActive(false);
-            skillSlot.transform.GetChild(2).GetComponent<Text>().text = skill.GetName();
-            skillSlot.transform.GetChild(3).GetComponent<Toggle>().isOn = skill.IsActive();
+                skillSlot.transform.GetChild(0).gameObject.SetActive(false);
+            skillSlot.transform.GetChild(1).GetComponent<Toggle>().isOn = skill.IsActive();
 
             uiSkillSlots.Add(skill.GetID(), skillSlot);
             OrderDictionary(uiSkillSlots, true);
@@ -3351,7 +3316,7 @@ public class Engine : MonoBehaviour
         UpdateInventoryAttributes();
     }
 
-    void UpdateInventoryAttributes()
+    public void UpdateInventoryAttributes()
     {
         UpdateHealthSliders();
         UpdateStaminaSliders();
@@ -3401,6 +3366,9 @@ public class Engine : MonoBehaviour
 
     void UpdateHealthSliders()
     {
+        directionalHealthSlider.maxValue = player.GetMaxHealth();
+        directionalHealthSlider.value = player.GetHealth();
+
         statsHealthSlider.maxValue = player.GetMaxHealth();
         statsHealthSlider.value = player.GetHealth();
         statsHealthTxt.text = player.GetHealth() + "/" + player.GetMaxHealth();
@@ -3408,6 +3376,9 @@ public class Engine : MonoBehaviour
 
     void UpdateStaminaSliders()
     {
+        directionalStaminaSlider.maxValue = player.GetMaxStamina();
+        directionalStaminaSlider.value = player.GetStamina();
+
         statsStaminaSlider.maxValue = player.GetMaxStamina();
         statsStaminaSlider.value = player.GetStamina();
         statsStaminaTxt.text = player.GetStamina() + "/" + player.GetMaxStamina();
@@ -3415,6 +3386,9 @@ public class Engine : MonoBehaviour
 
     void UpdateManaSliders()
     {
+        directionalManaSlider.maxValue = player.GetMaxMana();
+        directionalManaSlider.value = player.GetMana();
+
         statsManaSlider.maxValue = player.GetMaxMana();
         statsManaSlider.value = player.GetMana();
         statsManaTxt.text = player.GetMana() + "/" + player.GetMaxMana();
@@ -3470,8 +3444,7 @@ public class Engine : MonoBehaviour
     public void DisplayEnemy(EnemyContainer enemyContainer)
     {
         selectedEnemy = enemyContainer.GetEnemy();
-        arenaEnemyNameTxt.text = enemyContainer.GetEnemy().GetName();
-        arenaEnemyDescriptionTxt.text = enemyContainer.GetEnemy().GetDescription();
+
         arenaEnemyHealthTxt.text = enemyContainer.GetEnemy().GetMaxHealth().ToString();
         arenaEnemyStaminaTxt.text = enemyContainer.GetEnemy().GetMaxStamina().ToString();
         arenaEnemyManaTxt.text = enemyContainer.GetEnemy().GetMaxMana().ToString();
@@ -3484,10 +3457,6 @@ public class Engine : MonoBehaviour
         arenaEnemySpeedObj.SetActive(true);
         arenaEnemyDamageObj.SetActive(true);
 
-        if (selectedEnemy.GetEnemyType() == Enemy.EnemyType.boss)
-            arenaBossImg.SetActive(true);
-        else
-            arenaBossImg.SetActive(false);
     }
 
     public void DisplaySkill(SkillContainer skillContainer)
@@ -3515,7 +3484,7 @@ public class Engine : MonoBehaviour
     public void ActivateSkill()
     {
         (SkillDictionary[selectedSkill.GetID()]).SetActive(!SkillDictionary[selectedSkill.GetID()].IsActive());
-        uiSkillSlots[selectedSkill.GetID()].transform.GetChild(3).GetComponent<Toggle>().isOn = SkillDictionary[selectedSkill.GetID()].IsActive();
+        uiSkillSlots[selectedSkill.GetID()].transform.GetChild(1).GetComponent<Toggle>().isOn = SkillDictionary[selectedSkill.GetID()].IsActive();
 
         UpdateInventoryAttributes();
         UpdateExpSliders();
@@ -3536,9 +3505,15 @@ public class Engine : MonoBehaviour
         else
             makeActiveBtn.gameObject.SetActive(true);
 
+        questName.text = selectedQuest.GetName();
+        questDescription.text = selectedQuest.GetDescription();
+        noActiveQuestTxt.SetActive(false);
+
+        /*
         selQuestName.text = selectedQuest.GetName();
         selQuestDescription.text = selectedQuest.GetDescription();
         noSelectedQuestTxt.SetActive(false);
+        */
     }
 
     public void MakeQuestActive()
@@ -3546,7 +3521,9 @@ public class Engine : MonoBehaviour
         activeQuest = selectedQuest;
         questName.text = activeQuest.GetName();
         questDescription.text = activeQuest.GetDescription();
+        makeActiveBtn.gameObject.SetActive(false);
 
+        /*
         foreach (GameObject fGO in uiFetchQuestObjects.ToList<GameObject>())
         {
             uiFetchQuestObjects.Remove(fGO);
@@ -3595,44 +3572,12 @@ public class Engine : MonoBehaviour
                 uiFetchQuestObjects.Add(fGO);
             }
         }
+        */
 
         noActiveQuestTxt.SetActive(false);
-        DeactivateQuestSelection();
     }
 
-    public void TurnInQuest(Quest quest)
-    {
-        QuestDictionary[quest.GetID()].SetCompletion(true);
-        OutputToText(String.Format("You have completed {0}.", QuestDictionary[quest.GetID()].GetName()));
-        GameObject questSlot = uiQuestSlots[QuestDictionary[quest.GetID()].GetID()];
-        uiQuestSlots.Remove(QuestDictionary[quest.GetID()].GetID());
-        GameObject.Destroy(questSlot);
 
-        player.AddExp(QuestDictionary[quest.GetID()].GetExpReward());
-        player.ChangeGold((int)QuestDictionary[quest.GetID()].GetGoldReward());
-        player.RemoveQuest(QuestDictionary[quest.GetID()]);
-        player.AddCompletedQuest(QuestDictionary[quest.GetID()]);
-        OutputToText(String.Format("You have earned {0} exp and {1} gold.", QuestDictionary[quest.GetID()].GetExpReward(), QuestDictionary[quest.GetID()].GetGoldReward()));
-
-        if(QuestDictionary[quest.GetID()].GetQuestType() == Quest.QuestType.Fetch)
-        {
-            FetchQuest fetchQuest = ((FetchQuest)QuestDictionary[quest.GetID()]);
-            for (int i = 0; i < fetchQuest.GetFetchItems().Count; i++)
-                for (int j = 0; j < fetchQuest.GetItemCounts()[i]; j++)
-                    RemoveFromInventory(fetchQuest.GetFetchItems()[i]);
-        }
-
-        if(QuestDictionary[quest.GetID()].HasItemReward())
-        {
-            List<Item> itemRewards = QuestDictionary[quest.GetID()].GetItemRewards();
-            foreach (Item item in itemRewards)
-                AddToInventory(item);
-        }
-
-        UpdateInventoryAttributes();
-        DeactivateQuestSelection();
-        DeactivateActiveQuest();
-    }
 
 
     // UI Screen Activation Methods
@@ -3648,8 +3593,22 @@ public class Engine : MonoBehaviour
     public void ActivateQuestScreen(bool x)
     {
         UIQuestScreen.SetActive(x);
-        activeQuestScroll.verticalNormalizedPosition = 1;
+        makeActiveBtn.gameObject.SetActive(false);
 
+        if(x && activeQuest != null)
+        {
+            questName.text = activeQuest.GetName();
+            questDescription.text = activeQuest.GetDescription();
+            activeQuestScroll.verticalNormalizedPosition = 1;
+        }
+        else if(!x && activeQuest == null)
+        {
+            questName.text = "";
+            questDescription.text = "";
+            noActiveQuestTxt.SetActive(true);
+        }
+
+        /*
         if (activeQuest != null && activeQuest.GetQuestType() == Quest.QuestType.Fetch)
         {
             FetchQuest fetchQuest = ((FetchQuest)activeQuest);
@@ -3688,8 +3647,7 @@ public class Engine : MonoBehaviour
                 fGO.transform.GetChild(0).GetComponent<Slider>().value = slayQuest.GetCountSlayEnemies()[i];           
             }
         }
-
-        DeactivateQuestSelection();
+        */
     }
 
     public void ActivatePickupScreen(bool x)
@@ -3706,11 +3664,11 @@ public class Engine : MonoBehaviour
 
         if (x)
         {
-            if (isInNPC)
+            if (dialogueManager.isInNPC)
             {
-                if (currentNPC.GetNPCType() == NPC.NPCType.merchant)
+                if (dialogueManager.currentNPC.GetNPCType() == NPC.NPCType.merchant)
                 {
-                    Store currentShop = StoreDictionary[currentNPC.GetStore().GetID()];
+                    Store currentShop = StoreDictionary[dialogueManager.currentNPC.GetStore().GetID()];
                     sourceName = currentShop.GetName();
                     pickupDropItemBtn.gameObject.transform.GetChild(0).GetComponent<Text>().text = "Sell Item\n(75% Value)";
                     pickupItemBtn.gameObject.transform.GetChild(0).GetComponent<Text>().text = "Buy Item";
@@ -3727,6 +3685,10 @@ public class Engine : MonoBehaviour
             }
 
             invScroll.transform.SetParent(UIPickupScreen.transform);
+            invScroll.gameObject.SetActive(false);
+            playerPickUpNameTxt.gameObject.SetActive(false);
+            pickupDropItemBtn.gameObject.SetActive(false);
+
             otherPickUpNameTxt.text = sourceName;
             isInPickup = true;
             UIPickupScreen.SetActive(true);
@@ -3737,6 +3699,14 @@ public class Engine : MonoBehaviour
             pickupItemBtn.gameObject.transform.GetChild(0).GetComponent<Text>().text = "Grab Item";
 
             invScroll.transform.SetParent(UIInventoryScreen.transform);
+            invScroll.gameObject.SetActive(true);
+            playerPickUpNameTxt.gameObject.SetActive(true);
+            pickupDropItemBtn.gameObject.SetActive(true);
+
+            otherPickUpNameTxt.gameObject.SetActive(true);
+            pickupScroll.gameObject.SetActive(true);
+            pickupItemBtn.gameObject.SetActive(true);
+
             isInPickup = false;
 
             List<Item> items = new List<Item>();
@@ -3758,11 +3728,38 @@ public class Engine : MonoBehaviour
 
             uiPickupSlots.Clear();
             UIPickupScreen.SetActive(false);
-
+            
             /*
             if (isInChest)
                 OpenChest(activeChest); */
         }
+    }
+
+    public void SwapPickup()
+    {
+        if(pickupScroll.gameObject.activeInHierarchy)
+        {
+            playerPickUpNameTxt.gameObject.SetActive(true);
+            otherPickUpNameTxt.gameObject.SetActive(false);
+
+            pickupScroll.gameObject.SetActive(false);
+            invScroll.gameObject.SetActive(true);
+
+            pickupDropItemBtn.gameObject.SetActive(true);
+            pickupItemBtn.gameObject.SetActive(false);
+        }
+        else if(invScroll.gameObject.activeInHierarchy)
+        {
+            playerPickUpNameTxt.gameObject.SetActive(false);
+            otherPickUpNameTxt.gameObject.SetActive(true);
+
+            invScroll.gameObject.SetActive(false);
+            pickupScroll.gameObject.SetActive(true);
+
+            pickupDropItemBtn.gameObject.SetActive(false);
+            pickupItemBtn.gameObject.SetActive(true);
+        }
+        DeactivateInvSelection();
     }
 
     public void ActivateArenaScreen(bool x)
@@ -3790,27 +3787,27 @@ public class Engine : MonoBehaviour
             }
         }
 
-        //leveledEnemies.ForEach(y => Debug.Log(y.GetName()));
+        enemyABtn.GetComponent<EnemyContainer>().SetEnemy(leveledEnemies[UnityEngine.Random.Range(0, leveledEnemies.Count)]);
+        enemyBBtn.GetComponent<EnemyContainer>().SetEnemy(leveledEnemies[UnityEngine.Random.Range(0, leveledEnemies.Count)]);
+        enemyCBtn.GetComponent<EnemyContainer>().SetEnemy(leveledEnemies[UnityEngine.Random.Range(0, leveledEnemies.Count)]);
 
-        enemyA.GetComponent<EnemyContainer>().SetEnemy(leveledEnemies[UnityEngine.Random.Range(0, leveledEnemies.Count)]);
-        enemyB.GetComponent<EnemyContainer>().SetEnemy(leveledEnemies[UnityEngine.Random.Range(0, leveledEnemies.Count)]);
-        enemyC.GetComponent<EnemyContainer>().SetEnemy(leveledEnemies[UnityEngine.Random.Range(0, leveledEnemies.Count)]);
+        Enemy enemyA = enemyABtn.GetComponent<EnemyContainer>().GetEnemy();
+        Enemy enemyB = enemyBBtn.GetComponent<EnemyContainer>().GetEnemy();
+        Enemy enemyC = enemyCBtn.GetComponent<EnemyContainer>().GetEnemy();
 
+        enemyANameTxt.text = enemyA.GetName();
+        enemyBNameTxt.text = enemyB.GetName();
+        enemyCNameTxt.text = enemyC.GetName();
 
-        enemyANameTxt.text = enemyA.GetComponent<EnemyContainer>().GetEnemy().GetName();
-        enemyBNameTxt.text = enemyB.GetComponent<EnemyContainer>().GetEnemy().GetName();
-        enemyCNameTxt.text = enemyC.GetComponent<EnemyContainer>().GetEnemy().GetName();
-
-        arenaEnemyDescriptionTxt.text = "";
-        arenaEnemyNameTxt.text = "";
+        enemyARewardTxt.text = String.Format("Reward:\n{0}-{1} Gold", enemyA.GetMinGoldReward(), enemyA.GetMaxGoldReward());
+        enemyBRewardTxt.text = String.Format("Reward:\n{0}-{1} Gold", enemyB.GetMinGoldReward(), enemyB.GetMaxGoldReward());
+        enemyCRewardTxt.text = String.Format("Reward:\n{0}-{1} Gold", enemyC.GetMinGoldReward(), enemyC.GetMaxGoldReward());
 
         arenaEnemyHealthObj.SetActive(false);
         arenaEnemyStaminaObj.SetActive(false);
         arenaEnemyManaObj.SetActive(false);
         arenaEnemySpeedObj.SetActive(false);
         arenaEnemyDamageObj.SetActive(false);
-
-        arenaBossImg.SetActive(false);
 
         GameObject.Find("Player").transform.position = new Vector3(0, 2.2f, 10);
         GameObject.Find("Player").transform.transform.rotation = new Quaternion(0, 0, 0, 0);
@@ -3835,24 +3832,7 @@ public class Engine : MonoBehaviour
         UIStatsScreen.SetActive(x);
     }
 
-    public void ActivateDialogueScreen(bool x)
-    {
-        if (!x)
-        {
-            if (textType != null)
-                StopCoroutine(textType);
-            textType = null;
-            ClearDialogue();
-        }
 
-        if (isInNPC && x)
-        {
-            diagNPCNameTxt.text = currentNPC.GetName();
-            SetDialogues(currentNPC.GetDialogue());
-        }
-        isInDialogue = x;
-        UIDialogueScreen.SetActive(x);
-    }
 
     public void ActivateDungeonScreen(bool x, Dungeon dungeon)
     {
@@ -3987,510 +3967,8 @@ public class Engine : MonoBehaviour
 
 
     // Dialogue Methods
-
-    public void SetIsInNPC(bool x, GameObject NPC)
-    {
-        isInNPC = x;
-        if (x)
-            currentNPC = NPCDictionary[NPC.GetComponent<NPCContainer>().GetNPC().GetID()];
-        else
-            currentNPC = null;
-
-        enterDialogueBtn.gameObject.SetActive(x);
-    }
-
-    public void SelectDialogue(DialogueContainer dialogueContainer)
-    {
-        if (textType != null)
-            StopCoroutine(textType);
-
-        ClearDialogue();
-
-        if(dialogueContainer.GetDialogue().GetDialogueType() == Dialogue.DialogueType.merchant)
-        {
-            ActivateDialogueScreen(false);
-            ActivatePickupScreen(true);
-        }
-        else if(dialogueContainer.GetDialogue().GetDialogueType() == Dialogue.DialogueType.conversation)
-        {
-            SetDialogues(dialogueContainer.GetDialogue());
-        }
-        else if(dialogueContainer.GetDialogue().GetDialogueType() == Dialogue.DialogueType.quest)
-        {
-            QuestDialogue questDialogue = (QuestDialogue)dialogueContainer.GetDialogue();
-            if(questDialogue.GetQuestDialogueType() == QuestDialogue.QuestDialogueType.start)
-            {
-                if (questDialogue.GetQuest().GetQuestType() == Quest.QuestType.Fetch)
-                    if (((FetchQuest)questDialogue.GetQuest()).CheckQuestCompletion(player))
-                    {
-                        TurnInQuest(questDialogue.GetQuest());
-                        currentNPC.SetHasGivenQuest(false);
-                    }
-                if(questDialogue.GetQuest().GetQuestType() == Quest.QuestType.Slay)
-                    if(((SlayQuest)QuestDictionary[questDialogue.GetQuest().GetID()]).CheckQuestCompletion(player))
-                    {
-                        TurnInQuest(questDialogue.GetQuest());
-                        currentNPC.SetHasGivenQuest(false);
-                    }
-                if(questDialogue.GetQuest().GetQuestType() == Quest.QuestType.Talk)
-                    if(((TalkQuest)QuestDictionary[questDialogue.GetQuest().GetID()]).CheckTalkCompletion(currentNPC))
-                    {
-                        TurnInQuest(questDialogue.GetQuest());
-                        NPCDictionary[((TalkQuest)QuestDictionary[questDialogue.GetQuest().GetID()]).GetSourceNPC().GetID()].SetHasGivenQuest(false);
-                    }
-                if(questDialogue.GetQuest().GetQuestType() == Quest.QuestType.Clear)
-                    if(((ClearQuest)QuestDictionary[questDialogue.GetQuest().GetID()]).CheckQuestCompletion(player))
-                    {
-                        TurnInQuest(questDialogue.GetQuest());
-                        currentNPC.SetHasGivenQuest(false);
-                    }
-            }
-            if(questDialogue.GetQuestDialogueType() == QuestDialogue.QuestDialogueType.accept)
-            {
-                if(!player.CheckForQuest(questDialogue.GetQuest().GetID()) && !QuestDictionary[questDialogue.GetQuest().GetID()].IsCompleted())
-                {
-                    AddToQuestList(QuestDictionary[questDialogue.GetQuest().GetID()]);
-                    currentNPC.SetHasGivenQuest(true);
-                    currentNPC.SetGivenQuest(QuestDictionary[questDialogue.GetQuest().GetID()]);
-                }
-            }
-            SetDialogues(questDialogue);
-        }
-        else if(dialogueContainer.GetDialogue().GetDialogueType() == Dialogue.DialogueType.inn)
-        {
-            SetDialogues(dialogueContainer.GetDialogue());
-        }
-        else if(dialogueContainer.GetDialogue().GetDialogueType() == Dialogue.DialogueType.battle)
-        {
-            Enemy enemy = ((BattleDialogue)dialogueContainer.GetDialogue()).GetEnemy();
-            SetDialogues(dialogueContainer.GetDialogue());
-            battleCoroutine = StartCoroutine(EnterBattle(enemy));
-        }
-
-    }
-
-    void SetDialogues(Dialogue dialogue)
-    {
-        //ClearDialogue();
-        if (dialogue.GetDialogueType() == Dialogue.DialogueType.start)
-        {
-            textType = StartCoroutine(TypeText(dialogue.GetNPCLine()));
-
-            List<Dialogue> dialogues = dialogue.GetDialogueAnswers();
-            List<string> dialogueStrings = dialogue.GetDialogueOptions();
-            List<Sprite> sprites = dialogue.GetDialogueSprites();
-            for (int i = 0; i < dialogues.Count; i++)
-            {
-                GameObject dGO = Instantiate(dialogueBtn, responsePanel.transform);
-
-                dGO.GetComponent<DialogueContainer>().SetDialogue(dialogues[i]);
-                dGO.transform.GetChild(0).GetComponent<Text>().text = dialogueStrings[i];
-                if (sprites[i] == null)
-                    dGO.transform.GetChild(1).gameObject.SetActive(false);
-                else
-                    dGO.transform.GetChild(1).GetComponent<Image>().sprite = sprites[i];
-                dGO.GetComponent<Button>().onClick.AddListener(() => SelectDialogue(dGO.GetComponent<DialogueContainer>()));
-
-                dialogueOptionSlots.Add(dGO);
-            }
-            if(currentNPC.HasQuests() && !currentNPC.HasGivenQuest())
-            {
-                List<Quest> quests = currentNPC.GetQuests();
-                List<Quest> possibleQuests = new List<Quest>();
-                foreach(Quest quest in quests)
-                {
-                    bool level = (player.GetLevel() >= QuestDictionary[quest.GetID()].GetLevelRequirement());
-                    bool prereq = (!QuestDictionary[quest.GetID()].HasPrerequisite()) || (QuestDictionary[quest.GetID()].HasPrerequisite() && QuestDictionary[quest.GetPrerequisite().GetID()].IsCompleted());
-                    if (!QuestDictionary[quest.GetID()].IsCompleted() && level && prereq)
-                    {
-                        possibleQuests.Add(QuestDictionary[quest.GetID()]);
-                    }
-                }
-                if (possibleQuests.Count > 0)
-                {
-                    Quest r_Quest = possibleQuests[UnityEngine.Random.Range(0, possibleQuests.Count)];
-
-                    GameObject dGO = Instantiate(dialogueBtn, responsePanel.transform);
-
-                    dGO.GetComponent<DialogueContainer>().SetDialogue(r_Quest.GetDialogue());
-                    dGO.transform.GetChild(0).GetComponent<Text>().text = r_Quest.GetDialogue().GetNPCLine();
-                    if (((QuestDialogue)r_Quest.GetDialogue()).GetOpeningSprite() == null)
-                        dGO.transform.GetChild(1).gameObject.SetActive(false);
-                    else
-                        dGO.transform.GetChild(1).GetComponent<Image>().sprite = ((QuestDialogue)r_Quest.GetDialogue()).GetOpeningSprite();
-                    dGO.GetComponent<Button>().onClick.AddListener(() => SelectDialogue(dGO.GetComponent<DialogueContainer>()));
-
-                    dialogueOptionSlots.Add(dGO);
-                }
-            }
-            else if(currentNPC.HasQuests() && currentNPC.HasGivenQuest())
-            {
-                Quest r_Quest = QuestDictionary[currentNPC.GetGivenQuest().GetID()];
-
-                GameObject dGO = Instantiate(dialogueBtn, responsePanel.transform);
-
-                dGO.GetComponent<DialogueContainer>().SetDialogue(r_Quest.GetDialogue());
-                dGO.transform.GetChild(0).GetComponent<Text>().text = r_Quest.GetDialogue().GetNPCLine();
-                if (((QuestDialogue)r_Quest.GetDialogue()).GetOpeningSprite() == null)
-                    dGO.transform.GetChild(1).gameObject.SetActive(false);
-                else
-                    dGO.transform.GetChild(1).GetComponent<Image>().sprite = ((QuestDialogue)r_Quest.GetDialogue()).GetOpeningSprite();
-                dGO.GetComponent<Button>().onClick.AddListener(() => SelectDialogue(dGO.GetComponent<DialogueContainer>()));
-
-                dialogueOptionSlots.Add(dGO);
-            }
-
-            foreach(Quest quest in player.GetQuestList())
-            {
-                if(quest.GetQuestType() == Quest.QuestType.Talk)
-                {
-                    TalkQuest talkQuest = (TalkQuest)QuestDictionary[quest.GetID()];
-                    if(currentNPC.GetID() == talkQuest.GetTargetNPC().GetID())
-                    {
-                        GameObject dGO = Instantiate(dialogueBtn, responsePanel.transform);
-
-                        dGO.GetComponent<DialogueContainer>().SetDialogue(talkQuest.GetTargetNPCDialogue());
-                        dGO.transform.GetChild(0).GetComponent<Text>().text = talkQuest.GetTargetNPCDialogue().GetNPCLine();
-                        if (((QuestDialogue)talkQuest.GetTargetNPCDialogue()).GetOpeningSprite() == null)
-                            dGO.transform.GetChild(1).gameObject.SetActive(false);
-                        else
-                            dGO.transform.GetChild(1).GetComponent<Image>().sprite = talkQuest.GetTargetNPCDialogue().GetOpeningSprite();
-                        dGO.GetComponent<Button>().onClick.AddListener(() => SelectDialogue(dGO.GetComponent<DialogueContainer>()));
-
-                        dialogueOptionSlots.Add(dGO);
-                    }
-                }
-            }
-        }
-        else if(dialogue.GetDialogueType() == Dialogue.DialogueType.conversation)
-        {
-            textType = StartCoroutine(TypeText(dialogue.GetNPCLine()));
-
-            List<Dialogue> dialogues = dialogue.GetDialogueAnswers();
-            List<string> dialogueStrings = dialogue.GetDialogueOptions();
-            List<Sprite> sprites = dialogue.GetDialogueSprites();
-            for (int i = 0; i < dialogues.Count; i++)
-            {
-                GameObject dGO = Instantiate(dialogueBtn, responsePanel.transform);
-
-                dGO.GetComponent<DialogueContainer>().SetDialogue(dialogues[i]);
-                dGO.transform.GetChild(0).GetComponent<Text>().text = dialogueStrings[i];
-                if (sprites[i] == null)
-                    dGO.transform.GetChild(1).gameObject.SetActive(false);
-                else
-                    dGO.transform.GetChild(1).GetComponent<Image>().sprite = sprites[i];
-                dGO.GetComponent<Button>().onClick.AddListener(() => SelectDialogue(dGO.GetComponent<DialogueContainer>()));
-
-                dialogueOptionSlots.Add(dGO);
-            }
-        }
-        else if(dialogue.GetDialogueType() == Dialogue.DialogueType.quest)
-        {
-            QuestDialogue questDialogue = (QuestDialogue)dialogue;
-            if (questDialogue.GetQuestDialogueType() == QuestDialogue.QuestDialogueType.start)
-            {
-                if (QuestDictionary[questDialogue.GetQuest().GetID()].GetQuestType() == Quest.QuestType.Fetch)
-                {
-                    FetchQuest quest = (FetchQuest)QuestDictionary[questDialogue.GetQuest().GetID()];
-                    if (!player.CheckForQuest(quest.GetID()) && !quest.IsCompleted())
-                    {
-                        textType = StartCoroutine(TypeText(questDialogue.GetNotStartedResponse()));
-                        List<Dialogue> dialogues = dialogue.GetDialogueAnswers();
-                        List<string> dialogueStrings = dialogue.GetDialogueOptions();
-                        List<Sprite> sprites = dialogue.GetDialogueSprites();
-                        for (int i = 0; i < dialogues.Count; i++)
-                        {
-                            GameObject dGO = Instantiate(dialogueBtn, responsePanel.transform);
-
-                            dGO.GetComponent<DialogueContainer>().SetDialogue(dialogues[i]);
-                            dGO.transform.GetChild(0).GetComponent<Text>().text = dialogueStrings[i];
-                            if (sprites[i] == null)
-                                dGO.transform.GetChild(1).gameObject.SetActive(false);
-                            else
-                                dGO.transform.GetChild(1).GetComponent<Image>().sprite = sprites[i];
-                            dGO.GetComponent<Button>().onClick.AddListener(() => SelectDialogue(dGO.GetComponent<DialogueContainer>()));
-
-                            dialogueOptionSlots.Add(dGO);
-                        }
-                    }
-                    else if (!quest.IsCompleted())
-                    {
-                        textType = StartCoroutine(TypeText(questDialogue.GetNotCompleteResponse()));
-                        List<Dialogue> dialogues = questDialogue.GetNotCompleteDialogueAnswers();
-                        List<string> dialogueStrings = questDialogue.GetNotCompleteDialogueOptions();
-                        List<Sprite> sprites = questDialogue.GetNotCompleteDialogueSprites();
-                        for (int i = 0; i < dialogues.Count; i++)
-                        {
-                            GameObject dGO = Instantiate(dialogueBtn, responsePanel.transform);
-
-                            dGO.GetComponent<DialogueContainer>().SetDialogue(dialogues[i]);
-                            dGO.transform.GetChild(0).GetComponent<Text>().text = dialogueStrings[i];
-                            if (sprites[i] == null)
-                                dGO.transform.GetChild(1).gameObject.SetActive(false);
-                            else
-                                dGO.transform.GetChild(1).GetComponent<Image>().sprite = sprites[i];
-                            dGO.GetComponent<Button>().onClick.AddListener(() => SelectDialogue(dGO.GetComponent<DialogueContainer>()));
-
-                            dialogueOptionSlots.Add(dGO);
-                        }
-                    }
-                    else
-                        textType = StartCoroutine(TypeText(questDialogue.GetCompleteResponse()));
-                }
-                else if (QuestDictionary[questDialogue.GetQuest().GetID()].GetQuestType() == Quest.QuestType.Slay)
-                {
-                    SlayQuest quest = (SlayQuest)QuestDictionary[questDialogue.GetQuest().GetID()];
-                    if (!player.CheckForQuest(quest.GetID()) && !quest.IsCompleted())
-                    {
-                        textType = StartCoroutine(TypeText(questDialogue.GetNotStartedResponse()));
-                        List<Dialogue> dialogues = dialogue.GetDialogueAnswers();
-                        List<string> dialogueStrings = dialogue.GetDialogueOptions();
-                        List<Sprite> sprites = dialogue.GetDialogueSprites();
-                        for (int i = 0; i < dialogues.Count; i++)
-                        {
-                            GameObject dGO = Instantiate(dialogueBtn, responsePanel.transform);
-
-                            dGO.GetComponent<DialogueContainer>().SetDialogue(dialogues[i]);
-                            dGO.transform.GetChild(0).GetComponent<Text>().text = dialogueStrings[i];
-                            if (sprites[i] == null)
-                                dGO.transform.GetChild(1).gameObject.SetActive(false);
-                            else
-                                dGO.transform.GetChild(1).GetComponent<Image>().sprite = sprites[i];
-                            dGO.GetComponent<Button>().onClick.AddListener(() => SelectDialogue(dGO.GetComponent<DialogueContainer>()));
-
-                            dialogueOptionSlots.Add(dGO);
-                        }
-                    }
-                    else if (!quest.IsCompleted())
-                    {
-                        textType = StartCoroutine(TypeText(questDialogue.GetNotCompleteResponse()));
-                        List<Dialogue> dialogues = questDialogue.GetNotCompleteDialogueAnswers();
-                        List<string> dialogueStrings = questDialogue.GetNotCompleteDialogueOptions();
-                        List<Sprite> sprites = questDialogue.GetNotCompleteDialogueSprites();
-                        for (int i = 0; i < dialogues.Count; i++)
-                        {
-                            GameObject dGO = Instantiate(dialogueBtn, responsePanel.transform);
-
-                            dGO.GetComponent<DialogueContainer>().SetDialogue(dialogues[i]);
-                            dGO.transform.GetChild(0).GetComponent<Text>().text = dialogueStrings[i];
-                            if (sprites[i] == null)
-                                dGO.transform.GetChild(1).gameObject.SetActive(false);
-                            else
-                                dGO.transform.GetChild(1).GetComponent<Image>().sprite = sprites[i];
-                            dGO.GetComponent<Button>().onClick.AddListener(() => SelectDialogue(dGO.GetComponent<DialogueContainer>()));
-
-                            dialogueOptionSlots.Add(dGO);
-
-                        }
-                    }
-                    else
-                        textType = StartCoroutine(TypeText(questDialogue.GetCompleteResponse()));
-                }
-                else if (QuestDictionary[questDialogue.GetQuest().GetID()].GetQuestType() == Quest.QuestType.Talk)
-                {
-                    TalkQuest quest = (TalkQuest)QuestDictionary[questDialogue.GetQuest().GetID()];
-                    if (!player.CheckForQuest(quest.GetID()) && !quest.IsCompleted())
-                    {
-                        textType = StartCoroutine(TypeText(questDialogue.GetNotStartedResponse()));
-                        List<Dialogue> dialogues = dialogue.GetDialogueAnswers();
-                        List<string> dialogueStrings = dialogue.GetDialogueOptions();
-                        List<Sprite> sprites = dialogue.GetDialogueSprites();
-                        for (int i = 0; i < dialogues.Count; i++)
-                        {
-                            GameObject dGO = Instantiate(dialogueBtn, responsePanel.transform);
-
-                            dGO.GetComponent<DialogueContainer>().SetDialogue(dialogues[i]);
-                            dGO.transform.GetChild(0).GetComponent<Text>().text = dialogueStrings[i];
-                            if (sprites[i] == null)
-                                dGO.transform.GetChild(1).gameObject.SetActive(false);
-                            else
-                                dGO.transform.GetChild(1).GetComponent<Image>().sprite = sprites[i];
-                            dGO.GetComponent<Button>().onClick.AddListener(() => SelectDialogue(dGO.GetComponent<DialogueContainer>()));
-
-                            dialogueOptionSlots.Add(dGO);
-                        }
-                    }
-                    else if (!quest.IsCompleted())
-                    {
-                        textType = StartCoroutine(TypeText(questDialogue.GetNotCompleteResponse()));
-                        List<Dialogue> dialogues = questDialogue.GetNotCompleteDialogueAnswers();
-                        List<string> dialogueStrings = questDialogue.GetNotCompleteDialogueOptions();
-                        List<Sprite> sprites = questDialogue.GetNotCompleteDialogueSprites();
-                        for (int i = 0; i < dialogues.Count; i++)
-                        {
-                            GameObject dGO = Instantiate(dialogueBtn, responsePanel.transform);
-
-                            dGO.GetComponent<DialogueContainer>().SetDialogue(dialogues[i]);
-                            dGO.transform.GetChild(0).GetComponent<Text>().text = dialogueStrings[i];
-                            if (sprites[i] == null)
-                                dGO.transform.GetChild(1).gameObject.SetActive(false);
-                            else
-                                dGO.transform.GetChild(1).GetComponent<Image>().sprite = sprites[i];
-                            dGO.GetComponent<Button>().onClick.AddListener(() => SelectDialogue(dGO.GetComponent<DialogueContainer>()));
-
-                            dialogueOptionSlots.Add(dGO);
-
-                        }
-                    }
-                    else
-                        textType = StartCoroutine(TypeText(questDialogue.GetCompleteResponse()));
-                }
-                else if (QuestDictionary[questDialogue.GetQuest().GetID()].GetQuestType() == Quest.QuestType.Clear)
-                {
-                    ClearQuest quest = (ClearQuest)QuestDictionary[questDialogue.GetQuest().GetID()];
-                    if (!player.CheckForQuest(quest.GetID()) && !quest.IsCompleted())
-                    {
-                        textType = StartCoroutine(TypeText(questDialogue.GetNotStartedResponse()));
-                        List<Dialogue> dialogues = dialogue.GetDialogueAnswers();
-                        List<string> dialogueStrings = dialogue.GetDialogueOptions();
-                        List<Sprite> sprites = dialogue.GetDialogueSprites();
-                        for (int i = 0; i < dialogues.Count; i++)
-                        {
-                            GameObject dGO = Instantiate(dialogueBtn, responsePanel.transform);
-
-                            dGO.GetComponent<DialogueContainer>().SetDialogue(dialogues[i]);
-                            dGO.transform.GetChild(0).GetComponent<Text>().text = dialogueStrings[i];
-                            if (sprites[i] == null)
-                                dGO.transform.GetChild(1).gameObject.SetActive(false);
-                            else
-                                dGO.transform.GetChild(1).GetComponent<Image>().sprite = sprites[i];
-                            dGO.GetComponent<Button>().onClick.AddListener(() => SelectDialogue(dGO.GetComponent<DialogueContainer>()));
-
-                            dialogueOptionSlots.Add(dGO);
-                        }
-                    }
-                    else if (!quest.IsCompleted())
-                    {
-                        textType = StartCoroutine(TypeText(questDialogue.GetNotCompleteResponse()));
-                        List<Dialogue> dialogues = questDialogue.GetNotCompleteDialogueAnswers();
-                        List<string> dialogueStrings = questDialogue.GetNotCompleteDialogueOptions();
-                        List<Sprite> sprites = questDialogue.GetNotCompleteDialogueSprites();
-                        for (int i = 0; i < dialogues.Count; i++)
-                        {
-                            GameObject dGO = Instantiate(dialogueBtn, responsePanel.transform);
-
-                            dGO.GetComponent<DialogueContainer>().SetDialogue(dialogues[i]);
-                            dGO.transform.GetChild(0).GetComponent<Text>().text = dialogueStrings[i];
-                            if (sprites[i] == null)
-                                dGO.transform.GetChild(1).gameObject.SetActive(false);
-                            else
-                                dGO.transform.GetChild(1).GetComponent<Image>().sprite = sprites[i];
-                            dGO.GetComponent<Button>().onClick.AddListener(() => SelectDialogue(dGO.GetComponent<DialogueContainer>()));
-
-                            dialogueOptionSlots.Add(dGO);
-
-                        }
-                    }
-                    else
-                        textType = StartCoroutine(TypeText(questDialogue.GetCompleteResponse()));
-                }
-
-            }
-            else
-            {
-                textType = StartCoroutine(TypeText(dialogue.GetNPCLine()));
-
-                List<Dialogue> dialogues = dialogue.GetDialogueAnswers();
-                List<string> dialogueStrings = dialogue.GetDialogueOptions();
-                List<Sprite> sprites = dialogue.GetDialogueSprites();
-                for (int i = 0; i < dialogues.Count; i++)
-                {
-                    GameObject dGO = Instantiate(dialogueBtn, responsePanel.transform);
-
-                    dGO.GetComponent<DialogueContainer>().SetDialogue(dialogues[i]);
-                    dGO.transform.GetChild(0).GetComponent<Text>().text = dialogueStrings[i];
-                    if (sprites[i] == null)
-                        dGO.transform.GetChild(1).gameObject.SetActive(false);
-                    else
-                        dGO.transform.GetChild(1).GetComponent<Image>().sprite = sprites[i];
-                    dGO.GetComponent<Button>().onClick.AddListener(() => SelectDialogue(dGO.GetComponent<DialogueContainer>()));
-
-                    dialogueOptionSlots.Add(dGO);
-                }
-            }
-        }
-        else if(dialogue.GetDialogueType() == Dialogue.DialogueType.inn)
-        {
-            InnDialogue innDialogue = (InnDialogue)dialogue;
-
-            if(player.GetGold() >= innDialogue.GetCost())
-            {
-                textType = StartCoroutine(TypeText(innDialogue.GetSufficientFundsResponse()));
-                StartCoroutine(EnterInn(innDialogue.GetCost(), innDialogue.GetAttributeRegen()));
-            }
-            else
-            {
-                textType = StartCoroutine(TypeText(innDialogue.GetInsufficientFundsResponse()));
-
-                List<string> dialogueStrings = innDialogue.GetInsufficientFundsDialogueTexts();
-                List<Dialogue> dialogues = innDialogue.GetInsufficientFundsDialogueObjects();
-                List<Sprite> sprites = innDialogue.GetInsufficientFundsDialogueSprites();
-                for(int i = 0; i < dialogues.Count; i++)
-                {
-                    GameObject dGO = Instantiate(dialogueBtn, responsePanel.transform);
-
-                    dGO.GetComponent<DialogueContainer>().SetDialogue(dialogues[i]);
-                    dGO.transform.GetChild(0).GetComponent<Text>().text = dialogueStrings[i];
-                    if (sprites[i] == null)
-                        dGO.transform.GetChild(1).gameObject.SetActive(false);
-                    else
-                        dGO.transform.GetChild(1).GetComponent<Image>().sprite = sprites[i];
-                    dGO.GetComponent<Button>().onClick.AddListener(() => SelectDialogue(dGO.GetComponent<DialogueContainer>()));
-
-                    dialogueOptionSlots.Add(dGO);
-                }
-            }
-        }
-        else
-        {
-            textType = StartCoroutine(TypeText(dialogue.GetNPCLine()));
-
-            List<Dialogue> dialogues = dialogue.GetDialogueAnswers();
-            List<string> dialogueStrings = dialogue.GetDialogueOptions();
-            List<Sprite> sprites = dialogue.GetDialogueSprites();
-            for (int i = 0; i < dialogues.Count; i++)
-            {
-                GameObject dGO = Instantiate(dialogueBtn, responsePanel.transform);
-
-                dGO.GetComponent<DialogueContainer>().SetDialogue(dialogues[i]);
-                dGO.transform.GetChild(0).GetComponent<Text>().text = dialogueStrings[i];
-                if (sprites[i] == null)
-                    dGO.transform.GetChild(1).gameObject.SetActive(false);
-                else
-                    dGO.transform.GetChild(1).GetComponent<Image>().sprite = sprites[i];
-                dGO.GetComponent<Button>().onClick.AddListener(() => SelectDialogue(dGO.GetComponent<DialogueContainer>()));
-
-                dialogueOptionSlots.Add(dGO);
-            }
-        }
-    }
-
-    IEnumerator TypeText(string text)
-    {
-        var waitTimer = new WaitForSeconds(0.005f);
-        npcLineTxt.text = text;
-        npcLineTxt.maxVisibleCharacters = 0;
-        for(int i = 1; i < text.Length + 1; i++)
-        {
-            npcLineTxt.maxVisibleCharacters = i;
-
-            /*
-            if(i%2 == 0)
-                GameObject.Find("TextAudioSource").GetComponent<AudioSource>().Play();
-            */
-            yield return waitTimer;
-        }
-    }
-
-    void ClearDialogue()
-    {
-        npcLineTxt.text = "";
-        foreach(GameObject dGO in dialogueOptionSlots.ToList<GameObject>())
-        {
-            dialogueOptionSlots.Remove(dGO);
-            Destroy(dGO);
-        }
-    }
+   
+ 
 
     //**
 
@@ -4517,7 +3995,7 @@ public class Engine : MonoBehaviour
 
         string name = nameInputField.text != "" ? nameInputField.text : "Player";
         player.SetName(name);
-        playerBattleNameTxt.text = name;
+
         statsPlayerNameTxt.text = name;
         statsPlayerTitleTxt.text = player.GetTitle();
         playerPickUpNameTxt.text = name;
@@ -4545,7 +4023,7 @@ public class Engine : MonoBehaviour
         UICoverScreen.GetComponent<Image>().raycastTarget = false;
 
         battleLeaveBtn.gameObject.SetActive(false);
-        battleCoroutine = StartCoroutine(Battle(smallRat));
+        battleCoroutine = StartCoroutine(r_Battle(smallRat));
 
         while (UICoverScreen.GetComponent<Image>().color.a > 0)
         {
@@ -4557,7 +4035,7 @@ public class Engine : MonoBehaviour
 
         battleLeaveBtn.gameObject.SetActive(true);
         yield return new WaitForUIButtons(GameObject.Find("PickupExitBtn").GetComponent<Button>());
-        ActivateDialogueScreen(true);
+        GameObject.Find("GameManager").GetComponent<DialogueManager>().ActivateDialogueScreen(true);
 
         // PLAYER DEBUGGING AREA
 
@@ -4611,7 +4089,12 @@ public class Engine : MonoBehaviour
         UICoverScreen.GetComponent<Image>().raycastTarget = false;
     }
 
-    IEnumerator EnterInn(int cost, int attributeRegen)
+    public void EnterInn(int cost, int attributeRegen)
+    {
+        StartCoroutine(r_EnterInn(cost, attributeRegen));
+    }
+
+    IEnumerator r_EnterInn(int cost, int attributeRegen)
     {
         messageTxt.text = "You rest, healing and rejuvenating you.";
         
@@ -4624,7 +4107,7 @@ public class Engine : MonoBehaviour
             yield return new WaitForSecondsRealtime(0.005f * Time.deltaTime);
         }
 
-        ActivateDialogueScreen(false);
+        dialogueManager.ActivateDialogueScreen(false);
         player.ChangeGold(-cost);
 
         player.ChangeHealth(attributeRegen);
@@ -4664,8 +4147,8 @@ public class Engine : MonoBehaviour
             yield return new WaitForSecondsRealtime(0.01f * Time.deltaTime);
         }
 
-        ActivateDialogueScreen(false);
-        battleCoroutine = StartCoroutine(Battle(enemy));
+        dialogueManager.ActivateDialogueScreen(false);
+        battleCoroutine = StartCoroutine(r_Battle(enemy));
 
         while (UICoverScreen.GetComponent<Image>().color.a > 0)
         {
@@ -4718,18 +4201,7 @@ public class Engine : MonoBehaviour
         yield return new WaitForSecondsRealtime(1f);
     }
 
-    void DeactivateQuestSelection()
-    {
-        selectedQuest = null;
-        selQuestDescription.text = "";
-        selQuestName.text = "";
-
-        noSelectedQuestTxt.SetActive(true);
-
-        makeActiveBtn.gameObject.SetActive(false);
-    }
-
-    void DeactivateActiveQuest()
+    public void DeactivateActiveQuest()
     {
         activeQuest = null;
         questName.text = "";
@@ -4777,6 +4249,7 @@ public class Engine : MonoBehaviour
     {
         StartCoroutine(LoadToMain());
     }
+
 
     IEnumerator LoadToMain()
     {
@@ -4958,7 +4431,7 @@ public class Engine : MonoBehaviour
     {
         while (true)
         {
-            if (outputQueue.Count > 0 && !isInBattle && !isInPickup && !isInDialogue)
+            if (outputQueue.Count > 0 && !isInBattle && !isInPickup && !dialogueManager.isInDialogue)
             {
                 GameObject tGO = Instantiate(GameObject.Find("TextSpawn").transform.GetChild(0).gameObject, GameObject.Find("TextSpawn").transform);
                 tGO.GetComponent<Text>().text = outputQueue.Dequeue();

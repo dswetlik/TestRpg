@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77deace13b735624ebd35dc15085b84e, type: 3}
+  m_Name: completeQuest_FetchRatMeat
+  m_EditorClassIdentifier: 
+  dialogueType: 3
+  questDialogueType: 3
+  _quest: {fileID: 11400000, guid: 56ccbad5fbc03804fb664f4697df2e72, type: 2}
+  _questStatusType: 2
+  _playerLineObjectText: I have the meat...
+  _playerLineResponseText: I've got that meat for you.
+  _npcLine: Great! I'm going to make a mint on this idea! Thank you for this!
+  _playerResponses:
+  - {fileID: 11400000, guid: 04b910f252f3b144c94ff5d65fb9f6c6, type: 2}

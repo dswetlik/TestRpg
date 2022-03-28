@@ -21,5 +21,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8e297be833cd10f4da91c9059c55fafa, type: 2}
   hasGivenQuest: 0
   givenQuest: {fileID: 0}
-  dialogue: {fileID: 11400000, guid: a5dc87df2e21b404180d0b1ea659f018, type: 2}
+  dialogue: {fileID: 11400000, guid: abaef5b99068f5b4aa88c73d76ea0ec7, type: 2}
   store: {fileID: 11400000, guid: 9cbf69e67e5ff6c409ce0d73fcbd21a6, type: 2}

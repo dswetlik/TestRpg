@@ -19,5 +19,5 @@ MonoBehaviour:
   questList: []
   hasGivenQuest: 0
   givenQuest: {fileID: 0}
-  dialogue: {fileID: 11400000, guid: 6b13071eb85beb840862743c7df61d7f, type: 2}
+  dialogue: {fileID: 11400000, guid: 98123ca57043ccb4b92294e2f35014b5, type: 2}
   store: {fileID: 0}

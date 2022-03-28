@@ -13,18 +13,17 @@ MonoBehaviour:
   m_Name: 15_FetchArmorPiece
   m_EditorClassIdentifier: 
   questType: 1
+  id: 15
   name: Refurbishing Armor
   description: Varian would like you to pick up pieces of armor from fallen foes
     in the arena. He makes armor cheaper that way. Don't question the quality of
     it.
   levelRequirement: 10
-  hasPrerequisite: 0
   prerequisite: {fileID: 0}
   isCompleted: 0
-  dialogue: {fileID: 11400000, guid: 1ef526ed268e9d34db3f44fce3ebf6ca, type: 2}
+  dialogue: {fileID: 11400000, guid: 59132ea73a5429f48ba305b7cfff54c0, type: 2}
   hasItemReward: 0
   itemRewards: []
-  id: 15
   expReward: 50
   goldReward: 50
   fetchItems:

@@ -5,19 +5,44 @@ public class MovementButtonHandler : MonoBehaviour, IUpdateSelectedHandler, IPoi
 {
     bool isPressed = false;
 
+    enum MovementType
+    {
+        forward,
+        backward,
+        strafeRight,
+        strafeLeft,
+        turnRight,
+        turnLeft
+    }
+
+    [SerializeField] MovementType movementType;
+
     public void OnUpdateSelected(BaseEventData data)
     {
         if (isPressed)
         {
             GameObject btn = data.selectedObject;
-            if (btn.name == "NorthBtn")
-                GameObject.Find("Player").GetComponent<PlayerMovement>().w_MoveForward();
-            else if (btn.name == "EastBtn")
-                GameObject.Find("Player").GetComponent<PlayerMovement>().w_TurnRight();
-            else if (btn.name == "SouthBtn")
-                GameObject.Find("Player").GetComponent<PlayerMovement>().w_MoveBackward();
-            else if (btn.name == "WestBtn")
-                GameObject.Find("Player").GetComponent<PlayerMovement>().w_TurnLeft();
+            switch (movementType)
+            {
+                case MovementType.forward:
+                    GameObject.Find("Player").GetComponent<PlayerMovement>().w_MoveForward();
+                    break;
+                case MovementType.backward:
+                    GameObject.Find("Player").GetComponent<PlayerMovement>().w_MoveBackward();
+                    break;
+                case MovementType.strafeLeft:
+                    GameObject.Find("Player").GetComponent<PlayerMovement>().w_StrafeLeft();
+                    break;
+                case MovementType.strafeRight:
+                    GameObject.Find("Player").GetComponent<PlayerMovement>().w_StrafeRight();
+                    break;
+                case MovementType.turnLeft:
+                    GameObject.Find("Player").GetComponent<PlayerMovement>().w_TurnLeft();
+                    break;
+                case MovementType.turnRight:
+                    GameObject.Find("Player").GetComponent<PlayerMovement>().w_TurnRight();
+                    break;
+            }
         }
     }
 

@@ -13,13 +13,15 @@ MonoBehaviour:
   m_Name: FloorTwoLootTable
   m_EditorClassIdentifier: 
   items:
-  - {fileID: 11400000, guid: 0bdbe513d1d77bf4297a682e35e80ea1, type: 2}
-  - {fileID: 11400000, guid: 47672e4e92f03b845a131afa02c57556, type: 2}
-  - {fileID: 11400000, guid: 9e35b3473e37f3c4b8edbdb7957b62c8, type: 2}
+  - {fileID: 11400000, guid: b08c0c7706936924a9e93138ca090a0f, type: 2}
+  - {fileID: 11400000, guid: 67bf2d0555564f645ba335b68da8c5af, type: 2}
+  - {fileID: 11400000, guid: 2004514e5faac0148abc1adc3a957f10, type: 2}
   itemProbability:
-  - 90
-  - 50
-  - 10
-  itemCount: 030000000300000003000000
-  minGold: 5
-  maxGold: 10
+  - 0.9
+  - 0.9
+  - 0.9
+  itemCount:
+  - {x: 0, y: 3}
+  - {x: 0, y: 3}
+  - {x: 0, y: 3}
+  goldRewardRange: {x: 0, y: 0}

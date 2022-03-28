@@ -16,14 +16,18 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1ddd209038f6c5d47b9c6910d6240cb6, type: 2}
   - {fileID: 11400000, guid: 1edf873fd81389a4292e34c31b00feee, type: 2}
   - {fileID: 11400000, guid: 0831310329e58c045853713847ccd204, type: 2}
-  - {fileID: 11400000, guid: 86d21df1a0076194eb5e2adb9c0e1d0b, type: 2}
-  - {fileID: 11400000, guid: 0bdbe513d1d77bf4297a682e35e80ea1, type: 2}
+  - {fileID: 11400000, guid: b08c0c7706936924a9e93138ca090a0f, type: 2}
+  - {fileID: 11400000, guid: 2004514e5faac0148abc1adc3a957f10, type: 2}
   itemProbability:
-  - 100
-  - 90
-  - 5
-  - 50
-  - 100
-  itemCount: 0200000001000000010000000200000003000000
-  minGold: 10
-  maxGold: 50
+  - 1
+  - 0.9
+  - 0.55
+  - 0.5
+  - 1
+  itemCount:
+  - {x: 1, y: 2}
+  - {x: 1, y: 1}
+  - {x: 1, y: 1}
+  - {x: 1, y: 3}
+  - {x: 1, y: 3}
+  goldRewardRange: {x: 20, y: 50}
