@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [CreateAssetMenu(fileName = "New Base Skill", menuName = "Skills/Base Skill", order = 0)]
 public class Skill : ScriptableObject
@@ -24,7 +25,7 @@ public class Skill : ScriptableObject
     [TextArea(3,5)]
     [SerializeField] string description;
     [TextArea(3, 5)]
-    [SerializeField] string cardDescription;
+    [SerializeField] string shortDescription;
     [TextArea(3,5)]
     [SerializeField] string actionMessage;
 
@@ -33,20 +34,22 @@ public class Skill : ScriptableObject
     [SerializeField] Vector2Int damageRange;
     [SerializeField] List<StatusEffect> statusEffects = new List<StatusEffect>();
 
-    bool isActive;
+    [SerializeField] bool usableOutsideCombat;
+
 
     public uint GetID() { return ID; }
     public SkillType GetSkillType() { return skillType; }
     public Sprite GetSprite() { return sprite; }
     public string GetName() { return name; }
     public string GetDescription() { return description; }
-    public string GetCardDescription() { return cardDescription; }
+    public string GetShortDescription() { return shortDescription; }
     public string GetActionMessage() { return actionMessage; }
-    public bool IsActive() { return isActive; }
+
     public int GetAttributeCost() { return attributeCost; }
     public int GetMinDamage() { return damageRange.x; }
     public int GetMaxDamage() { return damageRange.y; }
 
+    
     /// <summary>
     /// Returns a random integer between damageRange.x [inclusive] and damageRange.y [inclusive]
     /// </summary>
@@ -55,7 +58,5 @@ public class Skill : ScriptableObject
 
     public List<StatusEffect> GetStatusEffects() { return statusEffects; }
     public bool HasStatusEffects() { return statusEffects != null && statusEffects.Count > 0 && !statusEffects.Contains(null); }
-  
-    public void SetActive(bool x) { isActive = x; }
-
+    public bool IsUsableOutsideCombat() { return usableOutsideCombat; }
 }

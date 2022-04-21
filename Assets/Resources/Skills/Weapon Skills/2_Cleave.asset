@@ -17,16 +17,10 @@ MonoBehaviour:
   sprite: {fileID: 0}
   name: Cleave
   description: 
-  cardDescription: 'Weapon
-
-    Damage-Dealing
-
-    25% Bleed Chance'
-  actionMessage: You cleave the enemy with your {0}, dealing {0} damage!
-  isActive: 0
+  shortDescription: 
+  actionMessage: You cleave the enemy with your {0}, dealing {1} damage!
   attributeCost: 0
-  minDamage: 0
-  maxDamage: 0
-  hasStatusEffects: 1
+  damageRange: {x: 0, y: 0}
   statusEffects:
   - {fileID: 11400000, guid: 528fc5616ee19294eac608d571eeb7f8, type: 2}
+  usableOutsideCombat: 0

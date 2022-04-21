@@ -253,27 +253,25 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "LocationPortal")
-        {
-            Vector3 dir = other.transform.position - transform.position;
-            Debug.Log(System.String.Format("X: {0}; Y: {1}; Z: {2}", dir.x, dir.y, dir.z));
-
-            if(other.name == "BurunsOverworld")
-            {
-                if (dir.z < 0)
-                    GameObject.Find("GameManager").GetComponent<Engine>().OutputToText("You have entered the city of Buruns.");
-                else
-                    GameObject.Find("GameManager").GetComponent<Engine>().OutputToText("You have entered Arenthia.");
-            }
-        }
         if(other.tag == "ScenePortal")
         {
-            if (currentMovement != null) { StopCoroutine(currentMovement); isMoving = false; }
+            if (currentMovement != null) { StopCoroutine(currentMovement); currentMovement = null; isMoving = false; }
             transform.position = new Vector3(Mathf.Round(transform.position.x / 10) * 10, 2.2f, Mathf.Round(transform.position.z / 10) * 10);
             GameObject.Find("GameManager").GetComponent<Engine>().ChangeScene(other.gameObject.GetComponent<SceneContainer>().GetLocation());
         }
+        else if(other.tag == "EventCollider")
+        {
+            if (other.GetComponent<EventContainer>().GetEvent().GetEventType() == Event.EventType.start)
+            {
+                StartEvent startEvent = EventManager.EventDictionary[(other.GetComponent<EventContainer>().GetEvent() as StartEvent).GetID()];
+                if (!startEvent.IsComplete())
+                    GameObject.Find("GameManager").GetComponent<EventManager>().ActivateEventScreen(true, startEvent);
+            }
+            else
+                Debug.LogErrorFormat("EventCollider is not StartEvent; Event: {0}", (other.GetComponent<EventContainer>().GetEvent() as StartEvent).GetName());
+        }
     }
-
+     
     private void OnTriggerExit(Collider other)
     {
         if (other.tag == "LocationPortal")
@@ -284,13 +282,15 @@ public class PlayerMovement : MonoBehaviour
             }
             else if (other.name == "DungeonPortal")
             {
-                GameObject.Find("GameManager").GetComponent<Engine>().ActivateDungeonScreen(true, other.gameObject.GetComponent<DungeonContainer>().GetDungeon());
+
             }
 
         }
+        /*
         else if (other.transform.parent.tag == "Chest")
         {
           //  GameObject.Find("GameManager").GetComponent<Engine>().OpenChest(other.GetComponentInParent<ChestInventory>(), false);
         }
+        */
     }
 }

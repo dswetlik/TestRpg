@@ -3,32 +3,35 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Dungeon", menuName = "Dungeon")]
-public class Dungeon : ScriptableObject
+public class Dungeon : Location
 {
-    [SerializeField] new string name;
-    [SerializeField] uint id;
-    [SerializeField] string description;
-    [SerializeField] bool isCleared;
-    [SerializeField] int floorCount;
-    [SerializeField] int clearedFloorCount;
-    [SerializeField] List<EventBase> floorEvents;
-    [SerializeField] Vector3 outputLocation;
-    [SerializeField] Vector3 outputRotation;
 
-    public string GetName() { return name; }
-    public uint GetID() { return id; }
+    protected Dungeon() : base(LocationType.Dungeon) { }
+
+    [SerializeField] string description;
+
+    [SerializeField] bool isCleared;
+    [SerializeField] List<StartEvent> events;
+
     public string GetDescription() { return description; }
     public bool IsCleared() { return isCleared; }
-    public int GetFloorCount() { return floorCount; }
-    public int GetClearedFloorCount() { return clearedFloorCount; }
-    public List<EventBase> GetFloorEvents() { return floorEvents; }
-    public Vector3 GetOutputLocation() { return outputLocation; }
-    public Vector3 GetOutputRotation() { return outputRotation; }
-
     public void SetCleared(bool x) { isCleared = x; }
+    
+    public List<StartEvent> GetEvents(bool includeCleared = false, bool includeOptional = false)
+    {
+        List<StartEvent> _startEvents = new List<StartEvent>();
+        foreach (StartEvent _events in events)
+        {
+            _startEvents.Add(EventManager.EventDictionary[_events.GetID()]);
+            Debug.Log(string.Format("Event: {0}", _events.GetName()));
+        }
 
-    public void IncrementClearedFloors() { clearedFloorCount++; }
-    public void DecrementClearedFloors() { clearedFloorCount--; }
+        if (!includeCleared)
+            _startEvents.RemoveAll(x => x.IsComplete());
+        if (!includeOptional)
+            _startEvents.RemoveAll(x => x.IsOptional());
 
-    public void SetClearedFloors(int floors) { clearedFloorCount = floors; }
+        return _startEvents;
+    }
+
 }

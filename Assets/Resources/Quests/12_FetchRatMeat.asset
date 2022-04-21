@@ -20,7 +20,7 @@ MonoBehaviour:
   levelRequirement: 0
   prerequisite: {fileID: 0}
   isCompleted: 0
-  dialogue: {fileID: 11400000, guid: f0eb6545c555291449fd49bc23491f7a, type: 2}
+  dialogue: {fileID: 11400000, guid: 8b86882a0f664204bb07b126b98a9d0d, type: 2}
   hasItemReward: 0
   itemRewards: []
   expReward: 10

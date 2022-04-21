@@ -18,12 +18,11 @@ MonoBehaviour:
   name: Mend
   description: Mend some of your wounds, healing some damage taken and giving a 50%
     chance to heal over time.
-  cardDescription: 'Healing
-
-    50% Heal Over Time Chance'
+  shortDescription: 
   actionMessage: You lightly mend your wounds, restoring {0} health.
   attributeCost: 7
   damageRange: {x: 4, y: 10}
   statusEffects:
   - {fileID: 11400000, guid: aa107aaecf49ebe459e8fbbb173d9b48, type: 2}
+  usableOutsideCombat: 1
   magicType: 2

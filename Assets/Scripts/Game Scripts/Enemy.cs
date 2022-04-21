@@ -69,8 +69,8 @@ public class Enemy : ScriptableObject
     public int GetMaxStamina() { return GetAgility(); }
     public int GetMaxMana() { return GetIntelligence(); }
 
-    public int GetStaminaRegen() { return GetAgility() / 5; }
-    public int GetManaRegen() { return GetIntelligence() / 5; }
+    public int GetStaminaRegen() { return GetAgility() / 2; }
+    public int GetManaRegen() { return GetIntelligence() / 2; }
 
     public float GetSpeed() { return speed; }
 
@@ -123,6 +123,32 @@ public class Enemy : ScriptableObject
         if (mana > GetMaxMana()) mana = GetMaxMana();
         if (mana < 0) mana = 0;
     }
+
+    public bool CheckShouldRest()
+    {
+        if (attackTypes.TrueForAll(x => (
+        x.GetAttackAttribute() == EnemyAttackType.AttackAttribute.stamina && stamina < x.GetAttributeCost()) ||
+        x.GetAttackAttribute() == EnemyAttackType.AttackAttribute.mana && mana < x.GetAttributeCost()))
+        {
+            return true;
+        }
+        else if (health < (health * 0.5f) &&
+            attackTypes.Where(x => x.GetAttackType() == EnemyAttackType.AttackType.heal).Any(x => x.GetAttributeCost() < mana))
+        {
+            return true;
+        }
+        return false;
+    }
+
+    /*
+    public bool CheckShouldDefend()
+    {
+        if (defense <= 0)
+            return false;
+        else if(Engine.player.)
+
+    }
+    */
 
     public EnemyAttackType GetAttack()
     {

@@ -106,8 +106,8 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 358a961bc1371f14f9348f5d57260e0f, type: 2}
-  - {fileID: 2100000, guid: afb029b85d7a03d4aa35a6f43b7a703f, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -120,7 +120,7 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 0
+  m_SelectedEditorRenderState: 2
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -154,6 +154,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasBeenSearched: 0
+  containsKey: 0
   items: []
   gold: 0
 --- !u!114 &1881879304
@@ -765,8 +766,8 @@ MonoBehaviour:
     IsBuilt: 0
   backfaces_: 0
   materials:
-  - {fileID: 2100000, guid: 358a961bc1371f14f9348f5d57260e0f, type: 2}
-  - {fileID: 2100000, guid: afb029b85d7a03d4aa35a6f43b7a703f, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
   editMode: 1
   recalculateTangents: 1
   serializedGuid: 

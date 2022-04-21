@@ -10,12 +10,24 @@ using System.Threading.Tasks;
 public class Location : ScriptableObject
 {
 
+    public enum LocationType
+    {
+        Town,
+        Wilderness,
+        Dungeon
+    }
+
+    protected Location(LocationType locationType) { this.locationType = locationType; }
+
+    [SerializeField] LocationType locationType;
     [SerializeField] uint id;
     [SerializeField] new string name;
     [SerializeField] string sceneName;
+
     [SerializeField] Vector3 spawnLocation;
     [SerializeField] Vector3 spawnRotation;
 
+    public LocationType GetLocationType() { return locationType; }
     public uint GetID() { return id; }
     public string GetName() { return name; }
 

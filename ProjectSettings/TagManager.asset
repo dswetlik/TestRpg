@@ -12,6 +12,7 @@ TagManager:
   - NodeType
   - Impassable
   - ScenePortal
+  - EventCollider
   layers:
   - Default
   - TransparentFX

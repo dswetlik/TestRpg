@@ -12,6 +12,17 @@ public class ClearQuest : Quest
 
     public Dungeon GetDungeon() { return dungeon; }
 
-    public override bool CheckQuestCompletion() { return Engine.DungeonDictionary[dungeon.GetID()].IsCleared(); }
+    public override bool CheckQuestCompletion()
+    {
+        try
+        {
+            return (Engine.LocationDictionary[dungeon.GetID()] as Dungeon).IsCleared();
+        }
+        catch(KeyNotFoundException)
+        {
+            Debug.LogErrorFormat("Dungeon with ID {0} not found in dictionary. Returning false.");
+            return false;
+        }
+    }
 
 }

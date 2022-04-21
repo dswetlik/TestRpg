@@ -38,8 +38,8 @@ public class DialogueManager : MonoBehaviour
 
     private void Start()
     {
-
-        engine = GameObject.Find("GameManager").GetComponent<Engine>();
+        if (engine == null)
+            engine = gameObject.GetComponent<Engine>();
 
         UIDialogueScreen = GameObject.Find("UI Dialogue");
 
@@ -273,7 +273,7 @@ public class DialogueManager : MonoBehaviour
 
         CreateDialogueTextObject(false, (dialogue as INPCDialogue).GetNPCLine());
 
-        engine.BattleFromDialogue(enemy);
+        engine.EnterBattle(enemy);
     }
 
     bool CheckQuestCompletion(Quest quest)
