@@ -26,4 +26,4 @@ MonoBehaviour:
   itemRewards: []
   expReward: 15
   goldReward: 25
-  dungeon: {fileID: 11400000, guid: 1b04746ea5c578640a6ccfe801dc2088, type: 2}
+  dungeon: {fileID: 11400000, guid: a5af41a67a6c34c45a835853db566868, type: 2}

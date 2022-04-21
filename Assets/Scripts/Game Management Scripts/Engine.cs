@@ -2609,7 +2609,7 @@ public class Engine : MonoBehaviour
 
         skillCostTxt.text = "Cost: " + selectedSkill.GetAttributeCost().ToString();
 
-        if((selectedSkill as ManaSkill).GetMagicType() == ManaSkill.MagicType.heal)
+        if((selectedSkill is ManaSkill) && (selectedSkill as ManaSkill).GetMagicType() == ManaSkill.MagicType.heal)
             skillDamageTxt.text = String.Format("Heal: {0}-{1}", selectedSkill.GetMinDamage(), selectedSkill.GetMaxDamage());
         else
             skillDamageTxt.text = String.Format("Damage: {0}-{1}", selectedSkill.GetMinDamage(), selectedSkill.GetMaxDamage());

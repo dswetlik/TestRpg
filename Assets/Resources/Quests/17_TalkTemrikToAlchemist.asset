@@ -24,6 +24,7 @@ MonoBehaviour:
   hasItemReward: 1
   itemRewards:
   - {fileID: 11400000, guid: b3f4c6cad8b210740a62d6395fb968bd, type: 2}
+  - {fileID: 11400000, guid: b3f4c6cad8b210740a62d6395fb968bd, type: 2}
   expReward: 5
   goldReward: 0
   _targetNPC: {fileID: 11400000, guid: 04b3b4eb19276a94496e554ba2f0644a, type: 2}

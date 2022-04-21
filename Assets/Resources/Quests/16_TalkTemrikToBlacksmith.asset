@@ -21,8 +21,9 @@ MonoBehaviour:
   prerequisite: {fileID: 0}
   isCompleted: 0
   dialogue: {fileID: 11400000, guid: a277b27d6e69cc54e9ee536b03c2d9e0, type: 2}
-  hasItemReward: 0
-  itemRewards: []
+  hasItemReward: 1
+  itemRewards:
+  - {fileID: 11400000, guid: ea8c7a45282f89c4a92e3a24a918b6f4, type: 2}
   expReward: 5
   goldReward: 0
   _targetNPC: {fileID: 11400000, guid: 09d783cf443fffd47a0c22f08fb02e8b, type: 2}
