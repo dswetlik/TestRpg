@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77deace13b735624ebd35dc15085b84e, type: 3}
+  m_Name: completeQuest_TalkToBlacksmith
+  m_EditorClassIdentifier: 
+  dialogueType: 3
+  questDialogueType: 3
+  _quest: {fileID: 11400000, guid: f01fcdbb7cabaca459c99ccdf0e2f5e7, type: 2}
+  _questStatusType: 2
+  _playerLineObjectText: Temrik sent me...
+  _playerLineResponseText: Temrik sent me to talk to you.
+  _npcLine: 'A new gladiator? I''m surprised you survived your first fight. You look
+    so frail and your weapon looks like a toothpick! Here, have a better dagger,
+    it''s on the house! Come back whenever you need to get a better weapon.
+
+
+    [Hands
+    you a Copper Dagger]'
+  _playerResponses:
+  - {fileID: 11400000, guid: 72eab240100da5f46ad84a122bce353d, type: 2}

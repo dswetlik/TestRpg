@@ -24,7 +24,9 @@ public class Item : ScriptableObject
     [SerializeField] new string name;
     [TextArea(3, 5)]
     [SerializeField] string description;
-    [SerializeField] uint weight, value;
+    [SerializeField] float weight;
+    [SerializeField] uint value;
+    
     
 
     public Item() { }
@@ -33,13 +35,13 @@ public class Item : ScriptableObject
     public Sprite GetSprite() { return sprite; }
     public string GetName() { return name; }
     public string GetDescription() { return description; }
-    public uint GetWeight() { return weight; }
+    public float GetWeight() { return weight; }
     public uint GetValue() { return value; }
     public uint GetID() { return id; }
 
     public void SetName(string name) { this.name = name; }
     public void SetDescription(string description) { this.description = description; }
-    public void SetWeight(uint weight) { this.weight = weight; }
+    public void SetWeight(float weight) { this.weight = weight; }
     public void SetValue(uint value) { this.value = value; }
     public void SetID(uint id) { this.id = id; }
 

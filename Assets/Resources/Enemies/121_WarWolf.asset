@@ -12,13 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da3ae000e98a71d489bf062b749ae76f, type: 3}
   m_Name: 121_WarWolf
   m_EditorClassIdentifier: 
+  id: 12100
   enemyType: 0
   name: War Wolf
   description: A trained dire wolf armed to the teeth, trained to serve as a battle
     companion to the Chief Knight, showing its battle prowess in the arena.
-  id: 12100
-  minLevel: 16
-  maxLevel: 20
+  levelRange: {x: 15, y: 20}
   defense: 4
   strength: 30
   agility: 25
@@ -32,4 +31,3 @@ MonoBehaviour:
   speed: 1.2
   expReward: 100
   itemRewards: {fileID: 11400000, guid: e57001a7f0b407e4b977e30a412df8d5, type: 2}
-  statusEffects: []

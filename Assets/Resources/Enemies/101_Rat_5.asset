@@ -12,12 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da3ae000e98a71d489bf062b749ae76f, type: 3}
   m_Name: 101_Rat_5
   m_EditorClassIdentifier: 
+  id: 10105
   enemyType: 0
   name: Rat
   description: A furry rat, a classic fight.
-  id: 10105
-  minLevel: 5
-  maxLevel: 5
+  levelRange: {x: 5, y: 5}
   defense: 0
   strength: 15
   agility: 10
@@ -30,4 +29,3 @@ MonoBehaviour:
   speed: 1.5
   expReward: 5
   itemRewards: {fileID: 11400000, guid: 6fd21c7884f09494082df16c550bff14, type: 2}
-  statusEffects: []

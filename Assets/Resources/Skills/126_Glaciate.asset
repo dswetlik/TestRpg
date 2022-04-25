@@ -22,11 +22,8 @@ MonoBehaviour:
 
     100% Freeze Chance'
   actionMessage: You drop a glacier on the enemy, dealing {0} damage!
-  isActive: 0
   attributeCost: 55
-  minDamage: 12
-  maxDamage: 16
-  hasStatusEffects: 1
+  damageRange: {x: 14, y: 20}
   statusEffects:
   - {fileID: 11400000, guid: 210c241864b2f274686a4ad1cfd6a6b9, type: 2}
   magicType: 1

@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29e770b62b8003f46aaf6492e628313e, type: 3}
+  m_Name: conversation_ArenaQuestion
+  m_EditorClassIdentifier: 
+  dialogueType: 1
+  _playerLineObjectText: Where am I...
+  _playerLineResponseText: Where am I? I don't recognize this place.
+  _npcLine: Well then, let me be the first to welcome you to the city of Buruns,
+    the smallest, proudest city in Arenthia! Our arena here is our shining jewel,
+    bringing spectators and their wealth from all over the island.
+  _playerResponses:
+  - {fileID: 11400000, guid: 5560626a493a3cf4fa32090fa2a906ec, type: 2}

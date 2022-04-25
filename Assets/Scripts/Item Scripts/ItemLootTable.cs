@@ -6,11 +6,10 @@ using UnityEngine;
 public class ItemLootTable : ScriptableObject
 {
     [SerializeField] List<Item> items = new List<Item>();
-    [Range(0, 100.0f)] [SerializeField] List<float> itemProbability = new List<float>();
-    [SerializeField] List<int> itemCount = new List<int>();
+    [Range(0, 1.0f)] [SerializeField] List<float> itemProbability = new List<float>();
+    [SerializeField] List<Vector2Int> itemCount = new List<Vector2Int>();
 
-    [SerializeField] int minGold;
-    [SerializeField] int maxGold;
+    [SerializeField] Vector2Int goldRewardRange;
 
     public void ItemDrop(ref List<Item> items, ref List<int> counts)
     {
@@ -19,8 +18,8 @@ public class ItemLootTable : ScriptableObject
 
         for(int i = 0; i < this.items.Count; i++)
         {
-            float key = Random.Range(0, 100.0f);
-            if(key <= itemProbability[i])
+            float key = Random.Range(0, 1.0f);
+            if(itemProbability[i] >= key)
             {
                 int count = GetItemCount(i);
                 if(count > 0)
@@ -32,14 +31,13 @@ public class ItemLootTable : ScriptableObject
         }
     }
 
-    public int GetGold() { return Random.Range(minGold, maxGold + 1); }
+    public int GetRandomGold() { return Random.Range(goldRewardRange.x, goldRewardRange.y + 1); }
+    public int GetMinGold() { return goldRewardRange.x; }
+    public int GetMaxGold() { return goldRewardRange.y; }
 
     public List<Item> GetItems() { return items; }
     public Item GetItem(int itemElement) { return items[itemElement]; }
-    public float GetItemProbability(int floatElement) { return itemProbability[floatElement]; }
-    public int GetItemCount(int countElement) { return Random.Range(1, itemCount[countElement] + 1); }
-
-    public int GetMinGold() { return minGold; }
-    public int GetMaxGold() { return maxGold; }
+    public float GetItemProbability(int i) { return itemProbability[i]; }
+    public int GetItemCount(int i) { return Random.Range(itemCount[i].x, itemCount[i].y + 1); }
 
 }

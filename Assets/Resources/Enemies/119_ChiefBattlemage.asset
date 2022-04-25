@@ -12,13 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da3ae000e98a71d489bf062b749ae76f, type: 3}
   m_Name: 119_ChiefBattlemage
   m_EditorClassIdentifier: 
+  id: 11900
   enemyType: 0
   name: Chief Battlemage
   description: The chief battlemage of the city, fought to knock-out instead of death,
     as a method of testing their skills against the best of the best.
-  id: 11900
-  minLevel: 18
-  maxLevel: 20
+  levelRange: {x: 15, y: 20}
   defense: 6
   strength: 20
   agility: 20
@@ -34,4 +33,3 @@ MonoBehaviour:
   speed: 1
   expReward: 100
   itemRewards: {fileID: 11400000, guid: 78e7cead93cfb1743b005221d4e9a615, type: 2}
-  statusEffects: []

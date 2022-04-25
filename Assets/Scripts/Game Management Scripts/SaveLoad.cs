@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 [System.Serializable]
 public class SaveLoad
@@ -21,12 +22,12 @@ public class SaveLoad
     public List<uint> _completedQuests;
 
     public List<uint> _unlockedSkills;
-    public List<bool> _skillActive;
 
     public uint weapon;
     public uint head, chest, legs, feet, hands;
     public uint location;
-    public uint level, exp, totalExp, expToLevel, skillPoints, currentWeight, maxWeight;
+    public uint level, exp, totalExp, expToLevel, skillPoints;
+    public float currentWeight, maxWeight;
     public int health, stamina, mana, gold;
     public int strength, agility, intelligence, luck;
 
@@ -39,7 +40,6 @@ public class SaveLoad
         _currentQuests = new List<uint>();
         _completedQuests = new List<uint>();
         _unlockedSkills = new List<uint>();
-        _skillActive = new List<bool>();
 
         name = player.GetName();
         title = player.GetTitle();
@@ -59,7 +59,6 @@ public class SaveLoad
         foreach (Skill skill in player.GetSkills())
         {
             _unlockedSkills.Add(skill.GetID());
-            _skillActive.Add(skill.IsActive());
         }
 
         weapon = player.GetWeapon().GetID();
@@ -99,37 +98,138 @@ public class SaveLoad
         inventory.SetCountValues(_countValues);
         inventory.OnAfterDeserialize();
 
-        Player player = new Player(name, Engine.LocationDictionary[location], inventory);
+        Player player;
+
+        try
+        {
+            player = new Player(name, Engine.LocationDictionary[location], inventory);
+            player.SetLocation(Engine.LocationDictionary[location]);
+            if (Engine.LocationDictionary[location].GetLocationType() == Location.LocationType.Dungeon)
+                GameObject.Find("GameManager").GetComponent<DungeonManager>().EnterDungeon(true, Engine.LocationDictionary[location] as Dungeon);
+        }
+        catch(KeyNotFoundException)
+        {
+            Debug.LogErrorFormat(string.Format("Location ID {0} not found! Spawning player at ID 0.", location));
+            player = new Player(name, Engine.LocationDictionary[0], inventory);
+            player.SetLocation(Engine.LocationDictionary[0]);
+            location = 0;
+        }
+
         player.SetTitle(title);
 
-        player.SetLocation(Engine.LocationDictionary[location]);
+        
 
-        foreach (uint id in _currentQuests)
-            player.AddQuest(Engine.QuestDictionary[id]);
-        foreach(uint id in _completedQuests)
+        foreach (uint id in _currentQuests.ToList<uint>())
         {
-            player.AddCompletedQuest(Engine.QuestDictionary[id]);
-            Engine.QuestDictionary[id].SetCompletion(true);
+            try
+            {
+                player.AddQuest(Engine.QuestDictionary[id]);
+            }
+            catch(KeyNotFoundException)
+            {
+                Debug.LogErrorFormat("Quest ID {0} not found! Removing.", id);
+                _currentQuests.Remove(id);
+
+            }
         }
-        for(int i = 0; i < Mathf.Min(_skillActive.Count, _unlockedSkills.Count); i++)
+        foreach(uint id in _completedQuests.ToList<uint>())
         {
-            Engine.SkillDictionary[_unlockedSkills[i]].SetActive(_skillActive[i]);
-            player.AddSkill(Engine.SkillDictionary[_unlockedSkills[i]]);
-            GameObject.Find("GameManager").GetComponent<Engine>().AddSkill(Engine.SkillDictionary[_unlockedSkills[i]]);
+            try
+            {
+                player.AddCompletedQuest(Engine.QuestDictionary[id]);
+                Engine.QuestDictionary[id].SetCompletion(true);
+            }
+            catch (KeyNotFoundException)
+            {
+                Debug.LogErrorFormat("Quest ID {0} not found! Removing.", id);
+                _completedQuests.Remove(id);
+            }
+        }
+        foreach(uint id in _unlockedSkills)
+        {
+            try
+            {
+                player.AddSkill(Engine.SkillDictionary[id]);
+                GameObject.Find("GameManager").GetComponent<Engine>().AddSkill(Engine.SkillDictionary[id]);
+            }
+            catch (KeyNotFoundException)
+            {
+                Debug.LogErrorFormat("Skill ID {0} not found! Removing.", id);
+            }
         }
 
         if (weapon != Engine.NULL_WEAPON.GetID())
-            player.EquipWeapon((Weapon)Engine.ItemDictionary[weapon]);
+        {
+            try
+            {
+                player.EquipWeapon((Weapon)Engine.ItemDictionary[weapon]);
+            }
+            catch(KeyNotFoundException)
+            {
+                Debug.LogErrorFormat("Item ID {0} not found! Removing.", weapon);
+                weapon = Engine.NULL_WEAPON.GetID();
+            }
+        }
         if (head != Engine.NULL_ARMOR.GetID())
-            player.EquipArmor((Armor)Engine.ItemDictionary[head]);
+        {
+            try
+            {
+                player.EquipArmor((Armor)Engine.ItemDictionary[head]);
+            }
+            catch(KeyNotFoundException)
+            {
+                Debug.LogErrorFormat("Item ID {0} not found! Removing.", head);
+                head = Engine.NULL_ARMOR.GetID();
+            }
+        }
         if (chest != Engine.NULL_ARMOR.GetID())
-            player.EquipArmor((Armor)Engine.ItemDictionary[chest]);
+        {
+            try
+            {
+                player.EquipArmor((Armor)Engine.ItemDictionary[chest]);
+            }
+            catch (KeyNotFoundException)
+            {
+                Debug.LogErrorFormat("Item ID {0} not found! Removing.", chest);
+                chest = Engine.NULL_ARMOR.GetID();
+            }
+        }
         if (legs != Engine.NULL_ARMOR.GetID())
-            player.EquipArmor((Armor)Engine.ItemDictionary[legs]);
+        {
+            try
+            {
+                player.EquipArmor((Armor)Engine.ItemDictionary[legs]);
+            }
+            catch (KeyNotFoundException)
+            {
+                Debug.LogErrorFormat("Item ID {0} not found! Removing.", legs);
+                legs = Engine.NULL_ARMOR.GetID();
+            }
+        }
         if (feet != Engine.NULL_ARMOR.GetID())
-            player.EquipArmor((Armor)Engine.ItemDictionary[feet]);
+        {
+            try
+            {
+                player.EquipArmor((Armor)Engine.ItemDictionary[feet]);
+            }
+            catch (KeyNotFoundException)
+            {
+                Debug.LogErrorFormat("Item ID {0} not found! Removing.", feet);
+                feet = Engine.NULL_ARMOR.GetID();
+            }
+        }
         if (hands != Engine.NULL_ARMOR.GetID())
-            player.EquipArmor((Armor)Engine.ItemDictionary[hands]);
+        {
+            try
+            {
+                player.EquipArmor((Armor)Engine.ItemDictionary[hands]);
+            }
+            catch (KeyNotFoundException)
+            {
+                Debug.LogErrorFormat("Item ID {0} not found! Removing.", hands);
+                hands = Engine.NULL_ARMOR.GetID();
+            }
+        }
 
         player.SetLevel(level);
         player.SetExp(exp);
@@ -177,10 +277,19 @@ public class SaveLoad
     public void LoadNPCs()
     {
         for(int i = 0; i < _npcIDs.Count; i++)
-        {
-            Engine.NPCDictionary[_npcIDs[i]].SetHasGivenQuest(_npcHasGivenQuest[i]);
+        {            
             if (_npcHasGivenQuest[i])
-                Engine.NPCDictionary[_npcIDs[i]].SetGivenQuest(Engine.QuestDictionary[_npcGivenQuests[i]]);
+            {
+                try
+                {
+                    Engine.NPCDictionary[_npcIDs[i]].SetHasGivenQuest(_npcHasGivenQuest[i]);
+                    Engine.NPCDictionary[_npcIDs[i]].SetGivenQuest(Engine.QuestDictionary[_npcGivenQuests[i]]);
+                }
+                catch(KeyNotFoundException)
+                {
+                    Debug.LogErrorFormat("Either NPC ID {0} or Quest ID {1} not found! Removing.");
+                }
+            }
         }
     }
 
@@ -208,10 +317,27 @@ public class SaveLoad
     public void LoadStores()
     {
         for (int i = 0; i < _storeIDs.Count; i++)
-            Engine.StoreDictionary[_storeIDs[i]].ClearInventory();
-
+        {
+            try
+            {
+                Engine.StoreDictionary[_storeIDs[i]].ClearInventory();
+            }
+            catch(KeyNotFoundException)
+            {
+                Debug.LogErrorFormat("Store ID {0} not found!", _storeIDs[i]);
+            }
+        }
         for (int i = 0; i < _storeIDs.Count; i++)
-            Engine.StoreDictionary[_storeIDs[i]].AddItem(Engine.ItemDictionary[_storeItemIDs[i]]);
+        {
+            try
+            {
+                Engine.StoreDictionary[_storeIDs[i]].AddItem(Engine.ItemDictionary[_storeItemIDs[i]]);
+            }
+            catch(KeyNotFoundException)
+            {
+                Debug.LogErrorFormat("Either Store ID {0} or Item ID {1} not found!", _storeIDs[i], _storeItemIDs[i]);
+            }
+        }
     }
 
 
@@ -239,39 +365,88 @@ public class SaveLoad
     {
         for(int i = 0; i < _bossEnemyIDs.Count; i++)
         {
-            ((BossEnemy)Engine.EnemyDictionary[_bossEnemyIDs[i]]).SetHasBeenDefeated(_bossEnemyHasBeenDefeated[i]);
-        }
-    }
-
-
-    // Dungeon Variables
-
-    public List<uint> _dungeonIDs;
-    public List<int> _dungeonClearedFloorCount;
-    public List<bool> _dungeonIsCleared;
-
-    public void SaveDungeons()
-    {
-        _dungeonIDs = new List<uint>();
-        _dungeonClearedFloorCount = new List<int>();
-        _dungeonIsCleared = new List<bool>();
-
-        foreach(KeyValuePair<uint, Dungeon> kvp in Engine.DungeonDictionary)
-        {
-            _dungeonIDs.Add(kvp.Value.GetID());
-            _dungeonClearedFloorCount.Add(kvp.Value.GetClearedFloorCount());
-            _dungeonIsCleared.Add(kvp.Value.IsCleared());
-        }
-    }
-
-    public void LoadDungeons()
-    {
-        if (_dungeonIDs != null)
-        {
-            for (int i = 0; i < _dungeonIDs.Count; i++)
+            try
             {
-                Engine.DungeonDictionary[_dungeonIDs[i]].SetClearedFloors(_dungeonClearedFloorCount[i]);
-                Engine.DungeonDictionary[_dungeonIDs[i]].SetCleared(_dungeonIsCleared[i]);
+                ((BossEnemy)Engine.EnemyDictionary[_bossEnemyIDs[i]]).SetHasBeenDefeated(_bossEnemyHasBeenDefeated[i]);
+            }
+            catch(KeyNotFoundException)
+            {
+                Debug.LogErrorFormat("Boss Enemy ID {0} not found; Skipping.", _bossEnemyIDs[i]);
+            }
+        }
+    }
+
+
+    // Location Variables
+
+    public List<uint> _locationIDs;
+    public List<bool> _locationIsCleared;
+
+    public void SaveLocations()
+    {
+        _locationIDs = new List<uint>();
+        _locationIsCleared = new List<bool>();
+
+        foreach(KeyValuePair<uint, Location> kvp in Engine.LocationDictionary)
+        {
+            _locationIDs.Add(kvp.Value.GetID());
+            if (kvp.Value.GetLocationType() == Location.LocationType.Dungeon)
+                _locationIsCleared.Add((kvp.Value as Dungeon).IsCleared());
+            else
+                _locationIsCleared.Add(false);
+        }
+    }
+
+    public void LoadLocations()
+    {
+        if (_locationIDs != null)
+        {
+            for (int i = 0; i < _locationIDs.Count; i++)
+            {
+                try
+                {
+                    if(Engine.LocationDictionary[_locationIDs[i]].GetLocationType() == Location.LocationType.Dungeon)
+                        (Engine.LocationDictionary[_locationIDs[i]] as Dungeon).SetCleared(_locationIsCleared[i]);
+                }
+                catch(KeyNotFoundException)
+                {
+                    Debug.LogErrorFormat("Location ID {0} not found; Skipping.", _locationIDs[i]);
+                }
+            }
+        }
+    }
+
+    // Event Variables
+
+    public List<uint> _eventIDs;
+    public List<bool> _eventIsComplete;
+
+    public void SaveEvents()
+    {
+        _eventIDs = new List<uint>();
+        _eventIsComplete = new List<bool>();
+
+        foreach(KeyValuePair<uint, StartEvent> kvp in EventManager.EventDictionary)
+        {
+            _eventIDs.Add(kvp.Value.GetID());
+            _eventIsComplete.Add(kvp.Value.IsComplete());
+        }
+    }
+
+    public void LoadEvents()
+    {
+        if (_eventIDs != null)
+        {
+            for (int i = 0; i < _eventIDs.Count; i++)
+            {
+                try
+                {
+                    EventManager.EventDictionary[_eventIDs[i]].SetComplete(_eventIsComplete[i]);
+                }
+                catch (KeyNotFoundException)
+                {
+                    Debug.LogErrorFormat("Event ID {0} not found!", _eventIDs[i]);
+                }
             }
         }
     }

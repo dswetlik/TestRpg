@@ -12,12 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da3ae000e98a71d489bf062b749ae76f, type: 3}
   m_Name: 116_Warlock_14
   m_EditorClassIdentifier: 
+  id: 11614
   enemyType: 0
   name: Warlock
   description: A mage that joined the arena's ranks by their own decision.
-  id: 11614
-  minLevel: 14
-  maxLevel: 15
+  levelRange: {x: 14, y: 15}
   defense: 2
   strength: 25
   agility: 10
@@ -33,4 +32,3 @@ MonoBehaviour:
   speed: 0.9
   expReward: 60
   itemRewards: {fileID: 11400000, guid: 78e7cead93cfb1743b005221d4e9a615, type: 2}
-  statusEffects: []

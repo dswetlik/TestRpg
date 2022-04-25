@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77deace13b735624ebd35dc15085b84e, type: 3}
+  m_Name: completeQuest_TalkToAlchemist
+  m_EditorClassIdentifier: 
+  dialogueType: 3
+  questDialogueType: 3
+  _quest: {fileID: 11400000, guid: 0f2087ca2f6b04a4a898369daedcc1d1, type: 2}
+  _questStatusType: 2
+  _playerLineObjectText: Temrik sent me...
+  _playerLineResponseText: Temrik sent me to talk to you.
+  _npcLine: 'Another new gladiator under his wing? Here, you''re going to need these.
+
+
+    [Hands
+    you 2 Health Tinctures]
+
+
+    Come back to me any time you need a potion, and
+    I''ll see what I can do to help you!'
+  _playerResponses:
+  - {fileID: 11400000, guid: 72eab240100da5f46ad84a122bce353d, type: 2}

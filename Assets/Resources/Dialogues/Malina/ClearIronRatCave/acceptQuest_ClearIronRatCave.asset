@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6368106e33955d4fa5248f5e5a85dd7, type: 3}
+  m_Name: acceptQuest_ClearIronRatCave
+  m_EditorClassIdentifier: 
+  dialogueType: 3
+  questDialogueType: 1
+  _quest: {fileID: 11400000, guid: 278d16556a1ca2b40a77b4631834e3b5, type: 2}
+  _playerLineObjectText: Accept Quest
+  _playerLineResponseText: I'll clear that cave out, no problem.
+  _npcLine: I like your bravery, rat slayer! Get in there and clear out those...beasts...the
+    cave is right outside the city.
+  _playerResponses: []

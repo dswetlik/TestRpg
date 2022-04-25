@@ -22,11 +22,8 @@ MonoBehaviour:
 
     50% Stun Chance'
   actionMessage: You slap the enemy, dealing {0} damage.
-  isActive: 0
   attributeCost: 6
-  minDamage: 1
-  maxDamage: 3
-  hasStatusEffects: 1
+  damageRange: {x: 2, y: 4}
   statusEffects:
   - {fileID: 11400000, guid: 2627a8f350c5a244c8dd6e92ecc76423, type: 2}
   isWeaponModifier: 0

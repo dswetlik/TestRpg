@@ -12,13 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da3ae000e98a71d489bf062b749ae76f, type: 3}
   m_Name: 113_GrayWolf_9
   m_EditorClassIdentifier: 
+  id: 11309
   enemyType: 0
   name: Gray Wolf
   description: A regular-looking gray wolf, seemingly plucked from the Lisdend Forest
     nearby and dropped in the arena.
-  id: 11309
-  minLevel: 9
-  maxLevel: 10
+  levelRange: {x: 9, y: 10}
   defense: 0
   strength: 20
   agility: 15
@@ -32,4 +31,3 @@ MonoBehaviour:
   speed: 1.25
   expReward: 20
   itemRewards: {fileID: 11400000, guid: e57001a7f0b407e4b977e30a412df8d5, type: 2}
-  statusEffects: []

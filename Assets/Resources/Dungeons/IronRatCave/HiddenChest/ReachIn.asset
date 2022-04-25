@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b2a6b8adc1f55f46a97bda0aafb9961, type: 3}
+  m_Name: ReachIn
+  m_EditorClassIdentifier: 
+  eventType: 4
+  id: 0
+  playerDescription: You decide the best course of action is to reach your hand in.
+  eventLinkButtonText: Reach In
+  eventDescription: You reach in and feel what seems to be a burlap sack.
+  eventLinks:
+  - {fileID: 11400000, guid: 88d36103440f6254b9d31311564bb225, type: 2}
+  - {fileID: 11400000, guid: 51ac0d42e0ac3e3418c30b7dda4494d9, type: 2}

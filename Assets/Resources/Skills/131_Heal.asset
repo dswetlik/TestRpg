@@ -21,11 +21,8 @@ MonoBehaviour:
 
     75% Heal Over Time Chance'
   actionMessage: You heal your wounds, restoring {0} health.
-  isActive: 0
   attributeCost: 20
-  minDamage: 10
-  maxDamage: 15
-  hasStatusEffects: 1
+  damageRange: {x: 15, y: 25}
   statusEffects:
   - {fileID: 11400000, guid: 6424e34eb601c9241911575da4f9f939, type: 2}
   magicType: 2

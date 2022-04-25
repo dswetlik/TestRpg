@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6368106e33955d4fa5248f5e5a85dd7, type: 3}
+  m_Name: acceptQuest_FetchSlimeEssense
+  m_EditorClassIdentifier: 
+  dialogueType: 3
+  questDialogueType: 1
+  _quest: {fileID: 11400000, guid: 1a2e84888078d75469dfce76f4048883, type: 2}
+  _playerLineObjectText: Accept Quest
+  _playerLineResponseText: Okay, I'll go find you some potion bases, but what exactly
+    am I looking for then?
+  _npcLine: Oh, of course, my apologies! A great potion base is essense from a slime.
+    I'm sure you've seen them bouncing around as they do. I just need three essenses
+    from each type of slime. That should tide me over until my shipment from the
+    slime farm comes in.
+  _playerResponses:
+  - {fileID: 11400000, guid: 72eab240100da5f46ad84a122bce353d, type: 2}

@@ -18,7 +18,8 @@ public class Player
     Inventory inventory;
     Weapon weapon;
     Armor head, chest, legs, feet, hands;
-    uint level, exp, totalExp, skillPoints, currentWeight, maxWeight;
+    uint level, exp, totalExp, skillPoints;
+    float currentWeight, maxWeight;
     int health, stamina, mana, defense, gold, battleCount;
     int strength, agility, intelligence, luck;
     float speed;
@@ -28,7 +29,7 @@ public class Player
     List<StatusEffect> statusEffects = new List<StatusEffect>();
     List<Skill> unlockedSkills = new List<Skill>();
 
-    public Player(string name, Location currentLocation, Inventory inventory, uint level = 1, int strength = 5, int agility = 5, int intelligence = 5, int luck = 0, uint currentWeight = 0)
+    public Player(string name, Location currentLocation, Inventory inventory, uint level = 1, int strength = 5, int agility = 5, int intelligence = 5, int luck = 0, float currentWeight = 0)
     {
         this.name = name;
         title = "Newcomer";
@@ -69,8 +70,26 @@ public class Player
     public Location GetLocation() { return currentLocation; }
 
     public Inventory GetInventory() { return inventory; }
-    public uint GetCurrentWeight() { return currentWeight; }
-    public uint GetMaxWeight() { return (uint)(strength * 2); }
+    public float GetCurrentWeight()
+    {
+        float weight = inventory.GetTotalWeight();
+
+        if (weapon != Engine.NULL_WEAPON)
+            weight += weapon.GetWeight();
+        if (head != Engine.NULL_ARMOR)
+            weight += head.GetWeight();
+        if (chest != Engine.NULL_ARMOR)
+            weight += chest.GetWeight();
+        if (legs != Engine.NULL_ARMOR)
+            weight += legs.GetWeight();
+        if (feet != Engine.NULL_ARMOR)
+            weight += feet.GetWeight();
+        if (hands != Engine.NULL_ARMOR)
+            weight += hands.GetWeight();
+
+        return (currentWeight = weight);
+    }
+    public float GetMaxWeight() { return (strength * 2); }
     public int GetGold() { return gold; }
 
     public uint GetLevel() { return level; }
@@ -85,7 +104,7 @@ public class Player
     public void SetTitle(string title) { this.title = title; }
     public void SetLocation(Location newLocation) { currentLocation = newLocation; }
 
-    public void SetCurrentWeight(uint currentWeight) { this.currentWeight = currentWeight; }
+    public void SetCurrentWeight(float currentWeight) { this.currentWeight = currentWeight; }
     public void ChangeGold(int gold) { this.gold += gold; if (gold < 0) gold = 0; }
     public void SetGold(int gold) { this.gold = gold; }
 
@@ -137,8 +156,8 @@ public class Player
     public int GetMaxHealth() { return GetStrength(); }
     public int GetMaxStamina() { return GetAgility(); }
     public int GetMaxMana() { return GetIntelligence(); }
-    public int GetStaminaRegen() { return (GetAgility() / 5); }
-    public int GetManaRegen() { return (GetIntelligence() / 5); }
+    public int GetStaminaRegen() { return (GetAgility() / 2); }
+    public int GetManaRegen() { return (GetIntelligence() / 2); }
 
     public void SetHealth(int health) { this.health = health; }
     public void SetStamina(int stamina) { this.stamina = stamina; }
@@ -355,7 +374,7 @@ public class Player
 
     public List<Skill> GetSkills() { return unlockedSkills; }
 
-    List<StaminaSkill> GetStaminaSkills()
+    public List<StaminaSkill> GetStaminaSkills()
     {
         List<StaminaSkill> sSkills = new List<StaminaSkill>();
         foreach (Skill skill in unlockedSkills)
@@ -364,7 +383,7 @@ public class Player
         return sSkills;
     }
 
-    List<ManaSkill> GetManaSkills()
+    public List<ManaSkill> GetManaSkills()
     {
         List<ManaSkill> mSkills = new List<ManaSkill>();
         foreach (Skill skill in unlockedSkills)
@@ -374,26 +393,6 @@ public class Player
     }
 
     public void AddSkill(Skill skill) { unlockedSkills.Add(skill); }
-
-    List<StaminaSkill> GetActiveStaminaSkills() { return GetStaminaSkills().FindAll(x => x.IsActive()); }
-    List<ManaSkill> GetActiveManaSkills() { return GetManaSkills().FindAll(x => x.IsActive()); }
-
-    public StaminaSkill GetRandomStaminaSkill()
-    {
-        List<StaminaSkill> activeStaminaSkills = GetActiveStaminaSkills();
-        if (activeStaminaSkills.Count == 0)
-            return null;
-        else
-            return (activeStaminaSkills.Count > 1) ? activeStaminaSkills[UnityEngine.Random.Range(0, activeStaminaSkills.Count)] : activeStaminaSkills[0];
-    }
-    public ManaSkill GetRandomManaSkill()
-    {
-        List<ManaSkill> activeManaSkills = GetActiveManaSkills();
-        if (activeManaSkills.Count == 0)
-            return null;
-        else
-            return (activeManaSkills.Count > 1) ? activeManaSkills[UnityEngine.Random.Range(0, activeManaSkills.Count)] : activeManaSkills[0];
-    }
 
     //**
 

@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dde8fca492cd0f4d9c041e465b88ad5, type: 3}
+  m_Name: GoblinLootTable
+  m_EditorClassIdentifier: 
+  items:
+  - {fileID: 11400000, guid: 7ab05d3a163351e41b1e092be27e965a, type: 2}
+  - {fileID: 11400000, guid: 2c07f1eb085aff34bb75115360542887, type: 2}
+  - {fileID: 11400000, guid: 312c9001abe1d6e47aace18f5bf3cbca, type: 2}
+  itemProbability:
+  - 0.75
+  - 0.5
+  - 0.15
+  itemCount:
+  - {x: 1, y: 2}
+  - {x: 1, y: 1}
+  - {x: 1, y: 1}
+  goldRewardRange: {x: 20, y: 40}

@@ -22,11 +22,8 @@ MonoBehaviour:
 
     75% Freeze Chance'
   actionMessage: You launch an ice spike through the enemy, dealing {0} damage.
-  isActive: 0
   attributeCost: 25
-  minDamage: 6
-  maxDamage: 11
-  hasStatusEffects: 1
+  damageRange: {x: 8, y: 13}
   statusEffects:
   - {fileID: 11400000, guid: dcad6eb99c32824438409df5f8c07c71, type: 2}
   magicType: 1

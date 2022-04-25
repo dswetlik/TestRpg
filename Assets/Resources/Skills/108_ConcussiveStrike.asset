@@ -25,11 +25,8 @@ MonoBehaviour:
 
     50% Dullen Chance'
   actionMessage: You concuss the enemy, dealing {0} damage!
-  isActive: 0
   attributeCost: 20
-  minDamage: 4
-  maxDamage: 7
-  hasStatusEffects: 1
+  damageRange: {x: 10, y: 12}
   statusEffects:
   - {fileID: 11400000, guid: 32497da888a508e4b9e4e82d50c40d7e, type: 2}
   - {fileID: 11400000, guid: 26eb41704bead254bb087f81d3ca2961, type: 2}

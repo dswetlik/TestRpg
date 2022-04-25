@@ -12,12 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da3ae000e98a71d489bf062b749ae76f, type: 3}
   m_Name: 102_RatPack_10
   m_EditorClassIdentifier: 
+  id: 10210
   enemyType: 0
   name: Pack of Rats
   description: A pack of rats just let loose from a burlap bag. They are not happy.
-  id: 10210
-  minLevel: 10
-  maxLevel: 10
+  levelRange: {x: 10, y: 10}
   defense: 0
   strength: 25
   agility: 15
@@ -31,4 +30,3 @@ MonoBehaviour:
   speed: 0.75
   expReward: 10
   itemRewards: {fileID: 11400000, guid: 6fd21c7884f09494082df16c550bff14, type: 2}
-  statusEffects: []

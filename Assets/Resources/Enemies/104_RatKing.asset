@@ -12,12 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69dcb926d5dd74c4799c018f51e456e0, type: 3}
   m_Name: 104_RatKing
   m_EditorClassIdentifier: 
+  id: 10400
   enemyType: 1
   name: Rat King
   description: A large bundle of angry rats tied at the tail.
-  id: 10400
-  minLevel: 5
-  maxLevel: 20
+  levelRange: {x: 5, y: 20}
   defense: 0
   strength: 10
   agility: 5
@@ -31,7 +30,6 @@ MonoBehaviour:
   speed: 0.75
   expReward: 20
   itemRewards: {fileID: 11400000, guid: 3c6a8e6f94c7a754b86382385dafca5a, type: 2}
-  statusEffects: []
   unlockedItems:
   - {fileID: 11400000, guid: a488a6750f7fb154682b49c570235313, type: 2}
   - {fileID: 11400000, guid: 76538cc43dfb1ba44afe04b693ee2f7d, type: 2}
@@ -53,4 +51,3 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2004514e5faac0148abc1adc3a957f10, type: 2}
   unlockedItemsCount: 010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000050000000500000005000000
   unlockedTitle: Rat Slayer
-  hasBeenDefeated: 0

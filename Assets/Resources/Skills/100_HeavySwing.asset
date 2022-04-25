@@ -21,10 +21,7 @@ MonoBehaviour:
 
     Weapon Modifier'
   actionMessage: You swing your weapon as hard as you can, dealing {0} damage!
-  isActive: 0
   attributeCost: 10
-  minDamage: 0
-  maxDamage: 3
-  hasStatusEffects: 0
+  damageRange: {x: 2, y: 7}
   statusEffects: []
   isWeaponModifier: 1

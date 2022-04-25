@@ -13,17 +13,16 @@ MonoBehaviour:
   m_Name: 0_FetchRatSkull
   m_EditorClassIdentifier: 
   questType: 1
+  id: 0
   name: A New Mantlepiece
   description: The blacksmith has requested that you get him a nice rat skull for
     him to hang over his mantle at home.
   levelRequirement: 0
-  hasPrerequisite: 0
   prerequisite: {fileID: 0}
   isCompleted: 0
-  dialogue: {fileID: 11400000, guid: a50d023035761e245827bcc9a663bb9c, type: 2}
+  dialogue: {fileID: 11400000, guid: a1e5e4eb9e4c24b4690575c10341fe6c, type: 2}
   hasItemReward: 0
   itemRewards: []
-  id: 0
   expReward: 5
   goldReward: 10
   fetchItems:

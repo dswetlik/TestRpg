@@ -22,11 +22,8 @@ MonoBehaviour:
 
     100% Shock Chance'
   actionMessage: You call upon the gods, smiting the enemy and dealing {0} damage!
-  isActive: 0
   attributeCost: 55
-  minDamage: 12
-  maxDamage: 16
-  hasStatusEffects: 1
+  damageRange: {x: 14, y: 20}
   statusEffects:
   - {fileID: 11400000, guid: 183db1feac9919e4880a4ddb6e8423d5, type: 2}
   magicType: 1

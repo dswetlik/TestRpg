@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 /// <summary>
 /// Inventory system, works off of a dual SortedDictionaries, where the key is ItemID.
@@ -134,9 +132,9 @@ public class Inventory //: ISerializationCallbackReceiver
     /// Returns total weight of inventory.
     /// </summary>
     /// <returns>A uint value for weight of inventory.</returns>
-    public uint GetTotalWeight()
+    public float GetTotalWeight()
     {
-        uint totalWeight = 0;
+        float totalWeight = 0;
 
         foreach (KeyValuePair<uint, Item> kvp in inventory)
         {

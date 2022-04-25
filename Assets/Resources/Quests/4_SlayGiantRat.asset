@@ -13,17 +13,16 @@ MonoBehaviour:
   m_Name: 4_SlayGiantRat
   m_EditorClassIdentifier: 
   questType: 2
+  id: 4
   name: Exterminator
   description: 'Malina has tasked you with killing the gigantic rat that has set
     up shop in her basement. '
   levelRequirement: 0
-  hasPrerequisite: 0
   prerequisite: {fileID: 0}
   isCompleted: 0
-  dialogue: {fileID: 11400000, guid: 4ba26370abd166348b2789ecee20e1ef, type: 2}
+  dialogue: {fileID: 11400000, guid: 17cfa81f36cb239469c6102b173fdaa6, type: 2}
   hasItemReward: 0
   itemRewards: []
-  id: 4
   expReward: 20
   goldReward: 20
   slayEnemies:

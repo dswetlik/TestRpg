@@ -22,11 +22,8 @@ MonoBehaviour:
 
     50% Freeze Chance'
   actionMessage: You surround the enemy in light flurries, dealing {0} damage.
-  isActive: 0
   attributeCost: 10
-  minDamage: 2
-  maxDamage: 5
-  hasStatusEffects: 1
+  damageRange: {x: 2, y: 5}
   statusEffects:
   - {fileID: 11400000, guid: d395b6841bd453241a298f7ee84f0024, type: 2}
   magicType: 1

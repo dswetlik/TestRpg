@@ -12,13 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da3ae000e98a71d489bf062b749ae76f, type: 3}
   m_Name: 110_CapturedBandit_10
   m_EditorClassIdentifier: 
+  id: 11010
   enemyType: 0
   name: Captured Bandit
   description: A bandit weakened by months of imprisonment, now fighting for his
     freedom.
-  id: 11010
-  minLevel: 10
-  maxLevel: 13
+  levelRange: {x: 10, y: 13}
   defense: 2
   strength: 20
   agility: 15
@@ -33,4 +32,3 @@ MonoBehaviour:
   speed: 0.75
   expReward: 20
   itemRewards: {fileID: 11400000, guid: 3b12251138c04904a996de43e7d7c658, type: 2}
-  statusEffects: []

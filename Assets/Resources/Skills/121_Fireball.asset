@@ -22,11 +22,8 @@ MonoBehaviour:
 
     50% Burn Chance'
   actionMessage: You throw a fireball at the enemy, dealing {0} damage!
-  isActive: 0
   attributeCost: 10
-  minDamage: 2
-  maxDamage: 5
-  hasStatusEffects: 1
+  damageRange: {x: 2, y: 5}
   statusEffects:
   - {fileID: 11400000, guid: 2c99e94f861430f459bdb06e44b18e8f, type: 2}
   magicType: 1

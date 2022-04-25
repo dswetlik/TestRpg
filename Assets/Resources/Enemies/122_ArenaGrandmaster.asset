@@ -12,13 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69dcb926d5dd74c4799c018f51e456e0, type: 3}
   m_Name: 122_ArenaGrandmaster
   m_EditorClassIdentifier: 
+  id: 12200
   enemyType: 1
   name: Arena Grandmaster
   description: The current grandmaster of the arena, who fought his way up the chain
     just like you. Can you best him to become the new grandmaster?
-  id: 12200
-  minLevel: 20
-  maxLevel: 20
+  levelRange: {x: 20, y: 20}
   defense: 12
   strength: 40
   agility: 30
@@ -34,8 +33,6 @@ MonoBehaviour:
   speed: 1
   expReward: 400
   itemRewards: {fileID: 11400000, guid: 519233f1017819842ad6e896da4b784e, type: 2}
-  statusEffects: []
   unlockedItems: []
   unlockedItemsCount: 
   unlockedTitle: Grandmaster
-  hasBeenDefeated: 0

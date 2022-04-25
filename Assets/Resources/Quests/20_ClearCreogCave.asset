@@ -13,18 +13,17 @@ MonoBehaviour:
   m_Name: 20_ClearCreogCave
   m_EditorClassIdentifier: 
   questType: 4
+  id: 20
   name: Necromancers?
   description: The mysterious man believes that there could be a group of necromancers
     holed up somewhere around or in the Creog Mountain. Check it out and report back
     to him.
   levelRequirement: 5
-  hasPrerequisite: 1
   prerequisite: {fileID: 11400000, guid: fc8beddc653d1d54fbe8a58f0300788e, type: 2}
   isCompleted: 0
-  dialogue: {fileID: 11400000, guid: 53d345fe386fe96418ad324b482cdbd3, type: 2}
+  dialogue: {fileID: 11400000, guid: a4300bc2836829340abea06fceda6116, type: 2}
   hasItemReward: 0
   itemRewards: []
-  id: 20
   expReward: 25
   goldReward: 25
   dungeon: {fileID: 11400000, guid: dcbf8a45812299a49965359dcbcc827c, type: 2}

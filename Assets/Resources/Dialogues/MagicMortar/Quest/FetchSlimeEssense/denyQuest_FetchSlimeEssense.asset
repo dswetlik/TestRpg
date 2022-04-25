@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 975e5e71ac536b34c8ff49aceec9f789, type: 3}
+  m_Name: denyQuest_FetchSlimeEssense
+  m_EditorClassIdentifier: 
+  dialogueType: 3
+  questDialogueType: 2
+  _quest: {fileID: 11400000, guid: 1a2e84888078d75469dfce76f4048883, type: 2}
+  _playerLineObjectText: Deny Quest
+  _playerLineResponseText: That just kind of sounds like busy work to me, so I'm
+    going to pass for now.
+  _npcLine: Busy work? I'm not going to have anything to make potions soon!
+  _playerResponses:
+  - {fileID: 11400000, guid: 72eab240100da5f46ad84a122bce353d, type: 2}

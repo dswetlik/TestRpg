@@ -13,19 +13,18 @@ MonoBehaviour:
   m_Name: 12_FetchRatMeat
   m_EditorClassIdentifier: 
   questType: 1
+  id: 12
   name: Rat Stew
   description: Apparently a delecacy here in Buruns, the innkeeper needs you to collect
     some rat meat for a stew.
   levelRequirement: 0
-  hasPrerequisite: 0
   prerequisite: {fileID: 0}
   isCompleted: 0
-  dialogue: {fileID: 11400000, guid: ec69fac7b0b5efc4f976b2f2b1beab23, type: 2}
+  dialogue: {fileID: 11400000, guid: 8b86882a0f664204bb07b126b98a9d0d, type: 2}
   hasItemReward: 0
   itemRewards: []
-  id: 12
   expReward: 10
   goldReward: 10
   fetchItems:
-  - {fileID: 11400000, guid: 8c214fd13434947498ed9e293061b797, type: 2}
+  - {fileID: 11400000, guid: b59bff2862573d04f888af45442c6122, type: 2}
   itemCounts: 0a000000

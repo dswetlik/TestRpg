@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f50c47e3fd4bdc45ad8804fa1ead0ca, type: 3}
+  m_Name: incompleteQuest_FetchSlimeEssense
+  m_EditorClassIdentifier: 
+  dialogueType: 3
+  questDialogueType: 3
+  _quest: {fileID: 11400000, guid: 1a2e84888078d75469dfce76f4048883, type: 2}
+  _questStatusType: 1
+  _playerLineObjectText: Slime essense...
+  _playerLineResponseText: Why slime essense? That seems quite the oddity for a potion.
+  _npcLine: Believe it or not, the essense of a slime is an integral part to a good
+    base of a potion. It holds all of the other ingredients in quite nicely, along
+    with fermenting them quite readily. Where else would potions get their distictive
+    colors if not from colored slimes?
+  _playerResponses:
+  - {fileID: 11400000, guid: 72eab240100da5f46ad84a122bce353d, type: 2}

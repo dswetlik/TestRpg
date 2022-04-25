@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75bf969278d946b4182f5cea525ee654, type: 3}
+  m_Name: startQuest_FetchRatSkull
+  m_EditorClassIdentifier: 
+  dialogueType: 3
+  questDialogueType: 0
+  _quest: {fileID: 11400000, guid: d7309c988dacafe4083d907478feb9e7, type: 2}
+  _notStartedDialogue: {fileID: 11400000, guid: 8bb05b7494d9a7544bb57098e5fd87bd,
+    type: 2}
+  _incompleteDialogue: {fileID: 11400000, guid: cb7ddc06ef779914a90d79c7cb256a62,
+    type: 2}
+  _completeDialogue: {fileID: 11400000, guid: 3435462d514c6604bb8e36238146dc18, type: 2}

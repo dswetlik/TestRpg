@@ -20,10 +20,7 @@ MonoBehaviour:
     from all negative effects.
   cardDescription: Dispel (2 Turns)
   actionMessage: You alleviate most of the negative effects against you.
-  isActive: 0
   attributeCost: 20
-  minDamage: 2
-  maxDamage: 2
-  hasStatusEffects: 0
+  damageRange: {x: 2, y: 2}
   statusEffects: []
   magicType: 4

@@ -12,13 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da3ae000e98a71d489bf062b749ae76f, type: 3}
   m_Name: 109_GoblinShaman_9
   m_EditorClassIdentifier: 
+  id: 10909
   enemyType: 0
   name: Goblin Shaman
   description: A shaman captured from a local goblin tribe, they harness basic powers
     of magic.
-  id: 10909
-  minLevel: 9
-  maxLevel: 10
+  levelRange: {x: 9, y: 10}
   defense: 0
   strength: 15
   agility: 5
@@ -32,4 +31,3 @@ MonoBehaviour:
   speed: 1
   expReward: 20
   itemRewards: {fileID: 11400000, guid: 55a6132d52c0da243b957e7ba9e78d65, type: 2}
-  statusEffects: []

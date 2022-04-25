@@ -22,11 +22,8 @@ MonoBehaviour:
 
     75% Shock Chance'
   actionMessage: You strike the enemy with a bolt of lightning, dealing {0} damage!
-  isActive: 0
   attributeCost: 25
-  minDamage: 6
-  maxDamage: 11
-  hasStatusEffects: 1
+  damageRange: {x: 8, y: 13}
   statusEffects:
   - {fileID: 11400000, guid: 8bded04327e347d46963e44be4b0482b, type: 2}
   magicType: 1

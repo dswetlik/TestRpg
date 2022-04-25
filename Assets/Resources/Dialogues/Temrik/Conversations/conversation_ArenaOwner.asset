@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29e770b62b8003f46aaf6492e628313e, type: 3}
+  m_Name: conversation_ArenaOwner
+  m_EditorClassIdentifier: 
+  dialogueType: 1
+  _playerLineObjectText: How...
+  _playerLineResponseText: How did I get here? I don't remember arriving in Buruns.
+  _npcLine: Well, considering the state that you were in, I imagine you were some
+    sort of criminal. That's how most end up in this arena now.
+  _playerResponses:
+  - {fileID: 11400000, guid: 31cac2089aa8292418cc70b6f839271c, type: 2}

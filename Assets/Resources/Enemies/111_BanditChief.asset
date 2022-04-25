@@ -12,13 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69dcb926d5dd74c4799c018f51e456e0, type: 3}
   m_Name: 111_BanditChief
   m_EditorClassIdentifier: 
+  id: 11100
   enemyType: 1
   name: Bandit Chief
   description: A captured bandit chieftan, forced to fight for entertainment in the
     arena.
-  id: 11100
-  minLevel: 10
-  maxLevel: 20
+  levelRange: {x: 10, y: 20}
   defense: 4
   strength: 20
   agility: 15
@@ -34,7 +33,6 @@ MonoBehaviour:
   speed: 1
   expReward: 100
   itemRewards: {fileID: 11400000, guid: 3b12251138c04904a996de43e7d7c658, type: 2}
-  statusEffects: []
   unlockedItems:
   - {fileID: 11400000, guid: 040fc84a27d38db419faad286a817d16, type: 2}
   - {fileID: 11400000, guid: fdd3ca91b875b8847bfce7de0674b176, type: 2}
@@ -56,4 +54,3 @@ MonoBehaviour:
   - {fileID: 0}
   unlockedItemsCount: 010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000050000000500000005000000
   unlockedTitle: Gladiator
-  hasBeenDefeated: 0

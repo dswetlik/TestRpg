@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d233d80ea164aa498730d50036b066c, type: 3}
+  m_Name: IronRatCave
+  m_EditorClassIdentifier: 
+  locationType: 2
+  id: 3
+  name: Iron Rat Cave
+  sceneName: IronRatCave
+  spawnLocation: {x: 0, y: 2.2, z: 10}
+  spawnRotation: {x: 0, y: 270, z: 0}
+  description: A cave taken over by a massive rat.
+  isCleared: 0
+  events:
+  - {fileID: 11400000, guid: 7661061a99a7e164086f806120020105, type: 2}
+  - {fileID: 11400000, guid: 97db1a8ba214ddb45a5ac1e7d59a42ca, type: 2}
+  - {fileID: 11400000, guid: 5eb1831c1ee3dc24da411eb44cc13046, type: 2}

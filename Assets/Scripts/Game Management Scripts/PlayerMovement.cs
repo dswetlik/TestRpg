@@ -22,13 +22,31 @@ public class PlayerMovement : MonoBehaviour
 
     public void w_MoveForward()
     {
-        if(!isMoving)
+        if (!isMoving)
             currentMovement = StartCoroutine("MoveForward");
+    }
+
+    public void w_MoveBackward()
+    {
+        if (!isMoving)
+            currentMovement = StartCoroutine("MoveBackward");
+    }
+
+    public void w_StrafeRight()
+    {
+        if (!isMoving)
+            currentMovement = StartCoroutine("StrafeRight");
+    }
+
+    public void w_StrafeLeft()
+    {
+        if (!isMoving)
+            currentMovement = StartCoroutine("StrafeLeft");
     }
 
     public void w_TurnRight()
     {
-        if(!isMoving)
+        if (!isMoving)
             currentMovement = StartCoroutine("TurnRight");
     }
 
@@ -36,12 +54,6 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!isMoving)
             currentMovement = StartCoroutine("TurnLeft");
-    }
-
-    public void w_MoveBackward()
-    {
-        if (!isMoving)
-            currentMovement = StartCoroutine("MoveBackward");
     }
 
     IEnumerator MoveForward()
@@ -86,6 +98,80 @@ public class PlayerMovement : MonoBehaviour
         isMoving = true;
 
         Vector3 target = transform.position + (-transform.forward * 10);
+        Vector3 offset = target - transform.position;
+        CollisionFlags collisionFlags = CollisionFlags.None;
+        AudioSource walk = GameObject.Find("FootstepAudioSource").GetComponent<AudioSource>();
+
+        while (true)
+        {
+            offset = target - transform.position;
+
+            if (!walk.isPlaying)
+                walk.Play();
+
+            if (offset.magnitude > 0.1f)
+            {
+                offset = offset.normalized * movementSpeed;
+                collisionFlags = characterController.Move(offset * Time.fixedDeltaTime);
+            }
+            else
+                break;
+
+            if ((collisionFlags & CollisionFlags.Sides) != 0)
+            {
+                break;
+            }
+
+            yield return new WaitForFixedUpdate();
+        }
+
+        transform.position = new Vector3(Mathf.Round(transform.position.x / 10) * 10, transform.position.y, Mathf.Round(transform.position.z / 10) * 10);
+
+        isMoving = false;
+    }
+
+    IEnumerator StrafeRight()
+    {
+        isMoving = true;
+
+        Vector3 target = transform.position + (transform.right * 10);
+        Vector3 offset = target - transform.position;
+        CollisionFlags collisionFlags = CollisionFlags.None;
+        AudioSource walk = GameObject.Find("FootstepAudioSource").GetComponent<AudioSource>();
+
+        while (true)
+        {
+            offset = target - transform.position;
+
+            if (!walk.isPlaying)
+                walk.Play();
+
+            if (offset.magnitude > 0.1f)
+            {
+                offset = offset.normalized * movementSpeed;
+                collisionFlags = characterController.Move(offset * Time.fixedDeltaTime);
+            }
+            else
+                break;
+
+            if ((collisionFlags & CollisionFlags.Sides) != 0)
+            {
+                break;
+            }
+
+            yield return new WaitForFixedUpdate();
+        }
+
+        transform.position = new Vector3(Mathf.Round(transform.position.x / 10) * 10, transform.position.y, Mathf.Round(transform.position.z / 10) * 10);
+
+        isMoving = false;
+    }
+
+    IEnumerator StrafeLeft()
+    {
+        isMoving = true;
+
+        Vector3 target = transform.position + (-transform.right * 10);
         Vector3 offset = target - transform.position;
         CollisionFlags collisionFlags = CollisionFlags.None;
         AudioSource walk = GameObject.Find("FootstepAudioSource").GetComponent<AudioSource>();
@@ -167,27 +253,25 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "LocationPortal")
-        {
-            Vector3 dir = other.transform.position - transform.position;
-            Debug.Log(System.String.Format("X: {0}; Y: {1}; Z: {2}", dir.x, dir.y, dir.z));
-
-            if(other.name == "BurunsOverworld")
-            {
-                if (dir.z < 0)
-                    GameObject.Find("GameManager").GetComponent<Engine>().OutputToText("You have entered the city of Buruns.");
-                else
-                    GameObject.Find("GameManager").GetComponent<Engine>().OutputToText("You have entered Arenthia.");
-            }
-        }
         if(other.tag == "ScenePortal")
         {
-            if (currentMovement != null) { StopCoroutine(currentMovement); isMoving = false; }
+            if (currentMovement != null) { StopCoroutine(currentMovement); currentMovement = null; isMoving = false; }
             transform.position = new Vector3(Mathf.Round(transform.position.x / 10) * 10, 2.2f, Mathf.Round(transform.position.z / 10) * 10);
             GameObject.Find("GameManager").GetComponent<Engine>().ChangeScene(other.gameObject.GetComponent<SceneContainer>().GetLocation());
         }
+        else if(other.tag == "EventCollider")
+        {
+            if (other.GetComponent<EventContainer>().GetEvent().GetEventType() == Event.EventType.start)
+            {
+                StartEvent startEvent = EventManager.EventDictionary[(other.GetComponent<EventContainer>().GetEvent() as StartEvent).GetID()];
+                if (!startEvent.IsComplete())
+                    GameObject.Find("GameManager").GetComponent<EventManager>().ActivateEventScreen(true, startEvent);
+            }
+            else
+                Debug.LogErrorFormat("EventCollider is not StartEvent; Event: {0}", (other.GetComponent<EventContainer>().GetEvent() as StartEvent).GetName());
+        }
     }
-
+     
     private void OnTriggerExit(Collider other)
     {
         if (other.tag == "LocationPortal")
@@ -198,13 +282,15 @@ public class PlayerMovement : MonoBehaviour
             }
             else if (other.name == "DungeonPortal")
             {
-                GameObject.Find("GameManager").GetComponent<Engine>().ActivateDungeonScreen(true, other.gameObject.GetComponent<DungeonContainer>().GetDungeon());
+
             }
 
         }
+        /*
         else if (other.transform.parent.tag == "Chest")
         {
           //  GameObject.Find("GameManager").GetComponent<Engine>().OpenChest(other.GetComponentInParent<ChestInventory>(), false);
         }
+        */
     }
 }

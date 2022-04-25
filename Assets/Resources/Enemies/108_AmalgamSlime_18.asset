@@ -12,12 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da3ae000e98a71d489bf062b749ae76f, type: 3}
   m_Name: 108_AmalgamSlime_18
   m_EditorClassIdentifier: 
+  id: 10818
   enemyType: 0
   name: Amalgam Slime
   description: A much larger slime made up of the three other colors of slime.
-  id: 10818
-  minLevel: 18
-  maxLevel: 20
+  levelRange: {x: 18, y: 20}
   defense: 0
   strength: 25
   agility: 25
@@ -33,4 +32,3 @@ MonoBehaviour:
   speed: 1
   expReward: 25
   itemRewards: {fileID: 11400000, guid: 247b8cfaa25fea746a5c2fc9cfde770e, type: 2}
-  statusEffects: []

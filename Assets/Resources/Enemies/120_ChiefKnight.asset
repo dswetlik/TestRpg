@@ -12,13 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da3ae000e98a71d489bf062b749ae76f, type: 3}
   m_Name: 120_ChiefKnight
   m_EditorClassIdentifier: 
+  id: 12000
   enemyType: 0
   name: Chief Knight
   description: The chief knight of the city, fought to knock-out instead of death,
     as a method of testing their skills against the best of the best.
-  id: 12000
-  minLevel: 18
-  maxLevel: 20
+  levelRange: {x: 15, y: 20}
   defense: 12
   strength: 40
   agility: 30
@@ -34,4 +33,3 @@ MonoBehaviour:
   speed: 0.75
   expReward: 100
   itemRewards: {fileID: 11400000, guid: 519233f1017819842ad6e896da4b784e, type: 2}
-  statusEffects: []

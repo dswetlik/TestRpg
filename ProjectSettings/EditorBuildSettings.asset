@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/RandownHouse.unity
     guid: dbd8378c3f663c943a4e53edf2b7bffd
+  - enabled: 1
+    path: Assets/Scenes/IronRatCave.unity
+    guid: b82661da5f8090941a202b068ecac850
   m_configObjects: {}

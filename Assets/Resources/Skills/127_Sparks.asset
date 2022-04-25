@@ -22,11 +22,8 @@ MonoBehaviour:
 
     50% Shock Chance'
   actionMessage: You statically shock the enemy, dealing {0} damage!
-  isActive: 0
   attributeCost: 10
-  minDamage: 2
-  maxDamage: 5
-  hasStatusEffects: 1
+  damageRange: {x: 2, y: 5}
   statusEffects:
   - {fileID: 11400000, guid: 4eada29031fc8304bb8cb583c6b23d02, type: 2}
   magicType: 1

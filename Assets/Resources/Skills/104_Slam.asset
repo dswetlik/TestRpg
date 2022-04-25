@@ -19,10 +19,7 @@ MonoBehaviour:
   description: Slam into your enemy as hard as you can!
   cardDescription: Damage-Dealing
   actionMessage: You slam your shoulder into the enemy, dealing {0} damage!
-  isActive: 0
   attributeCost: 20
-  minDamage: 6
-  maxDamage: 12
-  hasStatusEffects: 0
+  damageRange: {x: 5, y: 9}
   statusEffects: []
   isWeaponModifier: 0

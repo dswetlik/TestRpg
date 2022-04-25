@@ -12,13 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da3ae000e98a71d489bf062b749ae76f, type: 3}
   m_Name: 117_Witch_14
   m_EditorClassIdentifier: 
+  id: 11714
   enemyType: 0
   name: Witch
   description: A witch that studied arts of battle, who delivered themselves into
     the arena to test their skills.
-  id: 11714
-  minLevel: 14
-  maxLevel: 15
+  levelRange: {x: 14, y: 15}
   defense: 0
   strength: 25
   agility: 10
@@ -33,4 +32,3 @@ MonoBehaviour:
   speed: 0.8
   expReward: 70
   itemRewards: {fileID: 11400000, guid: 06fcec43741df5d44b9172cb2893e11a, type: 2}
-  statusEffects: []

@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6368106e33955d4fa5248f5e5a85dd7, type: 3}
+  m_Name: acceptQuest_FetchRatMeat
+  m_EditorClassIdentifier: 
+  dialogueType: 3
+  questDialogueType: 1
+  _quest: {fileID: 11400000, guid: 56ccbad5fbc03804fb664f4697df2e72, type: 2}
+  _playerLineObjectText: Accept Quest
+  _playerLineResponseText: What's your plan to remove the rats?
+  _npcLine: I'm going to turn them into a delicacy, turn them into a food that no
+    one can deny! I don't actually have any rat meat anywhere, so I need you to bring
+    me some. Get to it, we're becoming gourmands!
+  _playerResponses:
+  - {fileID: 11400000, guid: 04b910f252f3b144c94ff5d65fb9f6c6, type: 2}

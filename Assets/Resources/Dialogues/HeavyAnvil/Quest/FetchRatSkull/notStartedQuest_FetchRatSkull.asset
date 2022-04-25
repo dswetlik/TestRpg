@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49ff08ec39c51f5449ac8aef919a7c4d, type: 3}
+  m_Name: notStartedQuest_FetchRatSkull
+  m_EditorClassIdentifier: Assembly-CSharp::QuestConversationDialogue
+  dialogueType: 3
+  questDialogueType: 3
+  _quest: {fileID: 11400000, guid: d7309c988dacafe4083d907478feb9e7, type: 2}
+  _questStatusType: 0
+  _playerLineObjectText: Any jobs...
+  _playerLineResponseText: Do you have any jobs that I could do?
+  _npcLine: In the shop? No, I don't think you could swing the hammer well enough!
+    Rather, I've recently been trying to learn the magical arts, but the alchemist
+    and the librarian are no help at all! They laughed me out of their shops when
+    I asked. I've been looking into it myself, and it seems that goblin shamans draw
+    some power from skulls. Do you think you could help me get a skull?
+  _playerResponses:
+  - {fileID: 11400000, guid: 9f2a204b7502f1b43bb920a430512762, type: 2}
+  - {fileID: 11400000, guid: 8c7991b9fb49fc044b860f4e0bc46269, type: 2}

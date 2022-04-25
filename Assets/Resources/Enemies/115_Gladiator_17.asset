@@ -12,12 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da3ae000e98a71d489bf062b749ae76f, type: 3}
   m_Name: 115_Gladiator_17
   m_EditorClassIdentifier: 
+  id: 11517
   enemyType: 0
   name: Gladiator
   description: 'Finally, a trained gladiator such as yourself. '
-  id: 11517
-  minLevel: 17
-  maxLevel: 20
+  levelRange: {x: 17, y: 20}
   defense: 6
   strength: 30
   agility: 20
@@ -33,4 +32,3 @@ MonoBehaviour:
   speed: 1
   expReward: 75
   itemRewards: {fileID: 11400000, guid: 519233f1017819842ad6e896da4b784e, type: 2}
-  statusEffects: []

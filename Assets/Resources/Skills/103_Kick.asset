@@ -19,10 +19,7 @@ MonoBehaviour:
   description: Kick your enemy, kick them real good!
   cardDescription: Damage-Dealing
   actionMessage: You give your enemy the boot, dealing {0} damage!
-  isActive: 0
   attributeCost: 5
-  minDamage: 2
-  maxDamage: 5
-  hasStatusEffects: 0
+  damageRange: {x: 1, y: 5}
   statusEffects: []
   isWeaponModifier: 0
